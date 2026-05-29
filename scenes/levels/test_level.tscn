@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dorelmhjp0sqy"]
+
+[ext_resource type="PackedScene" uid="uid://2j2w8byl8tmm" path="res://scenes/player/player.tscn" id="1_jbqir"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hp5k"]
+size = Vector2(479.5, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqir"]
+size = Vector2(10, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yautc"]
+size = Vector2(86, 4)
+
+[node name="TestLevel" type="Node2D" unique_id=1542865607]
+
+[node name="dimian" type="StaticBody2D" parent="." unique_id=1875531678]
+position = Vector2(10, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dimian" unique_id=1502975225]
+position = Vector2(291.25, 165)
+shape = SubResource("RectangleShape2D_3hp5k")
+
+[node name="ColorRect" type="ColorRect" parent="dimian/CollisionShape2D" unique_id=1216936377]
+offset_left = -240.25
+offset_top = -28.0
+offset_right = 239.75
+offset_bottom = 28.0
+color = Color(0.04669073, 0, 0.13722081, 1)
+
+[node name="qiangbi" type="StaticBody2D" parent="." unique_id=926751080]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="qiangbi" unique_id=770926149]
+position = Vector2(287, 39)
+shape = SubResource("RectangleShape2D_jbqir")
+
+[node name="ColorRect" type="ColorRect" parent="qiangbi/CollisionShape2D" unique_id=470303904]
+offset_left = -5.0
+offset_top = -73.0
+offset_right = 5.0
+offset_bottom = 73.0
+color = Color(0.34117648, 0.32156864, 0.85882354, 1)
+
+[node name="guatai" type="StaticBody2D" parent="." unique_id=599176177]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="guatai" unique_id=1352374843]
+position = Vector2(58, 104)
+shape = SubResource("RectangleShape2D_yautc")
+
+[node name="ColorRect" type="ColorRect" parent="guatai/CollisionShape2D" unique_id=1434710792]
+offset_left = -43.0
+offset_top = -2.0
+offset_right = 43.0
+offset_bottom = 2.0
+color = Color(0.34509805, 0.2509804, 0.2, 1)
+
+[node name="Player" parent="." unique_id=1987142723 instance=ExtResource("1_jbqir")]
+position = Vector2(168, 28)

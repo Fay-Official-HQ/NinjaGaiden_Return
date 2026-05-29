@@ -1,12 +1,16 @@
 extends State
 
 func enter():
-	anim.play("idle") # 播放你创建的站立动画
+	player.play_animation("idle")
+	player.velocity.x = 0
 
 func physics_update(delta):
+	if Input.is_action_just_pressed("jump"):
+		state_machine.change_state(get_node("../Jump"))
+		return
+	if not player.is_on_floor():
+		state_machine.change_state(get_node("../Fall"))
+		return
 	var direction = Input.get_axis("nav_left", "nav_right")
 	if direction != 0:
 		state_machine.change_state(get_node("../Run"))
-	else:
-		player.velocity.x = 0
-	player.move_and_slide()

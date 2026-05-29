@@ -141,13 +141,12 @@ limit_enabled = false
 [node name="Animations" type="Node2D" parent="." unique_id=211936918]
 
 [node name="RunSprite" type="AnimatedSprite2D" parent="Animations" unique_id=1435785839]
-visible = false
 position = Vector2(-4, 2)
 sprite_frames = SubResource("SpriteFrames_je7p5")
 animation = &"run"
 
 [node name="IdleSprite" type="AnimatedSprite2D" parent="Animations" unique_id=1924849108]
-position = Vector2(-2, 2)
+position = Vector2(12, 0)
 sprite_frames = SubResource("SpriteFrames_fm80t")
 animation = &"idle"
 

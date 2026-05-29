@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="NinjaGaiden_Return"
-run/main_scene="uid://2j2w8byl8tmm"
+run/main_scene="uid://dorelmhjp0sqy"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,8 +19,10 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
+window/size/extend_to_title=true
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
-window/stretch/scale=4.0
 
 [input]
 

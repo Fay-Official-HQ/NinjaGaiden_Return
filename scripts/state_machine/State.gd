@@ -2,7 +2,6 @@ extends Node
 class_name State
 
 var player: CharacterBody2D
-var anim: AnimatedSprite2D
 var state_machine: StateMachine
 
 func enter(): pass

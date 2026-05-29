@@ -8,7 +8,6 @@ func _ready():
 	for child in get_children():
 		if child is State:
 			child.player = get_parent()
-			child.anim = get_parent().get_node("AnimatedSprite2D")
 			child.state_machine = self
 	change_state(initial_state)
 
