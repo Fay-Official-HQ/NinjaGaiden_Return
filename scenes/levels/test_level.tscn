@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dorelmhjp0sqy"]
 
-[ext_resource type="PackedScene" uid="uid://2j2w8byl8tmm" path="res://scenes/player/player.tscn" id="1_jbqir"]
+[ext_resource type="PackedScene" uid="uid://2j2w8byl8tmm" path="res://scenes/player/Player.tscn" id="1_jbqir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hp5k"]
 size = Vector2(479.5, 56)
@@ -53,5 +53,5 @@ offset_right = 43.0
 offset_bottom = 2.0
 color = Color(0.34509805, 0.2509804, 0.2, 1)
 
-[node name="Player" parent="." unique_id=1987142723 instance=ExtResource("1_jbqir")]
-position = Vector2(168, 28)
+[node name="Player" parent="." unique_id=1811321606 instance=ExtResource("1_jbqir")]
+position = Vector2(176.77107, 65.95394)
