@@ -1,0 +1,105 @@
+{
+  "name": "TestLevel",
+  "type": "Node2D",
+  "unique_id": 1542865607,
+  "children": [
+    {
+      "name": "ceshi",
+      "type": "Node",
+      "unique_id": 1445180905,
+      "children": [
+        {
+          "name": "dimian",
+          "instance": "res://scenes/module/dimian.tscn",
+          "unique_id": 223908678,
+          "position": { "x": 932, "y": 266 }
+        },
+        {
+          "name": "qiangbi",
+          "instance": "res://scenes/module/qiangbi.tscn",
+          "unique_id": 1004225553,
+          "position": { "x": 18, "y": 83 },
+          "children": [
+            {
+              "name": "HangingPlatform",
+              "instance": "res://scenes/module/hanging_platform.tscn",
+              "unique_id": 894400689,
+              "position": { "x": 216, "y": 5 }
+            },
+            {
+              "name": "HangingPlatform2",
+              "instance": "res://scenes/module/hanging_platform.tscn",
+              "unique_id": 1863337870,
+              "position": { "x": 336, "y": 28 },
+              "children": [
+                {
+                  "name": "qiangbi",
+                  "instance": "res://scenes/module/qiangbi.tscn",
+                  "unique_id": 370270516,
+                  "position": { "x": 89, "y": -94 },
+                  "children": [
+                    {
+                      "name": "qiangbi",
+                      "instance": "res://scenes/module/qiangbi.tscn",
+                      "unique_id": 129907839,
+                      "position": { "x": 55, "y": 108 },
+                      "children": [
+                        {
+                          "name": "HangingPlatform",
+                          "instance": "res://scenes/module/hanging_platform.tscn",
+                          "unique_id": 1749425107,
+                          "position": { "x": 44, "y": -72 }
+                        },
+                        {
+                          "name": "HangingPlatform2",
+                          "instance": "res://scenes/module/hanging_platform.tscn",
+                          "unique_id": 217496373,
+                          "position": { "x": 142, "y": -72 }
+                        },
+                        {
+                          "name": "HangingPlatform3",
+                          "instance": "res://scenes/module/hanging_platform.tscn",
+                          "unique_id": 1227376754,
+                          "position": { "x": 244, "y": -23 }
+                        },
+                        {
+                          "name": "HangingPlatform4",
+                          "instance": "res://scenes/module/hanging_platform.tscn",
+                          "unique_id": 1110078297,
+                          "position": { "x": 368, "y": 8 }
+                        },
+                        {
+                          "name": "HangingPlatform5",
+                          "instance": "res://scenes/module/hanging_platform.tscn",
+                          "unique_id": 2133178605,
+                          "position": { "x": 523, "y": -26 }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Player",
+      "instance": "res://scenes/player/player.tscn",
+      "unique_id": 1811321606,
+      "position": { "x": 145, "y": 9 }
+    },
+    {
+      "name": "ememys",
+      "type": "Node",
+      "unique_id": 65661492
+    }
+  ],
+  "external_resources": {
+    "1_jbqir": "res://scenes/player/player.tscn",
+    "2_v45ci": "res://scenes/module/qiangbi.tscn",
+    "2_yautc": "res://scenes/module/dimian.tscn",
+    "3_48ne7": "res://scenes/module/hanging_platform.tscn"
+  }
+}

@@ -44,3 +44,5 @@ position = Vector2(523, -26)
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("1_jbqir")]
 position = Vector2(145, 9)
+
+[node name="ememys" type="Node" parent="." unique_id=65661492]

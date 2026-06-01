@@ -77,6 +77,16 @@ special_move={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="Terrain"
+2d_physics/layer_4="Platform"
+2d_physics/layer_5="PlayerAttack"
+2d_physics/layer_6="EnemyAttack"
+2d_physics/layer_7="Item"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
