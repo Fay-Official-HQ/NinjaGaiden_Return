@@ -50,7 +50,7 @@ func update_input():
 	)
 
 	dash_pressed = Input.is_action_just_pressed(
-		"finishing_Move"
+		"finishing_move"
 	)
 
 	ninjutsu_pressed = Input.is_action_just_pressed(

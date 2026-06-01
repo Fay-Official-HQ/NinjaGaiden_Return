@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>批量修改文件扩展名工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .file-input-container {
+            margin-bottom: 20px;
+        }
+        #fileInput {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #fileInput:hover {
+            border-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>批量修改文件扩展名工具</h1>
+        <p style="text-align:center; color:#666;">将选中的 .gd 文件重命名为 .txt 文件</p>
+        
+        <div class="file-input-container">
+            <input type="file" id="fileInput" multiple accept=".gd" />
+            <p style="text-align:center; font-size:14px; color:#888;">请选择要转换的 .gd 文件（可多选）</p>
+        </div>
+        
+        <button id="convertBtn" disabled>开始转换</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const convertBtn = document.getElementById('convertBtn');
+            const resultDiv = document.getElementById('result');
+            
+            let selectedFiles = [];
+            
+            // 监听文件选择事件
+            fileInput.addEventListener('change', function(e) {
+                selectedFiles = Array.from(e.target.files).filter(file => 
+                    file.name.toLowerCase().endsWith('.gd')
+                );
+                
+                if (selectedFiles.length > 0) {
+                    convertBtn.disabled = false;
+                    resultDiv.style.display = 'none';
+                    console.log(`选择了 ${selectedFiles.length} 个 .gd 文件`);
+                } else {
+                    convertBtn.disabled = true;
+                }
+            });
+            
+            // 监听转换按钮点击事件
+            convertBtn.addEventListener('click', function() {
+                if (selectedFiles.length === 0) {
+                    showResult('没有选择任何 .gd 文件', 'info');
+                    return;
+                }
+                
+                // 创建下载链接用于下载转换后的文件
+                selectedFiles.forEach(file => {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        // 创建Blob对象
+                        const blob = new Blob([e.target.result], { type: 'text/plain' });
+                        
+                        // 创建下载链接
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        
+                        // 修改文件名扩展名
+                        const newFileName = file.name.substring(0, file.name.lastIndexOf('.')) + '.txt';
+                        a.download = newFileName;
+                        
+                        // 触发下载
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        
+                        // 释放URL对象
+                        URL.revokeObjectURL(url);
+                    };
+                    
+                    reader.readAsText(file);
+                });
+                
+                showResult(`已开始下载 ${selectedFiles.length} 个转换后的 .txt 文件`, 'success');
+                
+                // 清空选择
+                fileInput.value = '';
+                convertBtn.disabled = true;
+            });
+            
+            // 显示结果信息
+            function showResult(message, type) {
+                resultDiv.textContent = message;
+                resultDiv.className = type;
+                resultDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
