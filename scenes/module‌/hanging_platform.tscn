@@ -4,6 +4,8 @@
 size = Vector2(98.5, 2.5)
 
 [node name="HangingPlatform" type="StaticBody2D" unique_id=894400689 groups=["hanging_platform"]]
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=232704396]
 shape = SubResource("RectangleShape2D_fr1um")

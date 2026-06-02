@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dorelmhjp0sqy"]
+
+[ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="1_jbqir"]
+[ext_resource type="PackedScene" uid="uid://df5u4t1mug0nb" path="res://scenes/module‌/qiangbi.tscn" id="2_v45ci"]
+[ext_resource type="PackedScene" uid="uid://dc2lxhfdtb3f4" path="res://scenes/module‌/dimian.tscn" id="2_yautc"]
+[ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="3_48ne7"]
+[ext_resource type="PackedScene" uid="uid://r01tapx4qae0" path="res://scenes/enemy/enemy.tscn" id="5_48ne7"]
+[ext_resource type="PackedScene" uid="uid://c41646w588qro" path="res://scenes/enemy/smallenemy.tscn" id="6_6xh4u"]
+[ext_resource type="Resource" uid="uid://b6oousgmra4th" path="res://resources/enemy/EnemyData.tres" id="7_cyt5c"]
+
+[node name="TestLevel" type="Node2D" unique_id=1542865607]
+
+[node name="dixing" type="Node" parent="." unique_id=1445180905]
+
+[node name="dimian" parent="dixing" unique_id=223908678 instance=ExtResource("2_yautc")]
+position = Vector2(932, 266)
+
+[node name="HangingPlatform" parent="dixing" unique_id=894400689 instance=ExtResource("3_48ne7")]
+position = Vector2(-27, 80)
+
+[node name="qiangbi" parent="dixing" unique_id=1004225553 instance=ExtResource("2_v45ci")]
+position = Vector2(-81, 83)
+
+[node name="Player" parent="." unique_id=1811321606 instance=ExtResource("1_jbqir")]
+position = Vector2(145, 9)
+
+[node name="ememys" type="Node" parent="." unique_id=65661492]
+
+[node name="Enemy" parent="ememys" unique_id=869226174 instance=ExtResource("5_48ne7")]
+position = Vector2(283.52396, 80.48352)
+
+[node name="SmallEnemy" parent="ememys" unique_id=1993505514 instance=ExtResource("6_6xh4u")]
+position = Vector2(40.08734, 100.86864)
+
+[node name="Enemy2" parent="ememys" unique_id=1414099006 instance=ExtResource("5_48ne7")]
+position = Vector2(-35.695908, 24.60117)
+data = ExtResource("7_cyt5c")

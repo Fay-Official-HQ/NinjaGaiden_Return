@@ -44,17 +44,19 @@
 [ext_resource type="Texture2D" uid="uid://33ffa1fowfra" path="res://assets/sprites/Ryu/fcjingling/paodong/paodong_003.png" id="21_p1lr0"]
 [ext_resource type="Texture2D" uid="uid://bydsxjyu1e4uc" path="res://assets/sprites/Ryu/fcjingling/paodong/paodong_002.png" id="21_ro0t8"]
 [ext_resource type="Texture2D" uid="uid://ceg4v7fy6tgb" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_004.png" id="22_8qxvo"]
+[ext_resource type="Script" uid="uid://dtegjbw2ixnd2" path="res://scripts/components/PlayerHitBox.gd" id="22_bysbl"]
 [ext_resource type="Texture2D" uid="uid://d1kfuauyd748v" path="res://assets/sprites/Ryu/fcjingling/paodong/paodong_004.png" id="22_ro0t8"]
 [ext_resource type="Texture2D" uid="uid://o8ermo06xa04" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_005.png" id="23_5q8fn"]
-[ext_resource type="Script" uid="uid://bebkv78vdvd21" path="res://scripts/camera/PlayerCamera.gd" id="23_ro0t8"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="23_bysbl"]
+[ext_resource type="Script" uid="uid://6gqunn4us00k" path="res://scripts/camera/PlayerCamera.gd" id="23_ro0t8"]
 [ext_resource type="Texture2D" uid="uid://biemve1cpov1f" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_003.png" id="31_genst"]
 [ext_resource type="Texture2D" uid="uid://byr771p1frsq6" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_004.png" id="32_niom3"]
 [ext_resource type="Texture2D" uid="uid://c8xnchcrryhri" path="res://assets/sprites/Ryu/fcjingling/xuandiao/xuandiao_004.png" id="38_gmu8b"]
-[ext_resource type="Texture2D" uid="uid://lsb4eiwh1lqp" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_005.png" id="39_pwfqx"]
+[ext_resource type="Texture2D" uid="uid://umkmklhlxik1" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_005.png" id="39_pwfqx"]
 [ext_resource type="Texture2D" uid="uid://cuvp201nxr5bv" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_006.png" id="40_kssj8"]
 [ext_resource type="Texture2D" uid="uid://cg35nawxuvama" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_007.png" id="41_8lfxt"]
-[ext_resource type="Texture2D" uid="uid://5gytwaqqi7lg" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_008.png" id="42_8lfxt"]
-[ext_resource type="Texture2D" uid="uid://bc2ry5stq76pl" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_009.png" id="43_lclul"]
+[ext_resource type="Texture2D" uid="uid://0qne33xiivrf" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_008.png" id="42_8lfxt"]
+[ext_resource type="Texture2D" uid="uid://bfq3r0lu7dms7" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_009.png" id="43_lclul"]
 [ext_resource type="Texture2D" uid="uid://cimwmh6sx4aqw" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_003.png" id="44_0ncpa"]
 [ext_resource type="Texture2D" uid="uid://bbc27w5k70gpr" path="res://assets/sprites/Ryu/tpjingling/beizhan/beizhan.png" id="44_rw8a5"]
 [ext_resource type="Texture2D" uid="uid://b30ldriejrbrd" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_004.png" id="45_upxxc"]
@@ -73,6 +75,15 @@
 [ext_resource type="Texture2D" uid="uid://bkeswjbq3neej" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu2/qiangmian_008.png" id="61_7072n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5stf6"]
+size = Vector2(14, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bysbl"]
+size = Vector2(29, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wy34"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvjb1"]
 size = Vector2(14, 30)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_npwbq"]
@@ -347,8 +358,13 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" unique_id=1811321606]
 z_index = 5
+collision_mask = 12
 script = ExtResource("1_gfjak")
 data = ExtResource("2_c3xxp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
+position = Vector2(-1, 7)
+shape = SubResource("RectangleShape2D_5stf6")
 
 [node name="Components" type="Node" parent="." unique_id=1554109802]
 
@@ -414,17 +430,40 @@ script = ExtResource("21_ej2d6")
 
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1025911760]
 
+[node name="HitBox" type="Area2D" parent="AttackRoot" unique_id=1080134473]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("22_bysbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/HitBox" unique_id=324037649]
+position = Vector2(19, -5)
+shape = SubResource("RectangleShape2D_bysbl")
+
+[node name="CrouchHitBox" type="Area2D" parent="AttackRoot" unique_id=1167259624]
+collision_layer = 16
+collision_mask = 2
+monitoring = false
+script = ExtResource("22_bysbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/CrouchHitBox" unique_id=365448119]
+position = Vector2(19, 11)
+shape = SubResource("RectangleShape2D_2wy34")
+
 [node name="HurtRoot" type="Node2D" parent="." unique_id=1263872561]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
+[node name="HurtBox" type="Area2D" parent="HurtRoot" unique_id=1352263911]
+collision_mask = 32
+script = ExtResource("23_bysbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtRoot/HurtBox" unique_id=995973408]
 position = Vector2(-1, 7)
-shape = SubResource("RectangleShape2D_5stf6")
+shape = SubResource("RectangleShape2D_fvjb1")
 
 [node name="Visual" type="Node2D" parent="." unique_id=174212603]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"fall"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]
@@ -436,4 +475,5 @@ rotation_smoothing_speed = 0.0
 script = ExtResource("23_ro0t8")
 
 [node name="HeadSensor" type="RayCast2D" parent="." unique_id=967590739]
-target_position = Vector2(0, -32)
+target_position = Vector2(0, -20)
+collision_mask = 12

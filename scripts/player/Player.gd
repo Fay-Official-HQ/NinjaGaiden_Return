@@ -11,6 +11,7 @@ class_name Player
 @onready var animation: AnimationComponent = $Components/AnimationComponent
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animated_sprite: AnimatedSprite2D = $Visual/AnimatedSprite2D
+@onready var hurt_box: HurtBox = $HurtRoot/HurtBox
 
 # 状态节点引用
 @onready var idle_state: IdleState = $StateMachine/IdleState
@@ -18,34 +19,68 @@ class_name Player
 @onready var jump_state: JumpState = $StateMachine/JumpState
 @onready var fall_state: FallState = $StateMachine/FallState
 
-# 【规范化数据】面向方向：1.0 为右，-1.0 为左
+# 当前 HP
+var current_hp: int
+
+# 面向方向
 var facing_direction: float = 1.0
 
+# 受伤后的短暂无敌时间
+var invincible_timer: float = 0.0
+const INVINCIBLE_TIME: float = 1.5
+
 func _ready() -> void:
+	current_hp = data.max_hp
 	movement.initialize(self)
 	animation.initialize(animated_sprite)
-	# 状态机此时会在其内部的 _ready() 中自动、安全地处理初始状态的进入
+
+	# 连接受伤信号
+	if hurt_box:
+		hurt_box.took_damage.connect(_on_hurt_box_took_damage)
 
 func _process(delta: float) -> void:
-	input.update_input() 
-	input.update_buffer(delta) 
-	state_machine.update(delta) 
+	input.update_input()
+	input.update_buffer(delta)
+	state_machine.update(delta)
+
+	# 受伤无敌计时器
+	if invincible_timer > 0:
+		invincible_timer -= delta
+		# 闪烁效果（可选）
+		animated_sprite.modulate.a = 0.5 if fmod(invincible_timer * 10, 1.0) < 0.5 else 1.0
+	else:
+		animated_sprite.modulate.a = 1.0
 
 func _physics_process(delta: float) -> void:
-	movement.apply_gravity(delta) 
-	state_machine.physics_update(delta) 
-	
-	# 还原你之前保留的像素完美对齐代码
-	position = position.round() 
+	movement.apply_gravity(delta)
+	state_machine.physics_update(delta)
+	position = position.round()
 
-# 【企业级公共接口】唯一改变朝向的方法
-# 任何状态、任何组件想让玩家转头，必须调用此方法
 func set_facing_direction(direction: float) -> void:
 	if direction == 0:
 		return
-		
-	# 规范化方向值为 1 或 -1
 	facing_direction = 1.0 if direction > 0 else -1.0
-	
-	# 通过视觉组件通知贴图翻转，而不是在物理组件里硬编码
 	animation.flip_sprite(facing_direction)
+
+func _on_hurt_box_took_damage(damage: int) -> void:
+	if invincible_timer > 0:
+		return
+		
+	current_hp -= damage
+	print("玩家受伤，当前HP：", current_hp)
+	
+	if current_hp <= 0:
+		die()
+	else:
+		invincible_timer = INVINCIBLE_TIME
+		# 可在这里播放受伤动画，或进入受伤状态（你已有 shoushang 动画）
+		# 暂时简化：播放一下受伤动画
+		# animation.play("shoushang")  # 如果你有这个动画资源
+
+func die() -> void:
+	print("玩家死亡！")
+	# 暂时隐藏角色，实际可做死亡动画和重生逻辑
+	hide()
+	# 停止处理
+	set_process(false)
+	set_physics_process(false)

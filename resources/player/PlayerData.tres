@@ -4,5 +4,4 @@
 
 [resource]
 script = ExtResource("1_pmmo0")
-imbalance_speed_factor = 0.5
 metadata/_custom_type_script = "uid://bhuwkajpoc3ub"

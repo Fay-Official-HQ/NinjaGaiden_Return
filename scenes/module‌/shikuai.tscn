@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dm4cf2bgyj7wg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a38kv"]
+size = Vector2(172.5, 94)
+
+[node name="shikuai" type="StaticBody2D" unique_id=506782326]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=541660879]
+shape = SubResource("RectangleShape2D_a38kv")
+
+[node name="ColorRect" type="ColorRect" parent="CollisionShape2D" unique_id=900761931]
+offset_left = -85.75
+offset_top = -47.0
+offset_right = 87.25
+offset_bottom = 47.0
+color = Color(0.3485578, 0.58946013, 0.42449886, 0.6745098)

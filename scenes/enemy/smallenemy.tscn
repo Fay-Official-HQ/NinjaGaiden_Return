@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://c41646w588qro"]
+
+[ext_resource type="Script" uid="uid://cmj2g16oxb4st" path="res://scripts/enemy/SmallEnemy.gd" id="1_d2dr0"]
+[ext_resource type="Texture2D" uid="uid://t3xme5wer4si" path="res://assets/sprites/enemy/test/smallenemy_000.png" id="2_d2dr0"]
+[ext_resource type="Texture2D" uid="uid://dpubmwd2oac25" path="res://assets/sprites/enemy/test/smallenemy_001.png" id="3_3457j"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="4_u6kkg"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="5_tlbu0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_883im"]
+size = Vector2(25, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_883im"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d2dr0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d2dr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3457j")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
+size = Vector2(25, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40wdo"]
+size = Vector2(24, 20)
+
+[node name="SmallEnemy" type="CharacterBody2D" unique_id=869226174]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_d2dr0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843685403]
+position = Vector2(-0.5, 9)
+shape = SubResource("RectangleShape2D_883im")
+
+[node name="Visual" type="Node2D" parent="." unique_id=1433938110]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1757152495]
+sprite_frames = SubResource("SpriteFrames_883im")
+animation = &"walk"
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=243598376]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("4_u6kkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1106765834]
+position = Vector2(-0.5, 11)
+shape = SubResource("RectangleShape2D_a3pup")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=9247032]
+collision_layer = 32
+script = ExtResource("5_tlbu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1625149503]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_40wdo")

@@ -3,7 +3,7 @@ extends Resource
 
 class_name PlayerData
 
-@export var walk_speed: float = 120.0
+@export var walk_speed: float = 100.0
 @export var jump_force: float = 260.0
 @export var gravity: float = 700.0
 @export var max_hp: int = 100
