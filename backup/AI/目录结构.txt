@@ -1,0 +1,197 @@
+{
+  "name": "NinjaGaiden_Return",
+  "type": "directory",
+  "children": [
+    {
+      "name": "assets",
+      "type": "directory",
+      "children": [
+        {
+          "name": "audio",
+          "type": "directory",
+          "children": [
+            { "name": ".gitkeep", "type": "file" }
+          ]
+        },
+        {
+          "name": "fonts",
+          "type": "directory",
+          "children": [
+            { "name": ".gitkeep", "type": "file" }
+          ]
+        },
+        {
+          "name": "shaders",
+          "type": "directory",
+          "children": [
+            { "name": ".gitkeep", "type": "file" }
+          ]
+        },
+        {
+          "name": "sprites",
+          "type": "directory",
+          "children": [
+            {
+              "name": "Ryu",
+              "type": "directory",
+              "children": [
+                {
+                  "name": "fcjingling",
+                  "type": "directory",
+                  "children": [
+                    { "name": "dadao", "type": "directory", "files": ["dadao_000.png", "dadao_001.png", "dadao_002.png", "dadao_003.png", "dadao_004.png", "dadao_005.png", "dadao_006.png", "dadao_007.png", "dadao_008.png"] },
+                    { "name": "fangun", "type": "directory", "files": ["fangun_002.png", "fangun_003.png", "fangun_004.png", "fangun_005.png"] },
+                    { "name": "gongji", "type": "directory", "files": ["gongji_002.png", "gongji_003.png", "gongji_004.png"] },
+                    { "name": "konggongji", "type": "directory", "files": ["konggongji_002.png", "konggongji_003.png", "konggongji_004.png"] },
+                    { "name": "kongrenshu", "type": "directory", "files": ["kongrenshu_003.png", "kongrenshu_004.png"] },
+                    { "name": "paodong", "type": "directory", "files": ["paodong_002.png", "paodong_003.png", "paodong_004.png"] },
+                    { "name": "paqiang", "type": "directory", "files": ["qiangmian_003.png", "qiangmian_004.png"] },
+                    { "name": "qiangrenshu", "type": "directory", "files": ["qiangmian_005.png", "qiangmian_006.png"] },
+                    { "name": "qiangrenshu2", "type": "directory", "files": ["qiangmian_007.png", "qiangmian_008.png"] },
+                    { "name": "renshu", "type": "directory", "files": ["renshu_003.png", "renshu_004.png"] },
+                    { "name": "shiheng", "type": "directory", "files": ["shiheng_002.png"] },
+                    { "name": "shoushang", "type": "directory", "files": ["shoushang_000.png"] },
+                    { "name": "xiadun", "type": "directory", "files": ["xiadun_002.png", "xiadun_003.png"] },
+                    { "name": "xiadungongji", "type": "directory", "files": ["xiadungongji_003.png", "xiadungongji_004.png", "xiadungongji_005.png"] },
+                    { "name": "xuandiao", "type": "directory", "files": ["xuandiao_004.png"] },
+                    { "name": "xuankong", "type": "directory", "files": ["xuankong_001.png", "xuankong_002.png.png"] },
+                    { "name": "xuanrenshu", "type": "directory", "files": ["xuandiao_008.png", "xuandiao_009.png"] },
+                    { "name": "xuanyidong", "type": "directory", "files": ["xuandiao_005.png", "xuandiao_006.png", "xuandiao_007.png"] },
+                    { "name": "zhanli", "type": "directory", "files": ["zhanli_000.png", "zhanli_001.png"] }
+                  ]
+                },
+                {
+                  "name": "tpjingling",
+                  "type": "directory",
+                  "children": [
+                    { "name": "beizhan", "type": "directory", "files": ["beizhan.png"] },
+                    { "name": "qianchong", "type": "directory", "files": ["qianchong_003.png", "qianchong_004.png", "qianchong_005.png", "qianchong_006.png", "qianchong_007.png", "qianchong_008.png", "qianchong_009.png", "qianchong_010.png", "qianchong_011.png"] }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "enemy",
+              "type": "directory",
+              "children": [
+                {
+                  "name": "test",
+                  "type": "directory",
+                  "files": ["disiwang01.png", "disiwang02.png", "disiwang03.png", "disiwang04.png", "tetenemy_000.png", "tetenemy_001.png"]
+                }
+              ]
+            },
+            { "name": ".gitkeep", "type": "file" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "autoload",
+      "type": "directory",
+      "children": [
+        { "name": ".gitkeep", "type": "file" }
+      ]
+    },
+    {
+      "name": "backup",
+      "type": "directory",
+      "children": [
+        {
+          "name": "AI提示词",
+          "type": "directory",
+          "files": ["Player场景节点树.txt", "测试场景节点树.txt", "游戏设计.docx", "目录结构.txt", "空代码块（用作复制代码给AI阅读）.docx"]
+        },
+        { "name": "Player固定像素导出模板.psd", "type": "file" },
+        { "name": "Player场景所有代码.txt", "type": "file" },
+        { "name": "TRAE_NOTES.md", "type": "file" },
+        { "name": "《忍者龙剑传：归来》需求文档.docx", "type": "file" },
+        { "name": "学习笔记.txt", "type": "file" },
+        { "name": "导出模板32像素.psd", "type": "file" },
+        { "name": "批量修改文件名后缀.html", "type": "file" },
+        { "name": "第一版旧版代码.rar", "type": "file" },
+        { "name": "需求文档.md", "type": "file" }
+      ]
+    },
+    {
+      "name": "resources",
+      "type": "directory",
+      "children": [
+        {
+          "name": "player",
+          "type": "directory",
+          "files": [".gitkeep", "PlayerData.gd", "PlayerData.gd.uid", "PlayerData.tres"]
+        },
+        { "name": ".gitkeep", "type": "file" }
+      ]
+    },
+    {
+      "name": "scenes",
+      "type": "directory",
+      "children": [
+        {
+          "name": "levels",
+          "type": "directory",
+          "files": ["test_level.tscn"]
+        },
+        {
+          "name": "module",
+          "type": "directory",
+          "files": ["dimian.tscn", "hanging_platform.tscn", "qiangbi.tscn"]
+        },
+        {
+          "name": "player",
+          "type": "directory",
+          "files": ["player.tscn", "player.tscn13584200973.tmp", "player.tscn13592406319.tmp"]
+        }
+      ]
+    },
+    {
+      "name": "scripts",
+      "type": "directory",
+      "children": [
+        {
+          "name": "camera",
+          "type": "directory",
+          "files": ["PlayerCamera.gd", "PlayerCamera.gd.uid"]
+        },
+        {
+          "name": "components",
+          "type": "directory",
+          "files": [".gitkeep", "AnimationComponent.gd", "AnimationComponent.gd.uid", "HitBox.gd", "HitBox.gd.uid", "HurtBox.gd", "HurtBox.gd.uid", "InputComponent.gd", "InputComponent.gd.uid", "MovementComponent.gd", "MovementComponent.gd.uid"]
+        },
+        {
+          "name": "core",
+          "type": "directory",
+          "children": [
+            { "name": ".gitkeep", "type": "file" }
+          ]
+        },
+        {
+          "name": "player",
+          "type": "directory",
+          "children": [
+            {
+              "name": "states",
+              "type": "directory",
+              "files": [".gitkeep", "AirAttackState.gd", "AirAttackState.gd.uid", "AirNinjutsuState.gd", "AirNinjutsuState.gd.uid", "CrouchAttackState.gd", "CrouchAttackState.gd.uid", "CrouchState.gd", "CrouchState.gd.uid", "FallState.gd", "FallState.gd.uid", "GroundAttackState.gd", "GroundAttackState.gd.uid", "GroundNinjutsuState.gd", "GroundNinjutsuState.gd.uid", "HangState.gd", "HangState.gd.uid", "IdleState.gd", "IdleState.gd.uid", "JumpState.gd", "JumpState.gd.uid", "PlatformDropState.gd", "PlatformDropState.gd.uid", "RunState.gd", "RunState.gd.uid", "State.gd", "State.gd.uid", "StateMachine.gd", "StateMachine.gd.uid", "SwordDashState.gd", "SwordDashState.gd.uid", "SwordReadyState.gd", "SwordReadyState.gd.uid", "WallState.gd", "WallState.gd.uid"]
+            },
+            { "name": "Player.gd", "type": "file" },
+            { "name": "Player.gd.uid", "type": "file" }
+          ]
+        },
+        {
+          "name": "state_machine",
+          "type": "directory",
+          "children": [
+            { "name": ".gitkeep", "type": "file" }
+          ]
+        }
+      ]
+    },
+    { "name": ".editorconfig", "type": "file" },
+    { "name": ".gitignore", "type": "file" },
+    { "name": "icon.svg", "type": "file" },
+    { "name": "project.godot", "type": "file" }
+  ]
+}

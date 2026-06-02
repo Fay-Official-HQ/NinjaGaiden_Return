@@ -72,9 +72,6 @@
 [ext_resource type="Texture2D" uid="uid://qg1ms4d8x4m" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu2/qiangmian_007.png" id="60_hir57"]
 [ext_resource type="Texture2D" uid="uid://bkeswjbq3neej" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu2/qiangmian_008.png" id="61_7072n"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_180ig"]
-size = Vector2(12, 21)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5stf6"]
 size = Vector2(14, 30)
 
@@ -415,14 +412,9 @@ script = ExtResource("20_lclul")
 [node name="HangState" type="Node" parent="StateMachine" unique_id=1692244118]
 script = ExtResource("21_ej2d6")
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=1538209633]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=852436234]
-position = Vector2(-1, 5.5)
-shape = SubResource("RectangleShape2D_180ig")
-debug_color = Color(0.88235295, 0.32156864, 0.22352941, 0.85882354)
-
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1025911760]
+
+[node name="HurtRoot" type="Node2D" parent="." unique_id=1263872561]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
 position = Vector2(-1, 7)

@@ -1,0 +1,9 @@
+[
+  { "layer": "Layer 1", "name": "Player" },
+  { "layer": "Layer 2", "name": "Enemy" },
+  { "layer": "Layer 3", "name": "Terrain" },
+  { "layer": "Layer 4", "name": "Platform" },
+  { "layer": "Layer 5", "name": "PlayerAttack" },
+  { "layer": "Layer 6", "name": "EnemyAttack" },
+  { "layer": "Layer 7", "name": "Item" }
+]
