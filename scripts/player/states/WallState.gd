@@ -1,27 +1,37 @@
 # res://scripts/player/states/WallState.gd
+# 墙壁攀爬状态：吸附在墙壁上，可上下攀爬、蹬墙跳、墙上释放忍术
+# 核心规则：velocity.x 始终为 0（禁止左右移动），只有 y 轴受 climb_dir 驱动
 extends State
 
 class_name WallState
 
+# 蹬墙跳的水平推力
 @export var wall_jump_push_force: float = 170.0
+# 蹬墙跳的垂直高度系数（0.7 = 普通跳跃的 70%）
 @export var wall_jump_height_factor: float = 0.7
-
-# 【新增配置】：爬墙的移动速度
+# 爬墙的上下移动速度（像素/秒）
 @export var climb_speed: float = 50.0
 
+# 是否正在释放忍术（锁定攀爬移动）
 var is_casting: bool = false
+# 墙壁法线的 x 分量：-1 = 墙在右边，+1 = 墙在左边
+# 用 sign() 可得到推离墙壁的方向
 var wall_normal_x: float = 0.0 
 
 func enter(_msg: Dictionary = {}) -> void:
 	is_casting = false
+	# 进入墙壁状态时立刻清零所有速度，防止上一状态的惯性带入
 	player.velocity = Vector2.ZERO
 	player.animation.play("wall_idle")
 	
+	# 记录墙壁方向，并让角色面朝墙壁
+	# 例：墙在右边 → wall_normal_x = -1 → facing_direction = +1（面朝右 = 面朝墙）
 	if player.is_on_wall():
 		wall_normal_x = player.get_wall_normal().x
 		player.set_facing_direction(-wall_normal_x)
 
 func update(_delta: float) -> void:
+	# 忍术播放期间锁定输入，等动画播完自动恢复
 	if is_casting:
 		var sprite = player.animation.sprite
 		if (sprite.animation == "wall_ninjutsu" or sprite.animation == "wall_ninjutsu_backward") and not sprite.is_playing():
@@ -29,75 +39,42 @@ func update(_delta: float) -> void:
 			player.animation.play("wall_idle")
 		return
 
-	# 1. 蹬墙跳 (保持不变)
+	# 1. 蹬墙跳：按跳跃 + 方向键推离墙壁
+	# sign(wall_normal_x) 就是「远离墙壁」的方向
+	# 例：墙在右边 wall_normal_x=-1 → sign=-1 → 只有按左才触发蹬墙跳
 	if Input.is_action_just_pressed("jump"):
 		if player.input.move_direction == sign(wall_normal_x):
+			# 速度直接赋值（不是 +=），覆盖 physics_update 的 velocity.x=0
 			player.velocity.x = wall_normal_x * wall_jump_push_force
 			player.velocity.y = -player.data.jump_force * wall_jump_height_factor
+			# 蹬墙跳后面朝「远离墙壁」方向
 			player.set_facing_direction(wall_normal_x)
 			
 			state_machine.change_state(player.jump_state, {"wall_jump": true})
 			player.input.consume_jump() 
 			return
 
-	# 2. 墙上释放忍术 (保持不变)
+	# 2. 墙上释放忍术
 	if Input.is_action_just_pressed("ninjutsu"):
 		is_casting = true
+		# 推离墙壁方向 → 背对墙壁放忍术；否则面朝墙壁放忍术
 		if player.input.move_direction == sign(wall_normal_x):
 			player.animation.play("wall_ninjutsu_backward")
 		else:
 			player.animation.play("wall_ninjutsu")
 		return
 
-#func physics_update(_delta: float) -> void:
-	## 依然牢牢吸附墙面，禁止左右位移
-	#player.velocity.x = 0
-	#
-	## 【核心修改：上下攀爬逻辑】
-	#if not is_casting:
-		## 计算上下方向键的输入轴（按上为 -1，按下为 1，不按为 0）
-		#var climb_dir = 0.0
-		#if Input.is_action_pressed("nav_up"):
-			#climb_dir -= 1.0
-		#if Input.is_action_pressed("nav_down"):
-			#climb_dir += 1.0
-			#
-		## 赋予垂直速度
-		#player.velocity.y = climb_dir * climb_speed
-		#
-		## 【动画状态机微调】：根据有没有移动，智能切换攀爬与静止动画
-		#if climb_dir != 0:
-			#player.animation.play("wall_climb")
-		#else:
-			#player.animation.play("wall_idle")
-	#else:
-		## 释放忍术期间，强制静止悬停[cite: 5]
-		#player.velocity.y = 0 
-		#
-	#player.move_and_slide()
-#
-	## 边缘与退出条件判定[cite: 5]
-	#if not player.is_on_wall():
-		## 极佳手感体验：如果往上爬出了墙顶，会自然切换到下落状态，此时按住前方向键可以直接翻上平台！[cite: 5]
-		#state_machine.change_state(player.fall_state, {"imbalance": false})
-		#return
-		#
-	#if player.is_on_floor():
-		## 如果往下爬踩到了地面，自动恢复站立[cite: 5]
-		#state_machine.change_state(player.idle_state)
-		#return
-
 func physics_update(_delta: float) -> void:
-	# 依然牢牢吸附墙面，禁止左右位移
+	# 禁止左右移动，牢牢吸附墙面
 	player.velocity.x = 0
 	
+	# climb_dir 含义：-1=向上爬  0=静止  +1=向下爬
 	var climb_dir = 0.0
 	if not is_casting:
 		if Input.is_action_pressed("nav_up"):
 			climb_dir -= 1.0
 		if Input.is_action_pressed("nav_down"):
 			climb_dir += 1.0
-			
 		player.velocity.y = climb_dir * climb_speed
 		
 		if climb_dir != 0:
@@ -105,26 +82,21 @@ func physics_update(_delta: float) -> void:
 		else:
 			player.animation.play("wall_idle")
 	else:
-		player.velocity.y = 0 
-		
-	# 1. 【核心机制】：在执行移动前，悄悄记录下当前绝对安全的位置
-	var safe_position = player.global_position
-		
-	player.move_and_slide()
-
-	# 2. 【墙顶拦截防飘】：如果玩家正在往上爬，且由于到顶导致 move_and_slide 之后脱离了墙壁
-	if climb_dir < 0 and not player.is_on_wall():
-		# 瞬间把角色拉回到上一帧还在墙上的安全位置
-		player.global_position = safe_position
+		# 忍术期间悬停
 		player.velocity.y = 0
-		player.animation.play("wall_idle") # 强制切换回静止抓墙动画
-		return # 【极其重要】直接结束函数，死死拦截掉后面切换到 FallState 的逻辑！
-
-	# 3. 正常的边缘与退出条件判定（如下滑到底或者松手）
-	if not player.is_on_wall():
-		state_machine.change_state(player.fall_state, {"imbalance": false})
-		return
-		
+	
+	player.move_and_slide()
+	
+	# 踩到地面 → 站立
+	# 【重要】必须在 is_on_wall 之前检查：站在地面上时 is_on_wall 也为 false，
+	# 如果先判 is_on_wall 会错误地切到跳跃状态导致翻滚失衡
 	if player.is_on_floor():
 		state_machine.change_state(player.idle_state)
+		return
+	
+	# 脱离墙壁 → 跳跃
+	# 两种情况自然触发：(1)往上爬出墙顶  (2)往下滑出墙底
+	# 传递 wall_jump 参数给 JumpState，使其启用 0.15 秒锁时防止立即重抓墙
+	if not player.is_on_wall():
+		state_machine.change_state(player.jump_state, {"wall_jump": true})
 		return
