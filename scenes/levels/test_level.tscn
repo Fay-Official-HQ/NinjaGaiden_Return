@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c41646w588qro" path="res://scenes/enemy/smallenemy.tscn" id="6_7x1jh"]
 [ext_resource type="PackedScene" uid="uid://r01tapx4qae0" path="res://scenes/enemy/enemy.tscn" id="7_hfwtw"]
 [ext_resource type="Resource" uid="uid://b6oousgmra4th" path="res://resources/enemy/EnemyData.tres" id="8_2mu0v"]
+[ext_resource type="PackedScene" uid="uid://bmqid2ybm7h2n" path="res://scenes/enemy/airenemy.tscn" id="9_hfwtw"]
 
 [node name="TestLevel" type="Node2D" unique_id=1542865607]
 
@@ -60,9 +61,6 @@ position = Vector2(-28, 27)
 
 [node name="ememys" type="Node" parent="." unique_id=65661492]
 
-[node name="SmallEnemy" parent="ememys" unique_id=869226174 instance=ExtResource("6_7x1jh")]
-position = Vector2(-35, 141)
-
 [node name="SmallEnemy3" parent="ememys" unique_id=1474891378 instance=ExtResource("6_7x1jh")]
 position = Vector2(1380, 133)
 
@@ -95,3 +93,9 @@ data = ExtResource("8_2mu0v")
 
 [node name="SmallEnemy4" parent="ememys" unique_id=1069803591 instance=ExtResource("6_7x1jh")]
 position = Vector2(630, 94)
+
+[node name="SmallEnemy" parent="ememys" unique_id=869226174 instance=ExtResource("6_7x1jh")]
+position = Vector2(155.40645, 47.575226)
+
+[node name="Enemy7" parent="ememys" unique_id=454616735 instance=ExtResource("9_hfwtw")]
+position = Vector2(-63.103027, 90.26726)

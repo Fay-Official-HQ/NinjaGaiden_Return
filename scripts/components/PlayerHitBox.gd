@@ -11,8 +11,5 @@ func _ready() -> void:
 	if not area_entered.is_connected(_on_area_entered):
 		area_entered.connect(_on_area_entered)
 
-func _on_area_entered(area: Area2D) -> void:
-	if area is HurtBox:
-		area.take_damage(damage)
-		# 打中后立刻关闭，防止一刀多判
-		set_deferred("monitoring", false)
+func _on_area_entered(_area: Area2D) -> void:
+	pass

@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cmj2g16oxb4st" path="res://scripts/enemy/SmallEnemy.gd" id="1_d2dr0"]
 [ext_resource type="Texture2D" uid="uid://t3xme5wer4si" path="res://assets/sprites/enemy/test/smallenemy_000.png" id="2_d2dr0"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_tlbu0"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_8j6kq"]
 [ext_resource type="Texture2D" uid="uid://dpubmwd2oac25" path="res://assets/sprites/enemy/test/smallenemy_001.png" id="3_3457j"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="4_u6kkg"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_wg5t1"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_b0a37"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="5_tlbu0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_883im"]
@@ -15,6 +19,23 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tlbu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8j6kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wg5t1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b0a37")
+}],
+"loop": false,
+"name": &"die",
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -55,7 +76,7 @@ shape = SubResource("RectangleShape2D_883im")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1757152495]
 sprite_frames = SubResource("SpriteFrames_883im")
-animation = &"walk"
+animation = &"die"
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=243598376]
 collision_layer = 2

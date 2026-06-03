@@ -46,7 +46,6 @@
 [ext_resource type="Texture2D" uid="uid://ceg4v7fy6tgb" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_004.png" id="22_8qxvo"]
 [ext_resource type="Script" uid="uid://dtegjbw2ixnd2" path="res://scripts/components/PlayerHitBox.gd" id="22_bysbl"]
 [ext_resource type="Texture2D" uid="uid://d1kfuauyd748v" path="res://assets/sprites/Ryu/fcjingling/paodong/paodong_004.png" id="22_ro0t8"]
-[ext_resource type="Script" uid="uid://dhtl11nyytjmk" path="res://scripts/player/states/HurtState.gd" id="22_ymths"]
 [ext_resource type="Texture2D" uid="uid://o8ermo06xa04" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_005.png" id="23_5q8fn"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="23_bysbl"]
 [ext_resource type="Script" uid="uid://6gqunn4us00k" path="res://scripts/camera/PlayerCamera.gd" id="23_ro0t8"]
@@ -63,7 +62,6 @@
 [ext_resource type="Texture2D" uid="uid://b30ldriejrbrd" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_004.png" id="45_upxxc"]
 [ext_resource type="Texture2D" uid="uid://dy711ftrq1ajb" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_005.png" id="46_ln3h3"]
 [ext_resource type="Texture2D" uid="uid://biwcmi44b7nr2" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_006.png" id="47_uygh0"]
-[ext_resource type="Texture2D" uid="uid://bcj2o2v82ijfa" path="res://assets/sprites/Ryu/fcjingling/shoushang/shoushang.png" id="48_2wy34"]
 [ext_resource type="Texture2D" uid="uid://c35ulovryvjex" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_007.png" id="48_t1aof"]
 [ext_resource type="Texture2D" uid="uid://br41mnre27113" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_008.png" id="49_w8qe1"]
 [ext_resource type="Texture2D" uid="uid://drmn71juut602" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_009.png" id="50_hdvrm"]
@@ -221,14 +219,6 @@ animations = [{
 "loop": false,
 "name": &"hang_ninjutsu",
 "speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("48_2wy34")
-}],
-"loop": true,
-"name": &"hurt",
-"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -438,9 +428,6 @@ script = ExtResource("20_lclul")
 [node name="HangState" type="Node" parent="StateMachine" unique_id=1692244118]
 script = ExtResource("21_ej2d6")
 
-[node name="HurtState" type="Node" parent="StateMachine" unique_id=496294911]
-script = ExtResource("22_ymths")
-
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1025911760]
 
 [node name="HitBox" type="Area2D" parent="AttackRoot" unique_id=1080134473]
@@ -476,7 +463,7 @@ shape = SubResource("RectangleShape2D_fvjb1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"hurt"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]

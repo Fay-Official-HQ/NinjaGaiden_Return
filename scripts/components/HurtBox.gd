@@ -7,7 +7,6 @@ class_name HurtBox
 signal took_damage(damage: int)
 
 func _ready() -> void:
-	# 规范约束：HurtBox 只负责“被动挨打”，不需要主动探测别人
 	monitoring = false
 	monitorable = true
 

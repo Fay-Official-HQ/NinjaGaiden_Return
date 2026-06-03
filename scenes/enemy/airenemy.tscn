@@ -1,14 +1,14 @@
-[gd_scene format=3 uid="uid://r01tapx4qae0"]
+[gd_scene format=3 uid="uid://bmqid2ybm7h2n"]
 
-[ext_resource type="Texture2D" uid="uid://dl7vkbuuh8co4" path="res://assets/sprites/enemy/test/tetenemy_000.png" id="1_a3pup"]
-[ext_resource type="Script" uid="uid://b6vvvm22xgphi" path="res://scripts/enemy/Enemy.gd" id="1_gl05p"]
-[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_4efjx"]
-[ext_resource type="Texture2D" uid="uid://u5wai5qk75ju" path="res://assets/sprites/enemy/test/tetenemy_001.png" id="2_40wdo"]
-[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="3_40wdo"]
-[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_hvxgb"]
-[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_peoo5"]
-[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_2f3il"]
-[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="5_gl05p"]
+[ext_resource type="Script" uid="uid://do6341qtv63c8" path="res://scripts/enemy/AirEnemy.gd" id="1_rens3"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_ruyq2"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_4g8ia"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_h4xns"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_4wfyg"]
+[ext_resource type="Texture2D" uid="uid://dl7vkbuuh8co4" path="res://assets/sprites/enemy/test/tetenemy_000.png" id="6_nk30f"]
+[ext_resource type="Texture2D" uid="uid://u5wai5qk75ju" path="res://assets/sprites/enemy/test/tetenemy_001.png" id="7_qlpxo"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="8_7esde"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="9_wbicy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_883im"]
 size = Vector2(23, 31)
@@ -22,16 +22,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_4efjx")
+"texture": ExtResource("2_ruyq2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_hvxgb")
+"texture": ExtResource("3_4g8ia")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_peoo5")
+"texture": ExtResource("4_h4xns")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_2f3il")
+"texture": ExtResource("5_4wfyg")
 }],
 "loop": false,
 "name": &"die",
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_a3pup")
+"texture": ExtResource("6_nk30f")
 }],
 "loop": true,
 "name": &"idle",
@@ -47,10 +47,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_a3pup")
+"texture": ExtResource("6_nk30f")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_40wdo")
+"texture": ExtResource("7_qlpxo")
 }],
 "loop": true,
 "name": &"walk",
@@ -66,7 +66,8 @@ size = Vector2(23, 31)
 [node name="Enemy" type="CharacterBody2D" unique_id=869226174]
 collision_layer = 2
 collision_mask = 12
-script = ExtResource("1_gl05p")
+script = ExtResource("1_rens3")
+is_flying = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843685403]
 position = Vector2(0.5, -0.5)
@@ -81,7 +82,7 @@ animation = &"idle"
 [node name="HurtBox" type="Area2D" parent="." unique_id=243598376]
 collision_layer = 2
 collision_mask = 16
-script = ExtResource("3_40wdo")
+script = ExtResource("8_7esde")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1106765834]
 position = Vector2(0.5, -0.5)
@@ -89,7 +90,7 @@ shape = SubResource("RectangleShape2D_a3pup")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=9247032]
 collision_layer = 32
-script = ExtResource("5_gl05p")
+script = ExtResource("9_wbicy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1625149503]
 position = Vector2(0.5, -0.5)

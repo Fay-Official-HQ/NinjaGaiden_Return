@@ -5,6 +5,7 @@ class_name GroundAttackState
 
 var hit_box: PlayerHitBox
 var attack_root: Node2D
+var hit_enemies: Array[HurtBox] = []
 
 func enter(_msg: Dictionary = {}) -> void:
 	player.movement.stop()
@@ -12,13 +13,23 @@ func enter(_msg: Dictionary = {}) -> void:
 
 	attack_root = player.get_node("AttackRoot") as Node2D
 	hit_box = attack_root.get_node("HitBox") as PlayerHitBox
-	if hit_box:
-		hit_box.set_deferred("monitoring", true)
-		# 翻转整个攻击根节点，实现以玩家为中心的左右镜像
+	hit_enemies.clear()
+	if attack_root:
 		attack_root.scale.x = player.facing_direction
 
 func update(_delta: float) -> void:
 	var sprite = player.animation.sprite
+
+	if hit_box and not hit_box.monitoring and sprite.animation == "attack" and sprite.frame >= 1:
+		hit_box.set_deferred("monitoring", true)
+
+	if hit_box and hit_box.monitoring:
+		var areas = hit_box.get_overlapping_areas()
+		for area in areas:
+			if area is HurtBox and not hit_enemies.has(area):
+				hit_enemies.append(area)
+				area.take_damage(hit_box.damage)
+
 	if sprite.animation == "attack" and not sprite.is_playing():
 		_exit_attack()
 		if player.input.move_direction != 0:
@@ -27,14 +38,13 @@ func update(_delta: float) -> void:
 			state_machine.change_state(player.idle_state)
 		return
 
-	# 手动检测重叠
-	if hit_box and hit_box.monitoring:
-		var areas = hit_box.get_overlapping_areas()
-		for area in areas:
-			if area is HurtBox:
-				area.take_damage(hit_box.damage)
-
 func physics_update(_delta: float) -> void:
+	# 跳跃打断：攻击动画期间可按跳跃键取消并跳起
+	if player.input.consume_jump():
+		_exit_attack()
+		state_machine.change_state(player.jump_state)
+		return
+
 	player.movement.stop()
 	if not player.is_on_floor():
 		_exit_attack()
@@ -48,6 +58,6 @@ func exit() -> void:
 func _exit_attack() -> void:
 	if hit_box:
 		hit_box.set_deferred("monitoring", false)
-	# 重置缩放，避免影响其他逻辑
+	hit_enemies.clear()
 	if attack_root:
 		attack_root.scale.x = 1.0

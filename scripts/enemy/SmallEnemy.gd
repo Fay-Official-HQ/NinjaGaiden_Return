@@ -10,6 +10,7 @@ class_name SmallEnemy
 var start_position: Vector2
 var direction: float = 1.0
 var current_hp: int
+var is_dead: bool = false
 
 @onready var sprite: AnimatedSprite2D = $Visual/AnimatedSprite2D
 @onready var hurt_box: HurtBox = $HurtBox
@@ -23,6 +24,9 @@ func _ready() -> void:
 		hurt_box.took_damage.connect(_on_took_damage)
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+
 	velocity.x = direction * move_speed
 	velocity.y += 980 * delta
 
@@ -47,5 +51,15 @@ func _on_took_damage(damage: int) -> void:
 		die()
 
 func die() -> void:
+	if is_dead:
+		return
+	is_dead = true
+
 	print("敌人死亡！")
+	set_physics_process(false)
+	if hit_box:
+		hit_box.set_deferred("monitoring", false)
+	if sprite.sprite_frames.has_animation("die"):
+		sprite.play("die")
+		await sprite.animation_finished
 	queue_free()

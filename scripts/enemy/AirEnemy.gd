@@ -1,13 +1,16 @@
-# res://scripts/enemy/Enemy.gd
+# res://scripts/enemy/AirEnemy.gd
 extends CharacterBody2D
 
-class_name Enemy
+class_name AirEnemy
 
 # 默认属性（当没有配置资源时使用）
 @export var max_hp: int = 30
 @export var move_speed: float = 50.0
 @export var patrol_distance: float = 100.0
 @export var damage: int = 10
+
+# 飞行模式：勾选后不受重力，固定在空中
+@export var is_flying: bool = false
 
 # 敌人数据资源（如果设置了，将覆盖上面的默认值）
 @export var data: EnemyData
@@ -28,11 +31,10 @@ func _ready() -> void:
 		move_speed = data.move_speed
 		patrol_distance = data.patrol_distance
 		damage = data.damage
-		# 同步 HitBox 的伤害
+		# 注意：飞行状态也可以放在 EnemyData 里，但暂时先用手动勾选
 		if hit_box:
 			hit_box.damage = data.damage
 	else:
-		# 没有资源时，也要把默认伤害同步给 HitBox
 		if hit_box:
 			hit_box.damage = damage
 
@@ -47,9 +49,17 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
+	# 水平巡逻
 	velocity.x = direction * move_speed
-	velocity.y += 980 * delta
 
+	# 飞行敌人：无重力，竖直速度保持0
+	if is_flying:
+		velocity.y = 0.0
+	else:
+		# 地面敌人：正常施加重力
+		velocity.y += 980 * delta
+
+	# 巡逻边界回头
 	if global_position.x > start_position.x + patrol_distance:
 		direction = -1.0
 	elif global_position.x < start_position.x - patrol_distance:
@@ -57,10 +67,15 @@ func _physics_process(delta: float) -> void:
 
 	sprite.flip_h = (direction < 0)
 
-	if is_on_floor():
+	# 动画处理
+	if is_flying:
+		# 飞行敌人直接播放 walk 动画（或你可以改成专门的 "fly" 动画）
 		sprite.play("walk")
 	else:
-		sprite.play("idle")
+		if is_on_floor():
+			sprite.play("walk")
+		else:
+			sprite.play("idle")
 
 	move_and_slide()
 
