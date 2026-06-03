@@ -1,0 +1,121 @@
+# Trae 对话历史 - NinjaGaiden_Return 项目
+
+## 2026-06-03
+
+---
+
+### 用户消息 1
+
+> 这是一个使用godot4.6.2stable开发的游戏项目，主要是模仿FC时代《忍者龙剑传3》开发的一款同人游戏，采用企业级架构设计。请你先认真阅读这个项目，了解这个项目的结构和代码，重点关注功能是如何实现的。我将会让你给我继续开发。
+
+### AI 回复 1
+
+（见下方项目分析部分）
+
+---
+
+#### 项目全景分析：NinjaGaiden_Return
+
+**项目定位**  
+基于 Godot 4.2.6 stable 的横版动作同人游戏，致敬 FC 经典《忍者龙剑传III》，采用企业级组件化+状态机架构设计。
+
+**四层架构：**
+
+1. **资源层** (`resources/`)
+   - `PlayerData.gd` — 玩家配置数据（速度、跳跃力、重力、HP、攻击力、失衡速度系数）
+   - `EnemyData.gd` — 敌人配置数据（HP、移速、巡逻距离、伤害）
+
+2. **组件层** (`scripts/components/`) — ECS 风格解耦
+   - `InputComponent` — 输入轮询 + 跳跃缓冲（0.12s 预输入）
+   - `MovementComponent` — 纯物理移动（走、停、跳、重力）
+   - `AnimationComponent` — 动画播放 + 容灾检测 + 水平翻转
+   - `HurtBox` — 受击区域，发射 `took_damage` 信号
+   - `PlayerHitBox` — 玩家攻击检测，命中后自动关闭防一刀多判
+   - `EnemyHitBox` — 敌人攻击检测，持续开启
+
+3. **状态机层** (`scripts/player/states/`)
+   - `State.gd` — 基类：`enter()` / `exit()` / `update()` / `physics_update()`
+   - `StateMachine.gd` — 自动收集子状态，`await owner.ready` 防错初始化
+   - **16个状态**：IdleState / RunState / CrouchState / JumpState / FallState / GroundAttackState / CrouchAttackState / AirAttackState / GroundNinjutsuState / AirNinjutsuState / SwordReadyState / SwordDashState / HangState / WallState / PlatformDropState
+
+4. **实体层**
+   - `Player.gd` — `CharacterBody2D`，协调组件+状态机，管理 HP、无敌帧闪烁
+   - `Enemy.gd` / `SmallEnemy.gd` — 敌人基类/小怪，巡逻 AI
+   - `PlayerCamera.gd` — `top_level=true` 剥离父子绑定，水平跟随，Y 轴锁死
+
+**已实现功能：**
+- 走/跑/跳/下蹲移动（带输入缓冲）
+- J 键近战攻击（地面/空中/下蹲）
+- U 键忍术（地面/空中/悬挂/爬墙）
+- L 键剑术备战 → 前冲突进（2.5 倍速，空中无视重力）
+- 攀爬系统（自动贴墙、上下攀爬、蹬墙跳、墙顶防飘）
+- 悬挂系统（头顶吊台吸附、左右移动、上翻下穿）
+- 平台穿透（S+跳跃下穿，防回吸冷却保护）
+- 失衡机制（空中转身减速至 70%）
+
+**待开发功能：**
+- 忍术实体生成（火球/手里弹等投射物）
+- 剑术 TP/CD 系统、上挑（L+上）
+- 必杀技（O 键）
+- UI/HUD（HP 条、MP 条、计时器、生命数）
+- 道具系统
+- 关卡设计
+- BOSS 战系统
+- 死亡/重生流程
+- 音频系统
+- 过场动画
+
+---
+
+
+---
+
+## 关键代码文件路径速查
+
+| 文件 | 路径 |
+|------|------|
+| 项目配置 | `e:\Godot\GodotPro\NinjaGaiden_Return\project.godot` |
+| 玩家主控 | `scripts/player/Player.gd` |
+| 状态机 | `scripts/player/states/StateMachine.gd` |
+| 状态基类 | `scripts/player/states/State.gd` |
+| 输入组件 | `scripts/components/InputComponent.gd` |
+| 移动组件 | `scripts/components/MovementComponent.gd` |
+| 动画组件 | `scripts/components/AnimationComponent.gd` |
+| 受击盒 | `scripts/components/HurtBox.gd` |
+| 玩家攻击盒 | `scripts/components/PlayerHitBox.gd` |
+| 敌人攻击盒 | `scripts/components/EnemyHitBox.gd` |
+| 玩家数据 | `resources/player/PlayerData.gd` |
+| 敌人数据 | `resources/enemy/EnemyData.gd` |
+| 敌人基类 | `scripts/enemy/Enemy.gd` |
+| 小怪 | `scripts/enemy/SmallEnemy.gd` |
+| 摄像机 | `scripts/camera/PlayerCamera.gd` |
+| 需求文档 | `backup/需求文档.md` |
+
+## 碰撞层定义
+
+| 层号 | 名称 |
+|------|------|
+| 1 | Player |
+| 2 | Enemy |
+| 3 | Terrain |
+| 4 | Platform |
+| 5 | PlayerAttack |
+| 6 | EnemyAttack |
+| 7 | Item |
+
+## 输入映射
+
+| 按键 | 名称 | 功能 |
+|------|------|------|
+| W | nav_up | 上/攀爬 |
+| S | nav_down | 下/下蹲 |
+| A | nav_left | 左移 |
+| D | nav_right | 右移 |
+| K | jump | 跳跃 |
+| J | attack | 攻击 |
+| L | special_move | 剑术备战 |
+| U | ninjutsu | 释放忍术 |
+| I | switch_ninjutsu | 切换忍术 |
+| O | finishing_move | 必杀技 |
+
+---
