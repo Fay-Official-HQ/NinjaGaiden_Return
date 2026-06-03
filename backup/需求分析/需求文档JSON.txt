@@ -1,0 +1,344 @@
+{
+  "game_title": "忍者龙剑传：归来",
+  "based_on": "FC原版《忍者龙剑传III》",
+  "original_info": {
+    "jp_name": "忍者龍剣伝III 黄泉の方舟",
+    "us_name": "Ninja Gaiden III: The Ancient Ship of Doom",
+    "developer": "TECMO",
+    "year": 1991,
+    "platform": "FC/NES",
+    "genre": "横版动作游戏"
+  },
+  "overview": {
+    "genre": "横版卷轴动作平台游戏（2D Side-Scrolling Action Platformer）",
+    "core_features": [
+      "总体设计采取忍龙之父吉泽雄秀的理念，重视核心爽感、节奏",
+      "共设计7大章节，每章有独立的关卡标题和过场动画",
+      "世界观融合魔幻和科幻，加入量子科技、人工智能",
+      "取消幻影分身、剑刃加长忍术，保留4种原版忍术（回旋手里剑、火球、火焰、菱形刀片），常驻且可切换",
+      "难度提升，操作流畅（攀爬、反身跳等）",
+      "保留HP、MP系统，去掉卷轴",
+      "新增TP系统和剑术攻击方式",
+      "核心爽感：一刀秒杀、快速反应、割草、怀旧"
+    ],
+    "story": "架空于原版2代和3代，主角隼龙，全新故事但暂不开发具体剧情"
+  },
+  "controls": {
+    "input_mapping": [
+      { "key": "W", "name": "nav_up", "description": "贴墙时按住上即可攀爬" },
+      { "key": "S", "name": "nav_down", "description": "下蹲时可以普通攻击" },
+      { "key": "A/D", "name": "nav_left/nav_right", "description": "左和右移动" },
+      { "key": "K", "name": "jump", "description": "在空中可以攻击、释放忍术、释放部分剑术" },
+      { "key": "J", "name": "attack", "description": "使用龙剑近战攻击" },
+      { "key": "L", "name": "special_move", "description": "剑术动作" },
+      { "key": "U", "name": "ninjutsu", "description": "消耗忍术值释放当前装备的忍术" },
+      { "key": "I", "name": "switch_ninjutsu", "description": "切换忍术" },
+      { "key": "O", "name": "finishing_move", "description": "释放必杀技：真龙华闪" }
+    ],
+    "details": {
+      "climbing": "贴墙时按住\"上\"即可攀爬，可在墙上停留",
+      "wall_jump": "在墙上按跳跃键可反方向跳出",
+      "platform_vault": "面向平台边缘按住方向键+跳跃即可翻上平台",
+      "hang": "在移动平台下方按\"下+跳跃\"可悬挂"
+    }
+  },
+  "stats": {
+    "hp": {
+      "max": 16,
+      "initial": 16,
+      "display": "屏幕顶部格数",
+      "damage_reference": {
+        "enemy_contact": "1-2格",
+        "spikes_grids_traps": "3格",
+        "boss_attack": "1-3格"
+      }
+    },
+    "lives": {
+      "initial": 3,
+      "increase_item": "忍者头像",
+      "continue": "无限接关，从当前小节开始"
+    },
+    "mp": {
+      "max": 100,
+      "usage": "使用忍术消耗",
+      "recovery": "蓝色忍者图标+10，红色忍者图标补满",
+      "carry_over": "过关后保留前一关数值"
+    },
+    "level_timer": {
+      "display": "每关画面右上方",
+      "record": "每关结束时显示通关时间",
+      "total_ranking": "总通关时间排行榜",
+      "exclude_cutscenes": true
+    }
+  },
+  "items": {
+    "consumables": [
+      { "name": "蓝色忍", "icon": "蓝色忍者图标", "effect": "忍术值+10" },
+      { "name": "红色忍", "icon": "红色忍者图标", "effect": "忍术值补满" },
+      { "name": "血壶", "icon": "红色壶", "effect": "HP恢复6格" },
+      { "name": "忍者头像", "icon": "隼龙头像", "effect": "增加1条命" }
+    ],
+    "ninjutsu": [
+      { "name": "火球", "icon": "红色火球", "cost": 8, "effect": "向斜前下方发射3枚火球" },
+      { "name": "火焰", "icon": "红色火团", "cost": 8, "effect": "向斜前上方发射3枚火团" },
+      { "name": "菱形刀片", "icon": "菱形刃", "cost": 10, "effect": "竖直方向上下同时攻击" },
+      { "name": "红色手里剑", "icon": "红色飞镖", "cost": 10, "effect": "直线飞行，贯穿，可回收" }
+    ],
+    "ninjutsu_rules": {
+      "equip_one_at_a_time": true,
+      "switch_replaces_current": true,
+      "release_key": "U",
+      "usable_states": ["地面", "空中", "悬挂", "爬墙"]
+    },
+    "sword_arts": {
+      "description": "核心改版系统，默认按键L进入剑术姿势，消耗统一10，每个剑术CD 5秒",
+      "arts": [
+        { "input": "L", "name": "备战姿势", "condition": "角色在地面", "description": "进入剑术备战姿势" },
+        { "input": "L+方向前", "name": "前冲", "condition": "地面、空中", "description": "向前迅速斩击并且移动一大段距离" },
+        { "input": "L+方向上", "name": "上挑", "condition": "地面、空中", "description": "向上斩击并跃向空中，不消耗跳跃，可实现二段跳" },
+        { "input": "L+方向下", "name": "下斩", "condition": "空中", "description": "加快落地速度并向下斩击直到落地" },
+        { "input": "L+方向后", "name": "旋斩", "condition": "地面、空中", "description": "向前移动一小段并向周围斩击" }
+      ]
+    },
+    "super_skill": {
+      "name": "真龙华闪",
+      "key": "O",
+      "description": "以角色为中心召唤多个分身斩击大范围敌人，释放时无敌可移动",
+      "cooldown": 10,
+      "cost_hp": 4,
+      "usable_states": ["空中", "地面"]
+    },
+    "damage_values": {
+      "hp_max": 100,
+      "mp_max": 100,
+      "tp_max": 100,
+      "normal_attack": 1,
+      "incoming_damage_range": "1-16",
+      "sword_art_damage": 2,
+      "ninjutsu_damage": 3,
+      "super_skill_damage_per_hit": 3
+    }
+  },
+  "player_abilities": {
+    "basic_actions": [
+      { "action": "跑动", "description": "左右移动，基础速度" },
+      { "action": "跳跃", "description": "固定高度和距离" },
+      { "action": "攻击", "description": "龙剑近战斩击" },
+      { "action": "攀墙", "description": "贴墙上方向，可上下移动" },
+      { "action": "反墙跳", "description": "墙上按跳跃+方向反向跳出" },
+      { "action": "下蹲", "description": "降低受击判定" },
+      { "action": "悬挂", "description": "平台下方悬挂移动" }
+    ],
+    "combat_features": [
+      "攻击、忍术、剑术可破坏部分敌人弹幕",
+      "跳跃中可攻击（空中斩击）",
+      "剑术之间可衔接，独立CD"
+    ]
+  },
+  "level_design": {
+    "chapters": [
+      { "chapter": 1, "title": "归来", "theme": "繁华夜景都市", "mechanics": [] },
+      { "chapter": 2, "title": "", "theme": "", "mechanics": [] },
+      { "chapter": 3, "title": "", "theme": "", "mechanics": [] },
+      { "chapter": 4, "title": "", "theme": "", "mechanics": [] },
+      { "chapter": 5, "title": "", "theme": "", "mechanics": [] },
+      { "chapter": 6, "title": "", "theme": "", "mechanics": [] },
+      { "chapter": 7, "title": "", "theme": "", "mechanics": [] }
+    ],
+    "structure": "每章分为多个小节（如2-1A），小节间后续会有过场动画（暂不开发）",
+    "environment_mechanics": [
+      { "name": "流沙", "effect": "缓慢下沉，移动速度减半，淹没头部1秒死亡；攀墙时不下沉" },
+      { "name": "熔岩", "effect": "底部熔岩跌落即死；岩浆中跳出火球伤害；上升熔岩缓慢上涌" },
+      { "name": "水流", "effect": "顺水加速，逆水减速" },
+      { "name": "冰面", "effect": "惯性增大，起步刹车延迟" },
+      { "name": "尖刺墙壁", "effect": "周期伸缩（伸出2秒，缩入2秒），触碰扣3HP" },
+      { "name": "电流/电网", "effect": "固定位置，触碰扣3HP，常与移动平台组合" },
+      { "name": "强风", "effect": "固定向右吹，影响跳跃和移动" },
+      { "name": "消失砖块", "effect": "踩踏后约1秒消失" },
+      { "name": "移动平台", "effect": "水平/垂直移动，周期性出现/消失，可下方悬挂" }
+    ]
+  },
+  "enemies": {
+    "common_rules": [
+      "敌人可从屏幕外出现",
+      "可被攻击消灭或快速通过",
+      "飞行类优先解决",
+      "悬崖边、平台跳跃段敌人最危险"
+    ],
+    "types": [
+      { "name": "士兵/守卫", "behavior": "行走，近战/射击", "note": "基础敌人" },
+      { "name": "蝙蝠", "behavior": "从上方俯冲", "note": "小体型，难命中" },
+      { "name": "丧尸", "behavior": "突然从上方跳出", "note": "出现位置固定" },
+      { "name": "食人鱼", "behavior": "从水面突然跃出", "note": "可被火球克制" },
+      { "name": "侦察机/飞行器", "behavior": "快速飞行，部分发射弹幕", "note": "优先解决" },
+      { "name": "大黄蜂", "behavior": "快速飞行", "note": "危险度高" },
+      { "name": "监视眼", "behavior": "贴墙，向3方向发射慢速弹幕", "note": "弹幕可打落" },
+      { "name": "慢速飞行器", "behavior": "慢速前进3秒→向上下发射炮弹→同水平面时加速冲撞", "note": "有规律" },
+      { "name": "激光蜘蛛", "behavior": "发射不可打落的慢速激光", "note": "需躲避" },
+      { "name": "直升机", "behavior": "空中突袭", "note": "起落架关" },
+      { "name": "寄生虫", "behavior": "BOSS战时从上方掉落", "note": "伤害小但干扰大" }
+    ]
+  },
+  "bosses": [
+    {
+      "chapter": 1,
+      "name": "地波机械",
+      "appearance": "履带式地面机械",
+      "hp": 16,
+      "behavior_loop": [
+        "前进2步（无敌状态）",
+        "开启攻击模式（无敌解除）",
+        "向地面发射3枚地波（间隔1秒）",
+        "循环"
+      ],
+      "strategy": "近身攻击，跳跃躲避地波，可跳至身后安全输出"
+    },
+    {
+      "chapter": 2,
+      "name": "火焰机械",
+      "appearance": "浮空机械炮台",
+      "hp": 16,
+      "behavior": "空中飞行移动，向下/斜向发射火球",
+      "scene": "有2个可站立平台",
+      "strategy": "站在特定位置不动持续攻击，BOSS会飞入攻击范围"
+    },
+    {
+      "chapter": 3,
+      "name": "机械石像鬼×2",
+      "appearance": "石像鬼造型，一真一假",
+      "hp": 16,
+      "behavior_loop": ["前跃3次", "连续发射3枚手里剑（间隔1秒）", "循环"],
+      "distinction": "真身接触解除护身火效果；假身接触无伤害；手里剑对有护身火的主角无伤害",
+      "strategy": "开场8秒内用护身火+特定站位速杀"
+    },
+    {
+      "chapter": 4,
+      "name": "钻地机械",
+      "appearance": "履带式地面机械（加强版）",
+      "hp": 16,
+      "behavior_loop": [
+        "缓慢移动（可攻击）",
+        "钻入地下（无敌）",
+        "发射5枚火焰忍术",
+        "在主角正下方跳出",
+        "循环"
+      ],
+      "strategy": "利用BOSS出场慢，钻出前释放全部火焰忍术爆发输出"
+    },
+    {
+      "chapter": 5,
+      "name": "龙之复制体",
+      "appearance": "与主角相同的忍者",
+      "hp": 16,
+      "behavior_loop": [
+        "横向发射2枚手里剑+同时跳跃",
+        "前跃2次+向下投掷3枚火球",
+        "循环"
+      ],
+      "strategy": "发手里剑时跳跃接近攻击；前跃时爬墙躲避"
+    },
+    {
+      "chapter": 6,
+      "name": "龙之复制体·改",
+      "appearance": "巨大爬行怪兽（生化改造）",
+      "hp": "较高",
+      "scene": "全地形流沙",
+      "behavior_loop": [
+        "向主角方向前进",
+        "发射1枚火焰弹",
+        "冲撞墙壁，震落寄生虫",
+        "循环"
+      ],
+      "strategy": "远离爬墙等待 → 冲过来时跳跃到背后 → 砍几刀 → 循环。正面攻击无效，必须攻击背部。战后需反复跳跃直到屏幕变黑"
+    },
+    {
+      "chapter": 7,
+      "bosses": [
+        {
+          "name": "库兰西（人形态）",
+          "appearance": "褐色超生命体身躯",
+          "hp": 20,
+          "behavior_loop": ["漂浮", "发射3枚追踪弹", "受攻击后降下3道落雷", "循环"],
+          "strategy": "利用火焰忍术远程输出，使追踪弹飞出屏幕"
+        },
+        {
+          "name": "库兰西·暴走（异形形态）",
+          "appearance": "恐怖异形，左右各一只手",
+          "hp": 20,
+          "behavior_loop": [
+            "左手收集能量球 → 释放5枚能量弹",
+            "右手收集能量球 → 释放5枚能量弹",
+            "循环"
+          ],
+          "notes": "能量弹5枚在同一水平线，可判断安全区",
+          "strategy": "站在安全区等待 → 水平线过头部时跑向另一侧 → 跳上平台空中砍2刀 → 返回安全区"
+        },
+        {
+          "name": "邪神号（最终BOSS）",
+          "appearance": "巨大攻击型机器人",
+          "structure": "外防御罩(HP=16) + 核心本体",
+          "attacks": [
+            "小冲击波（HP-2）",
+            "反射激光（HP-2，有特定移动路径）"
+          ],
+          "strategy": "先破外罩，保持相对位置（敌进我退，敌退我进），HP越低发炮越频繁但模式不变"
+        }
+      ]
+    }
+  ],
+  "cutscenes": {
+    "status": "暂不开发",
+    "form": "游戏内像素画面+对话框，静态图片或简单动画，文字逐段显示",
+    "nodes": [
+      { "trigger": "片头", "content": "艾琳被'龙'追杀坠崖 → 龙被通缉 → 龙调查研究所" },
+      { "trigger": "第1章结束", "content": "黑衣男子（库兰西）出现，指引龙前往岩石城堡" },
+      { "trigger": "第2章结束", "content": "福斯塔全息影像出现，挑衅龙" },
+      { "trigger": "第3章结束", "content": "龙之复制体出现，决斗，复制体透露艾琳是他杀的" },
+      { "trigger": "第4章结束", "content": "库兰西解释'生化人类'计划，请求龙帮助阻止福斯塔" },
+      { "trigger": "第5章结束", "content": "艾琳还活着！复制体变身。龙击败复制体后库兰西背叛，福斯塔被亚空间撕碎" },
+      { "trigger": "第6章结束", "content": "库兰西揭示次元战舰真相" },
+      { "trigger": "第7章中段", "content": "库兰西变身，试图说服龙加入" },
+      { "trigger": "结局", "content": "龙击败库兰西，次元战舰坠毁，龙与艾琳看日出" }
+    ]
+  },
+  "audio": {
+    "music": {
+      "features": [
+        "保留部分原版BGM，加入重置BGM",
+        "每章独立BGM",
+        "BOSS战独立战斗BGM",
+        "剧情演义有BGM"
+      ]
+    },
+    "sfx": [
+      "攻击音效",
+      "跳跃音效",
+      "受创音效",
+      "道具拾取音效",
+      "忍术释放音效",
+      "BOSS登场/死亡音效"
+    ]
+  },
+  "development_notes": {
+    "engine": "Godot_v4.6.2-stable_win64",
+    "node_type": "CharacterBody2D",
+    "resolution": "480×270 (16:9)",
+    "hitbox_hurtbox": "Area2D组合模式，禁止像素碰撞",
+    "input": "Input Action Map，禁止硬编码键位",
+    "physics": "_physics_process()，禁止RigidBody，纯运动学",
+    "core_modules": [
+      "Player（移动、跳跃、攀墙、悬挂、攻击、忍术）",
+      "ItemSystem（道具拾取、忍术切换、HP/TP/MP管理）",
+      "EnemyAI（杂兵行为、BOSS行为）",
+      "LevelSystem（关卡加载、版面切换、计时器、环境机制）",
+      "UISystem（HUD、过场对话框）",
+      "AudioSystem（BGM管理、音效播放）"
+    ],
+    "implementation_approach": "先做单屏Demo（Player+1种敌人+1种环境）→第1章完整复刻→逐章推进",
+    "input_buffer": "所有跳跃/攻击输入保留6帧缓冲",
+    "coyote_time": "离开平台后允许8帧内仍可跳跃",
+    "delta_handling": "使用get_physics_process_delta_time()，锁定60FPS，时间以帧为单位换算",
+    "collision_layers": "需提前规划玩家、敌人、地形、道具、特效的Layer/Mask表格",
+    "priority": "需求冲突时以本文档为准"
+  }
+}

@@ -50,7 +50,6 @@
 [ext_resource type="Texture2D" uid="uid://o8ermo06xa04" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_005.png" id="23_5q8fn"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="23_bysbl"]
 [ext_resource type="Script" uid="uid://6gqunn4us00k" path="res://scripts/camera/PlayerCamera.gd" id="23_ro0t8"]
-[ext_resource type="Script" uid="uid://cu1y5up3obsk8" path="res://scripts/components/SwordHitBox.gd" id="24_3p0jd"]
 [ext_resource type="Texture2D" uid="uid://biemve1cpov1f" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_003.png" id="31_genst"]
 [ext_resource type="Texture2D" uid="uid://byr771p1frsq6" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_004.png" id="32_niom3"]
 [ext_resource type="Texture2D" uid="uid://c8xnchcrryhri" path="res://assets/sprites/Ryu/fcjingling/xuandiao/xuandiao_004.png" id="38_gmu8b"]
@@ -87,7 +86,7 @@ size = Vector2(29, 26)
 size = Vector2(30, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymths"]
-size = Vector2(31, 47)
+size = Vector2(29, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvjb1"]
 size = Vector2(14, 30)
@@ -468,13 +467,15 @@ damage = null
 position = Vector2(19, 11)
 shape = SubResource("RectangleShape2D_2wy34")
 
-[node name="SwordDashBox" type="Area2D" parent="AttackRoot" unique_id=1475980129]
+[node name="SwordDashHitBox" type="Area2D" parent="AttackRoot" unique_id=135427273]
 collision_layer = 16
 collision_mask = 2
-script = ExtResource("24_3p0jd")
+script = ExtResource("22_bysbl")
+damage = null
+metadata/_custom_type_script = "uid://dtegjbw2ixnd2"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordDashBox" unique_id=820386358]
-position = Vector2(19.5, 5.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordDashHitBox" unique_id=907351969]
+position = Vector2(19.5, 1.5)
 shape = SubResource("RectangleShape2D_ymths")
 
 [node name="HurtRoot" type="Node2D" parent="." unique_id=1263872561]
