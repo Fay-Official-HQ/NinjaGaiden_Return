@@ -21,7 +21,7 @@ class_name EdgeBlade
 @export var damping: float = 0.96
 
 ## 振幅阈值（像素）：当棱刃与玩家的垂直距离小于此值，且速度足够小时消失
-@export var min_amplitude: float = 20.0
+@export var min_amplitude: float = 10.0
 
 ## 最大存活时间（秒），防止无限弹动
 @export var lifetime: float = 3.0

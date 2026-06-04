@@ -4,20 +4,23 @@ extends State
 class_name AirNinjutsuState
 
 var is_imbalance: bool = false
+var _has_cast: bool = false
 
 func enter(msg: Dictionary = {}) -> void:
 	is_imbalance = msg.get("imbalance", false)
 	player.animation.play("air_ninjutsu")
-	player.ninjutsu.cast_ninjutsu()
+	_has_cast = false
 
 func update(_delta: float) -> void:
-	# 如果空中施法还没结束就落地了，直接中断动作恢复站立
 	if player.is_on_floor():
 		state_machine.change_state(player.idle_state)
 		return
 
-	# 动画结束，退回到下落状态，并交还失衡标记
 	var sprite = player.animation.sprite
+	if not _has_cast and sprite.animation == "air_ninjutsu" and sprite.frame >= 1:
+		_has_cast = true
+		player.ninjutsu.cast_ninjutsu()
+
 	if sprite.animation == "air_ninjutsu" and not sprite.is_playing():
 		state_machine.change_state(player.fall_state, {"imbalance": is_imbalance})
 

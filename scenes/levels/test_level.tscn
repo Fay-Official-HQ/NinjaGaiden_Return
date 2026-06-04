@@ -55,6 +55,54 @@ position = Vector2(1299.2224, 90.48819)
 [node name="HangingPlatform" parent="dixing/HangingPlatform2" unique_id=57779976 instance=ExtResource("3_48ne7")]
 position = Vector2(157.77759, -1.4881897)
 
+[node name="shikuai2" parent="dixing" unique_id=2025350521 instance=ExtResource("4_48ne7")]
+position = Vector2(1593, 135)
+
+[node name="shikuai" parent="dixing/shikuai2" unique_id=1647791914 instance=ExtResource("4_48ne7")]
+position = Vector2(-1, -163)
+
+[node name="shikuai" parent="dixing/shikuai2/shikuai" unique_id=1943207102 instance=ExtResource("4_48ne7")]
+position = Vector2(174, 0)
+
+[node name="shikuai" parent="dixing/shikuai2/shikuai/shikuai" unique_id=1515159335 instance=ExtResource("4_48ne7")]
+position = Vector2(173, 0)
+
+[node name="HangingPlatform" parent="dixing/shikuai2/shikuai/shikuai/shikuai" unique_id=894400689 instance=ExtResource("3_48ne7")]
+position = Vector2(-160.65735, 140.53244)
+
+[node name="HangingPlatform" parent="dixing/shikuai2" unique_id=1192040259 instance=ExtResource("3_48ne7")]
+position = Vector2(650, 23)
+
+[node name="shikuai" parent="dixing/shikuai2/HangingPlatform" unique_id=167952257 instance=ExtResource("4_48ne7")]
+position = Vector2(194, 45)
+
+[node name="shikuai" parent="dixing/shikuai2/HangingPlatform/shikuai" unique_id=1321078129 instance=ExtResource("4_48ne7")]
+position = Vector2(173, 0)
+
+[node name="Enemy" parent="dixing/shikuai2/HangingPlatform/shikuai/shikuai" unique_id=869226174 instance=ExtResource("7_hfwtw")]
+position = Vector2(-1142, -132)
+max_hp = 1
+move_speed = 20.0
+
+[node name="Enemy2" parent="dixing/shikuai2/HangingPlatform/shikuai/shikuai" unique_id=1639337001 instance=ExtResource("7_hfwtw")]
+position = Vector2(-1012, -131)
+max_hp = 1
+move_speed = 20.0
+
+[node name="Enemy3" parent="dixing/shikuai2/HangingPlatform/shikuai/shikuai" unique_id=865015206 instance=ExtResource("7_hfwtw")]
+position = Vector2(-784, -64)
+max_hp = 1
+move_speed = 20.0
+
+[node name="SmallEnemy" parent="dixing/shikuai2/HangingPlatform/shikuai/shikuai/Enemy3" unique_id=570102081 instance=ExtResource("6_7x1jh")]
+position = Vector2(656, 1)
+
+[node name="shikuai" parent="dixing/shikuai2/HangingPlatform/shikuai/shikuai/Enemy3/SmallEnemy" unique_id=304550879 instance=ExtResource("4_48ne7")]
+position = Vector2(286, -24)
+
+[node name="shikuai" parent="dixing/shikuai2/HangingPlatform/shikuai/shikuai/Enemy3/SmallEnemy/shikuai" unique_id=1274145448 instance=ExtResource("4_48ne7")]
+position = Vector2(-400, 61)
+
 [node name="ememys" type="Node" parent="." unique_id=65661492]
 
 [node name="SmallEnemy3" parent="ememys" unique_id=1474891378 instance=ExtResource("6_7x1jh")]
@@ -90,8 +138,11 @@ data = ExtResource("8_2mu0v")
 [node name="SmallEnemy4" parent="ememys" unique_id=1069803591 instance=ExtResource("6_7x1jh")]
 position = Vector2(630, 94)
 
-[node name="SmallEnemy" parent="ememys" unique_id=869226174 instance=ExtResource("6_7x1jh")]
+[node name="SmallEnemy" parent="ememys" unique_id=2131293826 instance=ExtResource("6_7x1jh")]
 position = Vector2(155.40645, 47.575226)
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("1_jbqir")]
 position = Vector2(-28, 27)
+
+[node name="HangingPlatform" parent="." unique_id=2092188651 instance=ExtResource("3_48ne7")]
+position = Vector2(2076, 159)

@@ -14,6 +14,8 @@ class_name WallState
 
 # 是否正在释放忍术（锁定攀爬移动）
 var is_casting: bool = false
+var _has_cast: bool = false
+var _cast_dir: float = 0.0
 # 墙壁法线的 x 分量：-1 = 墙在右边，+1 = 墙在左边
 # 用 sign() 可得到推离墙壁的方向
 var wall_normal_x: float = 0.0 
@@ -34,9 +36,13 @@ func update(_delta: float) -> void:
 	# 忍术播放期间锁定输入，等动画播完自动恢复
 	if is_casting:
 		var sprite = player.animation.sprite
-		if (sprite.animation == "wall_ninjutsu" or sprite.animation == "wall_ninjutsu_backward") and not sprite.is_playing():
-			is_casting = false
-			player.animation.play("wall_idle")
+		if sprite.animation == "wall_ninjutsu" or sprite.animation == "wall_ninjutsu_backward":
+			if not _has_cast and sprite.frame >= 1:
+				_has_cast = true
+				player.ninjutsu.cast_ninjutsu(_cast_dir)
+			elif not sprite.is_playing():
+				is_casting = false
+				player.animation.play("wall_idle")
 		return
 
 	# 1. 蹬墙跳：按跳跃 + 方向键推离墙壁
@@ -57,13 +63,14 @@ func update(_delta: float) -> void:
 	# 2. 墙上释放忍术
 	if Input.is_action_just_pressed("ninjutsu"):
 		is_casting = true
+		_has_cast = false
 		# 推离墙壁方向 → 背对墙壁放忍术；否则面朝墙壁放忍术
 		if player.input.move_direction == sign(wall_normal_x):
 			player.animation.play("wall_ninjutsu_backward")
-			player.ninjutsu.cast_ninjutsu(wall_normal_x)
+			_cast_dir = wall_normal_x
 		else:
 			player.animation.play("wall_ninjutsu")
-			player.ninjutsu.cast_ninjutsu(-wall_normal_x)
+			_cast_dir = -wall_normal_x
 		return
 
 func physics_update(_delta: float) -> void:

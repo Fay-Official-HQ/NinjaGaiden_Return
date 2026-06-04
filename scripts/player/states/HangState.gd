@@ -7,9 +7,11 @@ class_name HangState
 @export var hang_y_offset: float = 12 # 控制抓取时角色视觉高低，可根据模型微调
 
 var is_casting: bool = false
+var _has_cast: bool = false
 
 func enter(_msg: Dictionary = {}) -> void:
 	is_casting = false
+	_has_cast = false
 	player.velocity = Vector2.ZERO
 	player.animation.play("hang_idle")
 	
@@ -25,17 +27,21 @@ func update(_delta: float) -> void:
 	# --- 忍术结算 ---
 	if is_casting:
 		var sprite = player.animation.sprite
-		if sprite.animation == "hang_ninjutsu" and not sprite.is_playing():
-			is_casting = false
-			player.animation.play("hang_idle")
+		if sprite.animation == "hang_ninjutsu":
+			if not _has_cast and sprite.frame >= 1:
+				_has_cast = true
+				player.ninjutsu.cast_ninjutsu()
+			elif not sprite.is_playing():
+				is_casting = false
+				player.animation.play("hang_idle")
 		return
 
 	# --- 释放悬挂专属忍术 ---
 	if Input.is_action_just_pressed("ninjutsu"):
 		is_casting = true
+		_has_cast = false
 		player.velocity.x = 0
 		player.animation.play("hang_ninjutsu")
-		player.ninjutsu.cast_ninjutsu()
 		return
 
 	# --- 退出方式 1：向下脱离 ---

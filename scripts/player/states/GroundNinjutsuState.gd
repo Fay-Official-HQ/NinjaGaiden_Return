@@ -3,18 +3,19 @@ extends State
 
 class_name GroundNinjutsuState
 
+var _has_cast: bool = false
+
 func enter(_msg: Dictionary = {}) -> void:
-	print("【调试】进入 GroundNinjutsuState")
-	# 瞬间停止移动，施加施法硬直
 	player.movement.stop()
 	player.animation.play("ground_ninjutsu")
-	print("【调试】调用 player.ninjutsu.cast_ninjutsu()")
-	player.ninjutsu.cast_ninjutsu()
+	_has_cast = false
 
 func update(_delta: float) -> void:
 	var sprite = player.animation.sprite
+	if not _has_cast and sprite.animation == "ground_ninjutsu" and sprite.frame >= 1:
+		_has_cast = true
+		player.ninjutsu.cast_ninjutsu()
 	if sprite.animation == "ground_ninjutsu" and not sprite.is_playing():
-		# 动画结束，根据当前按键方向决定恢复状态
 		if player.input.move_direction != 0:
 			state_machine.change_state(player.run_state)
 		else:
