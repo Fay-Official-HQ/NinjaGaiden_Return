@@ -1,0 +1,345 @@
+# 《忍者龙剑传：归来》忍术系统需求分析（项目实况修正版）
+
+> 本版本已根据项目现有代码结构（Godot 4.6、组件-状态机架构、碰撞层配置）进行全面适配和修正。
+
+---
+
+## 一、功能需求
+
+### 1.1 基础规则
+
+- 角色初始拥有 4 种忍术：**火焰**、**火球**、**棱刃**、**回旋镖**
+- MP 上限 100，初始满值（配置在 `PlayerData` 的 `max_mp` 字段）
+- 按键映射（使用现有 Input Map）：
+  - **切换忍术**：`switch_ninjutsu`（默认 I）
+  - **释放忍术**：`ninjutsu`（默认 U）
+- 按下切换键，循环切换当前装备的忍术（暂时控制台输出当前忍术名）
+- 按下释放键，若 MP ≥ 10，消耗 10 MP 并释放当前忍术；若 MP 不足，仍播放释放动画，但**不生成投射物**，控制台输出"MP不足"
+- 忍术可在**所有允许输入的动作状态**中释放（详见 1.3 节），但不可在受伤、死亡等状态下释放
+
+### 1.2 四种忍术的行为定义
+
+#### ① 火焰（斜上方三团火）
+- 释放时，以玩家**身前一定距离**为中心，同时生成 3 团火焰
+- 初始位置：玩家面向方向偏移 20 像素前方，Y 坐标交错（-4, 0, 4）避免完全重叠
+- 运动方向：沿**与地面夹角约 45°**（斜上方），与角色面向水平方向一致
+- 三团火焰分别以 `-15°`、`0°`、`+15°` 的水平偏角飞行（相对于斜上方向），产生自然散开效果
+- 每团火焰独立判定伤害，飞行 **1.2 秒**后自动消失
+
+#### ② 火球（斜下方三团火）
+- 与火焰类似，但运动方向改为**斜下方**（约 -45°）
+- 初始 Y 偏移略向下调整（8, 4, 12），仍避免重叠
+- 偏角同样为 `-15°`、`0°`、`+15°`，速度略快于火焰
+- 飞行 **1.2 秒**后自动消失
+
+#### ③ 棱刃（垂直往返）
+- 释放时，在玩家**正上方和正下方**各生成一个棱刃
+- 初始距离：头顶 30 像素和脚底 30 像素
+- 运动规则：
+  - 两个棱刃分别沿世界 Y 轴（向上、向下）移动，速度恒定
+  - 每个棱刃拥有独立振动幅度（120 像素），以**释放点的 Y 坐标**为基准
+  - 当棱刃的 Y 坐标超出 `[基准Y - 振幅, 基准Y + 振幅]` 时，反向移动，形成来回穿梭
+- 持续存在时间：**3 秒**，到时间自动消失
+- 两个棱刃是独立的投射物，不互相影响
+
+#### ④ 回旋镖（水平往返）
+- 释放时，在玩家前方生成一个镖
+- 运动规则（状态机：`FORWARD → BACKWARD → FORWARD` 循环）：
+  - 初始状态为 `FORWARD`，速度方向为角色面向方向（`facing_direction`）
+  - 记录发射时的角色 X 坐标为 `home_x`
+  - 当镖的 X 坐标与 `home_x` 的距离 ≥ `max_distance`（300 像素）时，切换方向
+  - 当镖越过 `home_x` 继续飞行，再次达到最大距离时折返
+  - 实现：`velocity.x = direction * speed`，`direction` 在边界翻转
+- 此方案不实时追踪角色位置，简单稳定
+- 持续存在时间：**5 秒**，到时自动消失
+
+### 1.3 状态释放权限
+
+#### 允许释放的状态
+| 状态 | 方式 | 说明 |
+|------|------|------|
+| `IdleState` | 直接进入 `GroundNinjutsuState` | ✅ 现有逻辑已支持 |
+| `RunState` | 直接进入 `GroundNinjutsuState` | ✅ 现有逻辑已支持 |
+| `CrouchState` | 直接进入 `GroundNinjutsuState` | ✅ 现有逻辑已支持 |
+| `JumpState` | 进入 `AirNinjutsuState` | ✅ 现有逻辑已支持 |
+| `FallState` | 进入 `AirNinjutsuState` | ✅ 现有逻辑已支持 |
+| `WallState` | 墙上忍术动画 | ✅ 现有逻辑已支持 |
+| `HangState` | 悬挂忍术动画 | ✅ 现有逻辑已支持 |
+
+#### 禁止释放的状态
+| 状态 | 原因 |
+|------|------|
+| `GroundAttackState`、`AirAttackState`、`CrouchAttackState` | 攻击中不可打断 |
+| `SwordReadyState`、`SwordDashState` | 剑术专属动作 |
+| `HurtState` | 受伤硬直 |
+| `PlatformDropState` | 平台穿透中 |
+
+### 1.4 伤害与碰撞规则
+
+| 目标类型 | 伤害效果 | 投射物行为 |
+|:---|:---|:---|
+| 普通小怪（`Enemy`、`SmallEnemy`） | 秒杀（调用 `die()`） | 继续飞行，不消失 |
+| Boss（`HurtBox.is_boss = true`） | 单次造成 **3 点伤害** | **立即消失**（`queue_free()`） |
+
+- 棱刃特殊处理：两个棱刃独立命中 Boss 后分别消失，总共可造成 6 点伤害
+- 所有投射物对玩家自身和地形**无碰撞**
+
+---
+
+## 二、架构设计（与现有系统集成）
+
+### 2.1 碰撞层配置（基于项目实况）
+
+项目现有碰撞层（来自 `project.godot`）：
+
+| 层 | 名称 | 用途 |
+|:---|:---|:---|
+| 1 | `Player` | 玩家物理体 |
+| 2 | `Enemy` | 敌人物理体 + 敌人 HurtBox |
+| 3 | `Terrain` | 地形 |
+| 4 | `Platform` | 平台 |
+| 5 | `PlayerAttack` | 玩家攻击框（HitBox、SwordDashBox） |
+| 6 | `EnemyAttack` | 敌人攻击框 |
+| 7 | `Item` | 道具 |
+
+现有配置对照（已从场景文件中确认）：
+
+| 节点 | `collision_layer` | `collision_mask` |
+|:---|:---|:---|
+| 玩家 CharacterBody2D | 1 (Player) | 12 (Terrain + Platform) |
+| 敌人 CharacterBody2D | 2 (Enemy) | 12 (Terrain + Platform) |
+| 敌人 HurtBox | 2 (Enemy) | 16 (PlayerAttack) |
+| 敌人 HitBox | 32 (EnemyAttack) | — |
+| 玩家 HitBox / SwordDashBox | 16 (PlayerAttack) | 2 (Enemy) |
+| 玩家 HurtBox | — | 32 (EnemyAttack) |
+
+**忍术投射物碰撞配置**：
+| 属性 | 值 | 说明 |
+|:---|:---|:---|
+| `collision_layer` | 16（第5层 PlayerAttack） | 与玩家现有攻击框同层 |
+| `collision_mask` | 2（第2层 Enemy） | 只检测敌人 HurtBox |
+
+**Boss 识别方案**（无需新增碰撞层）：
+- 在 `HurtBox.gd` 中添加 `@export var is_boss: bool = false`
+- Boss 的 HurtBox 在场景中勾选此属性
+- 投射物的 `area_entered` 回调中通过 `hurt_box.is_boss` 区分伤害逻辑
+
+> 为什么不需要加 Boss 层？因为敌人 HurtBox 已经在 Layer 2 (Enemy) 上，投射物 mask 为 Layer 2 就能检测到所有敌人（包括 Boss）。Boss 的特殊伤害逻辑通过 `is_boss` 属性在代码层面区分。
+
+### 2.2 组件架构
+
+#### NinjutsuComponent（新增）
+
+**位置**：`Player` 场景 → `Components/CombatComponent` 节点（已有空节点，直接挂载脚本）
+
+**职责**：
+1. 管理当前忍术索引（0-3）
+2. 管理 MP（当前值 + 增减接口）
+3. 监听切换和释放输入（但不抢输入，由各状态触发调用）
+4. 检查 MP，消耗 MP
+5. 根据当前忍术索引，实例化对应的投射物
+6. 发出信号供 UI 更新
+
+**关键约定**：
+- `NinjutsuComponent` **不自作主张监听输入**，而是由各忍术状态（`GroundNinjutsuState` 等）在 `enter()` 中调用其释放接口
+- 这样与现有状态机架构完全兼容，无需改动现有状态的输入检测流程
+
+```gdscript
+# 调用示例（在 GroundNinjutsuState.enter() 中）：
+player.ninjutsu.cast_ninjutsu()
+```
+
+#### 投射物架构
+
+**BaseProjectile**（基类，Area2D）：
+
+```
+NinjutsuProjectile.tscn (Area2D)
+├── CollisionShape2D
+├── Visual/AnimatedSprite2D
+└── BaseProjectile.gd (脚本)
+```
+
+**导出变量**：
+```gdscript
+@export var speed: float = 400.0
+@export var damage: int = 999        # 秒杀小怪
+@export var boss_damage: int = 3     # Boss 单次伤害
+@export var lifetime: float = 1.2    # 飞行时间
+@export var direction: Vector2       # 单位方向向量
+@export var is_piercing: bool = true  # 是否穿怪（小怪不消失）
+```
+
+**生命流程**：
+1. 初始化：设置 direction、speed、position
+2. `_physics_process`：按 `direction * speed` 移动，倒计时 lifetime
+3. `area_entered` 检测到敌人 HurtBox：
+   - 若 `hurt_box.is_boss`：造成 3 点伤害 → `queue_free()`
+   - 否则：调用敌人 `die()` → 继续飞行（is_piercing = true）
+4. 倒计时结束或飞出屏幕 → `queue_free()`
+
+#### 忍术生成器
+
+**设计模式**：每个忍术是一个独立的生成脚本（非场景），放在 `scripts/ninjutsu/` 目录下。所有忍术**共用 `BaseProjectile` 场景**，各生成器只需实例化该场景并设置不同参数。
+
+```
+scripts/ninjutsu/
+├── NinjutsuComponent.gd          # MP管理+切换+分发
+├── BaseProjectile.gd             # 投射物基类脚本
+├── ninjutsu_projectile.tscn      # 投射物共享场景
+├── fire_ninjutsu.gd              # 火焰生成器
+├── fireball_ninjutsu.gd          # 火球生成器
+├── blade_ninjutsu.gd             # 棱刃生成器
+└── boomerang_ninjutsu.gd         # 回旋镖生成器
+```
+
+### 2.3 现有文件改动清单
+
+#### ① PlayerData.gd — 加 MP 字段
+```gdscript
+@export var max_mp: int = 100
+```
+
+#### ② Player.gd — 增加 NinjutsuComponent 引用
+```gdscript
+@onready var ninjutsu: NinjutsuComponent = $Components/CombatComponent
+```
+
+#### ③ GroundNinjutsuState.gd — 调用释放
+```gdscript
+# enter() 末尾新增
+player.ninjutsu.cast_ninjutsu()
+```
+
+#### ④ AirNinjutsuState.gd — 调用释放
+```gdscript
+# enter() 末尾新增
+player.ninjutsu.cast_ninjutsu()
+```
+
+#### ⑤ WallState.gd — 调用释放
+```gdscript
+# 忍术动画开始时调用
+player.ninjutsu.cast_ninjutsu()
+```
+
+#### ⑥ HangState.gd — 调用释放
+```gdscript
+# 忍术动画开始时调用
+player.ninjutsu.cast_ninjutsu()
+```
+
+#### ⑦ HurtBox.gd — 加 Boss 标记
+```gdscript
+@export var is_boss: bool = false
+```
+
+#### ⑧ project.godot — 无需改动
+```
+碰撞层已配好，投射物复用 Layer 5 (PlayerAttack)
+```
+
+---
+
+## 三、数据与参数配置
+
+### 3.1 PlayerData 新增字段
+
+| 字段 | 类型 | 默认值 | 说明 |
+|:---|:---|:---|:---|
+| `max_mp` | `int` | `100` | MP 上限 |
+
+### 3.2 NinjutsuComponent 导出变量
+
+| 字段 | 类型 | 默认值 | 说明 |
+|:---|:---|:---|:---|
+| `mp_cost` | `int` | `10` | 每次释放消耗 MP |
+| `ninjutsu_names` | `Array[String]` | `["火焰","火球","棱刃","回旋镖"]` | 四种忍术名称 |
+
+### 3.3 BaseProjectile 导出变量
+
+| 字段 | 类型 | 默认值 | 说明 |
+|:---|:---|:---|:---|
+| `speed` | `float` | `400.0` | 飞行速度 |
+| `damage` | `int` | `999` | 对小怪伤害（秒杀级） |
+| `boss_damage` | `int` | `3` | 对 Boss 单次伤害 |
+| `lifetime` | `float` | `1.2` | 存在时间（秒） |
+| `direction` | `Vector2` | `Vector2.RIGHT` | 飞行方向 |
+| `is_piercing` | `bool` | `true` | 是否穿透小怪 |
+
+### 3.4 四种忍术参数速查表
+
+| 忍术 | 投射物数 | 方向 | speed | lifetime | 偏角 | 特殊逻辑 |
+|:---|:---:|:---|:---:|:---:|:---|:---|
+| 火焰 | 3 | 斜上45° | 350 | 1.2s | ±15° | 无 |
+| 火球 | 3 | 斜下45° | 400 | 1.2s | ±15° | 无 |
+| 棱刃 | 2 | 垂直向上/下 | 200 | 3.0s | 无 | 振幅120px往返 |
+| 回旋镖 | 1 | 水平→折返 | 300 | 5.0s | 无 | 300px边界折返 |
+
+---
+
+## 四、与现有系统的对接（详细实现指引）
+
+### 4.1 输入流
+
+```
+玩家按键 (U)
+  → InputComponent.ninjutsu_pressed = true
+  → IdleState.physics_update() 检测到
+  → state_machine.change_state(GroundNinjutsuState)
+  → GroundNinjutsuState.enter()
+    → 播动画 ground_ninjutsu
+    → player.ninjutsu.cast_ninjutsu()   ← 新增
+      → 检查 MP
+      → 消耗 MP
+      → 实例化投射物
+```
+
+### 4.2 投射物碰撞回调逻辑
+
+```gdscript
+func _on_area_entered(area: Area2D) -> void:
+    if area is HurtBox:
+        if area.is_boss:
+            area.take_damage(boss_damage)
+            queue_free()  # Boss 伤后消失
+        else:
+            area.take_damage(damage)  # 秒杀伤害
+            # 不 queue_free，继续飞行（is_piercing）
+```
+
+### 4.3 无需改动的系统
+
+- **InputComponent**：已提供 `ninjutsu_pressed` 和 `switch_ninjutsu_pressed`，直接复用
+- **StateMachine**：无需改动，各状态自行切换的逻辑不变
+- **攻击状态**：`GroundAttackState`、`AirAttackState`、`CrouchAttackState` 中不处理 ninjutsu 输入，现有逻辑已如此
+- **碰撞层**：敌人 HurtBox 的 mask 已包含 Layer 5 (PlayerAttack)，投射物可直接检测到
+
+---
+
+## 五、开发顺序（逐步迭代）
+
+1. **PlayerData 加 `max_mp` 字段**
+2. **HurtBox 加 `is_boss` 导出属性**
+3. **创建 `BaseProjectile`（场景 + 脚本）**
+4. **创建 `NinjutsuComponent`（MP 管理 + 切换 + 释放分发）**
+5. **创建 4 种忍术生成器脚本**（火焰 → 火球 → 棱刃 → 回旋镖）
+6. **修改 `Player.gd` 初始化 NinjutsuComponent**
+7. **修改 4 个忍术状态接入投射物释放**（GroundNinjutsuState、AirNinjutsuState、WallState、HangState）
+8. **集成测试，参数调优**
+
+---
+
+## 六、项目实况修正总结
+
+与原始需求文档相比，本版本做了以下关键修正：
+
+| 修正项 | 原始版本 | 修正后 |
+|:---|:---|:---|
+| 碰撞层 | 建议新增 Layer 8 | 复用现有 Layer 5 (PlayerAttack)，配置表已从场景中验证 |
+| Boss 识别 | 建议新增 Layer 9 | HurtBox 加 `is_boss` 属性，无需新增碰撞层 |
+| 架构模式 | NinjutsuComponent 自监听输入 | 各状态触发调用，与现有状态机完全兼容 |
+| 投射物设计 | 每个忍术独立场景 | 共用 BaseProjectile 场景 + 生成器脚本配参数 |
+| 组件挂载 | 新增 Components 子节点 | 复用已有 CombatComponent 空节点 |
+| 改动文件 | 未具体列出 | 明确列出 8 个需改动文件 |
+| 状态权限 | 含攻击状态（有歧义） | 明确禁止攻击状态释放 |

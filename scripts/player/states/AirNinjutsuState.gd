@@ -8,7 +8,7 @@ var is_imbalance: bool = false
 func enter(msg: Dictionary = {}) -> void:
 	is_imbalance = msg.get("imbalance", false)
 	player.animation.play("air_ninjutsu")
-	# 【核心修复】：移除了 player.velocity.y = 0.0，不再打断跳跃的自然抛物线
+	player.ninjutsu.cast_ninjutsu()
 
 func update(_delta: float) -> void:
 	# 如果空中施法还没结束就落地了，直接中断动作恢复站立

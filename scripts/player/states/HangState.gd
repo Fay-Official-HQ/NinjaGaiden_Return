@@ -35,6 +35,7 @@ func update(_delta: float) -> void:
 		is_casting = true
 		player.velocity.x = 0
 		player.animation.play("hang_ninjutsu")
+		player.ninjutsu.cast_ninjutsu()
 		return
 
 	# --- 退出方式 1：向下脱离 ---

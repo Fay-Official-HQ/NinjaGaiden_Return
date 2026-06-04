@@ -3,6 +3,9 @@ extends Area2D
 
 class_name HurtBox
 
+## 是否为 Boss（影响忍术投射物的伤害逻辑：Boss 扣3点血，普通小怪秒杀）
+@export var is_boss: bool = false
+
 ## 受到伤害时发出的信号，交由父节点（如玩家或敌人自身）去实际扣血
 signal took_damage(damage: int)
 

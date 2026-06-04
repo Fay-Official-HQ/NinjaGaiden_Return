@@ -4,9 +4,12 @@ extends State
 class_name GroundNinjutsuState
 
 func enter(_msg: Dictionary = {}) -> void:
+	print("【调试】进入 GroundNinjutsuState")
 	# 瞬间停止移动，施加施法硬直
 	player.movement.stop()
 	player.animation.play("ground_ninjutsu")
+	print("【调试】调用 player.ninjutsu.cast_ninjutsu()")
+	player.ninjutsu.cast_ninjutsu()
 
 func update(_delta: float) -> void:
 	var sprite = player.animation.sprite

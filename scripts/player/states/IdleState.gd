@@ -15,6 +15,7 @@ func physics_update(_delta: float) -> void:
 	
 	# 触发地面忍术
 	if Input.is_action_just_pressed("ninjutsu"):
+		print("【调试】IdleState 检测到 ninjutsu 按键")
 		state_machine.change_state(state_machine.get_node("GroundNinjutsuState"))
 		return
 	

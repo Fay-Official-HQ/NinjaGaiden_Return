@@ -60,8 +60,10 @@ func update(_delta: float) -> void:
 		# 推离墙壁方向 → 背对墙壁放忍术；否则面朝墙壁放忍术
 		if player.input.move_direction == sign(wall_normal_x):
 			player.animation.play("wall_ninjutsu_backward")
+			player.ninjutsu.cast_ninjutsu(wall_normal_x)
 		else:
 			player.animation.play("wall_ninjutsu")
+			player.ninjutsu.cast_ninjutsu(-wall_normal_x)
 		return
 
 func physics_update(_delta: float) -> void:

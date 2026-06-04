@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://hh02pkkv8xry"]
+
+[ext_resource type="Script" uid="uid://cl0dv8gjbxcx7" path="res://scripts/ninjutsu/edge_blade.gd" id="1_fbu88"]
+[ext_resource type="Texture2D" uid="uid://c5dudheeflub" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_003.png" id="2_06s8n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oypsf"]
+radius = 8.0
+height = 20.0
+
+[node name="Area2D" type="Area2D" unique_id=1550002304]
+z_index = 10
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_fbu88")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1522365087]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_oypsf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2004485950]
+texture = ExtResource("2_06s8n")

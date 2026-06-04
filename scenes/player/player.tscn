@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ddfcyhwrvybrn" path="res://scripts/components/MovementComponent.gd" id="3_4kuee"]
 [ext_resource type="Texture2D" uid="uid://cdh7g16kk6ug2" path="res://assets/sprites/Ryu/fcjingling/zhanli/zhanli_001.png" id="3_c3xxp"]
 [ext_resource type="Script" uid="uid://uwmfea4ebq1o" path="res://scripts/components/AnimationComponent.gd" id="5_180ig"]
+[ext_resource type="Script" uid="uid://0c42lm51fa85" path="res://scripts/components/NinjutsuComponent.gd" id="6_7nf13"]
 [ext_resource type="Script" uid="uid://bicqkfw1indlk" path="res://scripts/player/states/StateMachine.gd" id="7_5stf6"]
 [ext_resource type="Script" uid="uid://e4qsxfifoewa" path="res://scripts/player/states/IdleState.gd" id="7_npwbq"]
 [ext_resource type="Script" uid="uid://c0onc1k065k5y" path="res://scripts/player/states/RunState.gd" id="8_7oing"]
@@ -371,7 +372,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1811321606]
-z_index = 5
+z_index = 100
 collision_mask = 12
 script = ExtResource("1_gfjak")
 data = ExtResource("2_c3xxp")
@@ -391,7 +392,8 @@ script = ExtResource("3_4kuee")
 [node name="AnimationComponent" type="Node" parent="Components" unique_id=319662279]
 script = ExtResource("5_180ig")
 
-[node name="CombatComponent" type="Node" parent="Components" unique_id=134329477]
+[node name="NinjutsuComponent" type="Node" parent="Components" unique_id=134329477]
+script = ExtResource("6_7nf13")
 
 [node name="StateMachine" type="Node" parent="." unique_id=700299431 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_5stf6")
