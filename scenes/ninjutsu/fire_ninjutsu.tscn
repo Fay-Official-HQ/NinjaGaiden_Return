@@ -2,9 +2,28 @@
 
 [ext_resource type="Script" uid="uid://q6rhabtk3y12" path="res://scripts/ninjutsu/fire_projectile.gd" id="1_iqj6j"]
 [ext_resource type="Texture2D" uid="uid://d2h05f74f3oqu" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_002.png" id="2_fdx56"]
+[ext_resource type="Texture2D" uid="uid://bwqwf2feyunlm" path="res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_000.png" id="3_xyb58"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdx56"]
 radius = 17.262676
+
+[sub_resource type="Gradient" id="Gradient_fdx56"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3e02b"]
+gradient = SubResource("Gradient_fdx56")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fdx56"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 25.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 40, 0)
+scale_min = 0.099999994
+scale_max = 0.35
+color_ramp = SubResource("GradientTexture1D_3e02b")
 
 [node name="Area2D" type="Area2D" unique_id=1550002304]
 z_index = 10
@@ -18,3 +37,10 @@ shape = SubResource("CircleShape2D_fdx56")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=867108951]
 texture = ExtResource("2_fdx56")
+
+[node name="FireParticles" type="GPUParticles2D" parent="." unique_id=1008349318]
+emitting = false
+texture = ExtResource("3_xyb58")
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_fdx56")

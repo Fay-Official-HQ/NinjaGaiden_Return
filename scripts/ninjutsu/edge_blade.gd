@@ -49,6 +49,10 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	life_timer = lifetime
 
+	# 粒子重启
+	if has_node("BladeParticles"):
+		$BladeParticles.restart()
+
 	# 归一化方向向量
 	var dir = initial_direction.normalized()
 	_initial_dir_sign = sign(dir.y)  # 向上为 -1，向下为 +1

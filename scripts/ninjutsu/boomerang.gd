@@ -20,6 +20,9 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	life_timer = lifetime
 
+	if has_node("BoomerangParticles"):
+		$BoomerangParticles.restart()
+
 	if facing_override != 0:
 		base_direction = Vector2(1.0 if facing_override > 0 else -1.0, 0)
 	elif player_ref:
@@ -50,6 +53,11 @@ func _physics_process(delta: float) -> void:
 	_velocity *= damping
 
 	global_position += _velocity * delta
+
+	if has_node("BoomerangParticles"):
+		var mat = $BoomerangParticles.process_material as ParticleProcessMaterial
+		if mat:
+			mat.direction = Vector3(sign(_velocity.x) if abs(_velocity.x) > 0 else base_direction.x, 0, 0)
 
 	if offset.length() < min_amplitude and _velocity.length() < 50.0:
 		queue_free()

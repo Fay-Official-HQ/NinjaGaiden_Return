@@ -12,6 +12,9 @@ func _ready() -> void:
 	_timer = lifetime
 	area_entered.connect(_on_area_entered)
 
+	if has_node("FireballParticles"):
+		$FireballParticles.restart()
+
 func set_direction(dir: Vector2) -> void:
 	_direction = dir.normalized()
 
