@@ -51,6 +51,7 @@
 [ext_resource type="Texture2D" uid="uid://o8ermo06xa04" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_005.png" id="23_5q8fn"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="23_bysbl"]
 [ext_resource type="Script" uid="uid://6gqunn4us00k" path="res://scripts/camera/PlayerCamera.gd" id="23_ro0t8"]
+[ext_resource type="Script" uid="uid://dxan5k733h18f" path="res://scripts/player/states/DragonFlashState.gd" id="24_0y4ya"]
 [ext_resource type="Script" uid="uid://cu1y5up3obsk8" path="res://scripts/components/SwordHitBox.gd" id="24_3p0jd"]
 [ext_resource type="Texture2D" uid="uid://biemve1cpov1f" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_003.png" id="31_genst"]
 [ext_resource type="Texture2D" uid="uid://byr771p1frsq6" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_004.png" id="32_niom3"]
@@ -377,10 +378,6 @@ collision_mask = 12
 script = ExtResource("1_gfjak")
 data = ExtResource("2_c3xxp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
-position = Vector2(-1, 7)
-shape = SubResource("RectangleShape2D_5stf6")
-
 [node name="Components" type="Node" parent="." unique_id=1554109802]
 
 [node name="InputComponent" type="Node" parent="Components" unique_id=1371523293]
@@ -447,6 +444,13 @@ script = ExtResource("21_ej2d6")
 [node name="HurtState" type="Node" parent="StateMachine" unique_id=496294911]
 script = ExtResource("22_ymths")
 
+[node name="DragonFlashState" type="Node" parent="StateMachine" unique_id=1936464250]
+script = ExtResource("24_0y4ya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
+position = Vector2(-1, 7)
+shape = SubResource("RectangleShape2D_5stf6")
+
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1025911760]
 
 [node name="HitBox" type="Area2D" parent="AttackRoot" unique_id=1080134473]
@@ -507,3 +511,5 @@ script = ExtResource("23_ro0t8")
 [node name="HeadSensor" type="RayCast2D" parent="." unique_id=967590739]
 target_position = Vector2(0, -20)
 collision_mask = 12
+
+[node name="ShadowContainer" type="Node2D" parent="." unique_id=1228282928]

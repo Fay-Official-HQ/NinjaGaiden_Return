@@ -38,6 +38,11 @@ func update(_delta: float) -> void:
 		state_machine.change_state(state_machine.get_node("AirNinjutsuState"), {"imbalance": air_imbalance})
 		return
 
+	# 触发真龙闪华必杀技（O键）
+	if Input.is_action_just_pressed("finishing_move"):
+		state_machine.change_state(state_machine.get_node("DragonFlashState"))
+		return
+
 	# 落地判定
 	if player.is_on_floor():
 		if player.input.move_direction != 0:

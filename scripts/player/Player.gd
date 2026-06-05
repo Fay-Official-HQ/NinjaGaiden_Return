@@ -32,6 +32,11 @@ var invincible_timer: float = 0.0
 const INVINCIBLE_TIME: float = 1.5
 var _was_invincible: bool = false
 
+# 必杀技无敌状态（由 DragonFlashState 控制）
+var is_invincible: bool = false
+# 必杀技重力禁用（由 DragonFlashState 控制）
+var is_gravity_disabled: bool = false
+
 func _ready() -> void:
 	current_hp = data.max_hp
 	movement.initialize(self)
@@ -51,13 +56,15 @@ func _process(delta: float) -> void:
 		_was_invincible = true
 		animated_sprite.modulate.a = 0.5 if fmod(invincible_timer * 10, 1.0) < 0.5 else 1.0
 	else:
-		animated_sprite.modulate.a = 1.0
+		if not is_gravity_disabled:
+			animated_sprite.modulate.a = 1.0
 		if _was_invincible:
 			_was_invincible = false
 			_check_overlapping_enemy_after_invincibility()
 
 func _physics_process(delta: float) -> void:
-	movement.apply_gravity(delta)
+	if not is_gravity_disabled:
+		movement.apply_gravity(delta)
 	state_machine.physics_update(delta)
 	position = position.round()
 
@@ -68,7 +75,7 @@ func set_facing_direction(direction: float) -> void:
 	animation.flip_sprite(facing_direction)
 
 func _on_hurt_box_took_damage(damage: int) -> void:
-	if invincible_timer > 0:
+	if invincible_timer > 0 or is_invincible:
 		return
 
 	current_hp -= damage
