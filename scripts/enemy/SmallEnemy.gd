@@ -1,4 +1,3 @@
-# res://scripts/enemy/SmallEnemy.gd
 extends CharacterBody2D
 
 class_name SmallEnemy
@@ -14,7 +13,8 @@ var is_dead: bool = false
 
 @onready var sprite: AnimatedSprite2D = $Visual/AnimatedSprite2D
 @onready var hurt_box: HurtBox = $HurtBox
-@onready var hit_box: EnemyHitBox = $HitBox   # 改这里
+@onready var hit_box: EnemyHitBox = $HitBox
+@onready var floor_detector: RayCast2D = $FloorDetector
 
 func _ready() -> void:
 	start_position = global_position
@@ -27,13 +27,18 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
-	velocity.x = direction * move_speed
-	velocity.y += 980 * delta
+	_update_floor_detector()
+
+	if is_on_floor() and not floor_detector.is_colliding():
+		direction *= -1.0
 
 	if global_position.x > start_position.x + patrol_distance:
 		direction = -1.0
 	elif global_position.x < start_position.x - patrol_distance:
 		direction = 1.0
+
+	velocity.x = direction * move_speed
+	velocity.y += 980 * delta
 
 	sprite.flip_h = (direction < 0)
 
@@ -43,6 +48,10 @@ func _physics_process(delta: float) -> void:
 		sprite.play("idle")
 
 	move_and_slide()
+
+func _update_floor_detector() -> void:
+	floor_detector.target_position.x = abs(floor_detector.target_position.x) * direction
+	floor_detector.force_raycast_update()
 
 func _on_took_damage(damage: int) -> void:
 	current_hp -= damage

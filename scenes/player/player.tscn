@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://0c42lm51fa85" path="res://scripts/components/NinjutsuComponent.gd" id="6_7nf13"]
 [ext_resource type="Script" uid="uid://bicqkfw1indlk" path="res://scripts/player/states/StateMachine.gd" id="7_5stf6"]
 [ext_resource type="Script" uid="uid://e4qsxfifoewa" path="res://scripts/player/states/IdleState.gd" id="7_npwbq"]
+[ext_resource type="Script" uid="uid://dvqdc7rn0e8nu" path="res://scripts/components/SwordComponent.gd" id="7_pq1ih"]
 [ext_resource type="Script" uid="uid://c0onc1k065k5y" path="res://scripts/player/states/RunState.gd" id="8_7oing"]
 [ext_resource type="Script" uid="uid://daep5nnwqrcff" path="res://scripts/player/states/JumpState.gd" id="9_5stf6"]
 [ext_resource type="Script" uid="uid://bdc4jhs6maefv" path="res://scripts/player/states/FallState.gd" id="10_180ig"]
@@ -53,6 +54,10 @@
 [ext_resource type="Script" uid="uid://6gqunn4us00k" path="res://scripts/camera/PlayerCamera.gd" id="23_ro0t8"]
 [ext_resource type="Script" uid="uid://dxan5k733h18f" path="res://scripts/player/states/DragonFlashState.gd" id="24_0y4ya"]
 [ext_resource type="Script" uid="uid://cu1y5up3obsk8" path="res://scripts/components/SwordHitBox.gd" id="24_3p0jd"]
+[ext_resource type="Script" uid="uid://h3ape4am1sw0" path="res://scripts/player/states/SwordUppercutState.gd" id="26_31ki0"]
+[ext_resource type="Script" uid="uid://yi7x82ynrsa3" path="res://scripts/player/states/SwordDownslashState.gd" id="27_avmva"]
+[ext_resource type="Script" uid="uid://c7u83ci83oedf" path="res://scripts/components/DragonFlashHitBox.gd" id="27_s050l"]
+[ext_resource type="Script" uid="uid://bb143kervlgs8" path="res://scripts/player/states/SwordSpinState.gd" id="28_0ioy2"]
 [ext_resource type="Texture2D" uid="uid://biemve1cpov1f" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_003.png" id="31_genst"]
 [ext_resource type="Texture2D" uid="uid://byr771p1frsq6" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_004.png" id="32_niom3"]
 [ext_resource type="Texture2D" uid="uid://c8xnchcrryhri" path="res://assets/sprites/Ryu/fcjingling/xuandiao/xuandiao_004.png" id="38_gmu8b"]
@@ -78,6 +83,17 @@
 [ext_resource type="Texture2D" uid="uid://boddtmlcylvxk" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu/qiangmian_006.png" id="59_5xbmr"]
 [ext_resource type="Texture2D" uid="uid://qg1ms4d8x4m" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu2/qiangmian_007.png" id="60_hir57"]
 [ext_resource type="Texture2D" uid="uid://bkeswjbq3neej" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu2/qiangmian_008.png" id="61_7072n"]
+[ext_resource type="Texture2D" uid="uid://bnqjvjtuelwli" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_004.png" id="72_vkc6f"]
+[ext_resource type="Texture2D" uid="uid://bcyr7uigo0m8k" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_006.png" id="73_21yht"]
+[ext_resource type="Texture2D" uid="uid://bsoqigbt7rvk" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_005.png" id="74_trum3"]
+[ext_resource type="Texture2D" uid="uid://cx2f4oew386xy" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_004.png" id="76_7u1tp"]
+[ext_resource type="Texture2D" uid="uid://crg41j4f8sytp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_004.png" id="76_v8cnd"]
+[ext_resource type="Texture2D" uid="uid://bbrwjd5h3urac" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_005.png" id="77_pq1ih"]
+[ext_resource type="Texture2D" uid="uid://b3v5buj37o85s" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_005.png" id="77_wuxn4"]
+[ext_resource type="Texture2D" uid="uid://ciog60uaubvf6" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_006.png" id="78_31ki0"]
+[ext_resource type="Texture2D" uid="uid://h1u6t056tqr0" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_006.png" id="78_46q5t"]
+[ext_resource type="Texture2D" uid="uid://dxja886d8v1kp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_007.png" id="79_5miun"]
+[ext_resource type="Texture2D" uid="uid://boebc2inlywh3" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_007.png" id="79_hf5gj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5stf6"]
 size = Vector2(14, 30)
@@ -90,6 +106,19 @@ size = Vector2(30, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymths"]
 size = Vector2(31, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0y4ya"]
+size = Vector2(246.75, 111)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7u1tp"]
+radius = 22.0
+height = 54.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_avmva"]
+size = Vector2(56, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u1tp"]
+size = Vector2(78, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvjb1"]
 size = Vector2(14, 30)
@@ -324,11 +353,83 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("72_vkc6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_trum3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_trum3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_21yht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_21yht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_21yht")
+}],
+"loop": false,
+"name": &"sword_downslash",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("44_rw8a5")
 }],
 "loop": true,
 "name": &"sword_ready",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("76_7u1tp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_pq1ih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_31ki0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_hf5gj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_7u1tp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_pq1ih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_31ki0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_hf5gj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_7u1tp")
+}],
+"loop": false,
+"name": &"sword_spin",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("76_v8cnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_wuxn4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_46q5t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_5miun")
+}],
+"loop": false,
+"name": &"sword_uppercut",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -392,6 +493,9 @@ script = ExtResource("5_180ig")
 [node name="NinjutsuComponent" type="Node" parent="Components" unique_id=134329477]
 script = ExtResource("6_7nf13")
 
+[node name="SwordComponent" type="Node" parent="Components" unique_id=975162586]
+script = ExtResource("7_pq1ih")
+
 [node name="StateMachine" type="Node" parent="." unique_id=700299431 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_5stf6")
 initial_state = NodePath("IdleState")
@@ -447,6 +551,15 @@ script = ExtResource("22_ymths")
 [node name="DragonFlashState" type="Node" parent="StateMachine" unique_id=1936464250]
 script = ExtResource("24_0y4ya")
 
+[node name="SwordUppercutState" type="Node" parent="StateMachine" unique_id=936827038]
+script = ExtResource("26_31ki0")
+
+[node name="SwordDownslashState" type="Node" parent="StateMachine" unique_id=1301818680]
+script = ExtResource("27_avmva")
+
+[node name="SwordSpinState" type="Node" parent="StateMachine" unique_id=126591555]
+script = ExtResource("28_0ioy2")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
 position = Vector2(-1, 7)
 shape = SubResource("RectangleShape2D_5stf6")
@@ -457,7 +570,6 @@ shape = SubResource("RectangleShape2D_5stf6")
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("22_bysbl")
-damage = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/HitBox" unique_id=324037649]
 position = Vector2(19, -5)
@@ -468,7 +580,6 @@ collision_layer = 16
 collision_mask = 2
 monitoring = false
 script = ExtResource("22_bysbl")
-damage = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/CrouchHitBox" unique_id=365448119]
 position = Vector2(19, 11)
@@ -482,6 +593,40 @@ script = ExtResource("24_3p0jd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordDashBox" unique_id=820386358]
 position = Vector2(19.5, 5.5)
 shape = SubResource("RectangleShape2D_ymths")
+
+[node name="DragonFlashHitBox" type="Area2D" parent="AttackRoot" unique_id=2072884072]
+collision_layer = 16
+collision_mask = 2
+monitoring = false
+script = ExtResource("27_s050l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/DragonFlashHitBox" unique_id=272522184]
+shape = SubResource("RectangleShape2D_0y4ya")
+debug_color = Color(0.8970039, 0.29778513, 0.28995174, 0.41960785)
+
+[node name="SwordUppercutHitBox" type="Area2D" parent="AttackRoot" unique_id=2042000667]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordUppercutHitBox" unique_id=1719301170]
+position = Vector2(14, 6)
+shape = SubResource("CapsuleShape2D_7u1tp")
+
+[node name="SwordDownslashHitBox" type="Area2D" parent="AttackRoot" unique_id=1045827946]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordDownslashHitBox" unique_id=444400676]
+position = Vector2(11, 27.5)
+shape = SubResource("RectangleShape2D_avmva")
+
+[node name="SwordSpinHitBox" type="Area2D" parent="AttackRoot" unique_id=1488826804]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordSpinHitBox" unique_id=807560180]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_7u1tp")
 
 [node name="HurtRoot" type="Node2D" parent="." unique_id=1263872561]
 
@@ -497,13 +642,13 @@ shape = SubResource("RectangleShape2D_fvjb1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"sword_dash"
+animation = &"sword_downslash"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1949881614]
-position = Vector2(9, 91)
+position = Vector2(0, 38)
 position_smoothing_speed = 0.0
 rotation_smoothing_speed = 0.0
 script = ExtResource("23_ro0t8")

@@ -4,8 +4,8 @@ extends CharacterBody2D
 class_name Enemy
 
 # 默认属性（当没有配置资源时使用）
-@export var max_hp: int = 30
-@export var move_speed: float = 50.0
+@export var max_hp: int = 1
+@export var move_speed: float = 20.0
 @export var patrol_distance: float = 100.0
 @export var damage: int = 10
 
@@ -20,6 +20,7 @@ var is_dead: bool = false
 @onready var sprite: AnimatedSprite2D = $Visual/AnimatedSprite2D
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var hit_box: EnemyHitBox = $HitBox
+@onready var floor_detector: RayCast2D = $FloorDetector
 
 func _ready() -> void:
 	# 如果关联了数据资源，就用资源里的值覆盖默认属性
@@ -47,13 +48,18 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
-	velocity.x = direction * move_speed
-	velocity.y += 980 * delta
+	_update_floor_detector()
+
+	if is_on_floor() and not floor_detector.is_colliding():
+		direction *= -1.0
 
 	if global_position.x > start_position.x + patrol_distance:
 		direction = -1.0
 	elif global_position.x < start_position.x - patrol_distance:
 		direction = 1.0
+
+	velocity.x = direction * move_speed
+	velocity.y += 980 * delta
 
 	sprite.flip_h = (direction < 0)
 
@@ -63,6 +69,10 @@ func _physics_process(delta: float) -> void:
 		sprite.play("idle")
 
 	move_and_slide()
+
+func _update_floor_detector() -> void:
+	floor_detector.target_position.x = abs(floor_detector.target_position.x) * direction
+	floor_detector.force_raycast_update()
 
 func _on_took_damage(amount: int) -> void:
 	current_hp -= amount

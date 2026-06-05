@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://cya36n0s28p0d"]
+
+[ext_resource type="Texture2D" uid="uid://bxjs2t688msfo" path="res://assets/img/beijing.png" id="1_ukdbm"]
+[ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="2_ccvly"]
+[ext_resource type="PackedScene" uid="uid://dc2lxhfdtb3f4" path="res://scenes/module‌/dimian.tscn" id="2_rs44j"]
+[ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="3_cnmxh"]
+[ext_resource type="PackedScene" uid="uid://dm4cf2bgyj7wg" path="res://scenes/module‌/shikuai.tscn" id="4_u8eek"]
+[ext_resource type="PackedScene" uid="uid://df5u4t1mug0nb" path="res://scenes/module‌/qiangbi.tscn" id="5_t1jjp"]
+[ext_resource type="PackedScene" uid="uid://c41646w588qro" path="res://scenes/enemy/smallenemy.tscn" id="6_t1jjp"]
+[ext_resource type="AudioStream" uid="uid://bjl2yjjfvhy4q" path="res://assets/audio/testbgm.mp3" id="8_50olt"]
+[ext_resource type="PackedScene" uid="uid://r01tapx4qae0" path="res://scenes/enemy/enemy.tscn" id="8_u84xi"]
+
+[node name="Node2D" type="Node2D" unique_id=311310683]
+
+[node name="NightCityBackground" type="ParallaxBackground" parent="." unique_id=2134945641]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="NightCityBackground" unique_id=2121242027]
+motion_scale = Vector2(0.2, 0)
+motion_mirroring = Vector2(900, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="NightCityBackground/ParallaxLayer" unique_id=548001042]
+modulate = Color(3.0688846, 0.7773766, 0.6818971, 0.53333336)
+texture_filter = 1
+texture = ExtResource("1_ukdbm")
+centered = false
+
+[node name="dixing" type="Node" parent="." unique_id=1987170480]
+
+[node name="dimian" parent="dixing" unique_id=223908678 instance=ExtResource("2_rs44j")]
+position = Vector2(-416, 374)
+
+[node name="dimian2" parent="dixing" unique_id=1988619147 instance=ExtResource("2_rs44j")]
+position = Vector2(1913, 374)
+
+[node name="shikuai" parent="dixing" unique_id=565919008 instance=ExtResource("4_u8eek")]
+position = Vector2(423, 223)
+
+[node name="qiangbi" parent="dixing/shikuai" unique_id=1004225553 instance=ExtResource("5_t1jjp")]
+position = Vector2(211, -150)
+
+[node name="qiangbi" parent="dixing/shikuai/qiangbi" unique_id=1197956940 instance=ExtResource("5_t1jjp")]
+position = Vector2(471, 119)
+
+[node name="shikuai2" parent="dixing" unique_id=1704709295 instance=ExtResource("4_u8eek")]
+position = Vector2(1194, 166)
+
+[node name="qiangbi" parent="dixing" unique_id=944794694 instance=ExtResource("5_t1jjp")]
+position = Vector2(1042, 117)
+
+[node name="qiangbi2" parent="dixing" unique_id=1021219423 instance=ExtResource("5_t1jjp")]
+position = Vector2(1042, 43)
+
+[node name="HangingPlatform" parent="dixing" unique_id=2095778883 instance=ExtResource("3_cnmxh")]
+position = Vector2(1396, 161)
+
+[node name="shikuai" parent="dixing/HangingPlatform" unique_id=154608960 instance=ExtResource("4_u8eek")]
+position = Vector2(200, 57)
+
+[node name="qiangbi" parent="dixing/HangingPlatform/shikuai" unique_id=1167367303 instance=ExtResource("5_t1jjp")]
+position = Vector2(-1383, 8)
+
+[node name="HangingPlatform" parent="dixing/HangingPlatform/shikuai/qiangbi" unique_id=1783112833 instance=ExtResource("3_cnmxh")]
+position = Vector2(54, -72)
+
+[node name="HangingPlatform4" parent="dixing" unique_id=894400689 instance=ExtResource("3_cnmxh")]
+position = Vector2(764, 192)
+
+[node name="HangingPlatform5" parent="dixing" unique_id=2027566350 instance=ExtResource("3_cnmxh")]
+position = Vector2(1909, 146)
+
+[node name="HangingPlatform6" parent="dixing" unique_id=90748286 instance=ExtResource("3_cnmxh")]
+position = Vector2(2038, 207)
+
+[node name="HangingPlatform7" parent="dixing" unique_id=614914532 instance=ExtResource("3_cnmxh")]
+position = Vector2(579, 145)
+
+[node name="shikuai3" parent="dixing" unique_id=506782326 instance=ExtResource("4_u8eek")]
+position = Vector2(764, 311)
+
+[node name="Player" parent="." unique_id=1811321606 instance=ExtResource("2_ccvly")]
+position = Vector2(-565, 116)
+
+[node name="diren" type="Node" parent="." unique_id=1730653662]
+
+[node name="SmallEnemy" parent="diren" unique_id=1207965598 instance=ExtResource("6_t1jjp")]
+position = Vector2(261, 133)
+
+[node name="Enemy" parent="diren" unique_id=835803185 instance=ExtResource("8_u84xi")]
+position = Vector2(422, 156)
+
+[node name="SmallEnemy2" parent="diren" unique_id=1000782343 instance=ExtResource("6_t1jjp")]
+position = Vector2(578, 124)
+
+[node name="Enemy2" parent="diren" unique_id=418581215 instance=ExtResource("8_u84xi")]
+position = Vector2(-279, 248)
+
+[node name="Enemy3" parent="diren" unique_id=193656254 instance=ExtResource("8_u84xi")]
+position = Vector2(763.6466, 232.23868)
+
+[node name="Enemy4" parent="diren" unique_id=869226174 instance=ExtResource("8_u84xi")]
+position = Vector2(756.5217, 144.36565)
+
+[node name="Enemy5" parent="diren" unique_id=69487276 instance=ExtResource("8_u84xi")]
+position = Vector2(-104, 246)
+
+[node name="SmallEnemy3" parent="diren" unique_id=2047896871 instance=ExtResource("6_t1jjp")]
+position = Vector2(61, 244)
+
+[node name="Enemy6" parent="diren" unique_id=1830327300 instance=ExtResource("8_u84xi")]
+position = Vector2(987, 242)
+
+[node name="Enemy7" parent="diren" unique_id=2146672312 instance=ExtResource("8_u84xi")]
+position = Vector2(1189, 101)
+
+[node name="SmallEnemy4" parent="diren" unique_id=1678704304 instance=ExtResource("6_t1jjp")]
+position = Vector2(1193.8656, 235.7547)
+
+[node name="Enemy8" parent="diren" unique_id=1648883184 instance=ExtResource("8_u84xi")]
+position = Vector2(1395, 243)
+
+[node name="SmallEnemy5" parent="diren" unique_id=1729146957 instance=ExtResource("6_t1jjp")]
+position = Vector2(1581.9261, 136.42023)
+
+[node name="Enemy9" parent="diren" unique_id=127060694 instance=ExtResource("8_u84xi")]
+position = Vector2(1844, 245)
+
+[node name="Enemy10" parent="diren" unique_id=1655015490 instance=ExtResource("8_u84xi")]
+position = Vector2(1952, 247)
+
+[node name="SmallEnemy6" parent="diren" unique_id=2075366165 instance=ExtResource("6_t1jjp")]
+position = Vector2(1911, 190)
+
+[node name="Enemy11" parent="diren" unique_id=870691889 instance=ExtResource("8_u84xi")]
+position = Vector2(2032.4247, 186.68819)
+
+[node name="SmallEnemy7" parent="diren" unique_id=1942016759 instance=ExtResource("6_t1jjp")]
+position = Vector2(1911.3193, 128.39343)
+
+[node name="Enemy12" parent="diren" unique_id=260261085 instance=ExtResource("8_u84xi")]
+position = Vector2(-415, 248)
+
+[node name="SmallEnemy8" parent="diren" unique_id=2133285737 instance=ExtResource("6_t1jjp")]
+position = Vector2(278, 244)
+
+[node name="Enemy13" parent="diren" unique_id=46282978 instance=ExtResource("8_u84xi")]
+position = Vector2(573, 247)
+
+[node name="Enemy14" parent="diren" unique_id=1061448269 instance=ExtResource("8_u84xi")]
+position = Vector2(2060.896, 176.96613)
+
+[node name="SmallEnemy9" parent="diren" unique_id=264179921 instance=ExtResource("6_t1jjp")]
+position = Vector2(2053.096, 236.08194)
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=339899982]
+stream = ExtResource("8_50olt")
+autoplay = true

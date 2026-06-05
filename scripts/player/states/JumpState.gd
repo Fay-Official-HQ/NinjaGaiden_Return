@@ -61,9 +61,10 @@ func physics_update(delta: float) -> void:
 
 	var move_dir = player.input.move_direction
 
+	# 空中按 L 进入备战态，但如果同时按着方向（说明刚被冷却弹回），留在 JumpState
 	if Input.is_action_pressed("special_move"):
-		if move_dir != 0 and move_dir == player.facing_direction:
-			state_machine.change_state(state_machine.get_node("SwordDashState"))
+		if move_dir == 0 and not player.input.up_pressed and not player.input.down_pressed:
+			state_machine.change_state(state_machine.get_node("SwordReadyState"))
 			return
 
 	# 【核心修复：智能单向硬直解除】

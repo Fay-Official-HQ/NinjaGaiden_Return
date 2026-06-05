@@ -12,16 +12,24 @@ var attack_root: Node2D
 var hit_enemies: Array[HurtBox] = []
 
 func enter(_msg: Dictionary = {}) -> void:
+	if player.sword.is_on_cooldown("dash"):
+		print("【突进】冷却中，剩余:", player.sword.get_cooldown_remaining("dash"), "秒")
+		_fallback_to_neutral()
+		return
+	if not player.sword.consume_tp():
+		print("【突进】TP 不足")
+		_fallback_to_neutral()
+		return
+	player.sword.start_cooldown("dash")
+	print("【突进】释放成功！消耗 TP:1  剩余:", player.sword.current_tp, "  冷却 5 秒")
+
 	player.animation.play("sword_dash")
 	
-	# 给一个向前面朝方向的瞬间爆发速度
 	player.velocity.x = player.facing_direction * player.data.walk_speed * dash_speed_multiplier
 	
-	# 【核心空战手感】：如果在空中触发，强制清除 Y 轴速度，实现无视重力的滞空突进
 	if not player.is_on_floor():
 		player.velocity.y = 0.0
 
-	# 初始化剑术专用攻击框 SwordDashBox（不在 enter 开启，交由 update 在第3帧激活）
 	attack_root = player.get_node("AttackRoot") as Node2D
 	dash_hit_box = attack_root.get_node("SwordDashBox") as SwordHitBox
 	hit_enemies.clear()
@@ -63,6 +71,12 @@ func physics_update(_delta: float) -> void:
 
 func exit() -> void:
 	_exit_dash()
+
+func _fallback_to_neutral() -> void:
+	if player.is_on_floor():
+		state_machine.change_state(player.idle_state)
+	else:
+		state_machine.change_state(player.fall_state, {"imbalance": false})
 
 func _exit_dash() -> void:
 	if dash_hit_box:

@@ -75,10 +75,11 @@ func physics_update(delta: float) -> void:
 
 	var move_dir = player.input.move_direction
 	
-	# 【空中剑术修正】按住 L 且 按下了面朝方向
+	# 【空中剑术修正】按住 L 进入 SwordReadyState
+	# 但如果同时按着方向键（说明刚被冷却弹回来），则留在 FallState 继续下落
 	if Input.is_action_pressed("special_move"):
-		if move_dir != 0 and move_dir == player.facing_direction:
-			state_machine.change_state(state_machine.get_node("SwordDashState"))
+		if move_dir == 0 and not player.input.up_pressed and not player.input.down_pressed:
+			state_machine.change_state(state_machine.get_node("SwordReadyState"))
 			return
 	
 	# 下落惯性与失衡处理

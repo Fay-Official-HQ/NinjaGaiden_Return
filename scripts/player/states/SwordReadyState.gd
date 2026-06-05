@@ -1,15 +1,19 @@
-# res://scripts/player/states/SwordReadyState.gd
 extends State
 
 class_name SwordReadyState
 
+# 进入时记录的已按住方向（用于阻止失败弹回后立即重触发）
+var _ignore_dir: float = 0.0
+
 func enter(_msg: Dictionary = {}) -> void:
-	# 瞬间定身，进入居合/备战架势
 	player.movement.stop()
-	player.animation.play("sword_ready")
+	_ignore_dir = player.input.move_direction
+	if player.is_on_floor():
+		player.animation.play("sword_ready")
+	else:
+		player.animation.play("fall")
 
 func physics_update(_delta: float) -> void:
-	# 1. 核心退出机制：如果松开了 L 键，立刻解除备战
 	if not Input.is_action_pressed("special_move"):
 		if player.input.move_direction != 0:
 			state_machine.change_state(player.run_state)
@@ -17,16 +21,31 @@ func physics_update(_delta: float) -> void:
 			state_machine.change_state(player.idle_state)
 		return
 
-	# 2. 核心触发机制：按着 L 的同时，按下了面朝方向的键
 	var move_dir = player.input.move_direction
-	if move_dir != 0 and move_dir == player.facing_direction:
+
+	if Input.is_action_just_pressed("nav_up"):
+		state_machine.change_state(state_machine.get_node("SwordUppercutState"))
+		return
+
+	if Input.is_action_just_pressed("nav_down"):
+		if not player.is_on_floor():
+			state_machine.change_state(state_machine.get_node("SwordDownslashState"))
+			return
+
+	if move_dir != 0 and move_dir == -player.facing_direction and move_dir != _ignore_dir:
+		state_machine.change_state(state_machine.get_node("SwordSpinState"))
+		return
+
+	if move_dir != 0 and move_dir == player.facing_direction and move_dir != _ignore_dir:
 		state_machine.change_state(state_machine.get_node("SwordDashState"))
 		return
 
-	# 3. 边缘坠落防错
-	if not player.is_on_floor():
-		state_machine.change_state(player.fall_state, {"imbalance": true})
-		return
+	_keep_stance()
 
-	player.movement.stop() # 保持 X 轴锁定
+func _keep_stance() -> void:
+	if not player.is_on_floor():
+		player.movement.stop()
+		player.move_and_slide()
+		return
+	player.movement.stop()
 	player.move_and_slide()

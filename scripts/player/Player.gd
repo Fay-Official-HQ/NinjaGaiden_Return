@@ -13,6 +13,7 @@ class_name Player
 @onready var animated_sprite: AnimatedSprite2D = $Visual/AnimatedSprite2D
 @onready var hurt_box: HurtBox = $HurtRoot/HurtBox
 @onready var ninjutsu: NinjutsuComponent = $Components/NinjutsuComponent
+@onready var sword: SwordComponent = $Components/SwordComponent
 
 # 状态节点引用
 @onready var idle_state: IdleState = $StateMachine/IdleState

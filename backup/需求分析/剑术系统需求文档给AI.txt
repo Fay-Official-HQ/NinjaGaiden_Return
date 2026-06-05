@@ -1,0 +1,216 @@
+你补充的三点都非常关键，尤其是**剑术组件**的引入和**单独冷却**机制，这让整个剑术系统的架构更清晰了。下面我逐一分析并给出完善后的完整需求文档。
+
+---
+
+## 一、对你补充内容的分析
+
+### 1. 剑术组件
+
+你目前没有独立的剑术管理模块，TP消耗和获取可能散落在各个状态里。引入一个专门的 `SwordComponent`（挂在 `Player` 的 `Components` 节点下）是最佳解耦方案。它的职责是：
+- 管理当前 TP 值（如最大值 100，初始 100）
+- 提供 `can_use(amount)` 检查是否足够消耗
+- 提供 `consume(amount)` 扣除 TP
+- 提供 `add_tp(amount)` 恢复 TP（供道具系统调用）
+- **为每个剑术技能维护独立的冷却计时器**
+
+### 2. 单独冷却 + 无缝衔接
+
+“单独冷却”意味着四个剑术各有一个 5 秒的 CD 计时器，使用某个技能后，该技能进入 CD，但其他技能仍可立即使用。这和“共享 CD”不同，共享 CD 是使用任意技能后所有技能都进入 CD。
+
+“无缝衔接”意味着你可以在一个剑术动画结束前就输入下一个剑术的指令，状态机会在动画完成后立即切换，不插入任何空闲帧。这是输入缓冲的范畴，可以在 `SwordComponent` 或状态机里处理。
+
+### 3. 下劈时的缓慢水平移动
+
+你取消了之前“X 轴完全归零”的限制，改为允许缓慢水平移动。这很合理，让玩家在空中下劈时仍能微调落点，手感更好。实现时，`velocity.x` 不应归零，而是乘以一个衰减系数（如 0.3），并保留玩家的方向输入。
+
+---
+
+## 二、改善后的完整需求文档
+
+以下是整合了你所有修改后的需求文档，已格式化，可以直接复制粘贴。
+
+---
+
+# 剑术系统需求说明书（第二阶段：SwordUppercut / SwordDownslash / SwordSpin）
+
+## 1. 新增：SwordComponent（剑术组件）
+
+### 1.1 节点位置
+在 `Player` 场景的 `Components` 节点下，新建子节点 `SwordComponent`，类型为 `Node`，挂载脚本 `SwordComponent.gd`。
+
+### 1.2 SwordComponent 职责
+
+| 功能 | 说明 |
+|------|------|
+| TP 管理 | 当前 TP 值，最大值 100，初始 100 |
+| TP 消耗检查 | `can_use(amount: int) -> bool` |
+| TP 扣除 | `consume_tp(amount: int) -> bool` |
+| TP 恢复 | `add_tp(amount: int)` |
+| 冷却管理 | 四个剑术各维护一个独立的 5 秒冷却计时器 |
+| 冷却检查 | `is_on_cooldown(skill_name: String) -> bool` |
+| 冷却触发 | `start_cooldown(skill_name: String)` |
+| 输入缓冲 | 存储最近一次的剑术输入请求（指令 + 时间戳），供状态机在动画结束后处理 |
+
+### 1.3 SwordComponent 伪代码结构
+
+```gdscript
+class_name SwordComponent
+extends Node
+
+const MAX_TP = 100
+const COOLDOWN_TIME = 5.0
+const SWORD_TP_COST = 10
+
+var current_tp: int = MAX_TP
+var cooldowns: Dictionary = {
+    "dash": 0.0,
+    "uppercut": 0.0,
+    "downslash": 0.0,
+    "spin": 0.0
+}
+var input_buffer: Dictionary = {}  # { "skill_name": String, "timestamp": float }
+
+func can_use(amount: int) -> bool:
+    return current_tp >= amount
+
+func consume_tp(amount: int) -> bool:
+    if current_tp >= amount:
+        current_tp -= amount
+        return true
+    return false
+
+func add_tp(amount: int):
+    current_tp = min(current_tp + amount, MAX_TP)
+
+func is_on_cooldown(skill_name: String) -> bool:
+    return cooldowns.get(skill_name, 0.0) > 0.0
+
+func start_cooldown(skill_name: String):
+    cooldowns[skill_name] = COOLDOWN_TIME
+
+func _process(delta):
+    for key in cooldowns.keys():
+        cooldowns[key] = max(cooldowns[key] - delta, 0.0)
+```
+
+---
+
+## 2. 共用核心参数
+
+所有剑术状态必须遵循以下统一规则：
+
+- **消耗数值：** 10 TP（通过 `SwordComponent.consume_tp(10)` 扣除）
+- **冷却时间：** 5 秒（每个技能独立计算，使用 `SwordComponent.start_cooldown(skill_name)`）
+- **共用前提：** 必须先在 `SwordReadyState` 中按住 `L` 键，然后配合方向键释放。
+- **无缝衔接：** 在剑术动画播放期间，如果玩家按下 `L + 方向键`，`SwordComponent` 缓存该输入。当前剑术动画结束后，状态机读取缓存，立即切换到下一个剑术状态，无空闲帧。
+- **打断关系：** 剑术之间可互相打断（通过缓存输入实现），但在 `enter()` 初期应短暂禁止打断（约 0.1 秒），防止按键抖动导致意外跳转。
+
+---
+
+## 3. 新剑术状态详细需求
+
+### 3.1. SwordUppercutState (上挑)
+
+**对应指令：** `L + 方向键 上`
+**前置条件：** 地面 / 空中
+**功能说明：** 角色挥刀向上斩击，并跃向空中。
+
+**核心逻辑：**
+1. **进入时消耗：** 调用 `player.sword_component.consume_tp(10)`，失败则退回 `SwordReadyState`。
+2. **二段跳机制：** 不消耗普通跳跃次数。直接设置 `player.velocity.y = -player.data.jump_force * 1.2`。
+3. **水平移动：** 进入时保留当前 `velocity.x`，技能期间允许水平移动（`velocity.x = move_dir * player.data.walk_speed`）。
+4. **攻击判定：** 在角色上方生成一个 `Area2D` 攻击区（`HitBox`），持续约 0.2 秒。
+5. **动画：** 播放 `sword_uppercut` 动画。
+6. **结束条件：** 动画播放完毕。若在落地前结束，切换到 `FallState`；若已落地，切换到 `IdleState`。
+
+---
+
+### 3.2. SwordDownslashState (下斩)
+
+**对应指令：** `L + 方向键 下`
+**前置条件：** **仅限空中**（地面按下无效果，或退回 `SwordReadyState`）
+**功能说明：** 角色加快下落并向下斩击，直到落地。
+
+**核心逻辑：**
+1. **进入时消耗：** 同 3.1。
+2. **加速下落：** `velocity.y` 强制增加一个巨大的向下速度（`player.velocity.y += 800`），并每帧继续叠加高倍重力（`gravity * 5.0`）。限制最大下落速度（如 `max_y = 1200`）防止穿墙。
+3. **缓慢水平移动：** 允许玩家在加速下落期间**缓慢水平移动**。`velocity.x` 不归零，而是按 `move_dir * player.data.walk_speed * 0.3` 计算（30% 的正常速度）。
+4. **攻击判定：** 在角色下方生成一个持续存在的 `Area2D` 攻击区，直到落地后关闭。
+5. **动画：** 播放 `sword_downslash` 动画。
+6. **落地处理：** 一旦 `is_on_floor()` 为 true，触发地面冲击粒子（可选），自动切换到 `IdleState`。此状态**无法在空中自行取消**。
+
+---
+
+### 3.3. SwordSpinState (旋斩)
+
+**对应指令：** `L + 方向键 后`（即角色背对的方向，或理解为“拉后”）
+**前置条件：** 地面 / 空中
+**功能说明：** 角色向前滑行一小段距离并对周围进行范围斩击。
+
+**核心逻辑：**
+1. **进入时消耗：** 同 3.1。
+2. **水平滑行：** 进入时给予一个向面朝方向的爆发速度：`velocity.x = player.facing_direction * 500`。随后每帧以 `move_toward(velocity.x, 0, 600 * delta)` 快速衰减。**技能期间锁定 `velocity.y = 0`**（空中使用时悬空滑行）。
+3. **攻击判定：** 在角色前方生成一个**半圆形** `Area2D` 攻击区（半径约 60 像素），在动画的第 1~3 帧激活，持续 0.15 秒后关闭。此攻击可命中**多次**（或设定为一次性伤害，根据设计选择）。
+4. **动画：** 播放 `sword_spin` 动画。
+5. **结束条件：** 动画播放完毕。空中使用则切换到 `FallState`，地面使用则切换到 `IdleState`。
+
+---
+
+## 4. 状态机无缝衔接机制
+
+### 4.1 SwordComponent 缓存输入
+在 `SwordComponent` 中维护一个输入缓冲：
+```gdscript
+var input_buffer: Dictionary = {}
+```
+
+当玩家在任何剑术状态期间按下 `L + 方向键`，调用：
+```gdscript
+func buffer_input(skill_name: String):
+    input_buffer[skill_name] = Time.get_ticks_msec()
+```
+
+### 4.2 状态机读取缓冲
+每个剑术状态的 `exit()` 或 `update()` 在动画结束时，检查 `SwordComponent.input_buffer`，如果存在有效的缓存输入（且对应的技能不在冷却中、TP 足够），则立即切换到对应的剑术状态，**不经过 IdleState**。
+
+### 4.3 缓存有效期
+缓存输入在 0.3 秒内有效，超时自动清除。
+
+---
+
+## 5. 动画资源要求
+
+| 状态 | 动画名 | 说明 |
+|------|--------|------|
+| `SwordUppercutState` | `sword_uppercut` | 挥刀向上 |
+| `SwordDownslashState` | `sword_downslash` | 向下劈斩 |
+| `SwordSpinState` | `sword_spin` | 旋转斩 |
+
+如果动画资源尚未制作，AI 应暂时使用 `sword_dash` 作为占位，并在代码中添加注释提醒后续替换。
+
+---
+
+## 6. 给 AI 的额外注意事项
+
+1. **TP 不足时：** 不进入剑术状态，播放“无法使用”提示（控制台输出即可），角色退回 `SwordReadyState` 或保持当前状态。
+2. **冷却中时：** 同上，不进入对应剑术状态，输出冷却剩余时间。
+3. **特效占位：** 在每个剑术状态的 `enter()` 中添加 `_play_effect()` 函数占位，便于后续加入粒子特效。
+4. **音效占位：** 添加 `_play_sound()` 占位函数。
+5. **输入优先级：** 在 `SwordReadyState` 中，方向键的检测优先级应为：上 > 下 > 后 > 前（或按你的设计调整）。
+
+---
+
+## 7. 需要 AI 生成的完整文件清单
+
+| 文件 | 说明 |
+|------|------|
+| `res://scripts/components/SwordComponent.gd` | 剑术组件，TP 管理 + 冷却 + 输入缓冲 |
+| `res://scripts/player/states/SwordUppercutState.gd` | 上挑状态 |
+| `res://scripts/player/states/SwordDownslashState.gd` | 下劈状态 |
+| `res://scripts/player/states/SwordSpinState.gd` | 旋转状态 |
+| `SwordReadyState.gd`（修改） | 添加三个方向键检测 |
+| `SwordDashState.gd`（修改） | 适配 TP 消耗和冷却调用 |
+
+---
+
+以上是完善后的需求文档，涵盖了剑术组件设计、独立冷却、无缝衔接、下劈缓慢移动等所有你提出的修改。文档结构清晰，包含伪代码和实现细节，可直接作为 AI 编码的输入。
