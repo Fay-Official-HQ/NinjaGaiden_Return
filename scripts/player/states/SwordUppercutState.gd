@@ -21,7 +21,7 @@ func enter(_msg: Dictionary = {}) -> void:
 		_fallback_to_neutral()
 		return
 	player.sword.start_cooldown("uppercut")
-	print("【上挑】释放成功！消耗 TP:1  剩余:", player.sword.current_tp, "  冷却 5 秒")
+	print("【上挑】释放成功！剩余TP:", player.sword.current_tp, "  冷却 5 秒")
 
 	player.animation.play("sword_uppercut")
 	# 向上跃起（跳跃力的 1.2 倍）

@@ -44,10 +44,21 @@ var _tween_fade: Tween = null # 透明度渐变的 Tween 引用
 var _dragon_hit_box: DragonFlashHitBox  # AOE伤害框引用
 
 func enter(_msg: Dictionary = {}) -> void:
+	if player.sword.is_on_cooldown("finish"):
+		print("【必杀技】冷却中，剩余:", player.sword.get_cooldown_remaining("finish"), "秒")
+		if player.is_on_floor():
+			state_machine.change_state(player.idle_state)
+		else:
+			state_machine.change_state(player.fall_state, {"imbalance": false})
+		return
+
 	# 初始化所有状态变量
 	_state = 0
 	_timer = 0.0
 	_wave_timer = 0.0
+
+	# 触发必杀技冷却
+	player.sword.start_cooldown("finish")
 
 	# 开启无敌 + 禁用重力（角色悬浮空中）
 	player.is_invincible = true

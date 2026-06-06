@@ -1,11 +1,13 @@
 extends Node
 class_name SwordComponent
 
-const MAX_TP = 100
+const MAX_TP = 16
 #剑术冷却
 const COOLDOWN_TIME = 5.0
+#必杀技冷却
+const FINISH_COOLDOWN_TIME = 10.0
 #剑术消耗
-const SWORD_TP_COST = 10
+const SWORD_TP_COST = 1
 const BUFFER_TIMEOUT = 0.3
 
 var current_tp: int = MAX_TP
@@ -13,7 +15,8 @@ var cooldowns: Dictionary = {
 	"dash": 0.0,
 	"uppercut": 0.0,
 	"downslash": 0.0,
-	"spin": 0.0
+	"spin": 0.0,
+	"finish": 0.0
 }
 var input_buffer: Dictionary = {}
 
@@ -48,7 +51,8 @@ func is_on_cooldown(skill_name: String) -> bool:
 	return cooldowns.get(skill_name, 0.0) > 0.0
 
 func start_cooldown(skill_name: String) -> void:
-	cooldowns[skill_name] = COOLDOWN_TIME
+	var cd_time = FINISH_COOLDOWN_TIME if skill_name == "finish" else COOLDOWN_TIME
+	cooldowns[skill_name] = cd_time
 
 func get_cooldown_remaining(skill_name: String) -> float:
 	return cooldowns.get(skill_name, 0.0)

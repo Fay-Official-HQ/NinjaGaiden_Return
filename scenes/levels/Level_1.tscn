@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://c41646w588qro" path="res://scenes/enemy/smallenemy.tscn" id="6_t1jjp"]
 [ext_resource type="AudioStream" uid="uid://bjl2yjjfvhy4q" path="res://assets/audio/testbgm.mp3" id="8_50olt"]
 [ext_resource type="PackedScene" uid="uid://r01tapx4qae0" path="res://scenes/enemy/enemy.tscn" id="8_u84xi"]
-[ext_resource type="PackedScene" uid="uid://dvji0cndecv86" path="res://scenes/enemy/crouchenemytest.tscn" id="10_jrjue"]
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 
@@ -83,6 +82,15 @@ position = Vector2(-673.45105, 151.49059)
 
 [node name="shikuai" parent="dixing/HangingPlatform2" unique_id=42848017 instance=ExtResource("4_u8eek")]
 position = Vector2(-21.54895, 65.509415)
+
+[node name="HangingPlatform" parent="dixing/HangingPlatform2/shikuai" unique_id=811644289 instance=ExtResource("3_cnmxh")]
+position = Vector2(359, -29)
+
+[node name="HangingPlatform2" parent="dixing/HangingPlatform2/shikuai" unique_id=1125839534 instance=ExtResource("3_cnmxh")]
+position = Vector2(449, -59)
+
+[node name="HangingPlatform3" parent="dixing/HangingPlatform2/shikuai" unique_id=2102493437 instance=ExtResource("3_cnmxh")]
+position = Vector2(531, -29)
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("2_ccvly")]
 position = Vector2(-565, 116)
@@ -158,11 +166,14 @@ position = Vector2(2060.896, 176.96613)
 [node name="SmallEnemy9" parent="diren" unique_id=264179921 instance=ExtResource("6_t1jjp")]
 position = Vector2(2053.096, 236.08194)
 
-[node name="Enemytest" parent="diren" unique_id=799660627 instance=ExtResource("10_jrjue")]
-position = Vector2(-640, 132)
+[node name="Enemy15" parent="diren" unique_id=2011406083 instance=ExtResource("8_u84xi")]
+position = Vector2(-343.80438, 159.31339)
 
-[node name="Enemytest2" parent="diren" unique_id=1699009981 instance=ExtResource("10_jrjue")]
-position = Vector2(-804.7116, 226.81068)
+[node name="Enemy16" parent="diren" unique_id=1236405567 instance=ExtResource("8_u84xi")]
+position = Vector2(-250, 135)
+
+[node name="Enemy17" parent="diren" unique_id=1698159713 instance=ExtResource("8_u84xi")]
+position = Vector2(-159, 165)
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=339899982]
 stream = ExtResource("8_50olt")

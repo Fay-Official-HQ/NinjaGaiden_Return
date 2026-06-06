@@ -14,7 +14,7 @@ class_name Enemy
 ## 巡逻半径——以出生点为中心左右往返的距离（像素）
 @export var patrol_distance: float = 100.0
 ## 每次攻击对玩家造成的伤害值
-@export var damage: int = 10
+@export var damage: int = 1
 
 var start_position: Vector2
 var direction: float = 1.0

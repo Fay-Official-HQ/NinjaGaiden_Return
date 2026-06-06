@@ -21,7 +21,7 @@ func enter(_msg: Dictionary = {}) -> void:
 		_fallback_to_neutral()
 		return
 	player.sword.start_cooldown("dash")
-	print("【突进】释放成功！消耗 TP:1  剩余:", player.sword.current_tp, "  冷却 5 秒")
+	print("【突进】释放成功！剩余TP:", player.sword.current_tp, "  冷却 5 秒")
 
 	player.animation.play("sword_dash")
 	

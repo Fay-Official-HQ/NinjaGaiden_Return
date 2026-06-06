@@ -473,7 +473,7 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1811321606]
+[node name="Player" type="CharacterBody2D" unique_id=1811321606 groups=["player"]]
 z_index = 100
 collision_mask = 12
 script = ExtResource("1_gfjak")
@@ -533,9 +533,6 @@ script = ExtResource("16_ttakn")
 [node name="SwordReadyState" type="Node" parent="StateMachine" unique_id=1985199153]
 script = ExtResource("17_upxxc")
 
-[node name="SwordDashState" type="Node" parent="StateMachine" unique_id=1051548288]
-script = ExtResource("18_ln3h3")
-
 [node name="WallState" type="Node" parent="StateMachine" unique_id=1276481399]
 script = ExtResource("19_hdvrm")
 
@@ -548,9 +545,6 @@ script = ExtResource("21_ej2d6")
 [node name="HurtState" type="Node" parent="StateMachine" unique_id=496294911]
 script = ExtResource("22_ymths")
 
-[node name="DragonFlashState" type="Node" parent="StateMachine" unique_id=1936464250]
-script = ExtResource("24_0y4ya")
-
 [node name="SwordUppercutState" type="Node" parent="StateMachine" unique_id=936827038]
 script = ExtResource("26_31ki0")
 
@@ -559,6 +553,12 @@ script = ExtResource("27_avmva")
 
 [node name="SwordSpinState" type="Node" parent="StateMachine" unique_id=126591555]
 script = ExtResource("28_0ioy2")
+
+[node name="SwordDashState" type="Node" parent="StateMachine" unique_id=1051548288]
+script = ExtResource("18_ln3h3")
+
+[node name="DragonFlashState" type="Node" parent="StateMachine" unique_id=1936464250]
+script = ExtResource("24_0y4ya")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
 position = Vector2(-1, 7)

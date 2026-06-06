@@ -5,7 +5,7 @@ class_name NinjutsuComponent
 signal mp_changed(current_mp: int)
 signal ninjutsu_switched(index: int, name: String)
 
-@export var mp_cost: int = 10
+@export var mp_cost: int = 1
 @export var ninjutsu_names: Array[String] = ["火焰", "火球", "棱刃", "回旋镖"]
 
 var current_mp: int = 0
