@@ -10,6 +10,7 @@ var hit_enemies: Array[HurtBox] = []
 func enter(_msg: Dictionary = {}) -> void:
 	player.movement.stop()
 	player.animation.play("crouch_attack")
+	player.set_hurtbox_crouch(true)
 
 	attack_root = player.get_node("AttackRoot") as Node2D
 	crouch_hit_box = attack_root.get_node("CrouchHitBox") as PlayerHitBox
@@ -60,5 +61,6 @@ func _exit_attack() -> void:
 	if crouch_hit_box:
 		crouch_hit_box.set_deferred("monitoring", false)
 	hit_enemies.clear()
+	player.set_hurtbox_crouch(false)
 	if attack_root:
 		attack_root.scale.x = 1.0

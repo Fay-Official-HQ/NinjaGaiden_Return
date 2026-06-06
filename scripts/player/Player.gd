@@ -12,6 +12,7 @@ class_name Player
 @onready var state_machine: StateMachine = $StateMachine
 @onready var animated_sprite: AnimatedSprite2D = $Visual/AnimatedSprite2D
 @onready var hurt_box: HurtBox = $HurtRoot/HurtBox
+@onready var hurtbox_collision: CollisionShape2D = $HurtRoot/HurtBox/CollisionShape2D
 @onready var ninjutsu: NinjutsuComponent = $Components/NinjutsuComponent
 @onready var sword: SwordComponent = $Components/SwordComponent
 
@@ -38,10 +39,21 @@ var is_invincible: bool = false
 # 必杀技重力禁用（由 DragonFlashState 控制）
 var is_gravity_disabled: bool = false
 
+# HurtBox 原始参数（用于下蹲切换恢复）
+var _normal_hurtbox_size: Vector2
+var _normal_hurtbox_pos: Vector2
+var _crouch_hurtbox_size: Vector2 = Vector2(13, 16)
+# HurtBox 下蹲参数（默认15，越大下蹲越厉害）
+var _crouch_hurtbox_pos: Vector2 = Vector2(-1.5, 10.0)
+
 func _ready() -> void:
 	current_hp = data.max_hp
 	movement.initialize(self)
 	animation.initialize(animated_sprite)
+
+	# 保存 HurtBox 碰撞体原始参数
+	_normal_hurtbox_size = hurtbox_collision.shape.size
+	_normal_hurtbox_pos = hurtbox_collision.position
 
 	# 连接受伤信号
 	if hurt_box:
@@ -88,13 +100,19 @@ func _on_hurt_box_took_damage(damage: int) -> void:
 		invincible_timer = INVINCIBLE_TIME
 		state_machine.change_state(hurt_state)
 
+func set_hurtbox_crouch(enabled: bool) -> void:
+	if enabled:
+		hurtbox_collision.shape.size = _crouch_hurtbox_size
+		hurtbox_collision.position = _crouch_hurtbox_pos
+	else:
+		hurtbox_collision.shape.size = _normal_hurtbox_size
+		hurtbox_collision.position = _normal_hurtbox_pos
+
 func _check_overlapping_enemy_after_invincibility() -> void:
 	var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
 	var query := PhysicsShapeQueryParameters2D.new()
-	var shape := CircleShape2D.new()
-	shape.radius = 16.0
-	query.shape = shape
-	query.transform = Transform2D(0, global_position)
+	query.shape = hurtbox_collision.shape
+	query.transform = Transform2D(0, hurtbox_collision.global_position)
 	query.collision_mask = 0b100000  # 第6层 EnemyAttack
 	query.collide_with_areas = true
 	query.collide_with_bodies = false

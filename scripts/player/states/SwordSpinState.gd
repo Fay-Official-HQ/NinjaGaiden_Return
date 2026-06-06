@@ -23,6 +23,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	print("【旋斩】释放成功！消耗 TP:1  剩余:", player.sword.current_tp, "  冷却 5 秒")
 
 	player.animation.play("sword_spin")
+	player.set_hurtbox_crouch(true)
 
 	# 向面朝方向短距离滑行（初速300，快速衰减）
 	player.velocity.x = player.facing_direction * 300.0
@@ -74,7 +75,7 @@ func physics_update(_delta: float) -> void:
 
 func exit() -> void:
 	_exit_hitbox()
-	# 恢复 AttackRoot 朝向
+	player.set_hurtbox_crouch(false)
 	var attack_root = player.get_node("AttackRoot") as Node2D
 	if attack_root:
 		attack_root.scale.x = 1.0

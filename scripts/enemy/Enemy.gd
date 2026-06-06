@@ -3,14 +3,18 @@ extends CharacterBody2D
 
 class_name Enemy
 
-# 默认属性（当没有配置资源时使用）
-@export var max_hp: int = 1
-@export var move_speed: float = 20.0
-@export var patrol_distance: float = 100.0
-@export var damage: int = 10
-
-# 敌人数据资源（如果设置了，将覆盖上面的默认值）
+## 敌人数据资源（如果设置了此项，将覆盖下面各属性的默认值）
 @export var data: EnemyData
+
+@export_group("基础属性")
+## 最大生命值——未使用 data 资源时直接生效
+@export var max_hp: int = 1
+## 巡逻移动速度（像素/秒）
+@export var move_speed: float = 20.0
+## 巡逻半径——以出生点为中心左右往返的距离（像素）
+@export var patrol_distance: float = 100.0
+## 每次攻击对玩家造成的伤害值
+@export var damage: int = 10
 
 var start_position: Vector2
 var direction: float = 1.0
@@ -50,9 +54,11 @@ func _physics_process(delta: float) -> void:
 
 	_update_floor_detector()
 
+	# 走到平台边缘 → 折返
 	if is_on_floor() and not floor_detector.is_colliding():
 		direction *= -1.0
 
+	# 超出巡逻范围 → 折返
 	if global_position.x > start_position.x + patrol_distance:
 		direction = -1.0
 	elif global_position.x < start_position.x - patrol_distance:
@@ -69,6 +75,10 @@ func _physics_process(delta: float) -> void:
 		sprite.play("idle")
 
 	move_and_slide()
+
+	# 碰到墙壁 → 折返（放在 move_and_slide 之后，is_on_wall 才有效）
+	if is_on_wall():
+		direction *= -1.0
 
 func _update_floor_detector() -> void:
 	floor_detector.target_position.x = abs(floor_detector.target_position.x) * direction

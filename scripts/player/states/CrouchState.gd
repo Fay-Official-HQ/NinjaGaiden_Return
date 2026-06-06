@@ -5,7 +5,11 @@ class_name CrouchState
 
 func enter(_msg: Dictionary = {}) -> void:
 	player.animation.play("crouch") 
-	player.velocity.x = 0 
+	player.velocity.x = 0
+	player.set_hurtbox_crouch(true)
+
+func exit() -> void:
+	player.set_hurtbox_crouch(false)
 
 func physics_update(_delta: float) -> void:
 	# 1. 如果松开下方向键，站起来恢复待机状态

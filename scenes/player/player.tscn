@@ -121,7 +121,7 @@ size = Vector2(56, 37)
 size = Vector2(78, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvjb1"]
-size = Vector2(14, 30)
+size = Vector2(13, 31)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_npwbq"]
 animations = [{
@@ -635,14 +635,15 @@ collision_mask = 32
 script = ExtResource("23_bysbl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtRoot/HurtBox" unique_id=995973408]
-position = Vector2(-1, 7)
+position = Vector2(-1.5, 6.5)
 shape = SubResource("RectangleShape2D_fvjb1")
+debug_color = Color(0.77392095, 0.43947607, 0.13655847, 0.41960785)
 
 [node name="Visual" type="Node2D" parent="." unique_id=174212603]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"sword_downslash"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]
