@@ -94,6 +94,7 @@
 [ext_resource type="Texture2D" uid="uid://h1u6t056tqr0" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_006.png" id="78_46q5t"]
 [ext_resource type="Texture2D" uid="uid://dxja886d8v1kp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_007.png" id="79_5miun"]
 [ext_resource type="Texture2D" uid="uid://boebc2inlywh3" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_007.png" id="79_hf5gj"]
+[ext_resource type="Script" uid="uid://cx404cfavlvyk" path="res://scripts/components/AttackHitBox.gd" id="attack_hitbox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5stf6"]
 size = Vector2(14, 30)
@@ -568,7 +569,9 @@ shape = SubResource("RectangleShape2D_5stf6")
 
 [node name="HitBox" type="Area2D" parent="AttackRoot" unique_id=1080134473]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 66
+monitoring = false
+monitorable = false
 script = ExtResource("22_bysbl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/HitBox" unique_id=324037649]
@@ -577,7 +580,7 @@ shape = SubResource("RectangleShape2D_bysbl")
 
 [node name="CrouchHitBox" type="Area2D" parent="AttackRoot" unique_id=1167259624]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 66
 monitoring = false
 script = ExtResource("22_bysbl")
 
@@ -587,7 +590,9 @@ shape = SubResource("RectangleShape2D_2wy34")
 
 [node name="SwordDashBox" type="Area2D" parent="AttackRoot" unique_id=1475980129]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 66
+monitoring = false
+monitorable = false
 script = ExtResource("24_3p0jd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordDashBox" unique_id=820386358]
@@ -596,7 +601,7 @@ shape = SubResource("RectangleShape2D_ymths")
 
 [node name="DragonFlashHitBox" type="Area2D" parent="AttackRoot" unique_id=2072884072]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 66
 monitoring = false
 script = ExtResource("27_s050l")
 
@@ -606,7 +611,10 @@ debug_color = Color(0.8970039, 0.29778513, 0.28995174, 0.41960785)
 
 [node name="SwordUppercutHitBox" type="Area2D" parent="AttackRoot" unique_id=2042000667]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 66
+monitoring = false
+monitorable = false
+script = ExtResource("attack_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordUppercutHitBox" unique_id=1719301170]
 position = Vector2(14, 6)
@@ -614,7 +622,10 @@ shape = SubResource("CapsuleShape2D_7u1tp")
 
 [node name="SwordDownslashHitBox" type="Area2D" parent="AttackRoot" unique_id=1045827946]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 66
+monitoring = false
+monitorable = false
+script = ExtResource("attack_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordDownslashHitBox" unique_id=444400676]
 position = Vector2(11, 27.5)
@@ -622,7 +633,10 @@ shape = SubResource("RectangleShape2D_avmva")
 
 [node name="SwordSpinHitBox" type="Area2D" parent="AttackRoot" unique_id=1488826804]
 collision_layer = 16
-collision_mask = 2
+collision_mask = 66
+monitoring = false
+monitorable = false
+script = ExtResource("attack_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordSpinHitBox" unique_id=807560180]
 position = Vector2(0, 8)

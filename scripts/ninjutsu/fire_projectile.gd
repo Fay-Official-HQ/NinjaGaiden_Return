@@ -26,8 +26,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HurtBox:
+		area.take_damage(1)
 		if area.is_boss:
-			area.take_damage(3)   # Boss 造成 3 点伤害
 			queue_free()
-		else:
-			area.take_damage(999) # 小兵秒杀，不消失

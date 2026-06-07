@@ -9,6 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://c41646w588qro" path="res://scenes/enemy/smallenemy.tscn" id="6_t1jjp"]
 [ext_resource type="AudioStream" uid="uid://bjl2yjjfvhy4q" path="res://assets/audio/testbgm.mp3" id="8_50olt"]
 [ext_resource type="PackedScene" uid="uid://r01tapx4qae0" path="res://scenes/enemy/enemy.tscn" id="8_u84xi"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="10_jrjue"]
+[ext_resource type="Texture2D" uid="uid://dvb3nubvt7dil" path="res://assets/sprites/item/item_mp_small.png" id="11_y54f7"]
+[ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="12_sha1w"]
+[ext_resource type="Texture2D" uid="uid://ysxpwo1kk4b3" path="res://assets/sprites/item/item_hp.png" id="13_sha1w"]
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 
@@ -178,3 +182,16 @@ position = Vector2(-159, 165)
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=339899982]
 stream = ExtResource("8_50olt")
 autoplay = true
+
+[node name="Items" type="Node" parent="." unique_id=111644370]
+
+[node name="Item" parent="Items" unique_id=1839314516 instance=ExtResource("10_jrjue")]
+position = Vector2(-717, 94)
+show_texture = ExtResource("11_y54f7")
+hidden_texture = ExtResource("12_sha1w")
+
+[node name="Item2" parent="Items" unique_id=575307007 instance=ExtResource("10_jrjue")]
+position = Vector2(-579, 256)
+consumable_type = 0
+show_texture = ExtResource("13_sha1w")
+hidden_texture = ExtResource("12_sha1w")

@@ -58,7 +58,12 @@ func _ready() -> void:
 	# 连接受伤信号
 	if hurt_box:
 		hurt_box.took_damage.connect(_on_hurt_box_took_damage)
-
+	#强制关闭所有攻击框
+	for node in $AttackRoot.get_children():
+		if node is Area2D:
+			node.monitoring = false
+			
+			
 func _process(delta: float) -> void:
 	input.update_input()
 	input.update_buffer(delta)

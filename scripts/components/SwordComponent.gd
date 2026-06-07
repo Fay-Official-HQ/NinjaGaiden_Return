@@ -7,7 +7,7 @@ const COOLDOWN_TIME = 5.0
 #必杀技冷却
 const FINISH_COOLDOWN_TIME = 10.0
 #剑术消耗
-const SWORD_TP_COST = 1
+const SWORD_TP_COST = 2
 const BUFFER_TIMEOUT = 0.3
 
 var current_tp: int = MAX_TP

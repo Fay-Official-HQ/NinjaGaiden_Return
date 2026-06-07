@@ -1,0 +1,440 @@
+这个是我准备开发的FC忍龙消耗品需求文档，你看看：游戏当中的消耗品系统也要遵循项目的现有的企业级架构，遵循高内聚、低耦合的设计
+游戏当中的各种数值恢复方式：
+	HP：每一关重新开始恢复满，拾取击落的血瓶图标恢复一半生命，死亡重开恢复满
+	MP：游戏一开始数值为满，每一关开始时候为上一关剩余数值，拾取击落的蓝色忍恢复2点，拾取红色忍恢复满
+	TP：游戏一开始数值为满，每一关开始时候为上一关剩余数值，每次普通攻击且命中敌人造成1点伤害（包括站立、下蹲、空中攻击）的时候恢复1
+
+所有的恢复都不可以超过上限值
+
+游戏当中可以击落的消耗品设计为一个单独的场景，通过配置参数对应不同的图标和作用：蓝色忍（恢复2MP）、红色忍（恢复16MP）、血瓶（恢复8生命值）
+
+消耗品实例化到场景中的时候，悬浮在空中，并且和FC3代原版一样，会隐约闪烁（这里我已经将显现图标和隐藏图标都制作了素材，只需要代码切换即可）让玩家知道是什么消耗品，消耗品可以被普通攻击（地面、下蹲、空中）和剑术、必杀技击落。
+
+最好设置一个新的碰撞，来调试消耗品，这样可以避免消耗品别敌人击落或者被魔法击落。
+
+消耗品被攻击后，会下坠，然后落到地面上。玩家走过去接触会拾取，然后启动对应的恢复。
+
+消耗品接触到地面后，如果在5秒内没有被拾取，那么将会变闪烁，闪烁3秒后还未被拾取，将会自动消失。
+
+
+这份需求文档写得非常清晰，而且你已经考虑到了架构解耦、碰撞隔离、状态切换等关键细节。我来逐条分析，然后给出实现方案。
+
+---
+
+## 一、需求文档审查
+
+### ✅ 做得好的地方
+- **高内聚低耦合**：消耗品作为独立场景，通过参数配置不同类型，完全符合你项目的组件化架构。
+- **碰撞隔离**：你明确要求消耗品不能被敌人/忍术击落，这是很关键的细节。我们可以新增一个碰撞层专门给消耗品用。
+- **状态机清晰**：悬浮闪烁 → 被攻击下坠 → 落地等待 → 闪烁后消失，四个状态界限分明。
+- **数值设计合理**：血瓶 8HP、蓝忍 2MP、红忍 16MP，符合 FC 原作的比例感。
+- **TP 恢复方式明确**：普攻击中敌人 +1，这个逻辑应该在攻击碰撞检测中实现，而非消耗品系统。
+
+### ⚠️ 需要明确的地方
+
+1. **消耗品被"击落"是什么意思？**  
+   我理解是：消耗品初始悬浮在空中，玩家用攻击/剑术/必杀技打到它，它就变成"可拾取"状态，然后下坠到地面。对吗？
+
+2. **消耗品初始悬浮高度？**  
+   是固定在某个 Y 坐标（比如敌人死亡位置上方 20 像素），还是跟随敌人位置？
+
+3. **"隐约闪烁"的实现**：  
+   你已经有显现和隐藏两种素材，代码只需要用一个 Timer 切换 `Sprite2D.texture` 即可。闪烁频率建议 0.2 秒切换一次。
+
+4. **被攻击后下坠**：  
+   消耗品被击中后，应该像敌人死亡一样受重力影响落到地面。可以用 `CharacterBody2D` 或直接用代码模拟重力。
+
+5. **落地后 5 秒 + 闪烁 3 秒**：  
+   落地后开始 5 秒倒计时，5 秒后进入"快闪"状态（闪烁频率加快，比如 0.1 秒切换），3 秒后自动 `queue_free()`。
+
+---
+
+## 二、架构设计
+
+### 2.1 碰撞层分配
+
+你现有的碰撞层（来自项目设置）：
+
+| Layer | 名称 |
+|-------|------|
+| 1 | Player |
+| 2 | Enemy |
+| 3 | Terrain |
+| 4 | Platform |
+| 5 | PlayerAttack |
+| 6 | EnemyAttack |
+| 7 | Item |
+
+**消耗品需要两个碰撞区域：**
+
+1. **拾取检测区**（玩家走过去触发）  
+   - Layer: 7 (Item)  
+   - Mask: 1 (Player) — 只检测玩家
+
+2. **被攻击检测区**（玩家攻击打中它）  
+   - Layer: 7 (Item)  
+   - Mask: 5 (PlayerAttack) + 16 (SwordAttack，如果你剑术用了单独的层) — 只检测玩家攻击和剑术
+
+> 注意：如果剑术和必杀技也用的 PlayerAttack 层（Layer 5），那只需要 Mask = 5 即可。如果剑术有独立层，记得加上。
+
+### 2.2 消耗品状态机
+
+```
+[悬浮闪烁] ──被攻击命中──→ [下坠中] ──落地──→ [地面等待5秒]
+                                                    │
+                                             5秒后进入快闪
+                                                    │
+                                             3秒后自动消失
+```
+
+任何时候玩家接触到"下坠中"或"地面等待"状态的消耗品，立即触发拾取。
+
+### 2.3 场景结构
+
+```
+Item.tscn (Area2D)  ← 用于被攻击检测
+├── Sprite2D (显示图标，切换显现/隐藏实现闪烁)
+├── CollisionShape2D (被攻击的碰撞框)
+├── PickupArea (Area2D)  ← 用于拾取检测
+│   └── CollisionShape2D (拾取碰撞框，比攻击框稍大)
+└── Item.gd (脚本)
+```
+
+---
+
+## 三、数值配置表
+
+| 消耗品类型 | 图标 | 恢复效果 | 闪烁频率 |
+|-----------|------|----------|----------|
+| 蓝忍 | `blue_ninpo.png` | MP +2 | 悬浮: 0.2s切换 / 快闪: 0.1s切换 |
+| 红忍 | `red_ninpo.png` | MP +16 | 同上 |
+| 血瓶 | `health_potion.png` | HP +8 | 同上 |
+
+---
+
+## 四、关键实现逻辑
+
+### 4.1 闪烁实现（伪代码）
+
+```gdscript
+var _flash_timer: float = 0.0
+var _flash_interval: float = 0.2  # 正常闪烁间隔
+var _show_icon: bool = true
+
+func _process(delta):
+    _flash_timer += delta
+    if _flash_timer >= _flash_interval:
+        _flash_timer = 0.0
+        _show_icon = not _show_icon
+        $Sprite2D.texture = visible_icon if _show_icon else hidden_icon
+```
+
+### 4.2 状态切换
+
+```gdscript
+enum State { FLOATING, FALLING, GROUND_WAIT, FAST_FLASH, PICKED_UP }
+
+var _state: State = State.FLOATING
+var _ground_timer: float = 0.0
+const GROUND_WAIT_TIME: float = 5.0
+const FAST_FLASH_TIME: float = 3.0
+
+func _physics_process(delta):
+    match _state:
+        State.FLOATING:
+            # 悬浮，只做闪烁
+            pass
+        State.FALLING:
+            # 受重力下落
+            _velocity.y += GRAVITY * delta
+            position += _velocity * delta
+            if is_on_floor():
+                _state = State.GROUND_WAIT
+                _ground_timer = 0.0
+        State.GROUND_WAIT:
+            _ground_timer += delta
+            if _ground_timer >= GROUND_WAIT_TIME:
+                _state = State.FAST_FLASH
+                _flash_interval = 0.1  # 加快闪烁
+                _ground_timer = 0.0
+        State.FAST_FLASH:
+            _ground_timer += delta
+            if _ground_timer >= FAST_FLASH_TIME:
+                queue_free()
+```
+
+### 4.3 被攻击检测
+
+```gdscript
+func _on_attack_area_entered(area: Area2D):
+    if area is PlayerHitBox or area is SwordHitBox or area is DragonFlashHitBox:
+        if _state == State.FLOATING:
+            _state = State.FALLING
+            _velocity = Vector2(randf_range(-50, 50), -100)  # 随机小弹跳
+```
+
+### 4.4 拾取检测
+
+```gdscript
+func _on_pickup_area_body_entered(body: Node2D):
+    if body is Player and _state in [State.FALLING, State.GROUND_WAIT, State.FAST_FLASH]:
+        _apply_effect(body)
+        queue_free()
+
+func _apply_effect(player: Player):
+    match item_type:
+        "health":
+            player.heal_hp(8)
+        "mp_small":
+            player.ninjutsu_component.add_mp(2)
+        "mp_large":
+            player.ninjutsu_component.add_mp(16)
+```
+
+---
+
+## 五、TP 恢复逻辑（在攻击命中时处理）
+
+在你的 `PlayerHitBox.gd` 或攻击状态的 `_on_area_entered` 中，每次命中敌人时调用：
+
+```gdscript
+if player.sword_component:
+    player.sword_component.add_tp(1)
+```
+
+确保一次攻击只加一次 TP（复用已有的 `hit_enemies` 防重复机制）。
+
+---
+
+## 六、需要你确认的几个问题
+
+1. **消耗品初始悬浮位置**：是敌人死亡位置上方固定偏移，还是固定 Y 坐标？
+2. **下坠速度**：用重力加速度 980 还是更慢（让玩家有时间跑过去接住）？
+3. **被攻击后的弹跳**：是否需要随机水平弹跳（像 FC 原版），还是直接垂直下落？
+4. **消耗品能否在"悬浮"状态就被拾取？** 还是必须被攻击后变成"下坠"才能捡？
+
+确认后我立刻给你完整的 `Item.gd` 代码。
+
+
+
+
+这个是我给你的进阶优化，你看看：进阶优化：
+所有参数都可以手动调试，不要在代码里写死
+消耗品被"击落"是什么意思？（消耗品初始被手动设置到关卡场景的空中位置，玩家用攻击/剑术/必杀技打到它，它就变成"可拾取"状态，然后下坠到地面）
+消耗品初始悬浮高度？（被开发者手动实例化设置）
+"隐约闪烁"的实现：已经有显现和隐藏两种素材，代码只需要用一个 Timer 切换 Sprite2D.texture 即可。闪烁频率 0.5秒切换一次
+被攻击后下坠：消耗品被击中后，应该像敌人死亡一样受重力影响落到地面。可以用 CharacterBody2D 或直接用代码模拟重力
+落地后 5 秒 + 闪烁 3 秒：落地后开始 5 秒倒计时，5 秒后进入"快闪"状态（闪烁频率加快，比如 0.1 秒切换），3 秒后自动 queue_free()。但是我担心queue_free()这个函数是否会影响性能，这么处理是否符合Godot规范？？
+由于剑术、忍术、普通、必杀技，这些都是使用的一个碰撞层PlayerAttack ，因此我很发愁怎么设置碰撞。解决，似乎必须要将忍术和其他的分开。
+
+
+
+
+
+你的进阶优化思路非常清晰，我来逐条回应，然后给出最终实现方案。
+
+---
+
+## 一、关于 `queue_free()` 的性能问题
+
+**完全不用担心。** `queue_free()` 是 Godot 中销毁节点的**标准做法**，它不会立即删除节点，而是将删除操作放入队列，在帧结束时统一处理。这是 Godot 官方推荐的方式，不存在性能问题。
+
+你的消耗品同时存在的数量最多也就几个（每个敌人死亡掉一个，或关卡中手动放置几个），即使同时有 10 个消耗品调用 `queue_free()`，对性能的影响也可以忽略不计。
+
+**结论：放心用 `queue_free()`，这是最规范的做法。**
+
+---
+
+## 二、关于碰撞层冲突问题
+
+你的问题核心是：**剑术、忍术、普通攻击、必杀技都用了同一个 `PlayerAttack` 层（Layer 5），导致消耗品无法区分“被玩家攻击打中”和“被忍术打中”。**
+
+### 解决方案：保持现状，不需要分开层
+
+分析一下需求：
+- 消耗品应该被**普通攻击、剑术、必杀技**击落
+- 消耗品**不应该被忍术**击落（你是这个意思吗？）
+
+如果你的需求是**以上两种**，那确实需要把忍术的攻击层和物理攻击层分开。
+
+但如果你希望**所有玩家攻击都能击落消耗品**（包括忍术），那就**不需要改任何碰撞层**，直接用 Layer 5 就行。
+
+**我建议：先不分开。** 原因如下：
+1. 玩家用忍术打消耗品也是一种合理的交互，FC 原版中忍术也可以击落物品。
+2. 分开层需要修改所有忍术投射物的碰撞层，改动范围大，容易引入 Bug。
+3. 如果后续你确实需要区分（比如某些消耗品只对物理攻击敏感），再重构也来得及。
+
+**如果你坚持要分开**，方案是：
+- 保留 Layer 5 给普通攻击 + 剑术 + 必杀技
+- 给忍术投射物单独分配一个新层（如 Layer 11，命名为 `NinjutsuAttack`）
+- 修改所有忍术投射物场景的 `collision_layer`
+
+我建议先保持现状，继续用 Layer 5。下面按这个方案给出最终实现。
+
+---
+
+## 三、最终架构确认
+
+| 参数 | 设计 |
+|------|------|
+| 初始位置 | 由开发者在关卡中手动摆放 `Item.tscn` 实例 |
+| 悬浮闪烁 | 0.5 秒切换一次显现/隐藏素材 |
+| 被攻击后 | 受重力下坠，落地后进入等待状态 |
+| 落地等待 | 5 秒 |
+| 快闪消失 | 3 秒，闪烁频率 0.1 秒 |
+| 碰撞层 | 被攻击检测: Layer 7 (Item), Mask 5 (PlayerAttack)；拾取检测: Layer 7, Mask 1 (Player) |
+| 参数配置 | 全部 `@export`，在编辑器中调试 |
+
+---
+
+## 四、完整 `Item.gd` 代码
+
+```gdscript
+# ============================================================
+# 消耗品系统 - Item.gd
+# 悬浮在空中闪烁 → 被玩家攻击打中后下坠 → 落地等待 → 快闪消失
+# 玩家接触后恢复对应数值
+# ============================================================
+extends Area2D
+class_name Item
+
+# ---------- 消耗品类型枚举 ----------
+enum ItemType { HEALTH, MP_SMALL, MP_LARGE }
+
+# ---------- 可调参数（全部在编辑器中配置） ----------
+@export var item_type: ItemType = ItemType.HEALTH
+@export var restore_amount: int = 8        # 恢复数值
+@export var float_flash_interval: float = 0.5  # 悬浮闪烁间隔
+@export var fast_flash_interval: float = 0.1    # 快闪闪烁间隔
+@export var ground_wait_time: float = 5.0       # 落地等待时间
+@export var fast_flash_duration: float = 3.0    # 快闪持续时间
+@export var gravity: float = 980.0              # 下坠重力
+@export var fall_bounce_x: float = 50.0         # 被击中后水平随机弹跳范围
+
+# ---------- 素材 ----------
+@export var visible_texture: Texture2D   # 显现图标
+@export var hidden_texture: Texture2D    # 隐藏图标
+
+# ---------- 内部状态 ----------
+enum State { FLOATING, FALLING, GROUND_WAIT, FAST_FLASH }
+
+var _state: State = State.FLOATING
+var _velocity: Vector2 = Vector2.ZERO
+var _state_timer: float = 0.0
+var _flash_timer: float = 0.0
+var _show_icon: bool = true
+
+# ---------- 节点引用 ----------
+@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _pickup_area: Area2D = $PickupArea
+
+
+func _ready() -> void:
+    # 初始化闪烁
+    _sprite.texture = visible_texture
+    
+    # 连接被攻击信号
+    area_entered.connect(_on_attack_hit)
+    
+    # 连接拾取信号
+    _pickup_area.body_entered.connect(_on_player_enter)
+
+
+func _physics_process(delta: float) -> void:
+    match _state:
+        State.FLOATING:
+            _handle_flash(delta, float_flash_interval)
+        
+        State.FALLING:
+            _velocity.y += gravity * delta
+            position += _velocity * delta
+            
+            # 检测落地
+            # 如果你的关卡地面有 TileMap 或 StaticBody2D，用 move_and_collide 检测
+            # 简化方案：当 Y 坐标到达预设的地面高度时落地
+            # 更完善的方案：用 RayCast2D 向下检测地面
+            var collision = move_and_collide(_velocity * delta)
+            if collision:
+                _state = State.GROUND_WAIT
+                _state_timer = 0.0
+                _velocity = Vector2.ZERO
+        
+        State.GROUND_WAIT:
+            _state_timer += delta
+            if _state_timer >= ground_wait_time:
+                _state = State.FAST_FLASH
+                _state_timer = 0.0
+        
+        State.FAST_FLASH:
+            _state_timer += delta
+            if _state_timer >= fast_flash_duration:
+                queue_free()
+            _handle_flash(delta, fast_flash_interval)
+
+
+func _handle_flash(delta: float, interval: float) -> void:
+    _flash_timer += delta
+    if _flash_timer >= interval:
+        _flash_timer = 0.0
+        _show_icon = not _show_icon
+        _sprite.texture = visible_texture if _show_icon else hidden_texture
+
+
+func _on_attack_hit(area: Area2D) -> void:
+    # 只有悬浮状态才能被击落
+    if _state != State.FLOATING:
+        return
+    
+    # 检测是否是玩家攻击（普通攻击、剑术、必杀技都使用 PlayerAttack 层）
+    # PlayerHitBox, SwordHitBox, DragonFlashHitBox 都在 Layer 5
+    if area.collision_layer & 16 != 0:  # Layer 5 = bit 4 = 16
+        _state = State.FALLING
+        _velocity = Vector2(
+            randf_range(-fall_bounce_x, fall_bounce_x),
+            -200.0  # 初始向上弹一下，然后受重力下落
+        )
+
+
+func _on_player_enter(body: Node2D) -> void:
+    if body is Player and _state != State.FLOATING:
+        _apply_effect(body)
+        queue_free()
+
+
+func _apply_effect(player: Player) -> void:
+    match item_type:
+        ItemType.HEALTH:
+            player.current_hp = min(player.current_hp + restore_amount, player.data.max_hp)
+            player.hp_changed.emit(player.current_hp, player.data.max_hp)
+        
+        ItemType.MP_SMALL, ItemType.MP_LARGE:
+            if player.ninjutsu_component:
+                player.ninjutsu_component.add_mp(restore_amount)
+```
+
+---
+
+## 五、碰撞层设置（在编辑器中操作）
+
+### `Item` 根节点 (Area2D)
+- **Layer**: 勾选 Layer 7 (Item)
+- **Mask**: 勾选 Layer 5 (PlayerAttack)
+
+### `PickupArea` 子节点 (Area2D)
+- **Layer**: 不勾选任何层
+- **Mask**: 勾选 Layer 1 (Player)
+
+---
+
+## 六、你需要做的
+
+1. **创建 `Item.tscn`**：按照上面的节点结构搭建场景
+2. **放置碰撞形状**：给根节点和 `PickupArea` 各添加 `CollisionShape2D`
+3. **加载素材**：把显现/隐藏图标拖到 `visible_texture` 和 `hidden_texture` 属性
+4. **拖入关卡**：把 `Item.tscn` 实例化到关卡中，设置位置和类型
+5. **在 Player.gd 中添加信号**（如果还没有）：
+   ```gdscript
+   signal hp_changed(current_hp: int, max_hp: int)
+   ```
+
+现在消耗品系统就完整了。需要我帮你写 TP 攻击积攒的那部分代码吗？

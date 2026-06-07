@@ -98,6 +98,7 @@ func _poll_hitbox() -> void:
 	for area in areas:
 		if area is HurtBox and not hit_enemies.has(area):
 			hit_enemies.append(area)
+			#造成2点伤害，直接写死
 			area.take_damage(2)
 
 func _check_buffer() -> void:

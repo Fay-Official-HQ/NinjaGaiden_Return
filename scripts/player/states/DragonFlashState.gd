@@ -52,6 +52,14 @@ func enter(_msg: Dictionary = {}) -> void:
 			state_machine.change_state(player.fall_state, {"imbalance": false})
 		return
 
+	if not player.sword.consume_tp(10):
+		print("【必杀技】TP 不足！需要10点")
+		if player.is_on_floor():
+			state_machine.change_state(player.idle_state)
+		else:
+			state_machine.change_state(player.fall_state, {"imbalance": false})
+		return
+
 	# 初始化所有状态变量
 	_state = 0
 	_timer = 0.0
