@@ -17,6 +17,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	if attack_root:
 		attack_root.scale.x = player.facing_direction
 
+
 func update(_delta: float) -> void:
 	var sprite = player.animation.sprite
 

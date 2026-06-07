@@ -1,0 +1,66 @@
+flowchart TD
+    subgraph 数据层["📦 数据层 — 纯数据，零逻辑"]
+        SER[SoundEventResource.gd\n音频事件定义\nevent_id · stream · bus\nvolume_db · pitch · cooldown\nrandom_pitch_range]
+        CAT[SoundCategory\n枚举分类\nSFX / BGM / VOICE]
+        SER --> CAT
+    end
+
+    subgraph 注册层["📋 注册层 — 数据驱动配置"]
+        REG[SoundRegistry.gd\n全局音频字典\n以 event_id 为 key\n启动时从 .tres 批量加载]
+    end
+
+    subgraph 事件总线["📡 AudioEventBus.gd — AutoLoad 单例"]
+        SIG1["signal play_sound(event_id, pos)"]
+        SIG2["signal play_bgm(event_id)"]
+        SIG3["signal stop_bgm()"]
+        SIG4["signal set_bus_volume(bus, db)"]
+    end
+
+    subgraph 管理层["⚙️ AudioManager.gd — AutoLoad 单例"]
+        POOL["SFXPool\nAudioStreamPlayer2D × 8\n轮询分配 · 距离衰减"]
+        BGM["BGMPlayer\nAudioStreamPlayer × 2\n交叉淡入淡出 Tween"]
+        BUS["总线路由\nMaster › SFX › BGM\n支持 set_bus_volume"]
+        POOL --- BUS
+        BGM --- BUS
+    end
+
+    subgraph 组件层["🧩 AudioComponent.gd — 挂载到 Player / Enemy"]
+        AC["订阅来自父节点的信号\n调用 AudioEventBus.play_sound\n携带 global_position"]
+        AAS["AnimationAudioSync.gd\n监听 AnimationPlayer.animation_started\n按帧触发 SoundEvent\n用于连招第2·3刀精准帧"]
+        AC --- AAS
+    end
+
+    subgraph FSM层["🤖 FSM 层 — 状态机（完全解耦）"]
+        direction LR
+        ST_ATK["GroundAttackState\nAirAttackState\nCrouchAttackState"]
+        ST_NIN["GroundNinjutsuState\nAirNinjutsuState"]
+        ST_SWD["SwordDashState\nSwordUppercutState\nSwordDownslashState\nSwordSpinState"]
+        ST_DRG["DragonFlashState\n必杀技"]
+        ST_HIT["HurtState"]
+    end
+
+    subgraph 信号桥["🌉 Player.gd — 信号桥（唯一耦合点）"]
+        BR["emit signal: sound_requested(event_id)\n状态机 → Player → AudioComponent\n状态机本身不引用任何音频类"]
+    end
+
+    %% 数据流向
+    SER -->|批量注册| REG
+    REG -->|初始化| 管理层
+
+    %% FSM 只发信号给 Player
+    ST_ATK & ST_NIN & ST_SWD & ST_DRG & ST_HIT -->|"emit signal\naudio_event(event_id)"| BR
+    BR -->|"AudioEventBus\n.play_sound(id, pos)"| 事件总线
+
+    %% 动画同步直接发总线
+    AAS -->|"play_sound(id, pos)"| 事件总线
+
+    %% 总线路由到管理层
+    事件总线 -->|订阅| 管理层
+
+    style 数据层 fill:#1a1a2e,stroke:#e94560,color:#eee
+    style 注册层 fill:#1a1a2e,stroke:#e94560,color:#eee
+    style 事件总线 fill:#16213e,stroke:#f5a623,color:#fff
+    style 管理层 fill:#0f3460,stroke:#53d8fb,color:#eee
+    style 组件层 fill:#0d2137,stroke:#a8ff78,color:#eee
+    style FSM层 fill:#16213e,stroke:#555,color:#aaa,stroke-dasharray:5 5
+    style 信号桥 fill:#2a1a0e,stroke:#f5a623,color:#fff

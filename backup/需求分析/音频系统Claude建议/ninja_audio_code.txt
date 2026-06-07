@@ -1,0 +1,315 @@
+# ============================================================
+# 文件 1：resources/audio/SoundEventResource.gd
+# 作用：单条音频事件的数据定义，在编辑器中填写，导出为 .tres
+# ============================================================
+class_name SoundEventResource
+extends Resource
+
+## 唯一事件ID，与状态机/动画中使用的字符串对应
+@export var event_id: StringName = ""
+## 音频流（支持 AudioStreamRandomizer 实现随机变体）
+@export var stream: AudioStream
+## 目标总线："SFX" / "BGM" / "VOICE"
+@export_enum("SFX", "BGM", "VOICE") var bus: String = "SFX"
+## 基础音量（dB）
+@export_range(-40.0, 6.0) var volume_db: float = 0.0
+## 基础音调
+@export_range(0.5, 2.0) var pitch: float = 1.0
+## 随机音调偏移范围（±值），0 = 不随机
+@export_range(0.0, 0.3) var pitch_variance: float = 0.05
+## 最小触发间隔（秒），防止同一帧重复播放
+@export_range(0.0, 1.0) var cooldown: float = 0.05
+## 2D 空间衰减最大距离（0 = 全局播放，不衰减）
+@export var max_distance: float = 400.0
+
+
+# ============================================================
+# 文件 2：autoload/SoundRegistry.gd  ← 在项目设置中注册为 AutoLoad
+# 作用：启动时批量加载所有 SoundEventResource，提供查询接口
+# ============================================================
+extends Node
+
+# 存储所有音频事件：{ "atk_slash_1": SoundEventResource, ... }
+var _registry: Dictionary[StringName, SoundEventResource] = {}
+
+func _ready() -> void:
+	# 扫描指定目录，自动注册所有 .tres 音频资源
+	_load_from_dir("res://resources/audio/player/")
+	_load_from_dir("res://resources/audio/enemy/")
+	_load_from_dir("res://resources/audio/ninjutsu/")
+	_load_from_dir("res://resources/audio/bgm/")
+
+func _load_from_dir(path: String) -> void:
+	var dir := DirAccess.open(path)
+	if dir == null:
+		return
+	dir.list_dir_begin()
+	var fname := dir.get_next()
+	while fname != "":
+		if fname.ends_with(".tres"):
+			var res := load(path + fname) as SoundEventResource
+			if res and res.event_id != "":
+				_registry[res.event_id] = res
+		fname = dir.get_next()
+
+## 查询音频事件，找不到返回 null
+func get_event(event_id: StringName) -> SoundEventResource:
+	return _registry.get(event_id, null)
+
+
+# ============================================================
+# 文件 3：autoload/AudioEventBus.gd  ← 注册为 AutoLoad
+# 作用：全局信号中转站，任何节点都可发射，AudioManager 统一订阅
+# ============================================================
+extends Node
+
+## 播放一次性音效，pos 为 Vector2.ZERO 时全局播放（不衰减）
+signal play_sound(event_id: StringName, pos: Vector2)
+## 切换背景音乐（自动交叉淡入淡出）
+signal play_bgm(event_id: StringName)
+## 停止背景音乐
+signal stop_bgm()
+## 动态调整总线音量（用于设置界面）
+signal set_bus_volume(bus_name: String, db: float)
+
+# 便捷静态方法，省去 .emit() 调用
+func request_sfx(event_id: StringName, pos: Vector2 = Vector2.ZERO) -> void:
+	play_sound.emit(event_id, pos)
+
+func request_bgm(event_id: StringName) -> void:
+	play_bgm.emit(event_id)
+
+
+# ============================================================
+# 文件 4：autoload/AudioManager.gd  ← 注册为 AutoLoad
+# 作用：真正的音频播放器，管理 SFXPool + BGM 双轨淡入淡出
+# ============================================================
+extends Node
+
+const SFX_POOL_SIZE := 8  # 同时最多 8 个音效播放器
+
+var _sfx_pool: Array[AudioStreamPlayer2D] = []
+var _sfx_index: int = 0  # 轮询索引
+
+# BGM 双轨（A/B 交叉淡入淡出）
+var _bgm_players: Array[AudioStreamPlayer] = []
+var _bgm_active: int = 0  # 当前活跃轨道索引（0 或 1）
+
+# 冷却计时器（防止同帧重复触发）
+var _cooldown_timers: Dictionary[StringName, float] = {}
+
+func _ready() -> void:
+	# 创建 SFX 池
+	for i in SFX_POOL_SIZE:
+		var p := AudioStreamPlayer2D.new()
+		p.bus = "SFX"
+		p.max_distance = 400.0
+		add_child(p)
+		_sfx_pool.append(p)
+
+	# 创建 BGM 双轨
+	for i in 2:
+		var p := AudioStreamPlayer.new()
+		p.bus = "BGM"
+		p.volume_db = -80.0  # 初始静音
+		add_child(p)
+		_bgm_players.append(p)
+
+	# 订阅事件总线
+	AudioEventBus.play_sound.connect(_on_play_sound)
+	AudioEventBus.play_bgm.connect(_on_play_bgm)
+	AudioEventBus.stop_bgm.connect(_on_stop_bgm)
+	AudioEventBus.set_bus_volume.connect(_on_set_bus_volume)
+
+func _process(delta: float) -> void:
+	# 递减所有冷却计时器
+	for key in _cooldown_timers.keys():
+		_cooldown_timers[key] -= delta
+		if _cooldown_timers[key] <= 0.0:
+			_cooldown_timers.erase(key)
+
+# ── SFX 播放 ──────────────────────────────────────────────
+func _on_play_sound(event_id: StringName, pos: Vector2) -> void:
+	# 冷却检查
+	if _cooldown_timers.has(event_id):
+		return
+
+	var ev := SoundRegistry.get_event(event_id)
+	if ev == null:
+		push_warning("AudioManager: 未找到音频事件 '%s'" % event_id)
+		return
+
+	# 注册冷却
+	_cooldown_timers[event_id] = ev.cooldown
+
+	# 轮询取出空闲播放器（优先找停止的）
+	var player := _get_free_sfx_player()
+	player.stream = ev.stream
+	player.volume_db = ev.volume_db
+	player.pitch_scale = ev.pitch + randf_range(-ev.pitch_variance, ev.pitch_variance)
+	player.max_distance = ev.max_distance
+
+	if pos == Vector2.ZERO:
+		# 全局播放：设置到摄像机位置附近，衰减无意义
+		player.global_position = get_viewport().get_camera_2d().global_position if get_viewport().get_camera_2d() else Vector2.ZERO
+	else:
+		player.global_position = pos
+
+	player.play()
+
+func _get_free_sfx_player() -> AudioStreamPlayer2D:
+	# 优先找已停止的播放器
+	for p in _sfx_pool:
+		if not p.playing:
+			return p
+	# 全忙则轮询最旧的
+	var p := _sfx_pool[_sfx_index]
+	_sfx_index = (_sfx_index + 1) % SFX_POOL_SIZE
+	return p
+
+# ── BGM 交叉淡入淡出 ───────────────────────────────────────
+func _on_play_bgm(event_id: StringName) -> void:
+	var ev := SoundRegistry.get_event(event_id)
+	if ev == null:
+		return
+
+	var next := 1 - _bgm_active  # 切换到另一轨
+	_bgm_players[next].stream = ev.stream
+	_bgm_players[next].play()
+
+	# Tween 交叉淡入淡出
+	var tw := create_tween().set_parallel()
+	tw.tween_property(_bgm_players[_bgm_active], "volume_db", -80.0, 1.5)
+	tw.tween_property(_bgm_players[next], "volume_db", ev.volume_db, 1.5)
+	tw.chain().tween_callback(_bgm_players[_bgm_active].stop)
+
+	_bgm_active = next
+
+func _on_stop_bgm() -> void:
+	var tw := create_tween()
+	tw.tween_property(_bgm_players[_bgm_active], "volume_db", -80.0, 1.0)
+	tw.chain().tween_callback(_bgm_players[_bgm_active].stop)
+
+func _on_set_bus_volume(bus_name: String, db: float) -> void:
+	var idx := AudioServer.get_bus_index(bus_name)
+	if idx >= 0:
+		AudioServer.set_bus_volume_db(idx, db)
+
+
+# ============================================================
+# 文件 5：scripts/components/AudioComponent.gd
+# 作用：挂载到 Player / Enemy 节点，桥接父节点信号与事件总线
+# ============================================================
+class_name AudioComponent
+extends Node
+
+# 父节点需 emit 此信号，AudioComponent 负责转发
+# 这是状态机与音频系统唯一的连接点
+signal sound_requested(event_id: StringName)
+
+@onready var _parent: Node2D = get_parent()
+
+func _ready() -> void:
+	# 连接父节点的音频请求信号
+	if _parent.has_signal("audio_event"):
+		_parent.audio_event.connect(_on_audio_event)
+
+## 由父节点（Player.gd）或 AnimationAudioSync 调用
+func play(event_id: StringName) -> void:
+	AudioEventBus.request_sfx(event_id, _parent.global_position)
+
+func _on_audio_event(event_id: StringName) -> void:
+	play(event_id)
+
+
+# ============================================================
+# 文件 6：scripts/components/AnimationAudioSync.gd
+# 作用：监听 AnimationPlayer，在指定帧触发精准音效
+#       专为连招第2刀、第3刀、忍术出手帧等设计
+# ============================================================
+class_name AnimationAudioSync
+extends Node
+
+## 配置格式：{ "anim_name": [ {frame, event_id}, ... ] }
+## 例：{"attack_3": [{"frame": 3, "event_id": "atk_slash_2"},
+##                    {"frame": 8, "event_id": "atk_slash_3"}]}
+@export var frame_events: Dictionary = {}
+
+@onready var _anim_player: AnimationPlayer = get_parent().get_node("AnimationPlayer")
+@onready var _audio_comp: AudioComponent = get_parent().get_node("AudioComponent")
+
+var _current_anim: String = ""
+var _triggered_frames: Array[int] = []
+
+func _ready() -> void:
+	if _anim_player:
+		_anim_player.animation_started.connect(_on_animation_started)
+
+func _on_animation_started(anim_name: StringName) -> void:
+	_current_anim = anim_name
+	_triggered_frames.clear()
+
+func _process(_delta: float) -> void:
+	if _current_anim == "" or not _anim_player.is_playing():
+		return
+	if not frame_events.has(_current_anim):
+		return
+
+	var cur_frame: int = int(_anim_player.current_animation_position * 
+		_anim_player.get_animation(_current_anim).length * 
+		Engine.get_frames_per_second())  # 近似帧号
+
+	for entry in frame_events[_current_anim]:
+		var f: int = entry["frame"]
+		var ev: StringName = entry["event_id"]
+		if cur_frame >= f and not _triggered_frames.has(f):
+			_triggered_frames.append(f)
+			_audio_comp.play(ev)
+
+
+# ============================================================
+# 文件 7：Player.gd 中需要新增的部分（仅增量，不修改现有代码）
+# 作用：在 Player 暴露 audio_event 信号，作为状态机→音频的唯一桥梁
+# ============================================================
+
+# 在 Player.gd 顶部添加：
+signal audio_event(event_id: StringName)
+
+# @onready 添加：
+# @onready var audio_component: AudioComponent = $AudioComponent
+
+# 无需修改任何状态机文件，由状态机调用 player.emit_audio(id)
+func emit_audio(event_id: StringName) -> void:
+	audio_event.emit(event_id)
+
+
+# ============================================================
+# 文件 8：状态机示例——GroundAttackState.gd 改动（极小）
+# 作用：展示状态机如何触发音效（不引用任何音频类）
+# ============================================================
+
+# 原有 enter() 中加一行：
+# func enter() -> void:
+#     player.emit_audio(&"atk_slash_1")  # 第1刀进入时立即播放
+#     anim.play("attack_1")
+#     ...
+#
+# 第2、3刀连招改用 AnimationAudioSync 的帧触发，
+# 在编辑器中配置 frame_events 即可，无需改代码。
+
+
+# ============================================================
+# 附：建议的音频事件 ID 命名规范
+# ============================================================
+# 格式：{来源}_{类别}_{描述}_{变体}
+#
+# 玩家攻击：  atk_slash_1 / atk_slash_2 / atk_slash_3
+# 下蹲攻击：  atk_crouch
+# 空中攻击：  atk_air
+# 剑术：      sword_dash / sword_upper / sword_downslash / sword_spin
+# 必杀技：    dragon_flash_vanish / dragon_flash_strike / dragon_flash_appear
+# 忍术（各）：nin_fire / nin_fireball / nin_blade / nin_boomerang
+# 受伤：      player_hurt / player_death
+# 移动：      player_land / player_jump / player_wallgrab
+# 背景音乐：  bgm_stage1 / bgm_boss1
+# 敌人：      enemy_hurt / enemy_death / enemy_attack
