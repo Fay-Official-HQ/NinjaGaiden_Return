@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://e4qsxfifoewa" path="res://scripts/player/states/IdleState.gd" id="7_npwbq"]
 [ext_resource type="Script" uid="uid://dvqdc7rn0e8nu" path="res://scripts/components/SwordComponent.gd" id="7_pq1ih"]
 [ext_resource type="Script" uid="uid://c0onc1k065k5y" path="res://scripts/player/states/RunState.gd" id="8_7oing"]
+[ext_resource type="Script" uid="uid://dkn0ephrawqnl" path="res://scripts/components/PlayerAudioComponent.gd" id="8_vlhku"]
 [ext_resource type="Script" uid="uid://daep5nnwqrcff" path="res://scripts/player/states/JumpState.gd" id="9_5stf6"]
 [ext_resource type="Script" uid="uid://bdc4jhs6maefv" path="res://scripts/player/states/FallState.gd" id="10_180ig"]
 [ext_resource type="Texture2D" uid="uid://mfc5epdvphh7" path="res://assets/sprites/Ryu/fcjingling/konggongji/konggongji_002.png" id="11_1hh02"]
@@ -497,6 +498,9 @@ script = ExtResource("6_7nf13")
 [node name="SwordComponent" type="Node" parent="Components" unique_id=975162586]
 script = ExtResource("7_pq1ih")
 
+[node name="PlayerAudioComponent" type="Node" parent="Components" unique_id=956284844]
+script = ExtResource("8_vlhku")
+
 [node name="StateMachine" type="Node" parent="." unique_id=700299431 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("7_5stf6")
 initial_state = NodePath("IdleState")
@@ -657,7 +661,7 @@ debug_color = Color(0.77392095, 0.43947607, 0.13655847, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]
@@ -673,3 +677,5 @@ target_position = Vector2(0, -20)
 collision_mask = 12
 
 [node name="ShadowContainer" type="Node2D" parent="." unique_id=1228282928]
+
+[connection signal="frame_changed" from="Visual/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
