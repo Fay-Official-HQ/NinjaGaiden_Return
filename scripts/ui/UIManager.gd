@@ -4,8 +4,10 @@ extends CanvasLayer
 @onready var mp_fill = $HUD/MPBarFill
 @onready var tp_fill = $HUD/TPBarFill
 @onready var ninjutsu_icon = $HUD/NinjutsuIcon
+@onready var _msg_label: Label = $HUD/MessageLabel
 
 var _ninjutsu_connected: bool = false
+var _msg_timer: float = 0.0
 
 var ninjutsu_textures: Array[Texture2D] = [
 	preload("res://assets/sprites/ui/fire_ninjutsu.png"),
@@ -26,8 +28,10 @@ func _ready() -> void:
 		"finish": $HUD/CD_Finish/CDMask,
 	}
 	cd_full_height = cd_masks["dash"].size.y
+	
 
-func _process(_delta: float) -> void:
+
+func _process(delta: float) -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:
 		return
@@ -41,6 +45,8 @@ func _process(_delta: float) -> void:
 	if not _ninjutsu_connected:
 		player.ninjutsu.ninjutsu_switched.connect(_update_ninjutsu_icon)
 		_ninjutsu_connected = true
+	
+	_handle_message(delta)
 
 func _update_bar(bar: Sprite2D, current_value: float, max_value: float) -> void:
 	if current_value <= 0:
@@ -67,3 +73,18 @@ func _update_cd_masks(player: Player) -> void:
 func _update_ninjutsu_icon(index: int, _name: String) -> void:
 	if index >= 0 and index < ninjutsu_textures.size():
 		ninjutsu_icon.texture = ninjutsu_textures[index]
+
+func show_message(text: String, duration: float = 1.0) -> void:
+	_msg_label.text = text
+	_msg_label.modulate.a = 1.0
+	_msg_timer = duration
+
+func _handle_message(delta: float) -> void:
+	if _msg_timer <= 0:
+		if _msg_label.visible:
+			_msg_label.hide()
+		return
+	_msg_label.show()
+	_msg_timer -= delta
+	if _msg_timer < 0.3:
+		_msg_label.modulate.a = _msg_timer / 0.3

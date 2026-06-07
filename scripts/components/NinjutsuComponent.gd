@@ -45,6 +45,7 @@ func switch_ninjutsu() -> void:
 func cast_ninjutsu(facing_override: float = 0.0) -> void:
 	if current_mp < mp_cost:
 		print("MP不足，无法释放")
+		UIManager.show_message("忍術不足！")
 		return
 
 	current_mp -= mp_cost

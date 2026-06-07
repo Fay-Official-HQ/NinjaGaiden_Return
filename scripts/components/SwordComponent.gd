@@ -41,6 +41,7 @@ func consume_tp(amount: int = SWORD_TP_COST) -> bool:
 		print("【剑术】消耗 TP:", amount, "  剩余 TP:", current_tp)
 		return true
 	print("【剑术】TP 不足！需要:", amount, "  当前:", current_tp)
+	UIManager.show_message("劍術不足！")
 	return false
 
 func add_tp(amount: int) -> void:

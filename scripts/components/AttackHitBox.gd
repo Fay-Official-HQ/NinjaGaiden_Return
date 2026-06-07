@@ -11,3 +11,8 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.has_method("receive_attack"):
 		area.receive_attack()
+	if area is HurtBox:
+		_on_hit_enemy(area)
+
+func _on_hit_enemy(_hurtbox: HurtBox) -> void:
+	pass
