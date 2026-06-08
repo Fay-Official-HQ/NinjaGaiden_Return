@@ -11,13 +11,16 @@ extends Node
 ## 核心名册：在这里配置【哪个动画】的【第几帧（从0开始数）】播放【什么声音】
 ## 以后增加新动画音效，让 AI 帮你往这个字典里添字即可！
 const FRAME_SOUNDS: Dictionary = {
-	"jump": {
-		1: &"bgm_test" # 代表 "attack" 动画的第 2 帧（索引为1），播放 "bgm_test"
+	"attack": {
+		1: &"gongji" # 代表 "attack" 动画的第 2 帧（索引为1），播放 "gongji"
 	},
-	"attack_heavy": {
-		2: &"p_slash_heavy" # 示范：重击动画的第 3 帧播放重劈声
+	 "crouch_attack": {
+		1: &"gongji" 
 	},
-	"run": {
+	"air_attack": {
+		1: &"gongji" 
+	},
+	"test": {
 		0: &"p_footstep", # 示范：跑步动画的第 1 帧和第 3 帧播脚步声
 		2: &"p_footstep"
 	}

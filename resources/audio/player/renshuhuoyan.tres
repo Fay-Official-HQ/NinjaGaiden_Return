@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://b3n7v8wekx86x"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_jobhm"]
+[ext_resource type="AudioStream" uid="uid://b32hcaueju6ua" path="res://assets/audio/player/ren_huoyan.wav" id="2_allhi"]
+
+[resource]
+script = ExtResource("1_jobhm")
+event_id = &"renshuhuoyan"
+stream = ExtResource("2_allhi")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

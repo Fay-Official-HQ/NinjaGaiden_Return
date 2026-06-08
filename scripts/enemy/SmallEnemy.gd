@@ -65,6 +65,7 @@ func die() -> void:
 	is_dead = true
 
 	print("敌人死亡！")
+	AudioManager.play_sound(&"disiwang")
 	set_physics_process(false)
 	if hit_box:
 		hit_box.set_deferred("monitoring", false)

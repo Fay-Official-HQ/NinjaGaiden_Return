@@ -8,7 +8,7 @@ var wall_jump_lockout_timer: float = 0.0
 
 func enter(msg: Dictionary = {}) -> void:
 	player.animation.play("jump")
-	
+	AudioManager.play_sound(&"tiaoyue")
 	is_wall_jump = msg.get("wall_jump", false)
 	if is_wall_jump:
 		# 给予 0.15 秒的向外爆发力保护

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://d18bn0mpo2wj7"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_eu2da"]
+[ext_resource type="AudioStream" uid="uid://sinfaa315icg" path="res://assets/audio/player/ren_lengren.wav" id="2_gny5k"]
+
+[resource]
+script = ExtResource("1_eu2da")
+event_id = &"renshulengren"
+stream = ExtResource("2_gny5k")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

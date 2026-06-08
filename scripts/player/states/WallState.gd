@@ -25,6 +25,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	# 进入墙壁状态时立刻清零所有速度，防止上一状态的惯性带入
 	player.velocity = Vector2.ZERO
 	player.animation.play("wall_idle")
+	AudioManager.play_sound(&"tiaoyue")
 	
 	# 记录墙壁方向，并让角色面朝墙壁
 	# 例：墙在右边 → wall_normal_x = -1 → facing_direction = +1（面朝右 = 面朝墙）

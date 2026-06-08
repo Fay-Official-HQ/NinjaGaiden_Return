@@ -14,7 +14,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	_has_cast = false
 	player.velocity = Vector2.ZERO
 	player.animation.play("hang_idle")
-	
+	AudioManager.play_sound(&"tiaoyue")
 	# 抓取瞬间：强制刷新射线，将角色精准吸附在平台下沿
 	var sensor = player.get_node("HeadSensor") as RayCast2D
 	sensor.force_raycast_update()

@@ -12,6 +12,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.velocity.x = -player.facing_direction * knockback_speed
 	player.velocity.y = -knockback_jump_force
 	hurt_timer = HURT_DURATION
+	AudioManager.play_sound(&"shoushang")
 
 func update(delta: float) -> void:
 	hurt_timer -= delta

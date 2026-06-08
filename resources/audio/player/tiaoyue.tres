@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://db1dlv5t1kcyj"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_7ga7b"]
+[ext_resource type="AudioStream" uid="uid://dux5t7640gogp" path="res://assets/audio/player/tiao.wav" id="2_i78g3"]
+
+[resource]
+script = ExtResource("1_7ga7b")
+event_id = &"tiaoyue"
+stream = ExtResource("2_i78g3")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

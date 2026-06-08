@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cya36n0s28p0d"]
 
-[ext_resource type="Texture2D" uid="uid://bxjs2t688msfo" path="res://assets/img/beijing.png" id="1_ukdbm"]
+[ext_resource type="Texture2D" uid="uid://ho41pk3dqxrm" path="res://assets/img/beijing.png" id="1_ukdbm"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="2_ccvly"]
 [ext_resource type="PackedScene" uid="uid://dc2lxhfdtb3f4" path="res://scenes/module‌/dimian.tscn" id="2_rs44j"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="3_cnmxh"]

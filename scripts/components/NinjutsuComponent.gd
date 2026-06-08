@@ -72,6 +72,7 @@ func _get_dir(facing_override: float) -> float:
 	return 1.0 if player.facing_direction > 0 else -1.0
 
 func _cast_fire(facing_override: float = 0.0) -> void:
+	AudioManager.play_sound(&"renshuhuoyan")
 	print("释放忍术：火焰")
 	var player = _get_player()
 	if not player:
@@ -89,6 +90,7 @@ func _cast_fire(facing_override: float = 0.0) -> void:
 
 func _cast_fireball(facing_override: float = 0.0) -> void:
 	print("释放忍术：火球")
+	AudioManager.play_sound(&"renshuhuoqiu")
 	var player = _get_player()
 	var dir = _get_dir(facing_override)
 	var base_pos = player.global_position + Vector2(dir * 20, 8)
@@ -102,6 +104,7 @@ func _cast_fireball(facing_override: float = 0.0) -> void:
 		get_tree().current_scene.add_child(proj)
 
 func _cast_edgeblade(_facing_override: float = 0.0) -> void:
+	AudioManager.play_sound(&"renshulengren")
 	print("释放忍术：棱刃")
 	var player = _get_player()
 	if not player:
@@ -121,6 +124,7 @@ func _cast_edgeblade(_facing_override: float = 0.0) -> void:
 
 func _cast_boomerang(facing_override: float = 0.0) -> void:
 	print("释放忍术：回旋镖")
+	AudioManager.play_sound(&"renshubiao")
 	var player = _get_player()
 	if not player:
 		return

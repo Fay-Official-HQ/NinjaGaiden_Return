@@ -8,9 +8,10 @@ extends Node
 var _registry: Dictionary = {}
 
 func _ready() -> void:
-	# 游戏一启动，就去下面这两个文件夹里搜寻身份证
+	# 游戏一启动，就去下面这几个文件夹里搜寻身份证
 	_load_from_dir("res://resources/audio/bgm/")
 	_load_from_dir("res://resources/audio/player/")
+	_load_from_dir("res://resources/audio/se/")
 
 func _load_from_dir(path: String) -> void:
 	var dir := DirAccess.open(path)

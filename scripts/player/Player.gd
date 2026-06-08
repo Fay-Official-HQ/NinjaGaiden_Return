@@ -16,6 +16,7 @@ class_name Player
 @onready var ninjutsu: NinjutsuComponent = $Components/NinjutsuComponent
 @onready var sword: SwordComponent = $Components/SwordComponent
 
+
 # 状态节点引用
 @onready var idle_state: IdleState = $StateMachine/IdleState
 @onready var run_state: RunState = $StateMachine/RunState

@@ -96,10 +96,12 @@ func die() -> void:
 	is_dead = true
 
 	print("敌人死亡！")
+	AudioManager.play_sound(&"disiwang")
 	set_physics_process(false)
 	if hit_box:
 		hit_box.set_deferred("monitoring", false)
 	if sprite.sprite_frames.has_animation("die"):
 		sprite.play("die")
+		
 		await sprite.animation_finished
 	queue_free()

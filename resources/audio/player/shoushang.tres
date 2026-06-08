@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://cq0lv6ond2826"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_bcwda"]
+[ext_resource type="AudioStream" uid="uid://bxa7kuyhi32ug" path="res://assets/audio/player/shoushang.wav" id="2_cqd7i"]
+
+[resource]
+script = ExtResource("1_bcwda")
+event_id = &"shoushang"
+stream = ExtResource("2_cqd7i")
+cooldown = 0.5
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

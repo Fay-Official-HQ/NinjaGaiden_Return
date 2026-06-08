@@ -45,6 +45,7 @@ func update(_delta: float) -> void:
 
 	# 落地判定
 	if player.is_on_floor():
+		AudioManager.play_sound(&"tiaoyue")
 		if player.input.move_direction != 0:
 			state_machine.change_state(player.run_state)
 		else:
