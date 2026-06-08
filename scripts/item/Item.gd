@@ -99,7 +99,10 @@ func _apply_effect(player: Player) -> void:
 	match consumable_type:
 		ConsumableType.HEALTH:
 			player.current_hp = min(player.current_hp + restore_hp, player.data.max_hp)
+			AudioManager.play_sound(&"HPhuifu")
 		ConsumableType.MP_SMALL:
 			player.ninjutsu.add_mp(restore_mp_small)
+			AudioManager.play_sound(&"renhuifu")
 		ConsumableType.MP_LARGE:
 			player.ninjutsu.add_mp(restore_mp_large)
+			AudioManager.play_sound(&"rendahuifu")

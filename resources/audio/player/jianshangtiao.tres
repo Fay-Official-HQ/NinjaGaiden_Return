@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://bjv0rasyyort"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_d41r8"]
+[ext_resource type="AudioStream" uid="uid://bhcsdryufgvvk" path="res://assets/audio/player/jianshu_shangtiao.wav" id="2_7jxc1"]
+
+[resource]
+script = ExtResource("1_d41r8")
+event_id = &"jianshangtiao"
+stream = ExtResource("2_7jxc1")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

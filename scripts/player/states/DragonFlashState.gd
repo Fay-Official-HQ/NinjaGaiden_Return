@@ -80,6 +80,8 @@ func enter(_msg: Dictionary = {}) -> void:
 	_tween_fade = create_tween()
 	_tween_fade.tween_property(sprite, "modulate:a", PLAYER_ALPHA, FADE_IN_TIME)
 
+	AudioManager.play_sound(&"yinshen")
+
 	# 获取场景中的 DragonFlashHitBox，开启它的碰撞监控（发射伤害雷达）
 	var box_node = player.get_node("AttackRoot/DragonFlashHitBox")
 	if box_node:
@@ -188,7 +190,8 @@ func trigger_screen_flash() -> void:
 	tw.tween_property(rect, "color:a", 0.0, 0.1)
 	tw.tween_callback(canvas.queue_free)
 
-	# 闪屏的同时对范围内的敌人造成 AOE 伤害
+	# 闪屏的同时播放斩击音效并对范围内的敌人造成 AOE 伤害
+	AudioManager.play_sound(&"gongji")
 	deal_aoe_damage()
 
 func deal_aoe_damage() -> void:

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cya36n0s28p0d"]
 
-[ext_resource type="Texture2D" uid="uid://ho41pk3dqxrm" path="res://assets/img/beijing.png" id="1_ukdbm"]
+[ext_resource type="Texture2D" uid="uid://bxjs2t688msfo" path="res://assets/img/beijing.png" id="1_ukdbm"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="2_ccvly"]
 [ext_resource type="PackedScene" uid="uid://dc2lxhfdtb3f4" path="res://scenes/module‌/dimian.tscn" id="2_rs44j"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="3_cnmxh"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://r01tapx4qae0" path="res://scenes/enemy/enemy.tscn" id="8_u84xi"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="10_jrjue"]
 [ext_resource type="Texture2D" uid="uid://dvb3nubvt7dil" path="res://assets/sprites/item/item_mp_small.png" id="11_y54f7"]
+[ext_resource type="Texture2D" uid="uid://dj3ag0psnt0i1" path="res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_008.png" id="12_hknnn"]
 [ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="12_sha1w"]
 [ext_resource type="Texture2D" uid="uid://ysxpwo1kk4b3" path="res://assets/sprites/item/item_hp.png" id="13_sha1w"]
 
@@ -185,7 +186,13 @@ position = Vector2(-717, 94)
 show_texture = ExtResource("11_y54f7")
 hidden_texture = ExtResource("12_sha1w")
 
-[node name="Item2" parent="Items" unique_id=575307007 instance=ExtResource("10_jrjue")]
+[node name="Item3" parent="Items" unique_id=575307007 instance=ExtResource("10_jrjue")]
+position = Vector2(-895, 203)
+consumable_type = 2
+show_texture = ExtResource("12_hknnn")
+hidden_texture = ExtResource("12_sha1w")
+
+[node name="Item2" parent="Items" unique_id=871921734 instance=ExtResource("10_jrjue")]
 position = Vector2(-579, 256)
 consumable_type = 0
 show_texture = ExtResource("13_sha1w")

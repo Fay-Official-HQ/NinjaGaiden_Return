@@ -42,6 +42,7 @@ func update(_delta: float) -> void:
 	# 第3帧（frame >= 2）才激活攻击框，造成伤害
 	if dash_hit_box and not dash_hit_box.monitoring and sprite.animation == "sword_dash" and sprite.frame >= 2:
 		dash_hit_box.set_deferred("monitoring", true)
+		AudioManager.play_sound(&"jianqianchong")
 
 	# 激活后持续检测命中
 	if dash_hit_box and dash_hit_box.monitoring:

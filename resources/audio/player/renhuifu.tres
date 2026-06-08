@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://c8ogm1kmnneap"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_iain0"]
+[ext_resource type="AudioStream" uid="uid://cqd3ef1xv15o6" path="res://assets/audio/player/huifu_MP.wav" id="2_n5eoe"]
+
+[resource]
+script = ExtResource("1_iain0")
+event_id = &"renhuifu"
+stream = ExtResource("2_n5eoe")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"
