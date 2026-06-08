@@ -661,7 +661,7 @@ debug_color = Color(0.77392095, 0.43947607, 0.13655847, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"air_attack"
+animation = &"sword_dash"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]

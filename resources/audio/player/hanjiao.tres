@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://dabk0jliygyav"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_0jwet"]
+[ext_resource type="AudioStream" uid="uid://dkvgm015y7ub3" path="res://assets/audio/player/hanjiao.wav" id="2_81xhi"]
+
+[resource]
+script = ExtResource("1_0jwet")
+event_id = &"hanjiao"
+stream = ExtResource("2_81xhi")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

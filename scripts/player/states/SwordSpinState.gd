@@ -20,6 +20,7 @@ func enter(_msg: Dictionary = {}) -> void:
 		_fallback_to_neutral()
 		return
 	player.sword.start_cooldown("spin")
+	AudioManager.play_sound(&"hanjiao")
 	AudioManager.play_sound(&"jianxuanzhuan") 
 	print("【旋斩】释放成功！剩余TP:", player.sword.current_tp, "  冷却 5 秒")
 

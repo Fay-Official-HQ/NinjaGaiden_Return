@@ -19,11 +19,14 @@ const FRAME_SOUNDS: Dictionary = {
 	},
 	"air_attack": {
 		1: &"gongji" 
-	}
+	},
 	#"test": {
 		#0: &"p_footstep", # 示范：跑步动画的第 1 帧和第 3 帧播脚步声
 		#2: &"p_footstep"
 	#}
+	"sword_dash": {
+		6: &"hanjiao" 
+	}
 }
 
 func _ready() -> void:

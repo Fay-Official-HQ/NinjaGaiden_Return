@@ -3,7 +3,7 @@ class_name DragonFlashState
 
 # ====== 时间常量（单位：秒）======
 const FADE_IN_TIME = 0.5      # 阶段0：角色渐隐消失耗时
-const FADE_OUT_TIME = 0.25     # 阶段2：角色渐显恢复耗时
+const FADE_OUT_TIME = 0.5     # 阶段2：角色渐显恢复耗时
 const SKILL_DURATION = 2.0    # 阶段1：技能持续总时长（斩击波阶段）
 const WAVE_INTERVAL = 0.15    # 每波斩击的时间间隔
 
@@ -19,6 +19,8 @@ const SPREAD_Y = 50.0         # 残影在Y轴随机偏移的最大范围
 # ====== 移动参数 ======
 const SPEED_MULTIPLIER = 0.35  # 技能期间移动速度倍率（0.5 = 半速）
 const PLAYER_ALPHA = 0.0      # 技能期间玩家透明度（0.0 = 完全透明）
+
+@export var final_phantom_lifetime: float = 1.0  # 终结幻影存在时间（秒），可在编辑器中调试
 
 # 5种残影贴图，每波随机选取
 var shadow_textures = [
@@ -42,6 +44,7 @@ var _wave_timer = 0.0         # 斩击波间隔计时器
 var _wave_count = 0           # 已生成的斩击波数（用于控制闪屏频率）
 var _tween_fade: Tween = null # 透明度渐变的 Tween 引用
 var _dragon_hit_box: DragonFlashHitBox  # AOE伤害框引用
+var _hit_count: int = 0            # 斩击命中计数器
 
 func enter(_msg: Dictionary = {}) -> void:
 	if player.sword.is_on_cooldown("finish"):
@@ -64,6 +67,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	_state = 0
 	_timer = 0.0
 	_wave_timer = 0.0
+	_hit_count = 0
 
 	# 触发必杀技冷却
 	player.sword.start_cooldown("finish")
@@ -139,13 +143,23 @@ func physics_update(_delta: float) -> void:
 	player.move_and_slide()
 
 func spawn_wave() -> void:
-	# 每波生成 SHADOWS_PER_WAVE 个残影
 	_wave_count += 1
+
+	if _wave_count % 2 == 0:
+		_hit_count += 1
+		var is_last = _hit_count >= 7
+		if is_last:
+			AudioManager.play_sound(&"hanjiao")
+			AudioManager.play_sound(&"jianshangtiao")
+			_spawn_final_phantom()
+			_deal_dragon_damage(4)
+		else:
+			AudioManager.play_sound(&"gongji")
+			_deal_dragon_damage(1)
+
 	for i in range(SHADOWS_PER_WAVE):
 		create_shadow()
 
-	# 每3波触发一次全屏闪烁（同时也是 AOE 伤害触发时机）
-	# 最后一次斩击的闪烁由 update() 阶段1→阶段2过渡时强制触发
 	if _wave_count % 3 == 0:
 		trigger_screen_flash()
 
@@ -190,21 +204,29 @@ func trigger_screen_flash() -> void:
 	tw.tween_property(rect, "color:a", 0.0, 0.1)
 	tw.tween_callback(canvas.queue_free)
 
-	# 闪屏的同时播放斩击音效并对范围内的敌人造成 AOE 伤害
-	AudioManager.play_sound(&"gongji")
-	deal_aoe_damage()
+	# 闪屏仅为视觉效果，伤害由 spawn_wave() 中的斩击同步触发
 
-func deal_aoe_damage() -> void:
-	# 如果伤害框未就绪或未开启监控，直接跳过
+func _spawn_final_phantom() -> void:
+	var phantom = Sprite2D.new()
+	phantom.texture = preload("res://assets/sprites/Ryu/fcjingling/dadao/dadao_004.png")
+	phantom.global_position = player.global_position
+	phantom.scale.x = player.facing_direction
+	phantom.modulate.a = 0.6
+	player.get_parent().add_child(phantom)
+
+	var tw = create_tween()
+	tw.tween_interval(final_phantom_lifetime - 0.3)
+	tw.tween_property(phantom, "modulate:a", 0.0, 0.3)
+	tw.tween_callback(phantom.queue_free)
+
+
+func _deal_dragon_damage(damage: int) -> void:
 	if not _dragon_hit_box or not _dragon_hit_box.monitoring:
 		return
-
-	# 扫描所有重叠的 Area2D
 	var areas = _dragon_hit_box.get_overlapping_areas()
 	for area in areas:
-		# 只对 HurtBox 类型的节点造成伤害
 		if area is HurtBox:
-			area.take_damage(_dragon_hit_box.damage)
+			area.take_damage(damage)
 
 func finish_skill() -> void:
 	# 清理所有残留残影
