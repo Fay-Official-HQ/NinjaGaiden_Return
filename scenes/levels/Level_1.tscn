@@ -125,6 +125,57 @@ position = Vector2(-273, 240)
 [node name="NinjaBladeToss2" parent="enemys" unique_id=1367321021 instance=ExtResource("14_vqsrt")]
 position = Vector2(-158, 243)
 
+[node name="NinjaPatrol4" parent="enemys" unique_id=1390154651 instance=ExtResource("8_p3uqr")]
+position = Vector2(51, 243)
+
+[node name="NinjaCrouch3" parent="enemys" unique_id=486392301 instance=ExtResource("7_hknnn")]
+position = Vector2(260, 131)
+
+[node name="NinjaBladeToss3" parent="enemys" unique_id=1854383954 instance=ExtResource("14_vqsrt")]
+position = Vector2(266, 245)
+
+[node name="NinjaPatrol5" parent="enemys" unique_id=579349617 instance=ExtResource("8_p3uqr")]
+position = Vector2(420, 156)
+
+[node name="NinjaCrouch4" parent="enemys" unique_id=1635861013 instance=ExtResource("7_hknnn")]
+position = Vector2(576, 123)
+
+[node name="NinjaBladeToss4" parent="enemys" unique_id=1282976282 instance=ExtResource("14_vqsrt")]
+position = Vector2(599, 231)
+
+[node name="NinjaPatrol6" parent="enemys" unique_id=1354731154 instance=ExtResource("8_p3uqr")]
+position = Vector2(764, 231)
+
+[node name="NinjaPatrol7" parent="enemys" unique_id=358319052 instance=ExtResource("8_p3uqr")]
+position = Vector2(767, 166)
+
+[node name="NinjaPatrol8" parent="enemys" unique_id=882325386 instance=ExtResource("8_p3uqr")]
+position = Vector2(938, 242)
+
+[node name="NinjaCrouch5" parent="enemys" unique_id=945348667 instance=ExtResource("7_hknnn")]
+position = Vector2(1128, 101)
+
+[node name="NinjaBladeToss5" parent="enemys" unique_id=287572727 instance=ExtResource("14_vqsrt")]
+position = Vector2(1356, 223)
+
+[node name="NinjaCrouch6" parent="enemys" unique_id=1954282200 instance=ExtResource("7_hknnn")]
+position = Vector2(1592, 153)
+
+[node name="NinjaPatrol9" parent="enemys" unique_id=656752753 instance=ExtResource("8_p3uqr")]
+position = Vector2(1380, 137)
+
+[node name="NinjaPatrol10" parent="enemys" unique_id=1395936536 instance=ExtResource("8_p3uqr")]
+position = Vector2(1906, 122)
+
+[node name="NinjaPatrol11" parent="enemys" unique_id=650101761 instance=ExtResource("8_p3uqr")]
+position = Vector2(2026, 189)
+
+[node name="NinjaPatrol12" parent="enemys" unique_id=97371312 instance=ExtResource("8_p3uqr")]
+position = Vector2(1971, 244)
+
+[node name="NinjaPatrol13" parent="enemys" unique_id=1362638251 instance=ExtResource("8_p3uqr")]
+position = Vector2(1864, 246)
+
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="Item" parent="Items" unique_id=1839314516 instance=ExtResource("10_jrjue")]

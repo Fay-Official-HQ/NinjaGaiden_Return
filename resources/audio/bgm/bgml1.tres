@@ -8,5 +8,6 @@ script = ExtResource("1_j0452")
 event_id = &"bgml1"
 stream = ExtResource("2_amtdh")
 bus = "BGM"
+volume_db = -3.3939999999999984
 pitch_variance = 0.0
 metadata/_custom_type_script = "uid://cfwtaajtfa38p"

@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_avwa0"]
 [ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_ielnj"]
 [ext_resource type="Texture2D" uid="uid://dl7vkbuuh8co4" path="res://assets/sprites/enemy/test/tetenemy_000.png" id="6_3blms"]
-[ext_resource type="Texture2D" uid="uid://vjnggcv8gvvc" path="res://assets/sprites/enemy/l1/hunhun_1.png" id="7_edfx5"]
-[ext_resource type="Texture2D" uid="uid://dbn2s7f1l3kes" path="res://assets/sprites/enemy/l1/hunhun_2.png" id="8_1wcdb"]
+[ext_resource type="Texture2D" uid="uid://1n3qqco11mng" path="res://assets/sprites/enemy/l1/hunhun_1.png" id="7_edfx5"]
+[ext_resource type="Texture2D" uid="uid://bq55ba4xxsw3p" path="res://assets/sprites/enemy/l1/hunhun_2.png" id="8_1wcdb"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_iqltf"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_yshub"]
 
@@ -82,7 +82,8 @@ shape = SubResource("RectangleShape2D_883im")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1757152495]
 sprite_frames = SubResource("SpriteFrames_883im")
-animation = &"walk"
+animation = &"test"
+frame_progress = 1.0
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=243598376]
 collision_layer = 2
