@@ -1,0 +1,9 @@
+几个关键设计决策的说明：
+为什么飞行怪用Area2D而不是CharacterBody2D
+蝙蝠、老鹰不需要地面碰撞，CharacterBody2D反而会引入不必要的move_and_slide问题，Area2D更干净。
+BOSS状态机用字符串而不是枚举
+DeepSeek生成代码时字符串更容易出歧义，而且change_state("BossChargeState")原因比change_state(BossState.CHARGE)对AI更透明。
+必杀技成分放在Boss主类而不是状态机
+成分是BOSS的业务数据，不是流程逻辑，放状态机里会导致状态和数据关联。
+开发顺序建议按阶段来的原因
+每个阶段进行跑通验证，避免等所有系统写完才发现基类设计有问题。建议你从阶段1的BaseEnemy + 巡逻怪开始，跑通死亡流程然后继续后面的怪事。
