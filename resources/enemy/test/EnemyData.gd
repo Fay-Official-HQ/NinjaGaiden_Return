@@ -1,5 +1,5 @@
 # res://resources/EnemyData.gd
-#普通小怪
+#旧版测试小怪代码，废弃
 extends Resource
 
 class_name EnemyData

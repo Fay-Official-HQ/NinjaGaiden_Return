@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://b6oousgmra4th"]
-
-[ext_resource type="Script" uid="uid://sg5bkv1pha44" path="res://resources/enemy/EnemyData.gd" id="1_mlkic"]
-
-[resource]
-script = ExtResource("1_mlkic")
-max_hp = 1
-move_speed = 10.0
-metadata/_custom_type_script = "uid://sg5bkv1pha44"

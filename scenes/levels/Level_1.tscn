@@ -7,14 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="3_cnmxh"]
 [ext_resource type="PackedScene" uid="uid://dm4cf2bgyj7wg" path="res://scenes/module‌/shikuai.tscn" id="4_u8eek"]
 [ext_resource type="PackedScene" uid="uid://df5u4t1mug0nb" path="res://scenes/module‌/qiangbi.tscn" id="5_t1jjp"]
-[ext_resource type="PackedScene" uid="uid://j2xn4u2kewvp" path="res://scenes/enemy/l1/NinjaCrouch .tscn" id="7_hknnn"]
-[ext_resource type="PackedScene" uid="uid://bvurq2koh4th4" path="res://scenes/enemy/l1/NinjaPatrol.tscn" id="8_p3uqr"]
+[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="8_sha1w"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="10_jrjue"]
 [ext_resource type="Texture2D" uid="uid://dvb3nubvt7dil" path="res://assets/sprites/item/item_mp_small.png" id="11_y54f7"]
 [ext_resource type="Texture2D" uid="uid://dj3ag0psnt0i1" path="res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_008.png" id="12_hknnn"]
 [ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="12_sha1w"]
 [ext_resource type="Texture2D" uid="uid://ysxpwo1kk4b3" path="res://assets/sprites/item/item_hp.png" id="13_sha1w"]
-[ext_resource type="PackedScene" uid="uid://buihw0g3kg4e" path="res://scenes/enemy/l1/NinjaBladeToss .tscn" id="14_vqsrt"]
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_p3uqr")
@@ -104,77 +102,11 @@ position = Vector2(-565, 116)
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="NinjaCrouch" parent="enemys" unique_id=869226174 instance=ExtResource("7_hknnn")]
-position = Vector2(-662, 130)
+[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("8_sha1w")]
+position = Vector2(-347, 159)
 
-[node name="NinjaPatrol" parent="enemys" unique_id=2111364058 instance=ExtResource("8_p3uqr")]
-position = Vector2(-421.59882, 245.13351)
-
-[node name="NinjaBladeToss" parent="enemys" unique_id=1072091938 instance=ExtResource("14_vqsrt")]
-position = Vector2(-250, 137)
-
-[node name="NinjaCrouch2" parent="enemys" unique_id=891201033 instance=ExtResource("7_hknnn")]
-position = Vector2(-336, 167)
-
-[node name="NinjaPatrol2" parent="enemys" unique_id=1658269686 instance=ExtResource("8_p3uqr")]
-position = Vector2(-158, 164)
-
-[node name="NinjaPatrol3" parent="enemys" unique_id=1444831936 instance=ExtResource("8_p3uqr")]
-position = Vector2(-273, 240)
-
-[node name="NinjaBladeToss2" parent="enemys" unique_id=1367321021 instance=ExtResource("14_vqsrt")]
-position = Vector2(-158, 243)
-
-[node name="NinjaPatrol4" parent="enemys" unique_id=1390154651 instance=ExtResource("8_p3uqr")]
-position = Vector2(51, 243)
-
-[node name="NinjaCrouch3" parent="enemys" unique_id=486392301 instance=ExtResource("7_hknnn")]
-position = Vector2(260, 131)
-
-[node name="NinjaBladeToss3" parent="enemys" unique_id=1854383954 instance=ExtResource("14_vqsrt")]
-position = Vector2(266, 245)
-
-[node name="NinjaPatrol5" parent="enemys" unique_id=579349617 instance=ExtResource("8_p3uqr")]
-position = Vector2(420, 156)
-
-[node name="NinjaCrouch4" parent="enemys" unique_id=1635861013 instance=ExtResource("7_hknnn")]
-position = Vector2(576, 123)
-
-[node name="NinjaBladeToss4" parent="enemys" unique_id=1282976282 instance=ExtResource("14_vqsrt")]
-position = Vector2(599, 231)
-
-[node name="NinjaPatrol6" parent="enemys" unique_id=1354731154 instance=ExtResource("8_p3uqr")]
-position = Vector2(764, 231)
-
-[node name="NinjaPatrol7" parent="enemys" unique_id=358319052 instance=ExtResource("8_p3uqr")]
-position = Vector2(767, 166)
-
-[node name="NinjaPatrol8" parent="enemys" unique_id=882325386 instance=ExtResource("8_p3uqr")]
-position = Vector2(938, 242)
-
-[node name="NinjaCrouch5" parent="enemys" unique_id=945348667 instance=ExtResource("7_hknnn")]
-position = Vector2(1128, 101)
-
-[node name="NinjaBladeToss5" parent="enemys" unique_id=287572727 instance=ExtResource("14_vqsrt")]
-position = Vector2(1356, 223)
-
-[node name="NinjaCrouch6" parent="enemys" unique_id=1954282200 instance=ExtResource("7_hknnn")]
-position = Vector2(1592, 153)
-
-[node name="NinjaPatrol9" parent="enemys" unique_id=656752753 instance=ExtResource("8_p3uqr")]
-position = Vector2(1380, 137)
-
-[node name="NinjaPatrol10" parent="enemys" unique_id=1395936536 instance=ExtResource("8_p3uqr")]
-position = Vector2(1906, 122)
-
-[node name="NinjaPatrol11" parent="enemys" unique_id=650101761 instance=ExtResource("8_p3uqr")]
-position = Vector2(2026, 189)
-
-[node name="NinjaPatrol12" parent="enemys" unique_id=97371312 instance=ExtResource("8_p3uqr")]
-position = Vector2(1971, 244)
-
-[node name="NinjaPatrol13" parent="enemys" unique_id=1362638251 instance=ExtResource("8_p3uqr")]
-position = Vector2(1864, 246)
+[node name="PatrolEnemy2" parent="enemys" unique_id=1658320678 instance=ExtResource("8_sha1w")]
+position = Vector2(-361, 244)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 

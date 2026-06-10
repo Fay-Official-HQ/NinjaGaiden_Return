@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://c41646w588qro"]
 
-[ext_resource type="Script" uid="uid://cmj2g16oxb4st" path="res://scripts/enemy/SmallEnemy.gd" id="1_d2dr0"]
-[ext_resource type="Texture2D" uid="uid://t3xme5wer4si" path="res://assets/sprites/enemy/test/smallenemy_000.png" id="2_d2dr0"]
-[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_tlbu0"]
-[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_8j6kq"]
-[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="4_u6kkg"]
-[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_wg5t1"]
-[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_b0a37"]
-[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="5_tlbu0"]
-[ext_resource type="Texture2D" uid="uid://d3qlckiebuywt" path="res://assets/sprites/enemy/l1/renxiadun1.png" id="7_wg5t1"]
-[ext_resource type="Texture2D" uid="uid://c658ssr3fvwdn" path="res://assets/sprites/enemy/l1/renxiadun2.png" id="8_b0a37"]
-[ext_resource type="Texture2D" uid="uid://bvqvxxhs15c8o" path="res://assets/sprites/enemy/l1/renxiadun3.png" id="9_ingqt"]
+[ext_resource type="Script" uid="uid://cmj2g16oxb4st" path="res://scripts/enemy/test/SmallEnemy.gd" id="1_6ypyj"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_j8wf6"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_iqxl6"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_7d13o"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_4leg1"]
+[ext_resource type="Texture2D" uid="uid://t3xme5wer4si" path="res://assets/sprites/enemy/test/smallenemy_000.png" id="6_a3k0g"]
+[ext_resource type="Texture2D" uid="uid://idswwr703ble" path="res://assets/sprites/enemy/l1/renxiadun1.png" id="7_d6hw8"]
+[ext_resource type="Texture2D" uid="uid://beu6y5avudb58" path="res://assets/sprites/enemy/l1/renxiadun2.png" id="8_47n8o"]
+[ext_resource type="Texture2D" uid="uid://blh5tkc5b62vl" path="res://assets/sprites/enemy/l1/renxiadun3.png" id="9_i5570"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="10_t2qx6"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="11_a7yjd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_883im"]
 size = Vector2(25, 14)
@@ -24,16 +24,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_tlbu0")
+"texture": ExtResource("2_j8wf6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_8j6kq")
+"texture": ExtResource("3_iqxl6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_wg5t1")
+"texture": ExtResource("4_7d13o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_b0a37")
+"texture": ExtResource("5_4leg1")
 }],
 "loop": false,
 "name": &"die",
@@ -41,7 +41,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_d2dr0")
+"texture": ExtResource("6_a3k0g")
 }],
 "loop": true,
 "name": &"idle",
@@ -49,13 +49,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_wg5t1")
+"texture": ExtResource("7_d6hw8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_b0a37")
+"texture": ExtResource("8_47n8o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_ingqt")
+"texture": ExtResource("9_i5570")
 }],
 "loop": true,
 "name": &"walk",
@@ -71,7 +71,7 @@ size = Vector2(24, 20)
 [node name="SmallEnemy" type="CharacterBody2D" unique_id=869226174]
 collision_layer = 2
 collision_mask = 12
-script = ExtResource("1_d2dr0")
+script = ExtResource("1_6ypyj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=843685403]
 position = Vector2(-0.5, 9)
@@ -86,7 +86,7 @@ animation = &"walk"
 [node name="HurtBox" type="Area2D" parent="." unique_id=243598376]
 collision_layer = 2
 collision_mask = 16
-script = ExtResource("4_u6kkg")
+script = ExtResource("10_t2qx6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1106765834]
 position = Vector2(-0.5, 11)
@@ -94,7 +94,7 @@ shape = SubResource("RectangleShape2D_a3pup")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=9247032]
 collision_layer = 32
-script = ExtResource("5_tlbu0")
+script = ExtResource("11_a7yjd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1625149503]
 position = Vector2(0, 5)

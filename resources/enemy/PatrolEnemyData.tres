@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PatrolEnemyData" format=3 uid="uid://lq5d2c5b22e7"]
+
+[ext_resource type="Script" uid="uid://dg3loecxi0yrp" path="res://resources/enemy/PatrolEnemyData.gd" id="1_icbou"]
+
+[resource]
+script = ExtResource("1_icbou")
+patrol_distance = 50.0
+metadata/_custom_type_script = "uid://dg3loecxi0yrp"
