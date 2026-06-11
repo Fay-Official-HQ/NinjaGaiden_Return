@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b20twcl27losj"]
 
 [ext_resource type="Script" uid="uid://bdnbwaea5410" path="res://scripts/enemy/flying/BatEnemy.gd" id="1_0na6w"]
-[ext_resource type="Resource" uid="uid://dtu8b7ixl5wss" path="res://resources/enemy/BatData.tres" id="2_ni43t"]
+[ext_resource type="Script" uid="uid://dwrt47fee4y1x" path="res://resources/enemy/BatData.gd" id="2_0na6w"]
 [ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_tp06s"]
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_bevwy"]
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_2388q"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://70r5ee0p74q2" path="res://assets/sprites/enemy/l1/feixingguai_001.png" id="8_d8t03"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_0ca73"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_h1eil"]
+
+[sub_resource type="Resource" id="Resource_ni43t"]
+script = ExtResource("2_0na6w")
+metadata/_custom_type_script = "uid://dwrt47fee4y1x"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n5vr1"]
 animations = [{
@@ -60,7 +64,7 @@ size = Vector2(17, 17)
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_0na6w")
-data = ExtResource("2_ni43t")
+data = SubResource("Resource_ni43t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1424014972]
 sprite_frames = SubResource("SpriteFrames_n5vr1")

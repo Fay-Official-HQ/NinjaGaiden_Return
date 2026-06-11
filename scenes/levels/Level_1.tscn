@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dj3ag0psnt0i1" path="res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_008.png" id="12_hknnn"]
 [ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="12_sha1w"]
 [ext_resource type="Texture2D" uid="uid://ysxpwo1kk4b3" path="res://assets/sprites/item/item_hp.png" id="13_sha1w"]
-[ext_resource type="PackedScene" uid="uid://b20twcl27losj" path="res://scenes/enemy/l1/bat_enemy.tscn" id="14_hknnn"]
+[ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="17_nd8jy"]
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_p3uqr")
@@ -110,15 +110,17 @@ position = Vector2(-347, 159)
 [node name="PatrolEnemy2" parent="enemys" unique_id=1658320678 instance=ExtResource("8_sha1w")]
 position = Vector2(-361, 244)
 
-[node name="BatEnemy" parent="enemys" unique_id=924443669 instance=ExtResource("14_hknnn")]
-position = Vector2(-451, 175)
-
 [node name="BatSpawner" parent="enemys" unique_id=1016133079 instance=ExtResource("10_p3uqr")]
 position = Vector2(-424, 175)
-spawn_count = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner" index="1" unique_id=1206789695]
-position = Vector2(0, -109)
+position = Vector2(189, 31)
+
+[node name="EagleSpawner" parent="enemys" unique_id=1712208962 instance=ExtResource("17_nd8jy")]
+position = Vector2(-707, 103)
+
+[node name="SpawnPosition" parent="enemys/EagleSpawner" index="1" unique_id=313397505]
+position = Vector2(-197, -67)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -140,3 +142,4 @@ show_texture = ExtResource("13_sha1w")
 hidden_texture = ExtResource("12_sha1w")
 
 [editable path="enemys/BatSpawner"]
+[editable path="enemys/EagleSpawner"]

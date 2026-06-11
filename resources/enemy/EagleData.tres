@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EagleData" format=3 uid="uid://coajf3e47ctit"]
+
+[ext_resource type="Script" uid="uid://c44ttdx55ycku" path="res://resources/enemy/EagleData.gd" id="1_3ia0e"]
+
+[resource]
+script = ExtResource("1_3ia0e")
+metadata/_custom_type_script = "uid://c44ttdx55ycku"

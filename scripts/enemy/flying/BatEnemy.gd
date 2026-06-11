@@ -45,7 +45,7 @@ func _on_took_damage(_amount: int) -> void:
 func _die() -> void:
 	is_dead = true
 
-	AudioManager.play_sound("disiwang")
+	AudioManager.play_sound(data.death_sound)
 
 	hurtbox.set_deferred("monitoring", false)
 	hurtbox.set_deferred("monitorable", false)
