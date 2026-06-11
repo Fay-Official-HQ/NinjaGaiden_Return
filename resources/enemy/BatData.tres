@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BatData" format=3 uid="uid://dtu8b7ixl5wss"]
+
+[ext_resource type="Script" uid="uid://dwrt47fee4y1x" path="res://resources/enemy/BatData.gd" id="1_edtxf"]
+
+[resource]
+script = ExtResource("1_edtxf")
+metadata/_custom_type_script = "uid://dwrt47fee4y1x"

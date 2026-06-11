@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cnyhgpkwkdttx"]
+
+[ext_resource type="Script" uid="uid://dahp4gk23eqi0" path="res://scripts/enemy/flying/BatSpawner.gd" id="1_j833s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpiv2"]
+size = Vector2(20, 167)
+
+[node name="BatSpawner" type="Node2D" unique_id=761399404]
+script = ExtResource("1_j833s")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1366595315]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=47906498]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_xpiv2")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=1206789695]
+position = Vector2(172, -54)

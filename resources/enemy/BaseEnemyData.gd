@@ -1,5 +1,5 @@
 # res://resources/enemy/BaseEnemyData.gd
-# 小怪通用数据基类（所有小怪数据资源的父类）
+# 小怪通用数据基类
 extends Resource
 
 class_name BaseEnemyData
