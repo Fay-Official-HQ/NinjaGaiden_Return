@@ -50,6 +50,17 @@ func _update_throw(delta: float) -> void:
 
 
 func _throw_dart() -> void:
+	# 【调试飞镖起始位置】关键修改点：
+	#   1. 位置：dart.global_position = global_position + dir * 14
+	#      - 14 是飞镖出生点偏离忍者中心的像素距离
+	#      - 调大→飞镖更远离身体，调小→飞镖更贴近身体，负值→飞镖从身后飞出
+	#   2. 方向：dir = (player - 忍者位置).normalized()
+	#      - 这是直接指向玩家的单位向量
+	#      - 如果想调角度偏移，可以用 dir.rotated(deg_to_rad(角度值))
+	#      - 例：dir.rotated(deg_to_rad(-5)) 向上偏移5度，玩家可蹲下躲
+	#   3. 场景预览调试技巧：在编辑器里选中 CrouchNinja 实例，
+	#      把飞镖场景从文件系统拖到场景窗口预览位置，
+	#      配合 dir * 14 的偏移量估算实际出生点
 	var ninja_data = data as CrouchNinjaData
 	if not ninja_data:
 		return
@@ -61,8 +72,13 @@ func _throw_dart() -> void:
 	var dart = preload("res://scenes/enemy/l1/flying_ninja_dart.tscn").instantiate()
 	var dir = (player.global_position - global_position).normalized()
 
-	dart.global_position = global_position + dir * 14
+	# 【调试点】修改 14 这个值调整飞镖出生水平偏移量（像素）
+	#   数值参考：14≈半个角色宽度，20≈一个角色宽度
+	# 【调试点】Vector2(0, 7) 的 7 是垂直偏移（正数=向下），
+	#   调大→飞镖更偏下飞，调小/负值→飞镖更偏上飞
+	dart.global_position = global_position + dir * 14 + Vector2(0, 7)
 	get_tree().current_scene.add_child(dart)
+	# 【调试点】dart.initialize 的第二个参数是飞镖速度，可在 CrouchNinjaData.tres 中直接调整
 	dart.initialize(dir, ninja_data.dart_speed)
 
 	anim.play("throw")

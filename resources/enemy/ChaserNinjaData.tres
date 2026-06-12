@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ChaserNinjaData" format=3 uid="uid://csyh8h5ckxua0"]
+
+[ext_resource type="Script" uid="uid://dvldat1iykuvx" path="res://resources/enemy/ChaserNinjaData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")

@@ -69,6 +69,9 @@ func enter(_msg: Dictionary = {}) -> void:
 	_wave_timer = 0.0
 	_hit_count = 0
 
+	# 清除受伤闪烁状态（防止 _process 中 invincible_timer 覆盖 DragonFlash 的 Tween）
+	player.invincible_timer = 0.0
+
 	# 触发必杀技冷却
 	player.sword.start_cooldown("finish")
 
