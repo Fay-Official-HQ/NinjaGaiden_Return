@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c11tt58p6c52p" path="res://scripts/projectile/Dart.gd" id="1_k7qkt"]
 [ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_81yjr"]
-[ext_resource type="Texture2D" uid="uid://bj8bwdskgc3qa" path="res://assets/sprites/enemy/l1/ren_touzhi_feidao.png" id="2_jcwfq"]
+[ext_resource type="Texture2D" uid="uid://6yvj87hjddhx" path="res://assets/sprites/enemy/l1/ren_touzhi_feidao.png" id="2_jcwfq"]
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_g4i07"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="3_we8gu"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="4_jcwfq"]

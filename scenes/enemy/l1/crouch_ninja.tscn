@@ -4,9 +4,9 @@
 [ext_resource type="Resource" uid="uid://bltg523yp1l36" path="res://resources/enemy/CrouchNinjaData.tres" id="2"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="3"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="4"]
-[ext_resource type="Texture2D" uid="uid://d3qlckiebuywt" path="res://assets/sprites/enemy/l1/renxiadun1.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://c658ssr3fvwdn" path="res://assets/sprites/enemy/l1/renxiadun2.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://c5sfkuu4q7w17" path="res://assets/sprites/enemy/l1/renxiadun3.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://idswwr703ble" path="res://assets/sprites/enemy/l1/renxiadun1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://beu6y5avudb58" path="res://assets/sprites/enemy/l1/renxiadun2.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://blh5tkc5b62vl" path="res://assets/sprites/enemy/l1/renxiadun3.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="10"]
@@ -55,7 +55,7 @@ animations = [{
 size = Vector2(17, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
-size = Vector2(17, 20)
+size = Vector2(18, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
 size = Vector2(17, 20)
@@ -84,7 +84,7 @@ collision_mask = 16
 script = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1636328222]
-position = Vector2(-0.5, 11)
+position = Vector2(0, 15.5)
 shape = SubResource("RectangleShape2D_hurt")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=862567462]

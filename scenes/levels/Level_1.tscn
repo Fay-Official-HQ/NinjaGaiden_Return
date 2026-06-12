@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cya36n0s28p0d"]
 
 [ext_resource type="Script" uid="uid://d34vea7s75eh1" path="res://scenes/levels/level_1.gd" id="1_p3uqr"]
-[ext_resource type="Texture2D" uid="uid://ho41pk3dqxrm" path="res://assets/img/beijing.png" id="1_ukdbm"]
+[ext_resource type="Texture2D" uid="uid://bxjs2t688msfo" path="res://assets/img/beijing.png" id="1_ukdbm"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="2_ccvly"]
 [ext_resource type="PackedScene" uid="uid://dc2lxhfdtb3f4" path="res://scenes/module‌/dimian.tscn" id="2_rs44j"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="3_cnmxh"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="17_nd8jy"]
 [ext_resource type="PackedScene" uid="uid://d1p3l5vf0p0ka" path="res://scenes/enemy/l1/soldier.tscn" id="18_vx33d"]
 [ext_resource type="PackedScene" uid="uid://ouj101grcbrq" path="res://scenes/enemy/l1/crouch_ninja.tscn" id="19_gqlf2"]
+[ext_resource type="PackedScene" uid="uid://doocneekcsaoy" path="res://scenes/enemy/l1/small_patrol_enemy.tscn" id="20_ar7sc"]
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_p3uqr")
@@ -160,6 +161,9 @@ hidden_texture = ExtResource("12_sha1w")
 
 [node name="CrouchNinja" parent="." unique_id=1656441098 instance=ExtResource("19_gqlf2")]
 position = Vector2(-140.02747, 161.90085)
+
+[node name="SmallPatrolEnemy" parent="." unique_id=2112001389 instance=ExtResource("20_ar7sc")]
+position = Vector2(-249.52963, 130.70535)
 
 [editable path="enemys/BatSpawner"]
 [editable path="enemys/EagleSpawner"]
