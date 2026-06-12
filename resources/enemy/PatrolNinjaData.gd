@@ -5,7 +5,7 @@ extends BaseEnemyData
 class_name PatrolNinjaData
 
 ## 投掷冷却时间（秒），玩家在检测范围内每隔 attack_cooldown 秒扔一次飞镖
-@export var attack_cooldown: float = 3.0
+@export var attack_cooldown: float = 1.0
 
 ## 飞镖数据引用（在 Inspector 中绑定 DartData.tres）
 @export var dart_data: DartData

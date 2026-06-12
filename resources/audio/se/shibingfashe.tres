@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://cf5yd1kl3e62a"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://di7mw2a3rxg5k" path="res://assets/audio/se/shibingfashe.wav" id="2"]
+
+[resource]
+script = ExtResource("1")
+event_id = &"shibingfashe"
+stream = ExtResource("2")

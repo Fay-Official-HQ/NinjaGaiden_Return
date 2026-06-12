@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="12_sha1w"]
 [ext_resource type="Texture2D" uid="uid://ysxpwo1kk4b3" path="res://assets/sprites/item/item_hp.png" id="13_sha1w"]
 [ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="17_nd8jy"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l1/soldier.tscn" id="18_vx33d"]
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_p3uqr")
@@ -86,19 +87,16 @@ position = Vector2(579, 145)
 [node name="shikuai3" parent="dixing" unique_id=506782326 instance=ExtResource("4_u8eek")]
 position = Vector2(764, 311)
 
-[node name="HangingPlatform2" parent="dixing" unique_id=343442694 instance=ExtResource("3_cnmxh")]
-position = Vector2(-673.45105, 151.49059)
+[node name="shikuai4" parent="dixing" unique_id=42848017 instance=ExtResource("4_u8eek")]
+position = Vector2(-695, 217)
 
-[node name="shikuai" parent="dixing/HangingPlatform2" unique_id=42848017 instance=ExtResource("4_u8eek")]
-position = Vector2(-21.54895, 65.509415)
-
-[node name="HangingPlatform" parent="dixing/HangingPlatform2/shikuai" unique_id=811644289 instance=ExtResource("3_cnmxh")]
+[node name="HangingPlatform" parent="dixing/shikuai4" unique_id=811644289 instance=ExtResource("3_cnmxh")]
 position = Vector2(359, -29)
 
-[node name="HangingPlatform2" parent="dixing/HangingPlatform2/shikuai" unique_id=1125839534 instance=ExtResource("3_cnmxh")]
+[node name="HangingPlatform2" parent="dixing/shikuai4" unique_id=1125839534 instance=ExtResource("3_cnmxh")]
 position = Vector2(449, -59)
 
-[node name="HangingPlatform3" parent="dixing/HangingPlatform2/shikuai" unique_id=2102493437 instance=ExtResource("3_cnmxh")]
+[node name="HangingPlatform3" parent="dixing/shikuai4" unique_id=2102493437 instance=ExtResource("3_cnmxh")]
 position = Vector2(531, -29)
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("2_ccvly")]
@@ -136,6 +134,9 @@ attack_type = 1
 
 [node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner2" index="1" unique_id=1423050258]
 position = Vector2(119, 88)
+
+[node name="Soldier" parent="enemys" unique_id=113679185 instance=ExtResource("18_vx33d")]
+position = Vector2(-758, 148)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
