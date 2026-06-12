@@ -17,7 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="12_sha1w"]
 [ext_resource type="Texture2D" uid="uid://ysxpwo1kk4b3" path="res://assets/sprites/item/item_hp.png" id="13_sha1w"]
 [ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="17_nd8jy"]
-[ext_resource type="PackedScene" path="res://scenes/enemy/l1/soldier.tscn" id="18_vx33d"]
+[ext_resource type="PackedScene" uid="uid://d1p3l5vf0p0ka" path="res://scenes/enemy/l1/soldier.tscn" id="18_vx33d"]
+[ext_resource type="PackedScene" uid="uid://ouj101grcbrq" path="res://scenes/enemy/l1/crouch_ninja.tscn" id="19_gqlf2"]
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_p3uqr")
@@ -156,6 +157,9 @@ position = Vector2(-579, 256)
 consumable_type = 0
 show_texture = ExtResource("13_sha1w")
 hidden_texture = ExtResource("12_sha1w")
+
+[node name="CrouchNinja" parent="." unique_id=1656441098 instance=ExtResource("19_gqlf2")]
+position = Vector2(-140.02747, 161.90085)
 
 [editable path="enemys/BatSpawner"]
 [editable path="enemys/EagleSpawner"]

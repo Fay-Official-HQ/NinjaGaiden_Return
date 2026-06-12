@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://cf5yd1kl3e62a"]
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://brl1pcc0bbfnx"]
 
 [ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1"]
-[ext_resource type="AudioStream" uid="uid://di7mw2a3rxg5k" path="res://assets/audio/se/shibingfashe.wav" id="2"]
+[ext_resource type="AudioStream" uid="uid://dh78x6nex4fux" path="res://assets/audio/se/shibingfashe.wav" id="2"]
 
 [resource]
 script = ExtResource("1")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1p3l5vf0p0ka"]
 
 [ext_resource type="Script" uid="uid://f625p5q4u3wi" path="res://scripts/enemy/l1/Soldier.gd" id="1"]
-[ext_resource type="Resource" path="res://resources/enemy/SoldierData.tres" id="2"]
+[ext_resource type="Script" uid="uid://bcy0x6geuy7f8" path="res://resources/enemy/SoldierData.gd" id="2_54ay1"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="3"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://b30p1foo1xba3" path="res://assets/sprites/enemy/l1/shibing_000.png" id="5"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="10"]
+
+[sub_resource type="Resource" id="Resource_sbehw"]
+script = ExtResource("2_54ay1")
+metadata/_custom_type_script = "uid://bcy0x6geuy7f8"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_soldier"]
 animations = [{
@@ -74,7 +78,7 @@ size = Vector2(458.5, 75.25)
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1")
-data = ExtResource("2")
+data = SubResource("Resource_sbehw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=468094849]
 sprite_frames = SubResource("SpriteFrames_soldier")

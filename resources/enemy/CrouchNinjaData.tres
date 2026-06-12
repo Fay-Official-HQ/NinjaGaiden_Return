@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="CrouchNinjaData" format=3 uid="uid://bltg523yp1l36"]
+
+[ext_resource type="Script" uid="uid://cu32otqxc2d6" path="res://resources/enemy/CrouchNinjaData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
