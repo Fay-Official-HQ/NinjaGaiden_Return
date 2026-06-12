@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cxo4iprmk5ckn"]
+
+[ext_resource type="Script" uid="uid://b7425jrjllacy" path="res://scripts/enemy/flying/FlyingNinjaSpawner.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpiv2"]
+size = Vector2(20, 167)
+
+[node name="FlyingNinjaSpawner" type="Node2D" unique_id=774473086]
+script = ExtResource("1")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1502568927]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=1078334481]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_xpiv2")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=1423050258]
+position = Vector2(0, -80)

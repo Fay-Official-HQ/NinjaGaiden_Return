@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="FlyingNinjaData" format=3 uid="uid://bbovj0kfu870t"]
+
+[ext_resource type="Script" uid="uid://wbd2w4rgi3vp" path="res://resources/enemy/FlyingNinjaData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")

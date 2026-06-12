@@ -1,25 +1,25 @@
 [gd_scene format=3 uid="uid://brnuwjdqtk32o"]
 
 [ext_resource type="Script" uid="uid://dym4olpagc6uw" path="res://scripts/ui/UIManager.gd" id="1_jpk1t"]
-[ext_resource type="Texture2D" uid="uid://fgtk6007jqcp" path="res://assets/sprites/ui/UIkuang.png" id="2_0t7y4"]
-[ext_resource type="Texture2D" uid="uid://rbqarjlelk6p" path="res://assets/sprites/ui/HPkong.png" id="2_jpk1t"]
-[ext_resource type="Texture2D" uid="uid://de5mt3ruyoe16" path="res://assets/sprites/ui/HPman.png" id="3_jpk1t"]
+[ext_resource type="Texture2D" uid="uid://c1wecvvx24i67" path="res://assets/sprites/ui/UIkuang.png" id="2_0t7y4"]
+[ext_resource type="Texture2D" uid="uid://bjjyiuh2cbvr1" path="res://assets/sprites/ui/HPkong.png" id="2_jpk1t"]
+[ext_resource type="Texture2D" uid="uid://c22ugc7wwhfi4" path="res://assets/sprites/ui/HPman.png" id="3_jpk1t"]
 [ext_resource type="Texture2D" uid="uid://cr0pld7jvs12j" path="res://assets/sprites/ui/Ryu.png" id="3_vxmrb"]
 [ext_resource type="Texture2D" uid="uid://cmst4une162bk" path="res://assets/sprites/ui/MPkong.png" id="4_it45l"]
 [ext_resource type="Texture2D" uid="uid://dq1310a5x4mvr" path="res://assets/sprites/ui/zimu/NINJA.png" id="4_kvqow"]
-[ext_resource type="Texture2D" uid="uid://dxqscmiwa83mm" path="res://assets/sprites/ui/MPman.png" id="5_it45l"]
-[ext_resource type="Texture2D" uid="uid://di5t8qymu4fth" path="res://assets/sprites/ui/zimu/hp.png" id="6_cw6jd"]
-[ext_resource type="Texture2D" uid="uid://f1lhr5edlnq7" path="res://assets/sprites/ui/TPkong.png" id="6_jpk1t"]
-[ext_resource type="Texture2D" uid="uid://ji3lhi2ypchh" path="res://assets/sprites/ui/TPman.png" id="7_j3vys"]
+[ext_resource type="Texture2D" uid="uid://dgx1va82tv3nl" path="res://assets/sprites/ui/MPman.png" id="5_it45l"]
+[ext_resource type="Texture2D" uid="uid://bhawsgf4ug2p0" path="res://assets/sprites/ui/zimu/hp.png" id="6_cw6jd"]
+[ext_resource type="Texture2D" uid="uid://dlyq3it4dgf1d" path="res://assets/sprites/ui/TPkong.png" id="6_jpk1t"]
+[ext_resource type="Texture2D" uid="uid://vxjlxx23tcyp" path="res://assets/sprites/ui/TPman.png" id="7_j3vys"]
 [ext_resource type="Texture2D" uid="uid://brcdjifwh1mom" path="res://assets/sprites/ui/fire_ninjutsu.png" id="7_oq7y8"]
 [ext_resource type="Texture2D" uid="uid://bpoe144e23baa" path="res://assets/sprites/ui/jianshu_000.png" id="8_it45l"]
-[ext_resource type="Texture2D" uid="uid://dea1a7xvn3rg8" path="res://assets/sprites/ui/zimu/mp.png" id="9_2k5s4"]
+[ext_resource type="Texture2D" uid="uid://3ufiis821x5x" path="res://assets/sprites/ui/zimu/mp.png" id="9_2k5s4"]
 [ext_resource type="Texture2D" uid="uid://bwpwkr4ppw1hd" path="res://assets/sprites/ui/kuohao.png" id="9_j3vys"]
 [ext_resource type="Texture2D" uid="uid://emsq3nu8flbb" path="res://assets/sprites/ui/jianshu_001.png" id="9_jpk1t"]
 [ext_resource type="Texture2D" uid="uid://d1j56eslio8us" path="res://assets/sprites/ui/jianshu_002.png" id="10_j3vys"]
-[ext_resource type="Texture2D" uid="uid://c1a0qow1uvvfa" path="res://assets/sprites/ui/jianshu_003.png" id="11_0t7y4"]
+[ext_resource type="Texture2D" uid="uid://bwo2n4skj0i2p" path="res://assets/sprites/ui/jianshu_003.png" id="11_0t7y4"]
 [ext_resource type="Texture2D" uid="uid://be1lvyhq6un5a" path="res://assets/sprites/ui/zimu/tp.png" id="12_e1w07"]
-[ext_resource type="Texture2D" uid="uid://bu2uublbbsdhx" path="res://assets/sprites/ui/bisha.png" id="15_1xpeq"]
+[ext_resource type="Texture2D" uid="uid://b67v6s8l5myta" path="res://assets/sprites/ui/bisha.png" id="15_1xpeq"]
 [ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="21_tg16a"]
 
 [node name="UiManager" type="CanvasLayer" unique_id=254736081]
@@ -206,6 +206,5 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("21_tg16a")
 theme_override_font_sizes/font_size = 16
-text = "劍術不足！"
 horizontal_alignment = 1
 vertical_alignment = 1
