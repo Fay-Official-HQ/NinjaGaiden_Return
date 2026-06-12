@@ -153,7 +153,7 @@ func spawn_wave() -> void:
 		var is_last = _hit_count >= 7
 		if is_last:
 			AudioManager.play_sound(&"hanjiao")
-			AudioManager.play_sound(&"jianshangtiao")
+			AudioManager.play_sound(&"bishaji")
 			_spawn_final_phantom()
 			_deal_dragon_damage(4)
 		else:

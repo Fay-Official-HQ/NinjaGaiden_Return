@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://cjgjto1dcg70y"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_pnq31"]
+[ext_resource type="AudioStream" uid="uid://16xhjtbilv8l" path="res://assets/audio/player/bishaji.wav" id="2_x6cq2"]
+
+[resource]
+script = ExtResource("1_pnq31")
+event_id = &"bishaji"
+stream = ExtResource("2_x6cq2")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"
