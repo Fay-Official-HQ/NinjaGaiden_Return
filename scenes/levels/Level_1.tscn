@@ -130,6 +130,13 @@ position = Vector2(-482, 173)
 [node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner" index="1" unique_id=1423050258]
 position = Vector2(-117, 130)
 
+[node name="FlyingNinjaSpawner2" parent="enemys" unique_id=774473086 instance=ExtResource("12_nd8jy")]
+position = Vector2(-590, 176)
+attack_type = 1
+
+[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner2" index="1" unique_id=1423050258]
+position = Vector2(119, 88)
+
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="Item" parent="Items" unique_id=1839314516 instance=ExtResource("10_jrjue")]
@@ -152,3 +159,4 @@ hidden_texture = ExtResource("12_sha1w")
 [editable path="enemys/BatSpawner"]
 [editable path="enemys/EagleSpawner"]
 [editable path="enemys/FlyingNinjaSpawner"]
+[editable path="enemys/FlyingNinjaSpawner2"]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://dl34t4w2xoo2"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://5uwlj10qgan3" path="res://assets/audio/se/disiwang2.wav" id="2"]
+
+[resource]
+script = ExtResource("1")
+event_id = &"disiwang2"
+stream = ExtResource("2")

@@ -23,6 +23,9 @@ extends Node2D
 @export var one_shot: bool = true            # true=触发一次就消失
 @export var cooldown_time: float = 5.0       # 重复触发的冷却时间（秒）
 
+## 攻击类型：DART=飞镖棕色忍者，FIRE=火焰红色忍者
+@export var attack_type: FlyingNinjaData.AttackType = FlyingNinjaData.AttackType.DART
+
 
 var _can_spawn: bool = true
 
@@ -55,6 +58,7 @@ func _do_spawn() -> void:
 		enemy.global_position = origin + Vector2(offset_x, spawn_offset_y)
 
 		enemy.data = enemy.data.duplicate()
+		enemy.data.attack_type = attack_type
 
 		get_tree().current_scene.add_child(enemy)
 

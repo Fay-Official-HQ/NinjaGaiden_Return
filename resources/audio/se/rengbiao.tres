@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://d84xjkd5x8ep"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_45r7y"]
+[ext_resource type="AudioStream" uid="uid://betqrw7q4m7og" path="res://assets/audio/se/rengbiao.wav" id="2_hdepi"]
+
+[resource]
+script = ExtResource("1_45r7y")
+event_id = &"rengbiao"
+stream = ExtResource("2_hdepi")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"
