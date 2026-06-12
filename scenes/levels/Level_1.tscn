@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="8_sha1w"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="10_jrjue"]
 [ext_resource type="PackedScene" uid="uid://cnyhgpkwkdttx" path="res://scenes/enemy/l1/bat_spawner.tscn" id="10_p3uqr"]
+[ext_resource type="PackedScene" uid="uid://cwwwl5njk4twt" path="res://scenes/enemy/l1/patrol_ninja.tscn" id="11_vqsrt"]
 [ext_resource type="Texture2D" uid="uid://dvb3nubvt7dil" path="res://assets/sprites/item/item_mp_small.png" id="11_y54f7"]
 [ext_resource type="Texture2D" uid="uid://dj3ag0psnt0i1" path="res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_008.png" id="12_hknnn"]
 [ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="12_sha1w"]
@@ -107,9 +108,6 @@ position = Vector2(-565, 116)
 [node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("8_sha1w")]
 position = Vector2(-347, 159)
 
-[node name="PatrolEnemy2" parent="enemys" unique_id=1658320678 instance=ExtResource("8_sha1w")]
-position = Vector2(-361, 244)
-
 [node name="BatSpawner" parent="enemys" unique_id=1016133079 instance=ExtResource("10_p3uqr")]
 position = Vector2(-424, 175)
 
@@ -121,6 +119,9 @@ position = Vector2(-707, 103)
 
 [node name="SpawnPosition" parent="enemys/EagleSpawner" index="1" unique_id=313397505]
 position = Vector2(-197, -67)
+
+[node name="PatrolNinja" parent="enemys" unique_id=1868551743 instance=ExtResource("11_vqsrt")]
+position = Vector2(-377, 228)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 

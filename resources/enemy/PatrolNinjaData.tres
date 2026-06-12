@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PatrolNinjaData" format=3 uid="uid://dydhisi3m8ryn"]
+
+[ext_resource type="Script" uid="uid://cs4auv2norwxq" path="res://resources/enemy/DartData.gd" id="1_8noin"]
+[ext_resource type="Script" uid="uid://ddq4vb8o8fh5o" path="res://resources/enemy/PatrolNinjaData.gd" id="1_s4yrt"]
+
+[sub_resource type="Resource" id="Resource_ttmpq"]
+script = ExtResource("1_8noin")
+metadata/_custom_type_script = "uid://cs4auv2norwxq"
+
+[resource]
+script = ExtResource("1_s4yrt")
+dart_data = SubResource("Resource_ttmpq")
+metadata/_custom_type_script = "uid://ddq4vb8o8fh5o"

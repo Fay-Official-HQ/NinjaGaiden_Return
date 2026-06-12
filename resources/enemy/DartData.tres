@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DartData" format=3 uid="uid://ngobj4qfsw07"]
+
+[ext_resource type="Script" uid="uid://cs4auv2norwxq" path="res://resources/enemy/DartData.gd" id="1_o36xh"]
+
+[resource]
+script = ExtResource("1_o36xh")
+metadata/_custom_type_script = "uid://cs4auv2norwxq"
