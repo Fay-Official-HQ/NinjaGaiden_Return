@@ -12,13 +12,18 @@ var _sfx_players: Array[AudioStreamPlayer] = []
 const SFX_POOL_SIZE = 4
 
 func _ready() -> void:
+	# 暂停时音频必须独立于 time_scale 运行，否则暂停音效播不出来
+	process_mode = PROCESS_MODE_ALWAYS
+
 	# 1. 初始化 BGM 播放器
 	_bgm_player = AudioStreamPlayer.new()
+	_bgm_player.process_mode = PROCESS_MODE_ALWAYS
 	add_child(_bgm_player)
-	
+
 	# 2. 初始化 SFX 音效播放器池
 	for i in range(SFX_POOL_SIZE):
 		var player = AudioStreamPlayer.new()
+		player.process_mode = PROCESS_MODE_ALWAYS
 		add_child(player)
 		_sfx_players.append(player)
 		
@@ -51,6 +56,14 @@ func _play_bgm(event: SoundEventResource) -> void:
 	_bgm_player.bus = event.bus
 	_bgm_player.play()
 	print("【音频系统】正在播放背景音乐: ", event.event_id)
+
+# ── 暂停/恢复 BGM（供暂停界面调用） ──
+func pause_bgm() -> void:
+	if _bgm_player.playing:
+		_bgm_player.stream_paused = true
+
+func resume_bgm() -> void:
+	_bgm_player.stream_paused = false
 
 # 内部私有方法：处理动作音效
 func _play_sfx(event: SoundEventResource) -> void:

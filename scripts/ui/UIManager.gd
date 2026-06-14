@@ -9,6 +9,11 @@ extends CanvasLayer
 var _ninjutsu_connected: bool = false
 var _msg_timer: float = 0.0
 
+# ── 暂停系统 ──
+var _pause_overlay: ColorRect
+var _is_paused: bool = false
+var _played_pause_sound: bool = false
+
 var ninjutsu_textures: Array[Texture2D] = [
 	preload("res://assets/sprites/ui/fire_ninjutsu.png"),
 	preload("res://assets/sprites/ui/fireball_ninjutsu.png"),
@@ -20,6 +25,9 @@ var cd_masks: Dictionary = {}
 var cd_full_height: float = 16.0
 
 func _ready() -> void:
+	# 暂停时 UIManager 必须继续运行才能检测恢复输入
+	process_mode = PROCESS_MODE_ALWAYS
+
 	cd_masks = {
 		"dash": $HUD/CD_Dash/CDMask,
 		"uppercut": $HUD/CD_Uppercut/CDMask,
@@ -28,10 +36,28 @@ func _ready() -> void:
 		"finish": $HUD/CD_Finish/CDMask,
 	}
 	cd_full_height = cd_masks["dash"].size.y
-	
+
+	_setup_pause_overlay()
+
+func _setup_pause_overlay() -> void:
+	# 半透明黑色遮罩
+	_pause_overlay = ColorRect.new()
+	_pause_overlay.color = Color(0, 0, 0, 0.6)
+	_pause_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	_pause_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_pause_overlay.hide()
+	add_child(_pause_overlay)
 
 
 func _process(delta: float) -> void:
+	# 隐藏时不处理暂停，避免和 Intro 场景的 pass 按键冲突
+	if not visible:
+		return
+
+	# 暂停输入检测（不依赖 player 存在）
+	if Input.is_action_just_pressed("pass"):
+		_toggle_pause()
+
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:
 		return
@@ -47,6 +73,23 @@ func _process(delta: float) -> void:
 		_ninjutsu_connected = true
 	
 	_handle_message(delta)
+
+
+func _toggle_pause() -> void:
+	_is_paused = not _is_paused
+
+	if _is_paused:
+		AudioManager.pause_bgm()
+		Engine.time_scale = 0.0
+		_pause_overlay.show()
+		if not _played_pause_sound:
+			AudioManager.play_sound(&"zanting")
+			_played_pause_sound = true
+	else:
+		Engine.time_scale = 1.0
+		_pause_overlay.hide()
+		_played_pause_sound = false
+		AudioManager.resume_bgm()
 
 func _update_bar(bar: Sprite2D, current_value: float, max_value: float) -> void:
 	if current_value <= 0:
