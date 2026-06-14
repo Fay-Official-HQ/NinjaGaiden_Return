@@ -477,7 +477,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" unique_id=1811321606 groups=["player"]]
 z_index = 100
-collision_mask = 12
+collision_mask = 140
 script = ExtResource("1_gfjak")
 data = ExtResource("2_c3xxp")
 

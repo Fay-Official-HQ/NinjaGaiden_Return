@@ -102,8 +102,11 @@ func _update_throw(delta: float) -> void:
 	# 扔镖冷却计时
 	_throw_cooldown -= delta
 	if _throw_cooldown <= 0.0:
-		_throw_dart()
-		_throw_cooldown = (data as PatrolNinjaData).attack_cooldown
+		var ninja_data = data as PatrolNinjaData
+		# fallback: 即使 data 丢失也要重置冷却，否则永远不攻击
+		_throw_cooldown = ninja_data.attack_cooldown if ninja_data else 2.0
+		if ninja_data:
+			_throw_dart()
 
 
 # 扔出一枚飞镖

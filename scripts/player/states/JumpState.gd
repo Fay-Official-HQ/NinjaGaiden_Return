@@ -54,7 +54,7 @@ func physics_update(delta: float) -> void:
 				state_machine.change_state(state_machine.get_node("HangState"))
 				return
 	
-	if player.is_on_wall():
+	if player.is_on_wall() and not _is_on_wall_blocker():
 		if player.velocity.x * player.get_wall_normal().x <= 0:
 			state_machine.change_state(state_machine.get_node("WallState"))
 			return
@@ -91,3 +91,12 @@ func physics_update(delta: float) -> void:
 		player.movement.stop()
 		
 	player.move_and_slide()
+
+
+# 检测当前贴墙的碰撞体是否属于 wall_blocker 组（阻挡物不触发攀爬）
+func _is_on_wall_blocker() -> bool:
+	for i in player.get_slide_collision_count():
+		var col = player.get_slide_collision(i)
+		if col and col.get_collider() and col.get_collider().is_in_group("wall_blocker"):
+			return true
+	return false

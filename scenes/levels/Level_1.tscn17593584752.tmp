@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://ca52o5acxygjl" path="res://resources/tilesets/fc2_1.tres" id="3_cnmxh"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="5_u8eek"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="7_50olt"]
+[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="7_t1jjp"]
 [ext_resource type="PackedScene" path="res://scenes/enemy/l1/chaser_ninja_spawner.tscn" id="8_ra48x"]
 [ext_resource type="PackedScene" uid="uid://ouj101grcbrq" path="res://scenes/enemy/l1/crouch_ninja.tscn" id="9_jrjue"]
 [ext_resource type="PackedScene" uid="uid://doocneekcsaoy" path="res://scenes/enemy/l1/small_patrol_enemy.tscn" id="9_y54f7"]
@@ -13,8 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://d1p3l5vf0p0ka" path="res://scenes/enemy/l1/soldier.tscn" id="11_y54f7"]
 [ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="12_sha1w"]
 [ext_resource type="PackedScene" uid="uid://cxo4iprmk5ckn" path="res://scenes/enemy/l1/flying_ninja_spawner.tscn" id="13_hknnn"]
-[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="13_p3uqr"]
-[ext_resource type="PackedScene" uid="uid://cwwwl5njk4twt" path="res://scenes/enemy/l1/patrol_ninja.tscn" id="14_p3uqr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -64,6 +63,70 @@ size = Vector2(105, 279.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3uqr"]
 size = Vector2(93.233154, 241.4815)
+
+[sub_resource type="GDScript" id="GDScript_hknnn"]
+script/source = "# res://scripts/enemy/patrol/PatrolEnemy.gd
+# 地面巡逻怪：在平台上左右往返行走
+class_name PatrolEnemy
+extends BaseEnemy
+
+# ── 巡逻检测射线（子类场景须包含同名节点） ──
+@onready var floor_detect_left: RayCast2D = $FloorDetectLeft
+@onready var floor_detect_right: RayCast2D = $FloorDetectRight
+@onready var wall_detect: RayCast2D = $WallDetect
+
+# 出生位置（用于 patrol_distance 范围限制）
+var _start_position: Vector2
+
+
+func _ready() -> void:
+	super()
+	_start_position = global_position
+
+
+func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+
+	_apply_gravity(delta)
+	_check_turn()
+	velocity.x = data.move_speed * (1.0 if facing_right else -1.0)
+	move_and_slide()
+	_update_animation()
+
+
+# ── 重力（继承自 CharacterBody2D，手动应用） ──
+func _apply_gravity(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y += 980.0 * delta
+
+
+# ── 转弯条件：走到边缘 / 撞墙 / 超出巡逻范围 ──
+func _check_turn() -> void:
+	var edge_ray = floor_detect_right if facing_right else floor_detect_left
+	var patrol_data := data as PatrolEnemyData
+
+	# 前方没地面 → 掉头
+	if not edge_ray.is_colliding() or is_on_wall():
+		_set_facing(not facing_right)
+		return
+
+	# 超出巡逻半径 → 掉头
+	if patrol_data:
+		var distance = global_position.x - _start_position.x
+		if distance > patrol_data.patrol_distance:
+			_set_facing(false)
+		elif distance < -patrol_data.patrol_distance:
+			_set_facing(true)
+
+
+# ── 动画状态切换 ──
+func _update_animation() -> void:
+	if is_on_floor():
+		anim.play(\"walk\")
+	else:
+		anim.play(\"idle\")
+"
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_p3uqr")
@@ -157,49 +220,19 @@ shape = SubResource("RectangleShape2D_5x2jh")
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("2_ccvly")]
 position = Vector2(38, 100)
 
-[node name="Items" type="Node" parent="." unique_id=111644370]
-
-[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("7_50olt")]
-position = Vector2(350, 194)
-
-[node name="Item5" parent="Items" unique_id=1275991693 instance=ExtResource("7_50olt")]
-position = Vector2(921, 194)
-
-[node name="Item2" parent="Items" unique_id=1965228990 instance=ExtResource("7_50olt")]
-position = Vector2(661, 195)
-
-[node name="Item3" parent="Items" unique_id=1929029004 instance=ExtResource("7_50olt")]
-position = Vector2(1091, 194)
-
-[node name="Item4" parent="Items" unique_id=331050663 instance=ExtResource("7_50olt")]
-position = Vector2(1375, 74)
-consumable_type = 2
-
-[node name="Item6" parent="Items" unique_id=140324954 instance=ExtResource("7_50olt")]
-position = Vector2(3837, 192)
-consumable_type = 0
-
-[node name="Item7" parent="Items" unique_id=1306743168 instance=ExtResource("7_50olt")]
-position = Vector2(3648, 192)
-
-[node name="Item8" parent="Items" unique_id=1152864354 instance=ExtResource("7_50olt")]
-position = Vector2(3490, 192)
-
-[node name="Item9" parent="Items" unique_id=88852933 instance=ExtResource("7_50olt")]
-position = Vector2(3178, 68)
-
-[node name="Item10" parent="Items" unique_id=361839634 instance=ExtResource("7_50olt")]
-position = Vector2(2975, 121)
-
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("13_p3uqr")]
-position = Vector2(522, 222)
-patrol_distance_override = 1000.0
+[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("7_t1jjp")]
+position = Vector2(623, 243)
 initial_facing_right = false
 
-[node name="PatrolEnemy2" parent="enemys" unique_id=1390777576 instance=ExtResource("13_p3uqr")]
-position = Vector2(725, 237)
+[node name="PatrolEnemy2" parent="enemys" unique_id=1322208625 instance=ExtResource("7_t1jjp")]
+position = Vector2(921, 232)
+initial_facing_right = false
+
+[node name="PatrolEnemy3" parent="enemys" unique_id=1751532384 instance=ExtResource("7_t1jjp")]
+position = Vector2(1212, 228)
+initial_facing_right = false
 
 [node name="CrouchNinja" parent="enemys" unique_id=1656441098 instance=ExtResource("9_jrjue")]
 position = Vector2(1324, 97)
@@ -220,6 +253,9 @@ spawn_count = 1
 [node name="SpawnPosition" parent="enemys/BatSpawner" index="1" unique_id=1206789695]
 position = Vector2(222, 30)
 
+[node name="Soldier" parent="enemys" unique_id=634735606 instance=ExtResource("11_y54f7")]
+position = Vector2(1826, 106)
+
 [node name="EagleSpawner" parent="enemys" unique_id=1712208962 instance=ExtResource("12_sha1w")]
 position = Vector2(1704, 85)
 
@@ -237,6 +273,7 @@ position = Vector2(153.55042, 23.00473)
 position = Vector2(1963.7668, 96.518486)
 
 [node name="CollisionShape2D" parent="enemys/FlyingNinjaSpawner/TriggerArea" parent_id_path=PackedInt32Array(774473086, 1502568927) index="0" unique_id=1078334481]
+position = Vector2(36.616577, 40.74076)
 shape = SubResource("RectangleShape2D_p3uqr")
 
 [node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner" index="1" unique_id=1423050258]
@@ -252,75 +289,24 @@ shape = SubResource("RectangleShape2D_p3uqr")
 [node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner2" index="1" unique_id=1423050258]
 position = Vector2(135.23315, 183.4815)
 
-[node name="Soldier2" parent="enemys" unique_id=518119196 instance=ExtResource("11_y54f7")]
-position = Vector2(2329, 195)
+[node name="SmallPatrolEnemy2" parent="enemys" unique_id=2068312942 instance=ExtResource("9_y54f7")]
+position = Vector2(2081, 247)
+script = SubResource("GDScript_hknnn")
 
-[node name="CrouchNinja2" parent="enemys" unique_id=1908887009 instance=ExtResource("9_jrjue")]
-position = Vector2(2773, 81)
+[node name="Items" type="Node" parent="." unique_id=111644370]
 
-[node name="PatrolEnemy3" parent="enemys" unique_id=288204657 instance=ExtResource("13_p3uqr")]
-position = Vector2(2520, 160)
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("7_50olt")]
+position = Vector2(350, 194)
 
-[node name="Soldier" parent="enemys" unique_id=634735606 instance=ExtResource("11_y54f7")]
-position = Vector2(1768, 106)
+[node name="Item2" parent="Items" unique_id=1965228990 instance=ExtResource("7_50olt")]
+position = Vector2(769, 194)
 
-[node name="PatrolNinja" parent="enemys" unique_id=1868551743 instance=ExtResource("14_p3uqr")]
-position = Vector2(2763, 196)
+[node name="Item3" parent="Items" unique_id=1929029004 instance=ExtResource("7_50olt")]
+position = Vector2(1091, 194)
 
-[node name="PatrolNinja2" parent="enemys" unique_id=1257003170 instance=ExtResource("14_p3uqr")]
-position = Vector2(2977, 155)
-
-[node name="PatrolNinja3" parent="enemys" unique_id=621512752 instance=ExtResource("14_p3uqr")]
-position = Vector2(3077, 126)
-
-[node name="SmallPatrolEnemy2" parent="enemys" unique_id=435301143 instance=ExtResource("9_y54f7")]
-position = Vector2(2874, 198)
-
-[node name="BatSpawner3" parent="enemys" unique_id=1591493490 instance=ExtResource("10_sha1w")]
-position = Vector2(3081, 130)
-spawn_count = 1
-
-[node name="SpawnPosition" parent="enemys/BatSpawner3" index="1" unique_id=1206789695]
-position = Vector2(146, -44)
-
-[node name="FlyingNinjaSpawner3" parent="enemys" unique_id=1542436031 instance=ExtResource("13_hknnn")]
-position = Vector2(3193, 113)
-attack_type = 1
-
-[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner3" index="1" unique_id=1423050258]
-position = Vector2(106, 135)
-
-[node name="SmallPatrolEnemy3" parent="enemys" unique_id=1975313961 instance=ExtResource("9_y54f7")]
-position = Vector2(2075, 242)
-patrol_distance_override = 300.0
-initial_facing_right = false
-
-[node name="SmallPatrolEnemy4" parent="enemys" unique_id=145005360 instance=ExtResource("9_y54f7")]
-position = Vector2(3085, 194)
-
-[node name="Soldier3" parent="enemys" unique_id=604345708 instance=ExtResource("11_y54f7")]
-position = Vector2(3388, 255)
-
-[node name="PatrolEnemy4" parent="enemys" unique_id=496272796 instance=ExtResource("13_p3uqr")]
-position = Vector2(3573, 254)
-
-[node name="PatrolEnemy5" parent="enemys" unique_id=1231624842 instance=ExtResource("13_p3uqr")]
-position = Vector2(3732, 248)
-
-[node name="Soldier4" parent="enemys" unique_id=30841131 instance=ExtResource("11_y54f7")]
-position = Vector2(3928, 247)
-
-[node name="EagleSpawner2" parent="enemys" unique_id=1270262626 instance=ExtResource("12_sha1w")]
-position = Vector2(4152, 138)
-
-[node name="SpawnPosition" parent="enemys/EagleSpawner2" index="1" unique_id=313397505]
-position = Vector2(257, -128)
-
-[node name="EagleSpawner3" parent="enemys" unique_id=1028428330 instance=ExtResource("12_sha1w")]
-position = Vector2(4177, 94)
-
-[node name="SpawnPosition" parent="enemys/EagleSpawner3" index="1" unique_id=313397505]
-position = Vector2(-332, -92)
+[node name="Item4" parent="Items" unique_id=331050663 instance=ExtResource("7_50olt")]
+position = Vector2(1375, 74)
+consumable_type = 2
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform2"]
@@ -332,7 +318,3 @@ position = Vector2(-332, -92)
 [editable path="enemys/BatSpawner2"]
 [editable path="enemys/FlyingNinjaSpawner"]
 [editable path="enemys/FlyingNinjaSpawner2"]
-[editable path="enemys/BatSpawner3"]
-[editable path="enemys/FlyingNinjaSpawner3"]
-[editable path="enemys/EagleSpawner2"]
-[editable path="enemys/EagleSpawner3"]

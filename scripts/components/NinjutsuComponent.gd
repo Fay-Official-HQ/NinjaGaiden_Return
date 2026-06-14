@@ -19,7 +19,7 @@ var _boomerang_scene: PackedScene = preload("res://scenes/ninjutsu/boomerang_nin
 func _ready() -> void:
 	var player_data = _get_player_data()
 	if player_data:
-		current_mp = player_data.max_mp
+		current_mp = player_data.initial_mp
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("switch_ninjutsu"):

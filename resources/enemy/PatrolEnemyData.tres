@@ -4,5 +4,4 @@
 
 [resource]
 script = ExtResource("1_icbou")
-patrol_distance = 50.0
 metadata/_custom_type_script = "uid://dg3loecxi0yrp"

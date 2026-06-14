@@ -18,7 +18,7 @@ enum AttackType { DART, FIRE }
 # ──── 上升物理参数（抛石头运动模型） ────
 ## 初始向上爆发速度（像素/秒）
 ## 越大蹦得越高越快，建议范围：200 ~ 500
-@export var rise_speed: float = 400.0
+@export var rise_speed: float = 500.0
 
 ## 上升减速度（像素/秒²），相当于"向上飞的重力"
 ## 越大上升弧线越短、越早到达最高点，建议范围：400 ~ 800

@@ -48,7 +48,7 @@ var _crouch_hurtbox_size: Vector2 = Vector2(13, 16)
 var _crouch_hurtbox_pos: Vector2 = Vector2(-1.5, 10.0)
 
 func _ready() -> void:
-	current_hp = data.max_hp
+	current_hp = data.initial_hp
 	movement.initialize(self)
 	animation.initialize(animated_sprite)
 

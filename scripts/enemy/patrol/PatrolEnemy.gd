@@ -8,6 +8,10 @@ extends BaseEnemy
 @onready var floor_detect_right: RayCast2D = $FloorDetectRight
 @onready var wall_detect: RayCast2D = $WallDetect
 
+## 巡逻半径（像素），覆盖 PatrolEnemyData 中的默认值
+## 设为 -1 则使用 data 资源中的 patrol_distance 值
+@export var patrol_distance_override: float = -1.0
+
 # 出生位置（用于 patrol_distance 范围限制）
 var _start_position: Vector2
 
@@ -46,10 +50,11 @@ func _check_turn() -> void:
 
 	# 超出巡逻半径 → 掉头
 	if patrol_data:
+		var dist = patrol_distance_override if patrol_distance_override >= 0 else patrol_data.patrol_distance
 		var distance = global_position.x - _start_position.x
-		if distance > patrol_data.patrol_distance:
+		if distance > dist:
 			_set_facing(false)
-		elif distance < -patrol_data.patrol_distance:
+		elif distance < -dist:
 			_set_facing(true)
 
 

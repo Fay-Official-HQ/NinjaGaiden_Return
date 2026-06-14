@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://m1mcny5xwvus"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fr1um"]
-size = Vector2(98.5, 2.5)
+size = Vector2(104, 6.25)
 
 [node name="HangingPlatform" type="StaticBody2D" unique_id=894400689 groups=["hanging_platform"]]
 collision_layer = 8
@@ -10,11 +10,4 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=232704396]
 shape = SubResource("RectangleShape2D_fr1um")
 one_way_collision = true
-debug_color = Color(0, 0, 0, 0.41960785)
-
-[node name="ColorRect" type="ColorRect" parent="CollisionShape2D" unique_id=228214823]
-offset_left = -49.0
-offset_top = -0.75
-offset_right = 49.25
-offset_bottom = 1.25
-color = Color(0.901123, 0.3564619, 0.41232696, 0.5921569)
+debug_color = Color(0, 0, 0, 0.5411765)

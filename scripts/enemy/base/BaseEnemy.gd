@@ -11,12 +11,23 @@ extends CharacterBody2D
 # ── 数据资源（由子类场景在 Inspector 中绑定） ──
 @export var data: BaseEnemyData
 
+## 初始面朝方向（在 Inspector 中勾选 = 面朝右，取消勾选 = 面朝左）
+@export var initial_facing_right: bool = true:
+	set(value):
+		initial_facing_right = value
+		facing_right = value
+		if anim:
+			anim.flip_h = not value
+
 # ── 运行时状态 ──
 var is_dead: bool = false
 var facing_right: bool = true
 
 
 func _ready() -> void:
+	# 应用初始朝向（确保动画节点就绪后同步精灵朝向）
+	facing_right = initial_facing_right
+	anim.flip_h = not facing_right
 	hurtbox.took_damage.connect(_on_took_damage)
 
 

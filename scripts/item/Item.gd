@@ -3,17 +3,22 @@ class_name Item
 
 enum ConsumableType { HEALTH, MP_SMALL, MP_LARGE }
 
-@export var consumable_type: ConsumableType = ConsumableType.HEALTH
+@export var consumable_type: ConsumableType = ConsumableType.HEALTH:
+	set(value):
+		consumable_type = value
+		_update_textures()
+
 @export var restore_hp: int = 8
-@export var restore_mp_small: int = 2
+@export var restore_mp_small: int = 1
 @export var restore_mp_large: int = 16
 @export var float_flash_interval: float = 0.5
 @export var fast_flash_duration: float = 3.0
 @export var ground_wait_time: float = 5.0
 @export var fall_gravity: float = 600.0
 
-@export var show_texture: Texture2D
-@export var hidden_texture: Texture2D
+# 纹理在 _update_textures() 中根据 consumable_type 自动加载，无需在 Inspector 中手动设置
+var show_texture: Texture2D
+var hidden_texture: Texture2D
 
 enum DropState { FLOATING, FALLING, GROUND_WAIT, FAST_FLASH }
 
@@ -29,8 +34,22 @@ var _show_icon: bool = true
 
 
 func _ready() -> void:
-	_sprite.texture = show_texture
+	_update_textures()
 	_pickup_area.body_entered.connect(_on_player_enter)
+
+
+## 根据 consumable_type 自动加载对应纹理路径
+func _update_textures() -> void:
+	hidden_texture = preload("res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_001.png")
+	match consumable_type:
+		ConsumableType.HEALTH:
+			show_texture = preload("res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_004.png")
+		ConsumableType.MP_SMALL:
+			show_texture = preload("res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_003.png")
+		ConsumableType.MP_LARGE:
+			show_texture = preload("res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_008.png")
+	if _sprite:
+		_sprite.texture = show_texture
 
 
 func receive_attack() -> void:

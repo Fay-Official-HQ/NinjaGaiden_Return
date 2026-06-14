@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_2twn6"]
 [ext_resource type="Texture2D" uid="uid://b1sxn6da5mvr6" path="res://assets/sprites/enemy/l1/ren_touzhi_3.png" id="7_x3oj8"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_kjdqa"]
-[ext_resource type="Resource" uid="uid://dydhisi3m8ryn" path="res://resources/enemy/PatrolNinjaData.tres" id="11_s4yrt"]
+[ext_resource type="Resource" uid="uid://dydhisi3m8ryn" path="res://resources/enemy/PatrolNinjaData.tres" id="11_8noin"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sbmmi"]
 animations = [{
@@ -86,7 +86,7 @@ size = Vector2(457, 32.5)
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_sfn74")
-data = ExtResource("11_s4yrt")
+data = ExtResource("11_8noin")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=266546870]
 sprite_frames = SubResource("SpriteFrames_sbmmi")

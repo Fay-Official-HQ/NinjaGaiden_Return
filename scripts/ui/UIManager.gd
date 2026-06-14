@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 	
 	_update_bar(hp_fill, player.current_hp, player.data.max_hp)
 	_update_bar(mp_fill, player.ninjutsu.current_mp, player.data.max_mp)
-	_update_bar(tp_fill, player.sword.current_tp, player.sword.MAX_TP)
+	_update_bar(tp_fill, player.sword.current_tp, player.sword.max_tp)
 	
 	_update_cd_masks(player)
 	

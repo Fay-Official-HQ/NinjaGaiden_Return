@@ -11,6 +11,7 @@ const SWORD_TP_COST = 2
 const BUFFER_TIMEOUT = 0.3
 
 var current_tp: int = MAX_TP
+var max_tp: int = MAX_TP
 var cooldowns: Dictionary = {
 	"dash": 0.0,
 	"uppercut": 0.0,
@@ -23,9 +24,17 @@ var input_buffer: Dictionary = {}
 signal tp_changed(current_tp: int)
 
 func _ready() -> void:
-	current_tp = MAX_TP
+	var player = _get_player()
+	if player:
+		max_tp = player.data.max_tp
+		current_tp = player.data.initial_tp
+	else:
+		current_tp = max_tp
 	tp_changed.emit(current_tp)
 	print("【剑术】组件初始化，当前 TP:", current_tp)
+
+func _get_player() -> Player:
+	return get_parent().owner as Player
 
 func _process(delta: float) -> void:
 	for key in cooldowns.keys():
@@ -45,7 +54,7 @@ func consume_tp(amount: int = SWORD_TP_COST) -> bool:
 	return false
 
 func add_tp(amount: int) -> void:
-	current_tp = clampi(current_tp + amount, 0, MAX_TP)
+	current_tp = clampi(current_tp + amount, 0, max_tp)
 	tp_changed.emit(current_tp)
 
 func is_on_cooldown(skill_name: String) -> bool:
