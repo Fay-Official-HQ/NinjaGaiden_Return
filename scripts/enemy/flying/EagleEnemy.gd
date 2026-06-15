@@ -36,6 +36,7 @@ enum Phase { DIVING, TURNING }
 
 var _phase: int = Phase.DIVING
 var _is_dead: bool = false
+var _current_hp: int = 1
 var _curve_velocity: Vector2 = Vector2.ZERO
 var _dive_locked: bool = false
 var _locked_direction: Vector2
@@ -43,6 +44,7 @@ var _dive_start_position: Vector2       # 锁定方向时的位置，用于判�
 
 
 func _ready() -> void:
+	_current_hp = data.max_hp
 	anim.play("fly")
 	hurtbox.took_damage.connect(_on_took_damage)
 
@@ -112,10 +114,12 @@ func _face_player() -> void:
 	anim.flip_h = player.global_position.x < global_position.x
 
 
-func _on_took_damage(_amount: int) -> void:
+func _on_took_damage(amount: int) -> void:
 	if _is_dead:
 		return
-	_die()
+	_current_hp -= amount
+	if _current_hp <= 0:
+		_die()
 
 
 func _die() -> void:

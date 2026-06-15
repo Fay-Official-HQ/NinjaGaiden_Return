@@ -22,12 +22,15 @@ extends CharacterBody2D
 # ── 运行时状态 ──
 var is_dead: bool = false
 var facing_right: bool = true
+var current_hp: int = 1
 
 
 func _ready() -> void:
 	# 应用初始朝向（确保动画节点就绪后同步精灵朝向）
 	facing_right = initial_facing_right
 	anim.flip_h = not facing_right
+	# 从数据资源初始化血量
+	current_hp = data.max_hp if data else 1
 	hurtbox.took_damage.connect(_on_took_damage)
 
 
@@ -35,10 +38,12 @@ func _ready() -> void:
 
 # 玩家攻击状态每帧 polling 检测到 HurtBox 后，会调用
 # HurtBox.take_damage() → 发出 took_damage 信号
-func _on_took_damage(_amount: int) -> void:
+func _on_took_damage(amount: int) -> void:
 	if is_dead:
 		return
-	_die()
+	current_hp -= amount
+	if current_hp <= 0:
+		_die()
 
 
 # 统一死亡处理

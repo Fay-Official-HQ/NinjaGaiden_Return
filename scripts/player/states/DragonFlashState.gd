@@ -5,7 +5,8 @@ class_name DragonFlashState
 const FADE_IN_TIME = 0.5      # 阶段0：角色渐隐消失耗时
 const FADE_OUT_TIME = 0.5     # 阶段2：角色渐显恢复耗时
 const SKILL_DURATION = 2.0    # 阶段1：技能持续总时长（斩击波阶段）
-const WAVE_INTERVAL = 0.15    # 每波斩击的时间间隔
+const WAVE_INTERVAL_FAST = 0.10  # 前6次快速斩击的间隔
+const PAUSE_BEFORE_FINAL = 0.3   # 最后一击前的停顿
 
 # ====== 残影参数 ======
 const SHADOWS_PER_WAVE = 3    # 每波生成的残影数量
@@ -20,7 +21,7 @@ const SPREAD_Y = 50.0         # 残影在Y轴随机偏移的最大范围
 const SPEED_MULTIPLIER = 0.35  # 技能期间移动速度倍率（0.5 = 半速）
 const PLAYER_ALPHA = 0.0      # 技能期间玩家透明度（0.0 = 完全透明）
 
-@export var final_phantom_lifetime: float = 1.0  # 终结幻影存在时间（秒），可在编辑器中调试
+@export var final_phantom_lifetime: float = 1.35  # 终结幻影存在时间（秒），可在编辑器中调试
 
 # 5种残影贴图，每波随机选取
 var shadow_textures = [
@@ -45,6 +46,7 @@ var _wave_count = 0           # 已生成的斩击波数（用于控制闪屏频
 var _tween_fade: Tween = null # 透明度渐变的 Tween 引用
 var _dragon_hit_box: DragonFlashHitBox  # AOE伤害框引用
 var _hit_count: int = 0            # 斩击命中计数器
+var _pause_before_final_timer: float = 0.0  # 最后一击前的停顿计时器
 
 func enter(_msg: Dictionary = {}) -> void:
 	if player.sword.is_on_cooldown("finish"):
@@ -67,7 +69,9 @@ func enter(_msg: Dictionary = {}) -> void:
 	_state = 0
 	_timer = 0.0
 	_wave_timer = 0.0
+	_wave_count = 0
 	_hit_count = 0
+	_pause_before_final_timer = 0.0
 
 	# 清除受伤闪烁状态（防止 _process 中 invincible_timer 覆盖 DragonFlash 的 Tween）
 	player.invincible_timer = 0.0
@@ -105,27 +109,45 @@ func update(_delta: float) -> void:
 				_state = 1          # 进入斩击阶段
 				_timer = 0.0
 			# 阶段0期间也重置波次计数器，确保进入阶段1时波次从干净状态开始
-			_wave_timer = WAVE_INTERVAL
+			_wave_timer = WAVE_INTERVAL_FAST
 			_wave_count = 0
 
 		1:
-			# 阶段1：核心输出阶段，每隔 WAVE_INTERVAL 秒生成一波残影
+			# 阶段1：前6次快速斩击(0.10s/次) → 停顿 → 最后一击
 			_timer += _delta
-			_wave_timer += _delta
-			if _wave_timer >= WAVE_INTERVAL:
-				_wave_timer -= WAVE_INTERVAL   # 保持累积不丢失，而非清零
-				spawn_wave()
+
+			if _wave_count < 12:
+				# 快速斩击阶段（6次斩击，每次2波，共12波），每次生成随机幻影
+				_wave_timer += _delta
+				if _wave_timer >= WAVE_INTERVAL_FAST:
+					_wave_timer -= WAVE_INTERVAL_FAST
+					spawn_wave()
+			elif _wave_count == 12:
+				# 停顿阶段：等待最后一击前奏
+				_pause_before_final_timer += _delta
+				if _pause_before_final_timer >= PAUSE_BEFORE_FINAL:
+					_do_final_strike()
+					_wave_count = 13
 
 			# 技能持续时间结束后，进入淡出阶段
 			if _timer >= SKILL_DURATION:
 				_state = 2
 				_timer = 0.0
-				trigger_screen_flash()  # 最后一次斩击强制闪屏
 				if _tween_fade and _tween_fade.is_valid():
 					_tween_fade.kill()
-				# Tween：角色逐渐恢复可见
+				# 故障重现特效：青色偏色 + 左右抖动 → 颜色恢复正常
+				sprite.modulate = Color.CYAN
+				sprite.position.x = -20.0
 				_tween_fade = create_tween()
-				_tween_fade.tween_property(sprite, "modulate:a", 1.0, FADE_OUT_TIME)
+				_tween_fade.set_parallel(true)
+				_tween_fade.tween_property(sprite, "modulate", Color.WHITE, FADE_OUT_TIME)
+				_tween_fade.tween_property(sprite, "position:x", 0.0, FADE_OUT_TIME).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+				# 快速抖动（0.15 秒内左右晃 3 次）
+				var shake = create_tween()
+				shake.tween_property(sprite, "position:x", 12.0, 0.04)
+				shake.tween_property(sprite, "position:x", -10.0, 0.04).set_delay(0.04)
+				shake.tween_property(sprite, "position:x", 6.0, 0.04).set_delay(0.08)
+				shake.tween_property(sprite, "position:x", -4.0, 0.04).set_delay(0.12)
 
 		2:
 			# 阶段2：等待淡出动画完成，然后退出技能
@@ -148,23 +170,28 @@ func physics_update(_delta: float) -> void:
 func spawn_wave() -> void:
 	_wave_count += 1
 
+	# 每2波算1次斩击（偶数波触发音效+伤害）
 	if _wave_count % 2 == 0:
 		_hit_count += 1
-		var is_last = _hit_count >= 7
-		if is_last:
-			AudioManager.play_sound(&"hanjiao")
-			AudioManager.play_sound(&"bishaji")
-			_spawn_final_phantom()
-			_deal_dragon_damage(4)
-		else:
-			AudioManager.play_sound(&"gongji")
-			_deal_dragon_damage(1)
+		AudioManager.play_sound(&"gongji")
+		_deal_dragon_damage(1)
 
+	# 每波都生成随机幻影（视觉效果）
 	for i in range(SHADOWS_PER_WAVE):
 		create_shadow()
 
 	if _wave_count % 3 == 0:
 		trigger_screen_flash()
+
+
+# 最后一击：保留玩家身上的淡出幻影，但不生成随机残影
+func _do_final_strike() -> void:
+	_hit_count += 1
+	AudioManager.play_sound(&"hanjiao")
+	AudioManager.play_sound(&"bishaji")
+	_spawn_final_phantom()
+	_deal_dragon_damage(4)
+	trigger_screen_flash()
 
 func create_shadow() -> void:
 	# 从5种残影贴图中随机选一个
@@ -244,8 +271,10 @@ func finish_skill() -> void:
 	player.is_invincible = false
 	player.is_gravity_disabled = false
 
-	# 恢复角色可见
+	# 恢复角色可见和位置
+	sprite.modulate = Color.WHITE
 	sprite.modulate.a = 1.0
+	sprite.position.x = 0.0
 
 	# 回到下落状态（真龙闪华只能在空中释放）
 	state_machine.change_state(player.fall_state, {"imbalance": false})
@@ -269,6 +298,8 @@ func exit() -> void:
 	player.is_invincible = false
 	player.is_gravity_disabled = false
 
-	# 确保角色恢复可见
+	# 确保角色恢复可见和位置
 	if sprite:
+		sprite.modulate = Color.WHITE
 		sprite.modulate.a = 1.0
+		sprite.position.x = 0.0

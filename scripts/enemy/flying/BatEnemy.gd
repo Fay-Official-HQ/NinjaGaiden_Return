@@ -12,11 +12,13 @@ var is_dead: bool = false
 var facing_right: bool = true
 var start_y: float
 var time: float = 0.0
+var current_hp: int = 1
 
 
 func _ready() -> void:
 	start_y = global_position.y
 	facing_right = data.facing_right
+	current_hp = data.max_hp
 	_set_facing(facing_right)
 	anim.play("fly")
 
@@ -36,10 +38,12 @@ func _process(delta: float) -> void:
 	position.y = start_y + offset_y
 
 
-func _on_took_damage(_amount: int) -> void:
+func _on_took_damage(amount: int) -> void:
 	if is_dead:
 		return
-	_die()
+	current_hp -= amount
+	if current_hp <= 0:
+		_die()
 
 
 func _die() -> void:

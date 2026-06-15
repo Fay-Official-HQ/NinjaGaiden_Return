@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="NinjaGaiden_Return"
-run/main_scene="res://scenes/intro/IntroController.tscn"
+run/main_scene="uid://c3wcnst0ne1bs"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -14,12 +14,14 @@ enum Phase { RISING, FALLING }
 
 var _phase: int = Phase.RISING
 var _is_dead: bool = false
+var _current_hp: int = 1
 var _velocity_y: float = 0.0
 var _has_thrown: bool = false
 var _fire_timer: float = 0.0
 
 
 func _ready() -> void:
+	_current_hp = data.max_hp
 	_velocity_y = -data.rise_speed
 
 	# 火焰忍者变红色
@@ -121,10 +123,12 @@ func _face_initial_direction() -> void:
 
 # ==================== 受击 ====================
 
-func _on_took_damage(_amount: int) -> void:
+func _on_took_damage(amount: int) -> void:
 	if _is_dead:
 		return
-	_die()
+	_current_hp -= amount
+	if _current_hp <= 0:
+		_die()
 
 
 func _die() -> void:

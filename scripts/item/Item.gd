@@ -1,7 +1,7 @@
 extends Area2D
 class_name Item
 
-enum ConsumableType { HEALTH, MP_SMALL, MP_LARGE }
+enum ConsumableType { HEALTH, MP_SMALL, MP_LARGE, TP }
 
 @export var consumable_type: ConsumableType = ConsumableType.HEALTH:
 	set(value):
@@ -11,7 +11,8 @@ enum ConsumableType { HEALTH, MP_SMALL, MP_LARGE }
 @export var restore_hp: int = 8
 @export var restore_mp_small: int = 1
 @export var restore_mp_large: int = 16
-@export var float_flash_interval: float = 0.5
+@export var restore_tp: int = 16
+@export var float_flash_interval: float = 0.3
 @export var fast_flash_duration: float = 3.0
 @export var ground_wait_time: float = 5.0
 @export var fall_gravity: float = 600.0
@@ -48,6 +49,8 @@ func _update_textures() -> void:
 			show_texture = preload("res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_003.png")
 		ConsumableType.MP_LARGE:
 			show_texture = preload("res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_008.png")
+		ConsumableType.TP:
+			show_texture = preload("res://assets/sprites/item/item_tp.png")
 	if _sprite:
 		_sprite.texture = show_texture
 
@@ -125,3 +128,6 @@ func _apply_effect(player: Player) -> void:
 		ConsumableType.MP_LARGE:
 			player.ninjutsu.add_mp(restore_mp_large)
 			AudioManager.play_sound(&"rendahuifu")
+		ConsumableType.TP:
+			player.sword.add_tp(restore_tp)
+			AudioManager.play_sound(&"HPhuifu")

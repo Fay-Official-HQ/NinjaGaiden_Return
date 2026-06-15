@@ -54,8 +54,8 @@ func _process(delta: float) -> void:
 	if not visible:
 		return
 
-	# 暂停输入检测（不依赖 player 存在）
-	if Input.is_action_just_pressed("pass"):
+	# 暂停输入检测（只在有 player 的关卡生效，菜单界面不触发）
+	if Input.is_action_just_pressed("pass") and get_tree().get_first_node_in_group("player"):
 		_toggle_pause()
 
 	var player = get_tree().get_first_node_in_group("player")

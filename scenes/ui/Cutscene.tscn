@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dlhk606xicgob"]
 
+[ext_resource type="AudioStream" uid="uid://l4hbgrjc5xgi" path="res://assets/audio/bgm/kaitouBGM.wav" id="1_wchr6"]
+
 [node name="Cutscene" type="Node2D" unique_id=825381784]
 
 [node name="NinjaIcon" type="Sprite2D" parent="." unique_id=2032754015]
@@ -9,3 +11,4 @@
 [node name="ChapterText" type="Sprite2D" parent="." unique_id=1917860986]
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1659387622]
+stream = ExtResource("1_wchr6")

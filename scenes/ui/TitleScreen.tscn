@@ -1,6 +1,18 @@
 [gd_scene format=3 uid="uid://c3wcnst0ne1bs"]
 
+[ext_resource type="Texture2D" uid="uid://bokkbqatni4xt" path="res://assets/img/title/LOGO.png" id="1_ny3vc"]
+[ext_resource type="AudioStream" uid="uid://16xhjtbilv8l" path="res://assets/audio/player/bishaji.wav" id="2_bt6bf"]
+[ext_resource type="Texture2D" uid="uid://dnl2md5h751no" path="res://assets/img/title/gametext.png" id="2_j2lur"]
+[ext_resource type="Texture2D" uid="uid://tp158jaocuhj" path="res://assets/img/title/mianzeshengming.png" id="3_tbfit"]
+[ext_resource type="AudioStream" uid="uid://dfu14fcju6ubs" path="res://assets/audio/player/huixue.wav" id="3_xnmwc"]
+[ext_resource type="Texture2D" uid="uid://ceanwxrr6ig03" path="res://assets/img/title/fayofficial2026.png" id="4_j4pmt"]
+[ext_resource type="Texture2D" uid="uid://jbjkqbucbvjt" path="res://assets/img/title/gamestart.png" id="5_6j5qt"]
+[ext_resource type="Texture2D" uid="uid://64lrib1hk65v" path="res://assets/img/title/cursor.png" id="5_bj1w8"]
+[ext_resource type="Texture2D" uid="uid://dry33qh0cegge" path="res://assets/img/title/Instructions.png" id="6_p52wy"]
+[ext_resource type="Script" uid="uid://dumplln0mtsxv" path="res://scripts/ui/TitleScreen.gd" id="9_cle6h"]
+
 [node name="TitleScreen" type="Node2D" unique_id=329057504]
+script = ExtResource("9_cle6h")
 
 [node name="BlackOverlay" type="ColorRect" parent="." unique_id=1824288829]
 offset_left = -30.0
@@ -10,21 +22,39 @@ offset_bottom = 298.0
 color = Color(0, 0, 0, 1)
 
 [node name="Logo" type="Sprite2D" parent="." unique_id=1780171710]
+position = Vector2(240, 135)
+texture = ExtResource("1_ny3vc")
 
 [node name="Menu" type="Node2D" parent="." unique_id=998258200]
 
-[node name="MenuBackground" type="Sprite2D" parent="Menu" unique_id=812250661]
+[node name="MenuBackground" type="Node2D" parent="Menu" unique_id=780735610]
 
-[node name="MenuText_Start" type="Label" parent="Menu" unique_id=156321284]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Title" type="Sprite2D" parent="Menu/MenuBackground" unique_id=812250661]
+position = Vector2(240, 80)
+texture = ExtResource("2_j2lur")
 
-[node name="MenuText_HowToPlay" type="Label" parent="Menu" unique_id=198420141]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="EDUCATIONALUSEONLY" type="Sprite2D" parent="Menu/MenuBackground" unique_id=972738879]
+position = Vector2(240, 244)
+texture = ExtResource("3_tbfit")
+
+[node name="FAYOFFICIAL2026" type="Sprite2D" parent="Menu/MenuBackground" unique_id=1721018360]
+position = Vector2(240, 224)
+texture = ExtResource("4_j4pmt")
+
+[node name="Cursor" type="Sprite2D" parent="Menu" unique_id=1826412558]
+position = Vector2(186, 152)
+texture = ExtResource("5_bj1w8")
+
+[node name="GameStart" type="Sprite2D" parent="Menu" unique_id=1159414177]
+position = Vector2(240, 151)
+texture = ExtResource("5_6j5qt")
+
+[node name="Instructions" type="Sprite2D" parent="Menu" unique_id=990828463]
+position = Vector2(250, 167)
+texture = ExtResource("6_p52wy")
 
 [node name="LogoClick" type="AudioStreamPlayer" parent="." unique_id=442050061]
+stream = ExtResource("2_bt6bf")
 
 [node name="MenuClick" type="AudioStreamPlayer" parent="." unique_id=720618694]
-
-[node name="MenuChangeClick" type="AudioStreamPlayer" parent="." unique_id=2070498114]
+stream = ExtResource("3_xnmwc")
