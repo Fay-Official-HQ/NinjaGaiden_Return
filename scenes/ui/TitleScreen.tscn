@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c3wcnst0ne1bs"]
+
+[node name="TitleScreen" type="Node2D" unique_id=329057504]
+
+[node name="BlackOverlay" type="ColorRect" parent="." unique_id=1824288829]
+offset_left = -30.0
+offset_top = -20.0
+offset_right = 515.0
+offset_bottom = 298.0
+color = Color(0, 0, 0, 1)
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=1780171710]
+
+[node name="Menu" type="Node2D" parent="." unique_id=998258200]
+
+[node name="MenuBackground" type="Sprite2D" parent="Menu" unique_id=812250661]
+
+[node name="MenuText_Start" type="Label" parent="Menu" unique_id=156321284]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MenuText_HowToPlay" type="Label" parent="Menu" unique_id=198420141]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LogoClick" type="AudioStreamPlayer" parent="." unique_id=442050061]
+
+[node name="MenuClick" type="AudioStreamPlayer" parent="." unique_id=720618694]
+
+[node name="MenuChangeClick" type="AudioStreamPlayer" parent="." unique_id=2070498114]

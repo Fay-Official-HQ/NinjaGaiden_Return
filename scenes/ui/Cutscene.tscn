@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dlhk606xicgob"]
+
+[node name="Cutscene" type="Node2D" unique_id=825381784]
+
+[node name="NinjaIcon" type="Sprite2D" parent="." unique_id=2032754015]
+
+[node name="GameTitle" type="Sprite2D" parent="." unique_id=2118428896]
+
+[node name="ChapterText" type="Sprite2D" parent="." unique_id=1917860986]
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1659387622]
