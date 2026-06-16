@@ -1,14 +1,42 @@
 [gd_scene format=3 uid="uid://dlhk606xicgob"]
 
+[ext_resource type="Texture2D" uid="uid://dryo4g1dnxfpq" path="res://assets/img/title/ninja_yanchu.png" id="1_7ojv4"]
+[ext_resource type="Script" uid="uid://n3q5awmh11p2" path="res://scripts/ui/Cutscene.gd" id="1_31qad"]
 [ext_resource type="AudioStream" uid="uid://l4hbgrjc5xgi" path="res://assets/audio/bgm/kaitouBGM.wav" id="1_wchr6"]
+[ext_resource type="Texture2D" uid="uid://dnl2md5h751no" path="res://assets/img/title/gametext.png" id="2_31qad"]
+[ext_resource type="Texture2D" uid="uid://c18j2212c1h3d" path="res://assets/img/title/diyizhang.png" id="3_6ip15"]
+[ext_resource type="Texture2D" uid="uid://crgnke4iukxp4" path="res://assets/img/title/guilai.png" id="4_iuf4u"]
 
 [node name="Cutscene" type="Node2D" unique_id=825381784]
+script = ExtResource("1_31qad")
+metadata/_edit_horizontal_guides_ = [125.0, 249.0]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1786945753]
+offset_left = -53.0
+offset_top = -14.0
+offset_right = 525.0
+offset_bottom = 290.0
+color = Color(0, 0, 0, 1)
 
 [node name="NinjaIcon" type="Sprite2D" parent="." unique_id=2032754015]
+position = Vector2(-128, 80)
+texture = ExtResource("1_7ojv4")
 
 [node name="GameTitle" type="Sprite2D" parent="." unique_id=2118428896]
+position = Vector2(635, 219)
+texture = ExtResource("2_31qad")
 
-[node name="ChapterText" type="Sprite2D" parent="." unique_id=1917860986]
+[node name="ChapterText" type="Node2D" parent="." unique_id=1567210427]
+
+[node name="chapter_1" type="Node2D" parent="ChapterText" unique_id=351385010]
+
+[node name="title" type="Sprite2D" parent="ChapterText/chapter_1" unique_id=213218103]
+position = Vector2(155, 110)
+texture = ExtResource("3_6ip15")
+
+[node name="subtitle" type="Sprite2D" parent="ChapterText/chapter_1/title" unique_id=700942321]
+position = Vector2(0, 30)
+texture = ExtResource("4_iuf4u")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1659387622]
 stream = ExtResource("1_wchr6")

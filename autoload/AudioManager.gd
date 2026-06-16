@@ -7,9 +7,9 @@ extends Node
 # 专门放背景音乐的播放器
 var _bgm_player: AudioStreamPlayer
 
-# 专门放音效的播放器池（准备4个，防止多个音效同时响的时候互相覆盖）
+# 专门放音效的播放器池（准备8个，动作游戏音效密集，4个不够用）
 var _sfx_players: Array[AudioStreamPlayer] = []
-const SFX_POOL_SIZE = 4
+const SFX_POOL_SIZE = 8
 
 func _ready() -> void:
 	# 暂停时音频必须独立于 time_scale 运行，否则暂停音效播不出来
@@ -74,9 +74,10 @@ func _play_sfx(event: SoundEventResource) -> void:
 			target_player = player
 			break
 			
-	# 如果大家都挺忙的，就强行征用第一个
+	# 如果大家都挺忙的，就强行征用第一个（先 stop 确保音频服务器重置）
 	if target_player == null:
 		target_player = _sfx_players[0]
+		target_player.stop()
 		
 	# 计算随机音调（让每次挥刀声音有细微不同，Claude 推荐的高级货）
 	var final_pitch = event.pitch

@@ -189,11 +189,13 @@ func _confirm_selection():
 	var action = _menu_items[_selected_index]["action"]
 	match action:
 		"start_game":
-			# 菜单简单淡出 1 秒，然后进入第一关
+			# 菜单简单淡出 1 秒，然后进入过场动画
 			var tween = create_tween()
 			tween.tween_property(menu, "modulate:a", 0.0, MENU_FADE_DURATION)
 			await tween.finished
-			get_tree().change_scene_to_file("res://scenes/levels/Level_1.tscn")
+			const CutsceneScript = preload("res://scripts/ui/Cutscene.gd")
+			CutsceneScript.target_chapter = 1
+			get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")
 		"show_instructions":
 			# 操作说明功能待实现，先恢复输入
 			_transitioning = false
