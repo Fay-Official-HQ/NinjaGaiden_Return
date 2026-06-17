@@ -34,6 +34,7 @@ var facing_direction: float = 1.0
 var invincible_timer: float = 0.0
 const INVINCIBLE_TIME: float = 1.5
 var _was_invincible: bool = false
+var _is_dead: bool = false
 
 # 必杀技无敌状态（由 DragonFlashState 控制）
 var is_invincible: bool = false
@@ -94,7 +95,7 @@ func set_facing_direction(direction: float) -> void:
 	animation.flip_sprite(facing_direction)
 
 func _on_hurt_box_took_damage(damage: int) -> void:
-	if invincible_timer > 0 or is_invincible:
+	if invincible_timer > 0 or is_invincible or _is_dead:
 		return
 
 	current_hp -= damage
@@ -132,6 +133,30 @@ func _check_overlapping_enemy_after_invincibility() -> void:
 
 func die() -> void:
 	print("玩家死亡！")
-	hide()
-	set_process(false)
+	_is_dead = true
+
+	# 冻结所有运动
+	velocity = Vector2.ZERO
 	set_physics_process(false)
+	set_process(false)
+
+	# 禁用受伤框，防止死亡期间继续受伤
+	hurtbox_collision.set_deferred("disabled", true)
+
+	# 停止关卡 BGM
+	AudioManager.pause_bgm()
+
+	# 播放死亡动画
+	animated_sprite.play("hurt")
+
+	# 播放死亡音效
+	AudioManager.play_sound(&"siwang")
+
+	# 等待 2.0 秒让死亡动画和音效播放一下
+	await get_tree().create_timer(2.0).timeout
+
+	# 切换到 GameOverScreen
+	hide()
+	const GameOverScreen = preload("res://scripts/ui/GameOverScreen.gd")
+	GameOverScreen.return_scene = get_tree().current_scene.scene_file_path
+	get_tree().change_scene_to_file("res://scenes/ui/GameOverScreen.tscn")

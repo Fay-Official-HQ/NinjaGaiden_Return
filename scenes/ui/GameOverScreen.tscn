@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://occgqmh5lwr3"]
 
-[ext_resource type="Texture2D" path="res://assets/img/title/continue.png" id="1_lhij4"]
-[ext_resource type="Texture2D" path="res://assets/img/title/quit.png" id="2_wdbrb"]
-[ext_resource type="Texture2D" path="res://assets/img/title/cursor.png" id="3_xfpdw"]
-[ext_resource type="AudioStream" path="res://assets/audio/player/huixue.wav" id="4_ln0yf"]
-[ext_resource type="AudioStream" path="res://assets/audio/se/gameover.wav" id="5_ns8sj"]
-[ext_resource type="Script" path="res://scripts/ui/GameOverScreen.gd" id="6_hpxtm"]
+[ext_resource type="Texture2D" uid="uid://b8lip1p523xsi" path="res://assets/img/title/continue.png" id="1_lhij4"]
+[ext_resource type="Texture2D" uid="uid://bcuntuebgjy18" path="res://assets/img/title/quit.png" id="2_wdbrb"]
+[ext_resource type="Texture2D" uid="uid://r888jmc2pvln" path="res://assets/img/title/cursor.png" id="3_xfpdw"]
+[ext_resource type="AudioStream" uid="uid://dfu14fcju6ubs" path="res://assets/audio/player/huixue.wav" id="4_ln0yf"]
+[ext_resource type="AudioStream" uid="uid://d375hx6uk27yo" path="res://assets/audio/se/gameover.wav" id="5_ns8sj"]
+[ext_resource type="Script" uid="uid://buwxymqsp5avb" path="res://scripts/ui/GameOverScreen.gd" id="6_hpxtm"]
 
 [node name="GameOverScreen" type="CanvasLayer" unique_id=1730780117]
 process_mode = 3

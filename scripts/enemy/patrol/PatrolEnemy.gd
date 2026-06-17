@@ -20,6 +20,14 @@ func _ready() -> void:
 	super()
 	_start_position = global_position
 
+	# 从数据资源同步接触伤害值到 HitBox
+	var enemy_hitbox = hitbox as EnemyHitBox
+	if enemy_hitbox and data:
+		enemy_hitbox.damage = data.contact_damage
+
+	# 显式设置 HitBox 碰撞掩码（layer 1 = 玩家层），确保能检测到玩家
+	hitbox.collision_mask = 1
+
 
 func _physics_process(delta: float) -> void:
 	if is_dead:

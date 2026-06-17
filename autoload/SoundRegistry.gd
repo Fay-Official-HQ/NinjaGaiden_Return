@@ -19,6 +19,7 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/player/renshuhuoqiu.tres",
 	"res://resources/audio/player/renshulengren.tres",
 	"res://resources/audio/player/shoushang.tres",
+	"res://resources/audio/player/siwang.tres",
 	"res://resources/audio/player/tiaoyue.tres",
 	"res://resources/audio/player/yinshen.tres",
 	"res://resources/audio/se/disiwang.tres",

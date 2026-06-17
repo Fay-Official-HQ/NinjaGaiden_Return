@@ -191,6 +191,14 @@ animations = [{
 "name": &"crouch_attack",
 "speed": 10.0
 }, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_2wy34")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [],
 "loop": true,
 "name": &"default",
@@ -661,7 +669,7 @@ debug_color = Color(0.77392095, 0.43947607, 0.13655847, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"sword_dash"
+animation = &"death"
 autoplay = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]

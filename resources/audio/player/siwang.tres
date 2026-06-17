@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://wxflade4ykfe"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://yenomuhftl80" path="res://assets/audio/player/siwang.wav" id="2"]
+
+[resource]
+script = ExtResource("1")
+event_id = &"siwang"
+stream = ExtResource("2")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

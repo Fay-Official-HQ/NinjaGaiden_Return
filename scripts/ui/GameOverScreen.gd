@@ -111,10 +111,10 @@ func _update_cursor_position():
 func _confirm_selection():
 	_transitioning = true
 	_active = false
-	confirm_sfx.play()
 
 	match _menu_items[_selected_index]["action"]:
 		"continue":
+			confirm_sfx.play()
 			_restart_level()
 		"quit":
 			_go_to_title()
