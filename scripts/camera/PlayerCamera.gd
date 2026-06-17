@@ -22,7 +22,9 @@ func _physics_process(_delta: float) -> void:
 	else:
 		global_position.y = target.global_position.y
 
-	# Camera2D 的 limit_* 属性会自动生效，无需额外处理
+	# 手动 clamp，双重保险（Camera2D 自带 limit 有时在 top_level 下不生效）
+	var viewport_half = get_viewport_rect().size.x * 0.5
+	global_position.x = clampf(global_position.x, limit_left + viewport_half, limit_right - viewport_half)
 
 
 # ════════════════════════════════════════════════════
@@ -41,13 +43,13 @@ func set_follow_y(follow: bool) -> void:
 ## 设置摄像机边界（防止摄像机超出场景范围）
 ##  传 -1 表示不限制该方向
 func set_bounds(left: float = -1, right: float = -1, top: float = -1, bottom: float = -1) -> void:
-	if left >= 0:
+	if left != -1:
 		limit_left = left
-	if right >= 0:
+	if right != -1:
 		limit_right = right
-	if top >= 0:
+	if top != -1:
 		limit_top = top
-	if bottom >= 0:
+	if bottom != -1:
 		limit_bottom = bottom
 
 

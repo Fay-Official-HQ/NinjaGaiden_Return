@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://cya36n0s28p0d"]
 
 [ext_resource type="Script" uid="uid://d34vea7s75eh1" path="res://scenes/levels/level_1.gd" id="1_p3uqr"]
-[ext_resource type="Texture2D" uid="uid://ho41pk3dqxrm" path="res://assets/img/beijing.png" id="1_ukdbm"]
+[ext_resource type="Texture2D" uid="uid://bxjs2t688msfo" path="res://assets/img/beijing.png" id="1_ukdbm"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="2_ccvly"]
 [ext_resource type="TileSet" uid="uid://ca52o5acxygjl" path="res://resources/tilesets/fc2_1.tres" id="3_cnmxh"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="5_u8eek"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="5_vqsrt"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="7_50olt"]
-[ext_resource type="PackedScene" uid="uid://c8voh3ao403c2" path="res://scenes/enemy/l1/chaser_ninja_spawner.tscn" id="8_ra48x"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l1/chaser_ninja_spawner.tscn" id="8_ra48x"]
 [ext_resource type="PackedScene" uid="uid://ouj101grcbrq" path="res://scenes/enemy/l1/crouch_ninja.tscn" id="9_jrjue"]
 [ext_resource type="PackedScene" uid="uid://doocneekcsaoy" path="res://scenes/enemy/l1/small_patrol_enemy.tscn" id="9_y54f7"]
 [ext_resource type="PackedScene" uid="uid://cnyhgpkwkdttx" path="res://scenes/enemy/l1/bat_spawner.tscn" id="10_sha1w"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cxo4iprmk5ckn" path="res://scenes/enemy/l1/flying_ninja_spawner.tscn" id="13_hknnn"]
 [ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="13_p3uqr"]
 [ext_resource type="PackedScene" uid="uid://cwwwl5njk4twt" path="res://scenes/enemy/l1/patrol_ninja.tscn" id="14_p3uqr"]
+[ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="17_nd8jy"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -68,6 +69,9 @@ size = Vector2(5035, 142)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3uqr"]
 size = Vector2(93.233154, 241.4815)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
+size = Vector2(8, 32)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_p3uqr")
@@ -168,6 +172,7 @@ shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("2_ccvly")]
 position = Vector2(67, 100)
+metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -337,6 +342,18 @@ position = Vector2(4177, 94)
 
 [node name="SpawnPosition" parent="enemys/EagleSpawner3" index="1" unique_id=313397505]
 position = Vector2(-332, -92)
+
+[node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
+position = Vector2(4386, 17)
+
+[node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
+script = ExtResource("17_nd8jy")
+target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
+spawn_point = "entry_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
+position = Vector2(4386, -16)
+shape = SubResource("RectangleShape2D_nd8jy")
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform2"]

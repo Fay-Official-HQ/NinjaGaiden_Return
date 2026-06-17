@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 UIManager="*uid://brnuwjdqtk32o"
 SoundRegistry="*uid://bskllj582mxca"
 AudioManager="*uid://dcc57x68jwn6x"
+LevelManager="*res://autoload/LevelManager.gd"
 
 [display]
 

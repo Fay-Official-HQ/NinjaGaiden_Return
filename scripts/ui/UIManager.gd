@@ -6,7 +6,6 @@ extends CanvasLayer
 @onready var ninjutsu_icon = $HUD/NinjutsuIcon
 @onready var _msg_label: Label = $HUD/MessageLabel
 
-var _ninjutsu_connected: bool = false
 var _msg_timer: float = 0.0
 
 # ── 暂停系统 ──
@@ -67,10 +66,11 @@ func _process(delta: float) -> void:
 	_update_bar(tp_fill, player.sword.current_tp, player.sword.max_tp)
 	
 	_update_cd_masks(player)
-	
-	if not _ninjutsu_connected:
+
+	# 用 is_connected 代替布尔变量：跨场景 Player 重建后自动重新连接
+	if not player.ninjutsu.ninjutsu_switched.is_connected(_update_ninjutsu_icon):
 		player.ninjutsu.ninjutsu_switched.connect(_update_ninjutsu_icon)
-		_ninjutsu_connected = true
+		_update_ninjutsu_icon(player.ninjutsu.current_ninjutsu_index, "")
 	
 	_handle_message(delta)
 
