@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="2_ccvly"]
 [ext_resource type="TileSet" uid="uid://ca52o5acxygjl" path="res://resources/tilesets/fc2_1.tres" id="3_cnmxh"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="5_u8eek"]
+[ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="5_vqsrt"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="7_50olt"]
 [ext_resource type="PackedScene" uid="uid://c8voh3ao403c2" path="res://scenes/enemy/l1/chaser_ninja_spawner.tscn" id="8_ra48x"]
 [ext_resource type="PackedScene" uid="uid://ouj101grcbrq" path="res://scenes/enemy/l1/crouch_ninja.tscn" id="9_jrjue"]
@@ -61,6 +62,9 @@ size = Vector2(32.313057, 340.12097)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5x2jh"]
 size = Vector2(105, 279.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
+size = Vector2(5035, 142)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3uqr"]
 size = Vector2(93.233154, 241.4815)
@@ -154,8 +158,16 @@ shape = SubResource("RectangleShape2D_hknnn")
 position = Vector2(3732.5, 148.75)
 shape = SubResource("RectangleShape2D_5x2jh")
 
+[node name="DeathZone" type="Area2D" parent="Map" unique_id=1321774903]
+script = ExtResource("5_vqsrt")
+metadata/_custom_type_script = "uid://c04yqponxtme3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/DeathZone" unique_id=1844145851]
+position = Vector2(2282, 400)
+shape = SubResource("RectangleShape2D_vqsrt")
+
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("2_ccvly")]
-position = Vector2(38, 100)
+position = Vector2(67, 100)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
