@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://dlhk606xicgob"]
 
-[ext_resource type="Texture2D" uid="uid://dryo4g1dnxfpq" path="res://assets/img/title/ninja_yanchu.png" id="1_7ojv4"]
+[ext_resource type="Texture2D" uid="uid://l54x5dy10c2n" path="res://assets/img/title/ninja_yanchu.png" id="1_7ojv4"]
 [ext_resource type="Script" uid="uid://n3q5awmh11p2" path="res://scripts/ui/Cutscene.gd" id="1_31qad"]
 [ext_resource type="AudioStream" uid="uid://l4hbgrjc5xgi" path="res://assets/audio/bgm/kaitouBGM.wav" id="1_wchr6"]
-[ext_resource type="Texture2D" uid="uid://dnl2md5h751no" path="res://assets/img/title/gametext.png" id="2_31qad"]
-[ext_resource type="Texture2D" uid="uid://c18j2212c1h3d" path="res://assets/img/title/diyizhang.png" id="3_6ip15"]
-[ext_resource type="Texture2D" uid="uid://crgnke4iukxp4" path="res://assets/img/title/guilai.png" id="4_iuf4u"]
+[ext_resource type="Texture2D" uid="uid://yslbkwa6j416" path="res://assets/img/title/gametext.png" id="2_31qad"]
+[ext_resource type="Texture2D" uid="uid://dftwkk4cgr6hh" path="res://assets/img/title/diyizhang.png" id="3_6ip15"]
+[ext_resource type="Texture2D" uid="uid://d3dvw4hrlgii6" path="res://assets/img/title/guilai.png" id="4_iuf4u"]
 
 [node name="Cutscene" type="Node2D" unique_id=825381784]
 script = ExtResource("1_31qad")

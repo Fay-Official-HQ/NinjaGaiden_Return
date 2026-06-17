@@ -89,10 +89,12 @@ var _fade_overlay: ColorRect
 #  初始化：拉起幕布、准备舞台、启动演出
 # ============================================================
 
-func _ready():
-	# 隐藏全局 HUD（标题界面不需要血量条、CD 指示器等）
+func _enter_tree():
+	# 尽早隐藏全局 HUD，防止切场景时闪一下
 	UIManager.visible = false
 
+
+func _ready():
 	# 永久黑色背景（ColorRect 全程 alpha=1.0，只是背景板）
 	black_rect.modulate.a = 1.0
 

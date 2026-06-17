@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/img/title/continue.png" id="1_lhij4"]
+[ext_resource type="Texture2D" path="res://assets/img/title/quit.png" id="2_wdbrb"]
+[ext_resource type="Texture2D" path="res://assets/img/title/cursor.png" id="3_xfpdw"]
+[ext_resource type="AudioStream" path="res://assets/audio/player/huixue.wav" id="4_ln0yf"]
+[ext_resource type="AudioStream" path="res://assets/audio/se/gameover.wav" id="5_ns8sj"]
+[ext_resource type="Script" path="res://scripts/ui/GameOverScreen.gd" id="6_hpxtm"]
+
+[node name="GameOverScreen" type="CanvasLayer" unique_id=1730780117]
+process_mode = 3
+script = ExtResource("6_hpxtm")
+
+[node name="BlackOverlay" type="ColorRect" parent="." unique_id=271354044]
+offset_left = -73.0
+offset_top = -47.0
+offset_right = 584.0
+offset_bottom = 335.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Panel" type="Node2D" parent="." unique_id=1990708257]
+
+[node name="Option_Continue" type="Sprite2D" parent="Panel" unique_id=387420904]
+position = Vector2(246, 131)
+texture = ExtResource("1_lhij4")
+
+[node name="Option_Quit" type="Sprite2D" parent="Panel" unique_id=34450763]
+position = Vector2(232, 145)
+texture = ExtResource("2_wdbrb")
+
+[node name="Cursor" type="Sprite2D" parent="Panel" unique_id=58533139]
+position = Vector2(202, 132)
+texture = ExtResource("3_xfpdw")
+
+[node name="ConfirmSFX" type="AudioStreamPlayer" parent="." unique_id=944499588]
+stream = ExtResource("4_ln0yf")
+
+[node name="GameOverBGM" type="AudioStreamPlayer" parent="." unique_id=1810967931]
+stream = ExtResource("5_ns8sj")

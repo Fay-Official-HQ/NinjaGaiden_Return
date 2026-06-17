@@ -67,9 +67,6 @@ func _ready():
 	# Logo 淡入阶段开始，此时按空格可提前打断
 	_fade_in_logo()
 
-func _exit_tree() -> void:
-	# 切到关卡场景时恢复 HUD 显示
-	UIManager.visible = true
 
 # ============================================================
 #  Logo 淡入动画（2秒，可按空格打断）
