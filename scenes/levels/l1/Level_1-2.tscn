@@ -500,6 +500,9 @@ position = Vector2(-3626, -26)
 [node name="SpawnPosition" parent="enemys/ChaserNinjaSpawner" index="1"]
 position = Vector2(-203, 30)
 
+[node name="PatrolEnemy4" parent="enemys" unique_id=434050736 instance=ExtResource("13_hkja5")]
+position = Vector2(-2999, 132)
+
 [node name="entry_right" type="Marker2D" parent="." unique_id=1636792977]
 position = Vector2(70, 179)
 
@@ -512,9 +515,6 @@ metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneRight" unique_id=1803929966]
 position = Vector2(74.5, 246.5)
 shape = SubResource("RectangleShape2D_62ig4")
-
-[node name="PatrolEnemy" parent="." unique_id=434050736 instance=ExtResource("13_hkja5")]
-position = Vector2(-2999, 132)
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform2"]
