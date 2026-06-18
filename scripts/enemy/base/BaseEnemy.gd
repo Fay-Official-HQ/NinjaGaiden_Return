@@ -78,5 +78,6 @@ func _set_facing(right: bool) -> void:
 
 # 如果某些子类需要用 area_entered 做特殊逻辑（如检测玩家进入攻击范围），
 # 可在此覆盖
-func _on_hurtbox_area_entered(area: Area2D) -> void:
+func _on_hurtbox_area_entered(_area):
+	# 函数体
 	pass

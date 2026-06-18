@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bnekb4roqnon4"]
 
 [ext_resource type="Script" uid="uid://cvqwaedt3j1xf" path="res://scenes/levels/l1/level_1-2.gd" id="1_4kb5k"]
-[ext_resource type="Texture2D" uid="uid://bxjs2t688msfo" path="res://assets/img/beijing.png" id="2_3yd20"]
+[ext_resource type="Texture2D" uid="uid://ho41pk3dqxrm" path="res://assets/img/beijing.png" id="2_3yd20"]
 [ext_resource type="TileSet" uid="uid://ca52o5acxygjl" path="res://resources/tilesets/fc2_1.tres" id="3_lw5dw"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/module‌/hanging_platform.tscn" id="4_i08ax"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="5_tkmo1"]

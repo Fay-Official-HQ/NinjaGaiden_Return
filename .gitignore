@@ -1,4 +1,8 @@
+# Godot 4+ 特定文件
 .godot/
-*.import
+
+# 导出配置（包含密钥等，不提交）
 export_presets.cfg
+
+# 环境变量（敏感信息，不提交）
 .env

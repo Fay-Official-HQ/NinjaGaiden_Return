@@ -42,7 +42,7 @@ func set_follow_y(follow: bool) -> void:
 
 ## 设置摄像机边界（防止摄像机超出场景范围）
 ##  传 -1 表示不限制该方向
-func set_bounds(left: float = -1, right: float = -1, top: float = -1, bottom: float = -1) -> void:
+func set_bounds(left: int = -1, right: int = -1, top: int = -1, bottom: int = -1) -> void:
 	if left != -1:
 		limit_left = left
 	if right != -1:
