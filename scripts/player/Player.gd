@@ -64,6 +64,9 @@ func _ready() -> void:
 	for node in $AttackRoot.get_children():
 		if node is Area2D:
 			node.monitoring = false
+
+	# 从全局状态管理器恢复 HP/MP/TP（跨小关卡持久化）
+	PlayerStateManager.apply(self)
 			
 			
 func _process(delta: float) -> void:
@@ -151,6 +154,9 @@ func die() -> void:
 
 	# 播放死亡音效
 	AudioManager.play_sound(&"siwang")
+
+	# 清除场景持久化，确保重开时恢复满状态
+	PlayerStateManager.clear()
 
 	# 等待 2.0 秒让死亡动画和音效播放一下
 	await get_tree().create_timer(2.0).timeout

@@ -72,7 +72,7 @@ size = Vector2(17, 32)
 size = Vector2(17, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
-size = Vector2(458.5, 75.25)
+size = Vector2(404.5, 75.25)
 
 [node name="Soldier" type="CharacterBody2D" unique_id=634735606]
 collision_layer = 2
@@ -108,7 +108,7 @@ shape = SubResource("RectangleShape2D_hit")
 [node name="DetectRange" type="Area2D" parent="." unique_id=858862171]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=545219636]
-position = Vector2(0.75, -21.375)
+position = Vector2(-0.25, -22.375)
 shape = SubResource("RectangleShape2D_detect")
 
 [node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=1939299372]

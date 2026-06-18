@@ -17,4 +17,10 @@ var spawn_point: String = "default"
 ##   3. 切换前自动保存入口点，目标关卡加载后 _place_player_at_entry 会读取
 func goto_level(scene_path: String, entry_point: String = "default") -> void:
 	spawn_point = entry_point
+
+	# 切场景前保存玩家 HP/MP/TP
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
+		PlayerStateManager.save(player)
+
 	(Engine.get_main_loop() as SceneTree).call_deferred("change_scene_to_file", scene_path)

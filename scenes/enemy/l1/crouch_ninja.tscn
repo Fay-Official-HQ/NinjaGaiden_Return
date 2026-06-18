@@ -61,7 +61,7 @@ size = Vector2(18, 11)
 size = Vector2(17, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
-size = Vector2(474, 291)
+size = Vector2(367, 274.5)
 
 [node name="CrouchNinja" type="CharacterBody2D" unique_id=1656441098]
 collision_layer = 2
