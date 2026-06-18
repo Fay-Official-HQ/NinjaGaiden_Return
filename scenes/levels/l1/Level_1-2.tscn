@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="13_hkja5"]
 [ext_resource type="PackedScene" uid="uid://cwwwl5njk4twt" path="res://scenes/enemy/l1/patrol_ninja.tscn" id="14_yibl2"]
 [ext_resource type="PackedScene" uid="uid://ouj101grcbrq" path="res://scenes/enemy/l1/crouch_ninja.tscn" id="15_ecjkx"]
+[ext_resource type="PackedScene" uid="uid://c8voh3ao403c2" path="res://scenes/enemy/l1/chaser_ninja_spawner.tscn" id="16_mew8j"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -470,6 +471,35 @@ position = Vector2(-2994, 71)
 [node name="SpawnPosition" parent="enemys/EagleSpawner2" index="1" unique_id=313397505]
 position = Vector2(-223, -69)
 
+[node name="FlyingNinjaSpawner4" parent="enemys" unique_id=661150582 instance=ExtResource("9_5vjj6")]
+position = Vector2(-3144, 65)
+spawn_count = 2
+spawn_offset_x = 50.0
+
+[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner4" index="1" unique_id=1423050258]
+position = Vector2(-19, 134)
+
+[node name="CrouchNinja3" parent="enemys" unique_id=1251120508 instance=ExtResource("15_ecjkx")]
+position = Vector2(-3212, 56)
+
+[node name="FlyingNinjaSpawner5" parent="enemys" unique_id=1495099655 instance=ExtResource("9_5vjj6")]
+position = Vector2(-3283, 5)
+
+[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner5" index="1" unique_id=1423050258]
+position = Vector2(-105, 180)
+
+[node name="PatrolNinja5" parent="enemys" unique_id=507717289 instance=ExtResource("14_yibl2")]
+position = Vector2(-3339, -19)
+
+[node name="Soldier5" parent="enemys" unique_id=1938418828 instance=ExtResource("12_smbk0")]
+position = Vector2(-3548, 132)
+
+[node name="ChaserNinjaSpawner" parent="enemys" unique_id=1895791683 instance=ExtResource("16_mew8j")]
+position = Vector2(-3626, -26)
+
+[node name="SpawnPosition" parent="enemys/ChaserNinjaSpawner" index="1"]
+position = Vector2(-203, 30)
+
 [node name="entry_right" type="Marker2D" parent="." unique_id=1636792977]
 position = Vector2(70, 179)
 
@@ -511,3 +541,6 @@ position = Vector2(-2999, 132)
 [editable path="enemys/BatSpawner5"]
 [editable path="enemys/FlyingNinjaSpawner3"]
 [editable path="enemys/EagleSpawner2"]
+[editable path="enemys/FlyingNinjaSpawner4"]
+[editable path="enemys/FlyingNinjaSpawner5"]
+[editable path="enemys/ChaserNinjaSpawner"]

@@ -5,10 +5,10 @@ extends BaseEnemyData
 class_name ChaserNinjaData
 
 ## 追击速度（像素/秒）
-@export var chase_speed: float = 200.0
+@export var chase_speed: float = 150.0
 
 ## 跳跃力（velocity.y = 负值=向上跳），建议范围 -200 ~ -300
-@export var jump_force: float = -350.0
+@export var jump_force: float = -320.0
 
 ## 跳跃冷却（秒），防止连跳
 @export var jump_cooldown: float = 0.3
