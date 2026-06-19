@@ -41,7 +41,7 @@ size = Vector2(25.50653, 2.5)
 size = Vector2(4438, 143)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62ig4"]
-size = Vector2(11.5, 74.5)
+size = Vector2(9.5, 10)
 
 [node name="Level_1-3" type="Node2D" unique_id=311310683]
 script = ExtResource("1_yy5ve")
@@ -202,7 +202,7 @@ spawn_point = "entry_left"
 metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneLeft" unique_id=1803929966]
-position = Vector2(378.25, 468.25)
+position = Vector2(377.25, 436)
 shape = SubResource("RectangleShape2D_62ig4")
 
 [node name="TransitionZoneRight" type="Area2D" parent="." unique_id=2135211131]
