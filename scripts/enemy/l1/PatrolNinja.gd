@@ -76,7 +76,7 @@ func _update_patrol(_delta: float) -> void:
 # 转弯检测：走到平台边缘 → 掉头
 func _check_turn() -> void:
 	var edge_ray = floor_detect_right if facing_right else floor_detect_left
-	if not edge_ray.is_colliding():
+	if not edge_ray.is_colliding() or is_on_wall():
 		_set_facing(not facing_right)
 		return
 

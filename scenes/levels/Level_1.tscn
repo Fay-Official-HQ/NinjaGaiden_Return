@@ -198,7 +198,6 @@ consumable_type = 2
 
 [node name="Item6" parent="Items" unique_id=140324954 instance=ExtResource("7_50olt")]
 position = Vector2(3837, 192)
-consumable_type = 0
 
 [node name="Item7" parent="Items" unique_id=1306743168 instance=ExtResource("7_50olt")]
 position = Vector2(3648, 192)

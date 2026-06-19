@@ -2,7 +2,9 @@ extends Camera2D
 
 class_name PlayerCamera
 
+@export var lock_x: bool = false
 @export var lock_y: bool = true
+@export var fixed_x: float = 0.0
 @export var fixed_y: float = 0.0
 
 func _ready() -> void:
@@ -11,29 +13,52 @@ func _ready() -> void:
 		var parent = get_parent()
 		if parent:
 			fixed_y = parent.global_position.y + position.y
+	if fixed_x == 0.0:
+		var parent = get_parent()
+		if parent:
+			fixed_x = parent.global_position.x + position.x
 
 func _physics_process(_delta: float) -> void:
 	var target = get_parent()
 	if not target:
 		return
-	global_position.x = target.global_position.x
+
+	if lock_x:
+		global_position.x = fixed_x
+	else:
+		global_position.x = target.global_position.x
+
 	if lock_y:
 		global_position.y = fixed_y
 	else:
 		global_position.y = target.global_position.y
 
-	# 手动 clamp，双重保险（Camera2D 自带 limit 有时在 top_level 下不生效）
-	var viewport_half = get_viewport_rect().size.x * 0.5
-	global_position.x = clampf(global_position.x, limit_left + viewport_half, limit_right - viewport_half)
+	var viewport_size = get_viewport_rect().size
+	var viewport_half_x = viewport_size.x * 0.5
+	var viewport_half_y = viewport_size.y * 0.5
+
+	global_position.x = clampf(global_position.x, limit_left + viewport_half_x, limit_right - viewport_half_x)
+	global_position.y = clampf(global_position.y, limit_top + viewport_half_y, limit_bottom - viewport_half_y)
 
 
 # ════════════════════════════════════════════════════
 #  公开接口（供关卡场景或脚本调用）
 # ════════════════════════════════════════════════════
 
+## 切换 X 轴跟随模式
+##  - true:  摄像机跟随玩家左右移动（横版关卡默认行为）
+##  - false: 锁定当前 X 位置，不再左右跟随（纵向关卡使用）
+##  注意：必须先调用此方法设置 lock_x，再设置 fixed_x 值才会生效
+func set_follow_x(follow: bool) -> void:
+	lock_x = not follow
+	if lock_x:
+		fixed_x = global_position.x
+
+
 ## 切换 Y 轴跟随模式
-##  - true: 摄像机跟随玩家上下移动
-##  - false: 锁定当前 Y 位置，不再上下跟随
+##  - true:  摄像机跟随玩家上下移动（纵向关卡使用）
+##  - false: 锁定当前 Y 位置，不再上下跟随（横版关卡默认行为）
+##  注意：必须先调用此方法设置 lock_y，再设置 fixed_y 值才会生效
 func set_follow_y(follow: bool) -> void:
 	lock_y = not follow
 	if lock_y:

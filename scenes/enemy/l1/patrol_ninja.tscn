@@ -119,9 +119,9 @@ shape = SubResource("RectangleShape2D_cmu7j")
 shape = SubResource("RectangleShape2D_2twn6")
 
 [node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=313765772]
-target_position = Vector2(-20, 20)
+target_position = Vector2(-5, 20)
 collision_mask = 12
 
 [node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=161747179]
-target_position = Vector2(20, 20)
+target_position = Vector2(5, 20)
 collision_mask = 12

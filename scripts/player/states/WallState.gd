@@ -75,8 +75,9 @@ func update(_delta: float) -> void:
 		return
 
 func physics_update(_delta: float) -> void:
-	# 禁止左右移动，牢牢吸附墙面
-	player.velocity.x = 0
+	# 【核心修复】施加微小的贴墙力（2px/s），确保 move_and_slide() 持续检测到墙壁碰撞
+	# 如果不加这个力，velocity.x=0 时 is_on_wall() 在 tilemap 接缝处会间歇性失效
+	player.velocity.x = -wall_normal_x * 2.0
 	
 	# climb_dir 含义：-1=向上爬  0=静止  +1=向下爬
 	var climb_dir = 0.0
