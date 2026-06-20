@@ -43,6 +43,8 @@ size = Vector2(4438, 143)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62ig4"]
 size = Vector2(9.5, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ht451"]
+
 [node name="Level_1-3" type="Node2D" unique_id=311310683]
 script = ExtResource("1_yy5ve")
 metadata/_edit_horizontal_guides_ = [200.0]
@@ -69,7 +71,6 @@ tile_set = ExtResource("3_punci")
 metadata/_edit_lock_ = true
 
 [node name="collision" type="TileMapLayer" parent="Map/TileMapLayer" unique_id=930108176]
-visible = false
 light_mask = 0
 tile_map_data = PackedByteArray("AADW/ygAAAAAAAAAAADW/ykAAAAAAAAAAADW/yoAAAAAAAAAAADW/ysAAAAAAAAAAADW/ywAAAAAAAAAAADW/y0AAAAAAAAAAADW/y4AAAAAAAAAAADW/y8AAAAAAAAAAADW/zAAAAAAAAAAAADW/zEAAAAAAAAAAADW/zIAAAAAAAAAAADW/zsAAAAAAAAAAADW/zoAAAAAAAAAAADW/zkAAAAAAAAAAADW/zgAAAAAAAAAAADW/zcAAAAAAAAAAADW/zYAAAAAAAAAAADW/zUAAAAAAAAAAADW/zQAAAAAAAAAAADW/zMAAAAAAAAAAADo//r/AAAAAAAAAADo//v/AAAAAAAAAADo//z/AAAAAAAAAADo//3/AAAAAAAAAADo//7/AAAAAAAAAADo////AAAAAAAAAADo/wAAAAAAAAAAAADo/wEAAAAAAAAAAADo/wIAAAAAAAAAAADo/wMAAAAAAAAAAADo/+//AAAAAAAAAADo//D/AAAAAAAAAADo//H/AAAAAAAAAADo//L/AAAAAAAAAADo//P/AAAAAAAAAADo//T/AAAAAAAAAADo//X/AAAAAAAAAADo//b/AAAAAAAAAADo//f/AAAAAAAAAADo//j/AAAAAAAAAADo//n/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_cnmxh")
@@ -211,9 +212,9 @@ target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
 spawn_point = "entry_right"
 metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneRight" unique_id=1837089651]
-position = Vector2(521, -175)
-shape = SubResource("RectangleShape2D_62ig4")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneRight" unique_id=976994797]
+position = Vector2(528, -153)
+shape = SubResource("RectangleShape2D_ht451")
 
 [editable path="enemys/FlyingNinjaSpawner"]
 [editable path="enemys/EagleSpawner"]
