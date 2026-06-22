@@ -6,28 +6,22 @@ class_name ClimbableWall
 enum ClimbableSide { LEFT, RIGHT, BOTH }
 @export var climbable_side: ClimbableSide = ClimbableSide.BOTH
 
-var player_inside: Player = null
-
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-	collision_layer = 0
-	collision_mask = 0
 	set_collision_layer_value(10, true)
 	set_collision_mask_value(1, true)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		player_inside = body
 		body.current_climbable_wall = self
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is Player and body.current_climbable_wall == self:
 		body.current_climbable_wall = null
-		player_inside = null
 
 
 ## 获取 CollisionShape2D 的实际包围盒（全局坐标）

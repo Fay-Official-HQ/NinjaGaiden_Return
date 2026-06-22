@@ -168,3 +168,17 @@ func die() -> void:
 	const GameOverScreen = preload("res://scripts/ui/GameOverScreen.gd")
 	GameOverScreen.return_scene = get_tree().current_scene.scene_file_path
 	get_tree().change_scene_to_file("res://scenes/ui/GameOverScreen.tscn")
+
+
+## 检测单面攀爬墙（Area2D 型），满足条件返回 true 且已切换状态
+func check_climbable_wall() -> bool:
+	var wall = current_climbable_wall
+	if not wall:
+		return false
+	if not wall.can_climb(self):
+		return false
+	var normal_x = wall.get_wall_normal_x(global_position.x)
+	if velocity.x * normal_x >= 0:
+		return false
+	state_machine.change_state($StateMachine/WallState, {"climbable_wall": wall})
+	return true

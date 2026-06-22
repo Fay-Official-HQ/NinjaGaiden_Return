@@ -55,7 +55,7 @@ func physics_update(delta: float) -> void:
 				return
 	
 	# 单面攀爬墙检测（Area2D 型）
-	if _check_climbable_wall():
+	if player.check_climbable_wall():
 		return
 
 	if player.is_on_wall() and not _is_on_wall_blocker():
@@ -104,18 +104,3 @@ func _is_on_wall_blocker() -> bool:
 		if col and col.get_collider() and col.get_collider().is_in_group("wall_blocker"):
 			return true
 	return false
-
-
-# 检测单面攀爬墙（Area2D 型），满足条件则切入 WallState
-func _check_climbable_wall() -> bool:
-	var wall = player.current_climbable_wall
-	if not wall:
-		return false
-	if not wall.can_climb(player):
-		return false
-	var normal_x = wall.get_wall_normal_x(player.global_position.x)
-	# 速度方向必须主动朝向墙壁（velocity.x 不能为 0，防止从上方/下方掉入区域时误触发）
-	if player.velocity.x * normal_x >= 0:
-		return false
-	state_machine.change_state(state_machine.get_node("WallState"), {"climbable_wall": wall})
-	return true
