@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://dp1q3h25tn5ww" path="res://scenes/levels/l1/level_1-4.gd" id="1_qevjy"]
 [ext_resource type="Texture2D" uid="uid://ho41pk3dqxrm" path="res://assets/img/beijing.png" id="2_30l0q"]
 [ext_resource type="TileSet" uid="uid://ca52o5acxygjl" path="res://resources/tilesets/fc2_1.tres" id="3_kix4t"]
+[ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/environment/hanging_platform.tscn" id="4_cy8kn"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="4_jcnye"]
+[ext_resource type="PackedScene" uid="uid://cikf76o6t3ig6" path="res://scenes/environment/ClimbableWall.tscn" id="5_12uac"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="5_xt0kh"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="12_7chmm"]
 
@@ -22,6 +24,9 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 67
 sources/0 = SubResource("TileSetAtlasSource_5x2jh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xt0kh"]
+size = Vector2(240.00002, 3.9999962)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64a38"]
 size = Vector2(152, 160)
 
@@ -37,8 +42,23 @@ size = Vector2(222, 89)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_niqdx"]
 size = Vector2(24.67627, 3.2047272)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hspd6"]
+size = Vector2(364, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qevjy"]
+size = Vector2(30.577026, 3.3532867)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6feq"]
+size = Vector2(547, 98)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(4438, 143)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30l0q"]
+size = Vector2(30.382996, 41.388412)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kix4t"]
+size = Vector2(30.383041, 1.9999962)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62ig4"]
 size = Vector2(9.5, 10)
@@ -75,6 +95,13 @@ tile_set = SubResource("TileSet_cnmxh")
 
 [node name="HangingPlat" type="Node" parent="Map/TileMapLayer" unique_id=1138539472]
 
+[node name="HangingPlatform" parent="Map/TileMapLayer/HangingPlat" unique_id=894400689 instance=ExtResource("4_cy8kn")]
+position = Vector2(1125.6537, 168.59679)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/HangingPlat/HangingPlatform" index="0" unique_id=232704396]
+position = Vector2(120.34631, 0.4032135)
+shape = SubResource("RectangleShape2D_xt0kh")
+
 [node name="StopMoving" type="StaticBody2D" parent="Map/TileMapLayer" unique_id=1068461566 groups=["wall_blocker"]]
 collision_layer = 4
 collision_mask = 3
@@ -99,6 +126,18 @@ shape = SubResource("RectangleShape2D_r5wqv")
 position = Vector2(-203.33813, 290.39764)
 shape = SubResource("RectangleShape2D_niqdx")
 
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=821679376]
+position = Vector2(262, 301)
+shape = SubResource("RectangleShape2D_hspd6")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=1076282088]
+position = Vector2(63.711487, 282.32336)
+shape = SubResource("RectangleShape2D_qevjy")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=386864237]
+position = Vector2(930.5, 295)
+shape = SubResource("RectangleShape2D_v6feq")
+
 [node name="DeathZone" type="Area2D" parent="Map/TileMapLayer" unique_id=1321774903]
 position = Vector2(-710, 10)
 script = ExtResource("4_jcnye")
@@ -107,6 +146,20 @@ metadata/_custom_type_script = "uid://c04yqponxtme3"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TileMapLayer/DeathZone" unique_id=1844145851]
 position = Vector2(2047, 419)
 shape = SubResource("RectangleShape2D_vqsrt")
+
+[node name="ClimbableWall" type="Node" parent="Map" unique_id=1853311518]
+
+[node name="ClimbableWall" parent="Map/ClimbableWall" unique_id=1480905261 instance=ExtResource("5_12uac")]
+position = Vector2(910.617, 188.61159)
+climbable_side = 2
+
+[node name="CollisionShape2D" parent="Map/ClimbableWall/ClimbableWall" index="0" unique_id=1989383217]
+position = Vector2(15.191467, 20.694199)
+shape = SubResource("RectangleShape2D_30l0q")
+
+[node name="CollisionShape2D" parent="Map/ClimbableWall/ClimbableWall/TopPlatform" parent_id_path=PackedInt32Array(1480905261, 774819875) index="0" unique_id=1766124646]
+position = Vector2(15.191467, 0.38841248)
+shape = SubResource("RectangleShape2D_kix4t")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("5_xt0kh")]
 position = Vector2(-4, 307)
@@ -140,3 +193,6 @@ metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneRight" unique_id=1837089651]
 position = Vector2(521, -175)
 shape = SubResource("RectangleShape2D_62ig4")
+
+[editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
+[editable path="Map/ClimbableWall/ClimbableWall"]

@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://b8qhslj7yoqaa" path="res://scripts/environment/ClimbableWall.gd" id="1_ci4ue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci4ue"]
+size = Vector2(30.382996, 41.388412)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnl88"]
+size = Vector2(30.383041, 1.9999962)
 
 [node name="ClimbableWall" type="Area2D" unique_id=1480905261]
 collision_layer = 512
@@ -11,3 +15,13 @@ climbable_side = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1989383217]
 shape = SubResource("RectangleShape2D_ci4ue")
+debug_color = Color(0.91764706, 0.14901961, 0.21176471, 0.7607843)
+
+[node name="TopPlatform" type="StaticBody2D" parent="." unique_id=774819875]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPlatform" unique_id=1766124646]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_tnl88")
+one_way_collision = true
