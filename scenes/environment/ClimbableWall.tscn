@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cikf76o6t3ig6"]
+
+[ext_resource type="Script" uid="uid://b8qhslj7yoqaa" path="res://scripts/environment/ClimbableWall.gd" id="1_ci4ue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci4ue"]
+
+[node name="ClimbableWall" type="Area2D" unique_id=1480905261]
+collision_layer = 512
+script = ExtResource("1_ci4ue")
+climbable_side = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1989383217]
+shape = SubResource("RectangleShape2D_ci4ue")

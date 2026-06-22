@@ -40,6 +40,8 @@ var _is_dead: bool = false
 var is_invincible: bool = false
 # 必杀技重力禁用（由 DragonFlashState 控制）
 var is_gravity_disabled: bool = false
+# 当前所在的单面攀爬墙检测区（由 ClimbableWall 设置）
+var current_climbable_wall: ClimbableWall = null
 
 # HurtBox 原始参数（用于下蹲切换恢复）
 var _normal_hurtbox_size: Vector2

@@ -100,6 +100,7 @@ pass={
 2d_physics/layer_6="EnemyAttack"
 2d_physics/layer_7="Item"
 2d_physics/layer_8="stop"
+2d_physics/layer_10="ClimbableWall"
 
 [physics]
 

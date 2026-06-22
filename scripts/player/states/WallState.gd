@@ -18,20 +18,29 @@ var _has_cast: bool = false
 var _cast_dir: float = 0.0
 # 墙壁法线的 x 分量：-1 = 墙在右边，+1 = 墙在左边
 # 用 sign() 可得到推离墙壁的方向
-var wall_normal_x: float = 0.0 
+var wall_normal_x: float = 0.0
+# 单面攀爬墙引用（Area2D 型），非空表示当前攀爬的是区域型墙壁
+var _climbable_wall: ClimbableWall = null 
 
 func enter(_msg: Dictionary = {}) -> void:
 	is_casting = false
-	# 进入墙壁状态时立刻清零所有速度，防止上一状态的惯性带入
 	player.velocity = Vector2.ZERO
 	player.animation.play("wall_idle")
 	AudioManager.play_sound(&"tiaoyue")
-	
-	# 记录墙壁方向，并让角色面朝墙壁
-	# 例：墙在右边 → wall_normal_x = -1 → facing_direction = +1（面朝右 = 面朝墙）
-	if player.is_on_wall():
-		wall_normal_x = player.get_wall_normal().x
+
+	_climbable_wall = _msg.get("climbable_wall", null)
+
+	if _climbable_wall:
+		# 区域型墙壁：法线由 ClimbableWall 根据玩家位置计算
+		wall_normal_x = _climbable_wall.get_wall_normal_x(player.global_position.x)
 		player.set_facing_direction(-wall_normal_x)
+		# 吸附到墙壁碰撞边缘，防止玩家陷在区域内
+		player.global_position.x = _climbable_wall.get_snap_x(player)
+	else:
+		# 物理型墙壁：从 Godot 物理引擎获取法线
+		if player.is_on_wall():
+			wall_normal_x = player.get_wall_normal().x
+			player.set_facing_direction(-wall_normal_x)
 
 func update(_delta: float) -> void:
 	# 忍术播放期间锁定输入，等动画播完自动恢复
@@ -75,10 +84,13 @@ func update(_delta: float) -> void:
 		return
 
 func physics_update(_delta: float) -> void:
-	# 【核心修复】施加微小的贴墙力（2px/s），确保 move_and_slide() 持续检测到墙壁碰撞
-	# 如果不加这个力，velocity.x=0 时 is_on_wall() 在 tilemap 接缝处会间歇性失效
-	player.velocity.x = -wall_normal_x * 2.0
-	
+	if _climbable_wall:
+		# 区域型墙壁：不需要贴墙微力
+		player.velocity.x = 0.0
+	else:
+		# 物理型墙壁：施加微小的贴墙力（2px/s），确保 is_on_wall() 持续生效
+		player.velocity.x = -wall_normal_x * 2.0
+
 	# climb_dir 含义：-1=向上爬  0=静止  +1=向下爬
 	var climb_dir = 0.0
 	if not is_casting:
@@ -87,27 +99,42 @@ func physics_update(_delta: float) -> void:
 		if Input.is_action_pressed("nav_down"):
 			climb_dir += 1.0
 		player.velocity.y = climb_dir * climb_speed
-		
+
 		if climb_dir != 0:
 			player.animation.play("wall_climb")
 		else:
 			player.animation.play("wall_idle")
 	else:
-		# 忍术期间悬停
 		player.velocity.y = 0
-	
+
 	player.move_and_slide()
-	
-	# 踩到地面 → 站立
-	# 【重要】必须在 is_on_wall 之前检查：站在地面上时 is_on_wall 也为 false，
-	# 如果先判 is_on_wall 会错误地切到跳跃状态导致翻滚失衡
+
 	if player.is_on_floor():
 		state_machine.change_state(player.idle_state)
 		return
-	
-	# 脱离墙壁 → 跳跃
-	# 两种情况自然触发：(1)往上爬出墙顶  (2)往下滑出墙底
-	# 传递 wall_jump 参数给 JumpState，使其启用 0.15 秒锁时防止立即重抓墙
-	if not player.is_on_wall():
-		state_machine.change_state(player.jump_state, {"wall_jump": true})
-		return
+
+	if _climbable_wall:
+		if _should_exit_area_wall():
+			state_machine.change_state(player.jump_state, {"wall_jump": true})
+			return
+	else:
+		if not player.is_on_wall():
+			state_machine.change_state(player.jump_state, {"wall_jump": true})
+			return
+
+
+func _should_exit_area_wall() -> bool:
+	var bounds = _climbable_wall.get_wall_bounds()
+	var player_shape: CollisionShape2D = player.get_node("CollisionShape2D")
+	var player_half_h := 15.0
+	var player_offset_y := 0.0
+	if player_shape and player_shape.shape is RectangleShape2D:
+		player_half_h = (player_shape.shape as RectangleShape2D).size.y / 2.0
+		player_offset_y = player_shape.position.y
+	var player_bottom := player.global_position.y + player_offset_y + player_half_h
+	var player_top := player.global_position.y + player_offset_y - player_half_h
+	if player_bottom < bounds.position.y:
+		return true
+	if player_top > bounds.end.y:
+		return true
+	return false
