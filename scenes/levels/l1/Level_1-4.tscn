@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="4_jcnye"]
 [ext_resource type="PackedScene" uid="uid://cikf76o6t3ig6" path="res://scenes/environment/ClimbableWall.tscn" id="5_12uac"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="5_xt0kh"]
+[ext_resource type="PackedScene" uid="uid://dyndypp655npf" path="res://scenes/environment/BossTransitionZone.tscn" id="9_niqdx"]
 [ext_resource type="PackedScene" uid="uid://dltnde0yqiwim" path="res://scenes/environment/CameraZone.tscn" id="9_r5wqv"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="12_7chmm"]
 
@@ -111,6 +112,9 @@ size = Vector2(4438, 143)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62ig4"]
 size = Vector2(9.5, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca71f"]
+size = Vector2(243, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qk0j"]
 size = Vector2(471, 113)
@@ -369,15 +373,25 @@ metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
 position = Vector2(377.25, 436)
 shape = SubResource("RectangleShape2D_62ig4")
 
-[node name="TransitionZoneRight" type="Area2D" parent="." unique_id=2135211131]
-script = ExtResource("12_7chmm")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
-spawn_point = "entry_right"
-metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
+[node name="BossTransitionZone" parent="." unique_id=1775603525 instance=ExtResource("9_niqdx")]
+position = Vector2(2604.0552, -146.99496)
+target_scene = "res://scenes/levels/l1/Level_1-5.tscn"
+spawn_point = null
+fade_duration = null
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneRight" unique_id=1837089651]
-position = Vector2(521, -175)
-shape = SubResource("RectangleShape2D_62ig4")
+[node name="CollisionShape2D" parent="BossTransitionZone" index="0" unique_id=1505097084]
+position = Vector2(140.44482, -8.005035)
+shape = SubResource("RectangleShape2D_ca71f")
+
+[node name="testBossTransitionZone" parent="." unique_id=1483819495 instance=ExtResource("9_niqdx")]
+position = Vector2(116, 130)
+target_scene = "res://scenes/levels/l1/Level_1-5.tscn"
+spawn_point = null
+fade_duration = null
+
+[node name="CollisionShape2D" parent="testBossTransitionZone" index="0" unique_id=1505097084]
+position = Vector2(140.44482, -8.005035)
+shape = SubResource("RectangleShape2D_ca71f")
 
 [node name="CameraZone" type="Node" parent="." unique_id=1017619398]
 
@@ -408,5 +422,7 @@ shape = SubResource("RectangleShape2D_vg1rg")
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall7"]
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall8"]
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall9"]
+[editable path="BossTransitionZone"]
+[editable path="testBossTransitionZone"]
 [editable path="CameraZone/CameraZone"]
 [editable path="CameraZone/CameraZone2"]

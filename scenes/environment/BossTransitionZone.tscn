@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dyndypp655npf"]
+
+[ext_resource type="Script" uid="uid://cduihly0ss1id" path="res://scripts/environment/BossTransitionZone.gd" id="1_rgcdf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sugtn"]
+size = Vector2(271.94482, 52.994965)
+
+[node name="BossTransitionZone" type="Area2D" unique_id=1775603525]
+script = ExtResource("1_rgcdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1505097084]
+shape = SubResource("RectangleShape2D_sugtn")

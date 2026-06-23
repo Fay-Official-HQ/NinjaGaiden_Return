@@ -65,6 +65,18 @@ func pause_bgm() -> void:
 func resume_bgm() -> void:
 	_bgm_player.stream_paused = false
 
+
+## BGM 淡出（用于关卡切换过渡）
+## 在指定 duration 秒内将 BGM 音量逐渐降到 -80dB（静音）
+func fade_out_bgm(duration: float = 2.0) -> void:
+	if not _bgm_player.playing:
+		return
+	var tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_IDLE)
+	tween.set_parallel(false)
+	tween.tween_property(_bgm_player, "volume_db", -80.0, duration) \
+		 .set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE)
+	tween.tween_callback(_bgm_player.stop)
+
 # 内部私有方法：处理动作音效
 func _play_sfx(event: SoundEventResource) -> void:
 	# 寻找一个当前没有在唱歌（空闲）的收音机
