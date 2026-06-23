@@ -27,6 +27,54 @@ sources/0 = SubResource("TileSetAtlasSource_5x2jh")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xt0kh"]
 size = Vector2(240.00002, 3.9999962)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30l0q"]
+size = Vector2(30.382996, 41.388412)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kix4t"]
+size = Vector2(30.383041, 1.9999962)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jcnye"]
+size = Vector2(145.19145, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyjky"]
+size = Vector2(144.19153, 0.9999981)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acahj"]
+size = Vector2(151.19144, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fwk16"]
+size = Vector2(149.19153, 1.9999962)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_glid0"]
+size = Vector2(30.191422, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tmeve"]
+size = Vector2(29.191467, 1.9999962)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7chmm"]
+size = Vector2(80.09571, 71.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjct2"]
+size = Vector2(78.59573, 1.9999981)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvn6f"]
+size = Vector2(225.0957, 123.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ensr"]
+size = Vector2(222.5957, 1.9999981)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3udp"]
+size = Vector2(282.0957, 74.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g57xo"]
+size = Vector2(280.5957, 1.9999981)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gupt7"]
+size = Vector2(31.095703, 68.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hi85c"]
+size = Vector2(29.595703, 1.999999)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64a38"]
 size = Vector2(152, 160)
 
@@ -51,14 +99,14 @@ size = Vector2(30.577026, 3.3532867)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6feq"]
 size = Vector2(547, 98)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltmtl"]
+size = Vector2(291, 436)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b0jx2"]
+size = Vector2(25.000122, 2.0966492)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(4438, 143)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_30l0q"]
-size = Vector2(30.382996, 41.388412)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kix4t"]
-size = Vector2(30.383041, 1.9999962)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62ig4"]
 size = Vector2(9.5, 10)
@@ -90,7 +138,7 @@ metadata/_edit_lock_ = true
 
 [node name="collision" type="TileMapLayer" parent="Map/TileMapLayer" unique_id=930108176]
 light_mask = 0
-tile_map_data = PackedByteArray("AACn/yoAAAAAAAAAAACn/ykAAAAAAAAAAACn/ygAAAAAAAAAAACn/ycAAAAAAAAAAACn/yYAAAAAAAAAAACn/yUAAAAAAAAAAACn/yQAAAAAAAAAAACn/yMAAAAAAAAAAACn/yIAAAAAAAAAAACn/yEAAAAAAAAAAACn/yAAAAAAAAAAAACn/x8AAAAAAAAAAACn/x4AAAAAAAAAAACn/x0AAAAAAAAAAACn/xwAAAAAAAAAAACn/xsAAAAAAAAAAACn/xoAAAAAAAAAAACn/xcAAAAAAAAAAACn/xgAAAAAAAAAAACn/xkAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AACn/yoAAAAAAAAAAACn/ykAAAAAAAAAAACn/ygAAAAAAAAAAACn/ycAAAAAAAAAAACn/yYAAAAAAAAAAACn/yUAAAAAAAAAAACn/yQAAAAAAAAAAACn/yMAAAAAAAAAAACn/yIAAAAAAAAAAACn/yEAAAAAAAAAAACn/yAAAAAAAAAAAACn/x8AAAAAAAAAAACn/x4AAAAAAAAAAACn/x0AAAAAAAAAAACn/xwAAAAAAAAAAACn/xsAAAAAAAAAAACn/xoAAAAAAAAAAACn/xcAAAAAAAAAAACn/xgAAAAAAAAAAACn/xkAAAAAAAAAAACEABIAAAAAAAAAAACEABEAAAAAAAAAAACEABAAAAAAAAAAAACEAA8AAAAAAAAAAACEAA4AAAAAAAAAAACEAA0AAAAAAAAAAACEAAwAAAAAAAAAAACDAAwAAAAAAAAAAACCAAwAAAAAAAAAAACBAAwAAAAAAAAAAACAAAwAAAAAAAAAAAB/AAwAAAAAAAAAAAB+AAwAAAAAAAAAAAB9AAwAAAAAAAAAAAB8AAwAAAAAAAAAAAB7AAwAAAAAAAAAAAB6AAwAAAAAAAAAAAB5AAwAAAAAAAAAAAB4AAwAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_cnmxh")
 
 [node name="HangingPlat" type="Node" parent="Map/TileMapLayer" unique_id=1138539472]
@@ -101,6 +149,121 @@ position = Vector2(1125.6537, 168.59679)
 [node name="CollisionShape2D" parent="Map/TileMapLayer/HangingPlat/HangingPlatform" index="0" unique_id=232704396]
 position = Vector2(120.34631, 0.4032135)
 shape = SubResource("RectangleShape2D_xt0kh")
+
+[node name="ClimbableWall" type="Node" parent="Map/TileMapLayer" unique_id=1853311518]
+
+[node name="ClimbableWall" parent="Map/TileMapLayer/ClimbableWall" unique_id=1480905261 instance=ExtResource("5_12uac")]
+position = Vector2(910.617, 188.61159)
+climbable_side = 2
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall" index="0" unique_id=1989383217]
+position = Vector2(15.191467, 20.694199)
+shape = SubResource("RectangleShape2D_30l0q")
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall/TopPlatform" parent_id_path=PackedInt32Array(1480905261, 774819875) index="0" unique_id=1766124646]
+position = Vector2(15.191467, 0.38841248)
+shape = SubResource("RectangleShape2D_kix4t")
+
+[node name="ClimbableWall2" parent="Map/TileMapLayer/ClimbableWall" unique_id=922792471 instance=ExtResource("5_12uac")]
+position = Vector2(996, 183)
+climbable_side = 2
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall2" index="0" unique_id=1989383217]
+position = Vector2(57.404297, 12.5)
+shape = SubResource("RectangleShape2D_jcnye")
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall2/TopPlatform" parent_id_path=PackedInt32Array(922792471, 774819875) index="0" unique_id=1766124646]
+position = Vector2(56.904297, -21.5)
+shape = SubResource("RectangleShape2D_uyjky")
+
+[node name="ClimbableWall3" parent="Map/TileMapLayer/ClimbableWall" unique_id=1454549872 instance=ExtResource("5_12uac")]
+position = Vector2(1382, 180)
+climbable_side = 2
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall3" index="0" unique_id=1989383217]
+position = Vector2(60.404297, 6.5)
+shape = SubResource("RectangleShape2D_acahj")
+
+[node name="TopPlatform" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall3" index="1" unique_id=774819875]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall3/TopPlatform" index="0" unique_id=1766124646]
+position = Vector2(59.404297, -10)
+shape = SubResource("RectangleShape2D_fwk16")
+
+[node name="ClimbableWall4" parent="Map/TileMapLayer/ClimbableWall" unique_id=355844511 instance=ExtResource("5_12uac")]
+position = Vector2(1598, 198)
+climbable_side = 2
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall4" index="0" unique_id=1989383217]
+position = Vector2(-0.095703125, -1.5)
+shape = SubResource("RectangleShape2D_glid0")
+
+[node name="TopPlatform" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall4" index="1" unique_id=774819875]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall4/TopPlatform" index="0" unique_id=1766124646]
+position = Vector2(0.40429688, -9)
+shape = SubResource("RectangleShape2D_tmeve")
+
+[node name="ClimbableWall5" parent="Map/TileMapLayer/ClimbableWall" unique_id=1997807503 instance=ExtResource("5_12uac")]
+position = Vector2(1598, 198)
+climbable_side = 1
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall5" index="0" unique_id=1989383217]
+position = Vector2(215.95215, -21.75)
+shape = SubResource("RectangleShape2D_7chmm")
+
+[node name="TopPlatform" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall5" index="1" unique_id=774819875]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall5/TopPlatform" index="0" unique_id=1766124646]
+position = Vector2(215.70215, -51)
+shape = SubResource("RectangleShape2D_xjct2")
+
+[node name="ClimbableWall7" parent="Map/TileMapLayer/ClimbableWall" unique_id=1936368170 instance=ExtResource("5_12uac")]
+position = Vector2(1709, 146)
+climbable_side = 2
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall7" index="0" unique_id=1989383217]
+position = Vector2(288.45215, 4.25)
+shape = SubResource("RectangleShape2D_tvn6f")
+
+[node name="TopPlatform" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall7" index="1" unique_id=774819875]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall7/TopPlatform" index="0" unique_id=1766124646]
+position = Vector2(287.70215, -51)
+shape = SubResource("RectangleShape2D_5ensr")
+
+[node name="ClimbableWall8" parent="Map/TileMapLayer/ClimbableWall" unique_id=1905255319 instance=ExtResource("5_12uac")]
+position = Vector2(2117, 191)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall8" index="0" unique_id=1989383217]
+position = Vector2(316.95215, -20.25)
+shape = SubResource("RectangleShape2D_f3udp")
+
+[node name="TopPlatform" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall8" index="1" unique_id=774819875]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall8/TopPlatform" index="0" unique_id=1766124646]
+position = Vector2(316.70215, -51)
+shape = SubResource("RectangleShape2D_g57xo")
+
+[node name="ClimbableWall9" parent="Map/TileMapLayer/ClimbableWall" unique_id=1070779879 instance=ExtResource("5_12uac")]
+position = Vector2(2007, 200)
+climbable_side = 2
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall9" index="0" unique_id=1989383217]
+position = Vector2(191.45215, -23.25)
+shape = SubResource("RectangleShape2D_gupt7")
+
+[node name="TopPlatform" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall9" index="1" unique_id=774819875]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" parent="Map/TileMapLayer/ClimbableWall/ClimbableWall9/TopPlatform" index="0" unique_id=1766124646]
+position = Vector2(191.20215, -51)
+shape = SubResource("RectangleShape2D_hi85c")
 
 [node name="StopMoving" type="StaticBody2D" parent="Map/TileMapLayer" unique_id=1068461566 groups=["wall_blocker"]]
 collision_layer = 4
@@ -138,6 +301,30 @@ shape = SubResource("RectangleShape2D_qevjy")
 position = Vector2(930.5, 295)
 shape = SubResource("RectangleShape2D_v6feq")
 
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=1574463175]
+position = Vector2(1698, 291)
+shape = SubResource("RectangleShape2D_v6feq")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=309893865]
+position = Vector2(2010.5, 124)
+shape = SubResource("RectangleShape2D_ltmtl")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=1596122946]
+position = Vector2(1851.5, 105.951675)
+shape = SubResource("RectangleShape2D_b0jx2")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=818360370]
+position = Vector2(1853, 50)
+shape = SubResource("RectangleShape2D_b0jx2")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=636110652]
+position = Vector2(1852, -6)
+shape = SubResource("RectangleShape2D_b0jx2")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=584702536]
+position = Vector2(1852, -62)
+shape = SubResource("RectangleShape2D_b0jx2")
+
 [node name="DeathZone" type="Area2D" parent="Map/TileMapLayer" unique_id=1321774903]
 position = Vector2(-710, 10)
 script = ExtResource("4_jcnye")
@@ -146,20 +333,6 @@ metadata/_custom_type_script = "uid://c04yqponxtme3"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TileMapLayer/DeathZone" unique_id=1844145851]
 position = Vector2(2047, 419)
 shape = SubResource("RectangleShape2D_vqsrt")
-
-[node name="ClimbableWall" type="Node" parent="Map" unique_id=1853311518]
-
-[node name="ClimbableWall" parent="Map/ClimbableWall" unique_id=1480905261 instance=ExtResource("5_12uac")]
-position = Vector2(910.617, 188.61159)
-climbable_side = 2
-
-[node name="CollisionShape2D" parent="Map/ClimbableWall/ClimbableWall" index="0" unique_id=1989383217]
-position = Vector2(15.191467, 20.694199)
-shape = SubResource("RectangleShape2D_30l0q")
-
-[node name="CollisionShape2D" parent="Map/ClimbableWall/ClimbableWall/TopPlatform" parent_id_path=PackedInt32Array(1480905261, 774819875) index="0" unique_id=1766124646]
-position = Vector2(15.191467, 0.38841248)
-shape = SubResource("RectangleShape2D_kix4t")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("5_xt0kh")]
 position = Vector2(-4, 307)
@@ -195,4 +368,11 @@ position = Vector2(521, -175)
 shape = SubResource("RectangleShape2D_62ig4")
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
-[editable path="Map/ClimbableWall/ClimbableWall"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall2"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall3"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall4"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall5"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall7"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall8"]
+[editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall9"]

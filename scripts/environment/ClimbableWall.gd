@@ -6,6 +6,8 @@ class_name ClimbableWall
 enum ClimbableSide { LEFT, RIGHT, BOTH }
 @export var climbable_side: ClimbableSide = ClimbableSide.BOTH
 
+var _enter_physics_frame: int = -1
+
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -17,6 +19,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body.current_climbable_wall = self
+		_enter_physics_frame = Engine.get_physics_frames()
 
 
 func _on_body_exited(body: Node2D) -> void:
@@ -46,16 +49,25 @@ func get_wall_normal_x(player_global_x: float) -> float:
 		return 1.0
 
 
-## 判断玩家是否可以从设定方向攀爬（必须靠近碰撞边缘）
+## 判断玩家是否可以从设定方向攀爬
+## 条件：必须是从区域外刚进来（前 2 帧内），且方向匹配
 func can_climb(player: Player) -> bool:
+	if _enter_physics_frame < 0:
+		return false
+	if Engine.get_physics_frames() - _enter_physics_frame > 2:
+		return false
 	if climbable_side == ClimbableSide.BOTH:
 		return true
 	var bounds := get_wall_bounds()
+	var player_shape := player.get_node("CollisionShape2D")
+	var player_hw := 8.0
+	if player_shape and player_shape.shape is RectangleShape2D:
+		player_hw = (player_shape.shape as RectangleShape2D).size.x / 2.0
 	var player_x := player.global_position.x
 	if climbable_side == ClimbableSide.LEFT:
-		return player_x < bounds.position.x + 8.0
+		return player_x + player_hw <= bounds.position.x + 8.0
 	else:
-		return player_x > bounds.end.x - 8.0
+		return player_x - player_hw >= bounds.end.x - 8.0
 
 
 ## 计算吸附位置：将玩家贴到墙壁碰撞边缘
