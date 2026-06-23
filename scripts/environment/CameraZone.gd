@@ -25,7 +25,6 @@ var _saved_lock_x: bool
 var _saved_lock_y: bool
 var _saved_fixed_x: float
 var _saved_fixed_y: float
-var _saved_cam_pos: Vector2
 var _camera: PlayerCamera
 var _has_saved_state: bool = false
 
@@ -42,18 +41,17 @@ func _on_body_entered(body: Node2D) -> void:
 	if not _camera:
 		return
 
-	# 只在第一次进入时保存状态和位置，防止反复进出偏移叠加
+	# 只在第一次进入时保存摄像机模式状态（用于离开时恢复）
 	if not _has_saved_state:
 		_has_saved_state = true
 		_saved_lock_x = _camera.lock_x
 		_saved_lock_y = _camera.lock_y
 		_saved_fixed_x = _camera.fixed_x
 		_saved_fixed_y = _camera.fixed_y
-		_saved_cam_pos = _camera.global_position
 
-	# 偏移始终基于首次进入时的摄像机位置，不累计
-	var target_fixed_x = _saved_cam_pos.x + offset_x
-	var target_fixed_y = _saved_cam_pos.y + offset_y
+	# 始终基于摄像机当前实际位置计算目标，防止重复进出时位置跳变
+	var target_fixed_x = _camera.global_position.x + offset_x
+	var target_fixed_y = _camera.global_position.y + offset_y
 
 	_camera.smooth_transition(lock_x, lock_y, target_fixed_x, target_fixed_y, transition_duration)
 
