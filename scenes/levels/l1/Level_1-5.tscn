@@ -30,7 +30,7 @@ size = Vector2(896, 217)
 size = Vector2(400, 214)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5yul"]
-size = Vector2(97, 268)
+size = Vector2(97, 324)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(4438, 143)
@@ -90,7 +90,7 @@ position = Vector2(-172, 238)
 shape = SubResource("RectangleShape2D_x82ch")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=729662119]
-position = Vector2(-1046.5, 73)
+position = Vector2(-1046.5, 45)
 shape = SubResource("RectangleShape2D_u5yul")
 
 [node name="DeathZone" type="Area2D" parent="Map/TileMapLayer" unique_id=1321774903]

@@ -380,16 +380,6 @@ fade_duration = null
 position = Vector2(140.44482, -8.005035)
 shape = SubResource("RectangleShape2D_ca71f")
 
-[node name="testBossTransitionZone" parent="." unique_id=1483819495 instance=ExtResource("9_niqdx")]
-position = Vector2(116, 130)
-target_scene = "res://scenes/levels/l1/Level_1-5.tscn"
-spawn_point = null
-fade_duration = null
-
-[node name="CollisionShape2D" parent="testBossTransitionZone" index="0" unique_id=1505097084]
-position = Vector2(140.44482, -8.005035)
-shape = SubResource("RectangleShape2D_ca71f")
-
 [node name="CameraZone" type="Node" parent="." unique_id=1017619398]
 
 [node name="CameraZone" parent="CameraZone" unique_id=851938473 instance=ExtResource("9_r5wqv")]
@@ -420,6 +410,5 @@ shape = SubResource("RectangleShape2D_vg1rg")
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall8"]
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall9"]
 [editable path="BossTransitionZone"]
-[editable path="testBossTransitionZone"]
 [editable path="CameraZone/CameraZone"]
 [editable path="CameraZone/CameraZone2"]
