@@ -113,7 +113,13 @@ size = Vector2(4438, 143)
 size = Vector2(9.5, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qk0j"]
-size = Vector2(119.446655, 162)
+size = Vector2(428, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vg1rg"]
+size = Vector2(280, 288)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca71f"]
+size = Vector2(280, 108)
 
 [node name="Level_1-4" type="Node2D" unique_id=311310683]
 script = ExtResource("1_qevjy")
@@ -374,13 +380,28 @@ shape = SubResource("RectangleShape2D_62ig4")
 [node name="CameraZone" type="Node" parent="." unique_id=1017619398]
 
 [node name="CameraZone" parent="CameraZone" unique_id=851938473 instance=ExtResource("9_r5wqv")]
-position = Vector2(580.55334, 182.73778)
-lock_x = true
-offset_y = -30.0
+position = Vector2(13, 80)
 
 [node name="CollisionShape2D" parent="CameraZone/CameraZone" index="0" unique_id=1778439333]
-position = Vector2(49.723328, -16.737778)
+position = Vector2(1873, -23)
 shape = SubResource("RectangleShape2D_6qk0j")
+
+[node name="CameraZone2" parent="CameraZone" unique_id=1481686049 instance=ExtResource("9_r5wqv")]
+position = Vector2(2294.0103, 94.711945)
+
+[node name="CollisionShape2D" parent="CameraZone/CameraZone2" index="0" unique_id=1778439333]
+position = Vector2(141.98975, -107.711945)
+shape = SubResource("RectangleShape2D_vg1rg")
+
+[node name="CameraZone3" parent="CameraZone" unique_id=393310304 instance=ExtResource("9_r5wqv")]
+position = Vector2(10.277496, 111.34789)
+follow_x = false
+follow_y = true
+y_offset = -230.0
+
+[node name="CollisionShape2D" parent="CameraZone/CameraZone3" index="0" unique_id=1778439333]
+position = Vector2(129.7225, 7.6521072)
+shape = SubResource("RectangleShape2D_ca71f")
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall"]
@@ -392,3 +413,5 @@ shape = SubResource("RectangleShape2D_6qk0j")
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall8"]
 [editable path="Map/TileMapLayer/ClimbableWall/ClimbableWall9"]
 [editable path="CameraZone/CameraZone"]
+[editable path="CameraZone/CameraZone2"]
+[editable path="CameraZone/CameraZone3"]
