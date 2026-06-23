@@ -1,7 +1,7 @@
 extends Node2D
 
 ## 场景淡入时长（秒），可在 Inspector 中调整
-@export var fade_in_duration: float = 3.0
+@export var fade_in_duration: float = 2.0
 
 
 # ════════════════════════════════════════════════════════════

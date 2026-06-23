@@ -360,9 +360,6 @@ position = Vector2(-4, 307)
 [node name="entry_left" type="Marker2D" parent="." unique_id=1636792977]
 position = Vector2(384, 405)
 
-[node name="entry_right" type="Marker2D" parent="." unique_id=1376835733]
-position = Vector2(513, -113)
-
 [node name="TransitionZoneLeft" type="Area2D" parent="." unique_id=426374898]
 script = ExtResource("12_7chmm")
 target_scene = "res://scenes/levels/l1/Level_1-2.tscn"

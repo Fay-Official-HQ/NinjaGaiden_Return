@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://ca52o5acxygjl" path="res://resources/tilesets/fc2_1.tres" id="3_snxnj"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_lg02w"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_v4dcx"]
-[ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="8_7prjd"]
+[ext_resource type="Script" uid="uid://ckwvxaqlg05oj" path="res://scripts/environment/BossGateTrigger.gd" id="7_x82ch"]
 [ext_resource type="PackedScene" uid="uid://dltnde0yqiwim" path="res://scenes/environment/CameraZone.tscn" id="9_omkep"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -29,18 +29,23 @@ size = Vector2(896, 217)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x82ch"]
 size = Vector2(400, 214)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5yul"]
+size = Vector2(97, 268)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(4438, 143)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_62ig4"]
-size = Vector2(9.5, 10)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjqpd"]
-size = Vector2(494, 384)
+size = Vector2(685, 381)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwabe"]
+size = Vector2(19, 382)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snxnj"]
+size = Vector2(22, 388)
 
 [node name="Level_1-5" type="Node2D" unique_id=311310683]
 script = ExtResource("1_u5yul")
-fade_in_duration = null
 metadata/_edit_horizontal_guides_ = [200.0]
 
 [node name="Map" type="Node2D" parent="." unique_id=970251159]
@@ -84,6 +89,10 @@ shape = SubResource("RectangleShape2D_2t63o")
 position = Vector2(-172, 238)
 shape = SubResource("RectangleShape2D_x82ch")
 
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=729662119]
+position = Vector2(-1046.5, 73)
+shape = SubResource("RectangleShape2D_u5yul")
+
 [node name="DeathZone" type="Area2D" parent="Map/TileMapLayer" unique_id=1321774903]
 position = Vector2(-710, 10)
 script = ExtResource("6_lg02w")
@@ -100,32 +109,6 @@ position = Vector2(-216, 98)
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="entry_left" type="Marker2D" parent="." unique_id=1636792977]
-position = Vector2(-216, 99)
-
-[node name="entry_right" type="Marker2D" parent="." unique_id=1376835733]
-position = Vector2(832, 77)
-
-[node name="TransitionZoneLeft" type="Area2D" parent="." unique_id=426374898]
-script = ExtResource("8_7prjd")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
-spawn_point = "entry_left"
-metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneLeft" unique_id=1803929966]
-position = Vector2(377.25, 436)
-shape = SubResource("RectangleShape2D_62ig4")
-
-[node name="TransitionZoneRight" type="Area2D" parent="." unique_id=2135211131]
-script = ExtResource("8_7prjd")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
-spawn_point = "entry_right"
-metadata/_custom_type_script = "uid://bgx8fcvkt60f6"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneRight" unique_id=1837089651]
-position = Vector2(521, -175)
-shape = SubResource("RectangleShape2D_62ig4")
-
 [node name="CameraZone" type="Node" parent="." unique_id=1017619398]
 
 [node name="CameraZone" parent="CameraZone" unique_id=851938473 instance=ExtResource("9_omkep")]
@@ -137,7 +120,20 @@ offset_y = -60.0
 transition_duration = 1.0
 
 [node name="CollisionShape2D" parent="CameraZone/CameraZone" index="0" unique_id=1778439333]
-position = Vector2(179.29257, 141.32404)
+position = Vector2(257.79257, 137.82404)
 shape = SubResource("RectangleShape2D_bjqpd")
+
+[node name="BossGateTrigger" type="Area2D" parent="." unique_id=743490277]
+script = ExtResource("7_x82ch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossGateTrigger" unique_id=1420816821]
+position = Vector2(314.5, 168)
+shape = SubResource("RectangleShape2D_pwabe")
+
+[node name="Wall" type="StaticBody2D" parent="BossGateTrigger" unique_id=1503151685 groups=["wall_blocker"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossGateTrigger/Wall" unique_id=1941029473]
+position = Vector2(266, 168)
+shape = SubResource("RectangleShape2D_snxnj")
 
 [editable path="CameraZone/CameraZone"]
