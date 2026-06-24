@@ -1,0 +1,343 @@
+好的，你的需求非常明确，原则也很清晰。基于**状态机+策略模式+组件化+数据驱动**，并且**杜绝继承玩家组件、杜绝继承类**，我为你设计如下架构。
+
+---
+
+## 一、整体架构概览
+
+```
+BossSpawner (Area2D)                     ← 生成器，触发BOSS出现
+    ↓ 触发
+Boss (CharacterBody2D)                   ← BOSS本体
+├── BossAIComponent (Node)               ← 大脑：感知、决策、策略选择
+├── BossMovementComponent (Node)         ← 独立移动组件（不复用玩家的）
+├── BossAnimationComponent (Node)        ← 独立动画组件（不复用玩家的）
+├── BossStateMachine (Node)              ← 独立状态机（不复用玩家的StateMachine）
+│   ├── BossAppearState                  ← 显现
+│   ├── BossIdleState                    ← 待机
+│   ├── BossDefendState                  ← 防御
+│   ├── BossMoveState                    ← 移动接近
+│   ├── BossFireBreathState              ← 吐火
+│   ├── BossRushState                    ← 冲撞
+│   ├── BossJumpState                    ← 跳跃压顶
+│   ├── BossDashState                    ← 前冲
+│   ├── BossSlashState                   ← 砍击
+│   ├── BossShockwaveState               ← 发射冲击波
+│   ├── BossLightningState               ← 雷电
+│   ├── BossHurtState                    ← 受伤
+│   └── BossDeathState                   ← 死亡
+├── AttackRoot (Node2D)
+│   ├── RushHitBox (Area2D)
+│   ├── JumpHitBox (Area2D)
+│   ├── SlashHitBox (Area2D)
+│   ├── DashHitBox (Area2D)
+│   └── FireBreathHitBox (Area2D)
+├── HurtRoot (Node2D)
+│   └── HurtBox (Area2D)                 ← is_boss = true
+├── Visual (Node2D)
+│   └── AnimatedSprite2D
+├── BossUI (CanvasLayer)                 ← BOSS血条，捆绑在场景内
+│   ├── BossHPBar (TextureProgressBar)
+│   └── BossNameLabel (Label)
+├── CollisionShape2D
+└── BossData (Resource)                  ← @export var data: BossData
+```
+
+---
+
+## 二、各组件职责
+
+| 组件 | 职责 | 关键接口 |
+|------|------|----------|
+| **BossAIComponent** | 感知玩家位置/状态、BOSS自身状态；决策下一个状态；发出状态切换信号 | `_evaluate() -> String` 返回目标状态名 |
+| **BossMovementComponent** | 处理移动、重力、碰撞；提供 `move_toward(target, speed)` 等 | `move(direction, speed)`, `stop()`, `apply_gravity(delta)` |
+| **BossAnimationComponent** | 播放动画、翻转朝向玩家 | `play(anim_name)`, `face_player()` |
+| **BossStateMachine** | 管理状态切换、调用生命周期 | `change_state(state_name, msg)`, `current_state` |
+| **BossUI** | 显示/隐藏BOSS血条、更新血量 | `show()`, `hide()`, `update_hp(current, max)` |
+
+---
+
+## 三、BossAIComponent 决策逻辑（策略模式核心）
+
+```gdscript
+# BossAIComponent.gd
+extends Node
+class_name BossAIComponent
+
+signal state_change_requested(state_name: String)
+
+@export var boss: Boss
+@export var perception_range: float = 500.0
+@export var rush_range: float = 200.0
+@export var slash_range: float = 50.0
+
+var current_state: String = ""
+var attack_cooldown: float = 0.0
+var phase2: bool = false
+
+func _physics_process(delta):
+    if attack_cooldown > 0:
+        attack_cooldown -= delta
+        return  # 冷却中，不切换状态
+    
+    var new_state = _evaluate()
+    if new_state != current_state:
+        current_state = new_state
+        print("[BossAI] 决策切换状态: ", new_state)
+        state_change_requested.emit(new_state)
+
+func _evaluate() -> String:
+    var player = boss.player_ref
+    if not player:
+        return "BossIdleState"
+    
+    var dist_x = abs(player.global_position.x - boss.global_position.x)
+    phase2 = boss.current_hp <= boss.data.max_hp * 0.5
+    
+    # 二阶段：解锁雷电攻击，增加攻击频率
+    if phase2 and randf() < 0.2:
+        return "BossLightningState"
+    
+    if dist_x > rush_range:
+        # 远距离：冲撞或跳跃接近
+        return "BossRushState" if randf() < 0.6 else "BossJumpState"
+    elif dist_x > slash_range:
+        # 中距离：移动接近，或吐火/发射冲击波
+        var r = randf()
+        if r < 0.3: return "BossFireBreathState"
+        elif r < 0.5: return "BossShockwaveState"
+        else: return "BossMoveState"
+    else:
+        # 近距离：砍击、前冲、防御
+        var r = randf()
+        if r < 0.3: return "BossSlashState"
+        elif r < 0.5: return "BossDashState"
+        elif r < 0.7: return "BossDefendState"
+        else: return "BossIdleState"
+
+func start_cooldown(time: float = 1.0):
+    attack_cooldown = time
+```
+
+---
+
+## 四、BossData 资源定义
+
+```gdscript
+# BossData.gd
+extends Resource
+class_name BossData
+
+@export var boss_name: String = "影之守护者"
+@export var max_hp: int = 32
+@export var move_speed: float = 80.0
+@export var rush_speed: float = 400.0
+@export var jump_force: float = 500.0
+@export var slash_damage: int = 2
+@export var rush_damage: int = 2
+@export var fire_breath_damage: int = 1
+@export var shockwave_damage: int = 2
+@export var lightning_damage: int = 3
+@export var attack_cooldown: float = 1.5
+@export var phase2_cooldown: float = 0.8
+@export var hurt_invincible_time: float = 0.5
+@export var death_anim_duration: float = 3.0
+```
+
+---
+
+## 五、BossSpawner 生成器
+
+```gdscript
+# BossSpawner.gd
+extends Area2D
+class_name BossSpawner
+
+@export var boss_scene: PackedScene
+@export var spawn_position: Marker2D
+@export var boss_bgm: String = "boss_bgm"
+
+var _spawned: bool = false
+
+func _ready():
+    body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body: Node2D):
+    if _spawned or not body.is_in_group("player"):
+        return
+    _spawned = true
+    
+    # 生成BOSS
+    var boss = boss_scene.instantiate()
+    boss.global_position = spawn_position.global_position if spawn_position else global_position
+    get_parent().add_child(boss)
+    
+    # 显示血条
+    if boss.has_node("BossUI"):
+        boss.get_node("BossUI").show()
+    
+    # 播放BGM
+    AudioManager.play_sound(boss_bgm)
+    
+    # 禁用自身
+    queue_free()
+```
+
+---
+
+## 六、BossStateMachine
+
+```gdscript
+# BossStateMachine.gd
+extends Node
+class_name BossStateMachine
+
+var current_state: String = ""
+var states: Dictionary = {}
+var boss: Boss
+
+func _ready():
+    boss = get_parent() as Boss
+    for child in get_children():
+        if child.has_method("enter") and child.has_method("exit"):
+            states[child.name] = child
+            child.boss = boss
+            child.state_machine = self
+
+func change_state(new_state: String, msg: Dictionary = {}):
+    if new_state == current_state:
+        return
+    if current_state != "" and states.has(current_state):
+        print("[BossState] 退出状态: ", current_state)
+        states[current_state].exit()
+    
+    current_state = new_state
+    if states.has(new_state):
+        print("[BossState] 进入状态: ", new_state)
+        states[new_state].enter(msg)
+
+func update(delta: float):
+    if states.has(current_state) and states[current_state].has_method("update"):
+        states[current_state].update(delta)
+
+func physics_update(delta: float):
+    if states.has(current_state) and states[current_state].has_method("physics_update"):
+        states[current_state].physics_update(delta)
+```
+
+---
+
+## 七、BossUI（捆绑在Boss场景内）
+
+```gdscript
+# BossUI.gd
+extends CanvasLayer
+
+@onready var hp_bar: TextureProgressBar = $BossHPBar
+@onready var name_label: Label = $BossNameLabel
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
+func initialize(boss_data: BossData):
+    name_label.text = boss_data.boss_name
+    hp_bar.max_value = boss_data.max_hp
+    hp_bar.value = boss_data.max_hp
+    visible = false
+
+func update_hp(current: int):
+    hp_bar.value = current
+
+func show_with_animation():
+    visible = true
+    animation_player.play("show")
+
+func hide_with_animation():
+    animation_player.play("hide")
+    await animation_player.animation_finished
+    visible = false
+```
+
+---
+
+## 八、Boss 主类骨架
+
+```gdscript
+# Boss.gd
+extends CharacterBody2D
+class_name Boss
+
+@export var data: BossData
+
+@onready var ai: BossAIComponent = $Components/BossAIComponent
+@onready var movement: BossMovementComponent = $Components/BossMovementComponent
+@onready var animation: BossAnimationComponent = $Components/BossAnimationComponent
+@onready var state_machine: BossStateMachine = $BossStateMachine
+@onready var hurt_box: HurtBox = $HurtRoot/HurtBox
+@onready var boss_ui: BossUI = $BossUI
+
+var player_ref: Player = null
+var current_hp: int
+var is_dead: bool = false
+var facing_direction: float = 1.0
+
+func _ready():
+    current_hp = data.max_hp
+    player_ref = get_tree().get_first_node_in_group("player")
+    
+    hurt_box.took_damage.connect(_on_took_damage)
+    ai.state_change_requested.connect(_on_ai_state_change)
+    boss_ui.initialize(data)
+    boss_ui.update_hp(current_hp)
+
+func _physics_process(delta):
+    if is_dead:
+        return
+    state_machine.physics_update(delta)
+
+func _on_ai_state_change(state_name: String):
+    state_machine.change_state(state_name)
+
+func _on_took_damage(damage: int):
+    if is_dead:
+        return
+    current_hp = max(0, current_hp - damage)
+    boss_ui.update_hp(current_hp)
+    print("[Boss] 受伤，剩余HP: ", current_hp, "/", data.max_hp)
+    
+    if current_hp <= 0:
+        state_machine.change_state("BossDeathState")
+    else:
+        state_machine.change_state("BossHurtState")
+
+func die():
+    is_dead = true
+    # 播放死亡音效
+    # 触发 SceneTransition 淡出
+    # 通知关卡解锁出口
+```
+
+---
+
+## 九、关键设计决策说明
+
+| 决策 | 理由 |
+|------|------|
+| **不使用玩家的组件** | 避免修改玩家组件时意外影响BOSS，完全解耦 |
+| **BossUI捆绑在Boss场景** | 不污染全局UIManager，切换关卡自动清理 |
+| **BossSpawner独立场景** | 生成逻辑与BOSS本体分离，可在任意关卡复用 |
+| **BossAIComponent集中决策** | 策略模式核心，所有“选哪个状态”的逻辑集中在一个 `_evaluate()` 函数中 |
+| **状态平级，非继承** | 所有攻击状态都是独立脚本，通过 `BossStateMachine` 统一调度，无继承链 |
+
+---
+
+## 十、你现在要做的
+
+1. 创建 `BossData.gd` 资源脚本。
+2. 创建 `BossStateMachine.gd`。
+3. 创建 `BossAIComponent.gd`（先做简单版，只根据距离选状态）。
+4. 创建 `Boss.gd` 主类骨架。
+5. 创建 `BossUI.gd` 和对应的 `BossUI.tscn` 场景。
+6. 创建 `BossSpawner.tscn` 生成器场景。
+7. 逐个实现攻击状态脚本（先从 RushState 和 SlashState 开始）。
+8. 创建 Boss 场景，组装所有组件。
+9. 在关卡中放置 `BossSpawner`，测试完整流程。
+
+需要我从哪个部分开始给你完整代码？

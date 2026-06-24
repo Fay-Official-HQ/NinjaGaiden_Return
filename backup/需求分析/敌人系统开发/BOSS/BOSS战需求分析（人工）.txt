@@ -1,0 +1,62 @@
+原则：
+1.使用状态机+策略模式驱动
+2.数据驱动，方便调试
+3.组件化，避免和别的代码耦合
+4.高内聚，低耦合
+5.杜绝使用继承类，这样会引起混乱，杜绝采用玩家的组件，因为一旦修改就会都影响
+
+BOSS的血量：32，一共2阶段，血量降低到一半的时候进入强化状态
+BOSS的血条显示UI捆绑在BOSS场景，在画面中固定显示，避免和别的场景耦合
+BOSS出现需要一个生成器场景，玩家进入这个生成器出发区域，BOSS出现，随后出现血条，在BOSS关卡中使用这个生成器来生成一个BOSS
+
+
+BOSS的场景树举例：
+Boss (CharacterBody2D)
+├── Components (Node)
+│   ├── BossAIComponent (Node)           # 大脑：感知、决策、信号输出
+│   ├── MovementComponent (Node)         # 移动组件
+│   └── AnimationComponent (Node)        # 动画组件
+├── StateMachine (Node)                  # 状态机
+│   ├── BossIdleState (Node)             # 待机
+│   ├── BossChaseState (Node)            # 移动接近玩家
+│   ├── BossRushState (Node)             # 冲撞攻击
+│   ├── BossJumpState (Node)             # 跳跃压顶
+│   ├── BossSlashState (Node)            # 近战挥砍
+│   ├── BossSpinState (Node)             # 旋转斩
+│   ├── BossHurtState (Node)             # 受伤硬直
+│   └── BossDeathState (Node)            # 死亡
+├── AttackRoot (Node2D)                  # 攻击框挂载点
+│   ├── RushHitBox (Area2D)
+│   ├── JumpHitBox (Area2D)
+│   ├── SlashHitBox (Area2D)
+│   └── SpinHitBox (Area2D)
+├── HurtRoot (Node2D)
+│   └── HurtBox (Area2D)                 # 受击判定，可以根据需要动态调整受伤区域
+├── Visual (Node2D)
+│   └── AnimatedSprite2D
+├── CollisionShape2D
+└── BossData (Resource)                  #  @export var data: BossData 关联
+
+BOSS的战斗流：
+1.玩家接触BOSS生成器，然后在画面中的固定位置生成一个BOSS，随后画面中血条出现，并且播放BOSS战BGM
+2.玩家和BOSS战斗，BOSS通过BossAIComponent来决定使用哪一种攻击，BOSS具有多种攻击模式
+3.BOSS血量降低到一半以下，会开启强化模式
+4.玩家击败BOSS，BOSS播放死亡动画，播放音效，画面逐渐淡出
+5.关卡结束
+
+BOSS的攻击模式（状态）：
+1.显现：BOSS从画面中逐渐淡入，此过程无敌
+2.待机：BOSS站立不动
+3.防御：BOSS举起盾牌抵御正面的攻击
+4.移动：BOSS以防御姿态向玩家移动，抵御前方的攻击
+5.吐火：BOSS朝地面间下方连续释放三团火焰
+6.冲撞：BOSS以防御姿态向玩家迅速移动，身后带残影，冲撞攻击玩家，抵御前方的攻击，到达楼边缘停止
+7.跳跃：BOSS蓄力1秒，瞄准玩家位置，然后跳跃到空中，然后落到画面当中可以站立的这个地点；或者是直接跳跃到地图当中的某一点，这个交给AI组件决策。跳跃落地的时候会进入起跳姿势，并且在地面附近产生冲击波（如果能采用粒子效果实现）
+8.前冲：BOSS蓄力1秒，冲击前方
+9.砍击：BOSS蓄力1秒，挥刀砍前方
+10.发射：BOSS蓄力1秒，向前方释放冲击波
+11.雷电：BOSS跃入空中，然后隐身无敌，同时先后召唤3道雷电劈向玩家位置，随后BOSS在地图左侧或者右侧随机显现
+12.受伤：BOSS遭受攻击，身体短暂变白，并且播放音效
+13.死亡：BOSS受到致命一击，画面定格1秒，期间画面变成黑白两种颜色，然后BOSS播放死亡动画，身上播放爆炸动画，BOSS逐渐往画面下方下沉，画面慢慢淡出变黑
+
+BOSS每释放进入和退出一个状态都要在控制台输出，方便调试
