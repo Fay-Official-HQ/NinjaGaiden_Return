@@ -36,7 +36,7 @@ extends Node2D
 # ════════════════════════════════════════════════════════════
 
 func _ready() -> void:
-	#AudioManager.play_sound(&"bgml1")
+	AudioManager.play_sound(&"wind1")
 
 	# 根据入口点定位玩家
 	_place_player_at_entry()

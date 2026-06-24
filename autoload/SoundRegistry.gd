@@ -28,6 +28,7 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/se/shibingfashe.tres",
 	"res://resources/audio/se/shibingxuli.tres",
 	"res://resources/audio/se/zanting.tres",
+	"res://resources/audio/bgm/wind1.tres",
 ]
 
 func _ready() -> void:
