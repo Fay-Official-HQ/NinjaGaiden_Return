@@ -10,6 +10,7 @@ size = Vector2(30.383041, 1.9999962)
 
 [node name="ClimbableWall" type="Area2D" unique_id=1480905261]
 collision_layer = 512
+collision_mask = 0
 script = ExtResource("1_ci4ue")
 climbable_side = 0
 
@@ -18,7 +19,7 @@ shape = SubResource("RectangleShape2D_ci4ue")
 debug_color = Color(0.91764706, 0.14901961, 0.21176471, 0.7607843)
 
 [node name="TopPlatform" type="StaticBody2D" parent="." unique_id=774819875]
-collision_layer = 128
+collision_layer = 132
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopPlatform" unique_id=1766124646]

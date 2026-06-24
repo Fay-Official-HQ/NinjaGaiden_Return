@@ -63,6 +63,13 @@ func receive_attack() -> void:
 	_sprite.texture = show_texture
 	_sprite.modulate = Color.WHITE
 
+	# 如果玩家已经在拾取区域内，立即拾取
+	for body in _pickup_area.get_overlapping_bodies():
+		if body is Player:
+			_apply_effect(body)
+			queue_free()
+			return
+
 
 func _physics_process(delta: float) -> void:
 	match _state:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://q6rhabtk3y12" path="res://scripts/ninjutsu/fire_projectile.gd" id="1_iqj6j"]
 [ext_resource type="Texture2D" uid="uid://d2h05f74f3oqu" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_002.png" id="2_fdx56"]
-[ext_resource type="Texture2D" uid="uid://bwqwf2feyunlm" path="res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_000.png" id="3_xyb58"]
+[ext_resource type="Texture2D" uid="uid://cinu878eeafb7" path="res://assets/sprites/Ryu/lizitexiao/huoyanlizi.png" id="3_3e02b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdx56"]
 radius = 17.262676
@@ -21,8 +21,8 @@ spread = 25.0
 initial_velocity_min = 100.0
 initial_velocity_max = 200.0
 gravity = Vector3(0, 40, 0)
-scale_min = 0.099999994
-scale_max = 0.35
+scale_min = 0.29999998
+scale_max = 0.79999995
 color_ramp = SubResource("GradientTexture1D_3e02b")
 
 [node name="Area2D" type="Area2D" unique_id=1550002304]
@@ -40,7 +40,7 @@ texture = ExtResource("2_fdx56")
 
 [node name="FireParticles" type="GPUParticles2D" parent="." unique_id=1008349318]
 emitting = false
-texture = ExtResource("3_xyb58")
+texture = ExtResource("3_3e02b")
 lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_fdx56")

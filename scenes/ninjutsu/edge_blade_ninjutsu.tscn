@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cl0dv8gjbxcx7" path="res://scripts/ninjutsu/edge_blade.gd" id="1_fbu88"]
 [ext_resource type="Texture2D" uid="uid://c5dudheeflub" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_003.png" id="2_06s8n"]
-[ext_resource type="Texture2D" uid="uid://bwqwf2feyunlm" path="res://assets/sprites/Ryu/xiaohaoping/xiaohaoping_000.png" id="3_bw1f2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oypsf"]
 radius = 8.0
@@ -22,8 +21,8 @@ spread = 10.0
 initial_velocity_min = 50.0
 initial_velocity_max = 120.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 0.5
+scale_min = 0.5
+scale_max = 0.79999995
 color_ramp = SubResource("GradientTexture1D_bw1f2")
 
 [node name="Area2D" type="Area2D" unique_id=1550002304]
@@ -40,9 +39,9 @@ shape = SubResource("CapsuleShape2D_oypsf")
 texture = ExtResource("2_06s8n")
 
 [node name="BladeParticles" type="GPUParticles2D" parent="." unique_id=1707983145]
-emitting = true
-amount = 8
-texture = ExtResource("3_bw1f2")
+emitting = false
+amount = 4
+texture = ExtResource("2_06s8n")
 lifetime = 0.4
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_bw1f2")

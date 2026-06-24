@@ -36,13 +36,13 @@ size = Vector2(97, 324)
 size = Vector2(4438, 143)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjqpd"]
-size = Vector2(685, 381)
+size = Vector2(684, 501)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwabe"]
 size = Vector2(19, 382)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snxnj"]
-size = Vector2(22, 388)
+size = Vector2(24, 512)
 
 [node name="Level_1-5" type="Node2D" unique_id=311310683]
 script = ExtResource("1_u5yul")
@@ -120,7 +120,7 @@ offset_y = -60.0
 transition_duration = 1.0
 
 [node name="CollisionShape2D" parent="CameraZone/CameraZone" index="0" unique_id=1778439333]
-position = Vector2(257.79257, 137.82404)
+position = Vector2(258.29257, 77.824036)
 shape = SubResource("RectangleShape2D_bjqpd")
 
 [node name="BossGateTrigger" type="Area2D" parent="." unique_id=743490277]
@@ -133,7 +133,7 @@ shape = SubResource("RectangleShape2D_pwabe")
 [node name="Wall" type="StaticBody2D" parent="BossGateTrigger" unique_id=1503151685 groups=["wall_blocker"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossGateTrigger/Wall" unique_id=1941029473]
-position = Vector2(266, 168)
+position = Vector2(267, 106)
 shape = SubResource("RectangleShape2D_snxnj")
 
 [editable path="CameraZone/CameraZone"]
