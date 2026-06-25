@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://ddr5tg3t2y5xp" path="res://scripts/enemy/boss/l1/states/BossDeathState.gd" id="6_vxnxg"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="7_1ucsr"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="7_cld7c"]
+[ext_resource type="Texture2D" uid="uid://78y33kuue38k" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_012.png" id="9_5lqeb"]
+[ext_resource type="Texture2D" uid="uid://c6sxoi1jqve73" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_013.png" id="10_8xm6s"]
+[ext_resource type="Texture2D" uid="uid://dmuyasnlqpd0" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_008.png" id="11_8xm6s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(25, 48)
@@ -21,6 +24,25 @@ size = Vector2(25, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sb8oc"]
 animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": ExtResource("9_5lqeb")
+}, {
+"duration": 3.0,
+"texture": ExtResource("10_8xm6s")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_8xm6s")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [],
 "loop": true,
 "name": &"default",
@@ -85,5 +107,6 @@ shape = SubResource("RectangleShape2D_6aqok")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
 animation = &"idle"
+frame_progress = 0.8195182
 
 [node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
