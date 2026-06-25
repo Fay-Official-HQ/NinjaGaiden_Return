@@ -7,6 +7,7 @@ class_name BossData
 @export var rush_speed: float = 400.0
 @export var rush_damage: int = 2
 @export var slash_damage: int = 2
+@export var slash_lunge_distance: float = 15.0
 @export var attack_cooldown: float = 1.5
 @export var hurt_invincible_time: float = 0.5
 @export var death_anim_duration: float = 3.0

@@ -23,6 +23,8 @@ func change_state(new_state: BossState, msg: Dictionary = {}) -> void:
 		return
 	if current_state:
 		current_state.exit()
+	var from_name = String(current_state.name) if current_state else "无"
+	print("【Boss状态机】", from_name, " → ", new_state.name)
 	current_state = new_state
 	current_state.enter(msg)
 

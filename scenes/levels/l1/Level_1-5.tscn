@@ -4,8 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://ho41pk3dqxrm" path="res://assets/img/beijing.png" id="2_pwabe"]
 [ext_resource type="TileSet" uid="uid://ca52o5acxygjl" path="res://resources/tilesets/fc2_1.tres" id="3_snxnj"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_lg02w"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="6_u5yul"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_v4dcx"]
 [ext_resource type="Script" uid="uid://ckwvxaqlg05oj" path="res://scripts/environment/BossGateTrigger.gd" id="7_x82ch"]
+[ext_resource type="PackedScene" uid="uid://bfmo3lp0lnlot" path="res://scenes/enemy/boss/Boss_1.tscn" id="8_bjqpd"]
 [ext_resource type="PackedScene" uid="uid://dltnde0yqiwim" path="res://scenes/environment/CameraZone.tscn" id="9_omkep"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -107,7 +109,18 @@ position = Vector2(-216, 98)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("6_u5yul")]
+position = Vector2(-266.41943, 57.374557)
+consumable_type = 3
+
+[node name="Item2" parent="Items" unique_id=647059776 instance=ExtResource("6_u5yul")]
+position = Vector2(-211, 57)
+consumable_type = 2
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="Boss1" parent="enemys" unique_id=389371954 instance=ExtResource("8_bjqpd")]
+position = Vector2(541, 60)
 
 [node name="CameraZone" type="Node" parent="." unique_id=1017619398]
 

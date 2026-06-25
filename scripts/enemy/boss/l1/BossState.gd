@@ -5,10 +5,10 @@ var boss: Boss
 var state_machine: BossStateMachine
 
 func enter(_msg: Dictionary = {}) -> void:
-	pass
+	print("【Boss状态】进入: ", name)
 
 func exit() -> void:
-	pass
+	print("【Boss状态】离开: ", name)
 
 func update(_delta: float) -> void:
 	pass
