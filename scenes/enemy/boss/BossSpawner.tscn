@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c10i24ofc4qro"]
+
+[ext_resource type="Script" uid="uid://r4mmfo37qtaq" path="res://scripts/enemy/boss/l1/BossSpawner.gd" id="1_3tj7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tj7q"]
+size = Vector2(345, 148)
+
+[node name="BossSpawner" type="Node2D" unique_id=769527771]
+script = ExtResource("1_3tj7q")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1470984488]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=14058458]
+shape = SubResource("RectangleShape2D_3tj7q")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=1337469552]
+position = Vector2(473, -2)

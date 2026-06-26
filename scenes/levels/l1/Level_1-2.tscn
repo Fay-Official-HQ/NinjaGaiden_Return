@@ -367,14 +367,11 @@ position = Vector2(-2817, 16)
 [node name="Item10" parent="Items" unique_id=1714645628 instance=ExtResource("7_n5f1t")]
 position = Vector2(-2997, 94)
 
-[node name="Item11" parent="Items" unique_id=992331261 instance=ExtResource("7_n5f1t")]
-position = Vector2(-3284, -43)
-
 [node name="Item12" parent="Items" unique_id=1398065439 instance=ExtResource("7_n5f1t")]
 position = Vector2(-3559, 96)
 
 [node name="Item13" parent="Items" unique_id=1038830059 instance=ExtResource("7_n5f1t")]
-position = Vector2(-3738, -22)
+position = Vector2(-3738, -18)
 
 [node name="Item14" parent="Items" unique_id=514610171 instance=ExtResource("7_n5f1t")]
 position = Vector2(-1911.4486, 86.55087)
@@ -465,8 +462,11 @@ position = Vector2(-1547, 35)
 spawn_count = 1
 spawn_direction = 1
 
+[node name="CollisionShape2D" parent="enemys/BatSpawner5/TriggerArea" parent_id_path=PackedInt32Array(1633572617, 1366595315) index="0" unique_id=47906498]
+position = Vector2(5, 3.5)
+
 [node name="SpawnPosition" parent="enemys/BatSpawner5" index="1" unique_id=1206789695]
-position = Vector2(-137, 51)
+position = Vector2(-170, 72)
 
 [node name="Soldier3" parent="enemys" unique_id=1188613917 instance=ExtResource("12_smbk0")]
 position = Vector2(-1686, 132)

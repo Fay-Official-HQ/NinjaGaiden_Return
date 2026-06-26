@@ -4,6 +4,7 @@ class_name BossStateMachine
 var current_state: BossState
 var states: Dictionary = {}
 var boss: Boss
+var _deferred_start: bool = false
 
 func _ready() -> void:
 	await owner.ready
@@ -13,10 +14,20 @@ func _ready() -> void:
 			states[child.name.to_lower()] = child
 			child.boss = boss
 			child.state_machine = self
+	if states.size() > 0 and not _deferred_start:
+		_enter_first_state()
+
+func defer_start() -> void:
+	_deferred_start = true
+
+func start() -> void:
 	if states.size() > 0:
-		var first = states.values()[0]
-		current_state = first
-		current_state.enter()
+		_enter_first_state()
+
+func _enter_first_state() -> void:
+	var first = states.values()[0]
+	current_state = first
+	current_state.enter()
 
 func change_state(new_state: BossState, msg: Dictionary = {}) -> void:
 	if not new_state or current_state == new_state:

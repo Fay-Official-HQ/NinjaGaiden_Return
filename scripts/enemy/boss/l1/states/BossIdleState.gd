@@ -9,9 +9,9 @@ func update(_delta: float) -> void:
 	if not boss.player_ref:
 		return
 	_face_player()
-	var dist_x = abs(boss.player_ref.global_position.x - boss.global_position.x)
-	if dist_x < 70.0:
-		state_machine.change_state_by_name("BossSlashState")
+	var attack_name = boss.ai_component.get_next_action()
+	if attack_name != "":
+		state_machine.change_state_by_name(attack_name)
 
 func _face_player() -> void:
 	var dir = 1.0 if boss.player_ref.global_position.x > boss.global_position.x else -1.0

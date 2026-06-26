@@ -10,3 +10,5 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		body.die()
+	elif body is Boss:
+		body.trigger_appear_if_alive()
