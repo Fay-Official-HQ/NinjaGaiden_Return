@@ -29,9 +29,10 @@ texture = ExtResource("2_31qad")
 [node name="ChapterText" type="Node2D" parent="." unique_id=1567210427]
 
 [node name="chapter_1" type="Node2D" parent="ChapterText" unique_id=351385010]
+position = Vector2(-1, 0)
 
 [node name="title" type="Sprite2D" parent="ChapterText/chapter_1" unique_id=213218103]
-position = Vector2(155, 110)
+position = Vector2(147, 110)
 texture = ExtResource("3_6ip15")
 
 [node name="subtitle" type="Sprite2D" parent="ChapterText/chapter_1/title" unique_id=700942321]

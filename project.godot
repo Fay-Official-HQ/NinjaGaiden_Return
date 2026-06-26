@@ -13,7 +13,9 @@ config_version=5
 config/name="NinjaGaiden_Return"
 run/main_scene="uid://c3wcnst0ne1bs"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="uid://bpov1ebglsjul"
+boot_splash/show_image=false
+config/icon="uid://22kcrhhua07o"
+config/windows_native_icon="res://game_icon.ico"
 
 [autoload]
 
