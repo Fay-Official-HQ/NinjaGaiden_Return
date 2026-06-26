@@ -101,7 +101,7 @@ func _poll_hitbox() -> void:
 		if area is HurtBox and not hit_enemies.has(area):
 			hit_enemies.append(area)
 			#造成2点伤害，直接写死
-			area.take_damage(2)
+			area.take_heavy_damage(2)
 
 func _check_buffer() -> void:
 	if not Input.is_action_just_pressed("special_move"):

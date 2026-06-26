@@ -190,7 +190,7 @@ func _do_final_strike() -> void:
 	AudioManager.play_sound(&"hanjiao")
 	AudioManager.play_sound(&"bishaji")
 	_spawn_final_phantom()
-	_deal_dragon_damage(4)
+	_deal_dragon_damage(4, true)
 	trigger_screen_flash()
 
 func create_shadow() -> void:
@@ -250,13 +250,16 @@ func _spawn_final_phantom() -> void:
 	tw.tween_callback(phantom.queue_free)
 
 
-func _deal_dragon_damage(damage: int) -> void:
+func _deal_dragon_damage(damage: int, is_heavy: bool = false) -> void:
 	if not _dragon_hit_box or not _dragon_hit_box.monitoring:
 		return
 	var areas = _dragon_hit_box.get_overlapping_areas()
 	for area in areas:
 		if area is HurtBox:
-			area.take_damage(damage)
+			if is_heavy:
+				area.take_heavy_damage(damage)
+			else:
+				area.take_damage(damage)
 
 func finish_skill() -> void:
 	# 清理所有残留残影

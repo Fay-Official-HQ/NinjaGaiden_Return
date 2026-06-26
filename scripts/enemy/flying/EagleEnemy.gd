@@ -114,7 +114,7 @@ func _face_player() -> void:
 	anim.flip_h = player.global_position.x < global_position.x
 
 
-func _on_took_damage(amount: int) -> void:
+func _on_took_damage(amount: int, _is_heavy: bool = false) -> void:
 	if _is_dead:
 		return
 	_current_hp -= amount

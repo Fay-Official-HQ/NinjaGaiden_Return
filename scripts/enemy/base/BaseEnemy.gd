@@ -38,7 +38,7 @@ func _ready() -> void:
 
 # 玩家攻击状态每帧 polling 检测到 HurtBox 后，会调用
 # HurtBox.take_damage() → 发出 took_damage 信号
-func _on_took_damage(amount: int) -> void:
+func _on_took_damage(amount: int, _is_heavy: bool = false) -> void:
 	if is_dead:
 		return
 	current_hp -= amount

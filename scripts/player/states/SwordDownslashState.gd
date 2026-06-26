@@ -86,7 +86,7 @@ func _poll_hitbox() -> void:
 	for area in areas:
 		if area is HurtBox and not hit_enemies.has(area):
 			hit_enemies.append(area)
-			area.take_damage(2)
+			area.take_heavy_damage(2)
 
 func _check_buffer() -> void:
 	if not Input.is_action_just_pressed("special_move"):

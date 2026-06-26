@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 	position.y = start_y + offset_y
 
 
-func _on_took_damage(amount: int) -> void:
+func _on_took_damage(amount: int, _is_heavy: bool = false) -> void:
 	if is_dead:
 		return
 	current_hp -= amount

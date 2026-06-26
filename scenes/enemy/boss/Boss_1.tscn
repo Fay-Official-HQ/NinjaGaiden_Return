@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://q0ixs2u1t2rq" path="res://assets/sprites/enemy/boss/boss_l1/BossHPkong.png" id="15_b2w2p"]
 [ext_resource type="Script" uid="uid://c0xb2g70druks" path="res://scripts/enemy/boss/l1/BossUI.gd" id="15_qs1t1"]
 [ext_resource type="Texture2D" uid="uid://c5clak2fmn0vx" path="res://assets/sprites/enemy/boss/boss_l1/BossHPman.png" id="16_nyn4l"]
+[ext_resource type="Script" uid="uid://ce0epb6f57ru4" path="res://scripts/enemy/boss/l1/states/BossHurtState.gd" id="17_bqk6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(25, 48)
@@ -102,6 +103,7 @@ script = ExtResource("4_1ucsr")
 script = ExtResource("6_vxnxg")
 
 [node name="BossHurtState" type="Node" parent="BossStateMachine" unique_id=429618402]
+script = ExtResource("17_bqk6a")
 
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 

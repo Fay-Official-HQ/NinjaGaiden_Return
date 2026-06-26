@@ -50,7 +50,7 @@ func update(_delta: float) -> void:
 		for area in areas:
 			if area is HurtBox and not hit_enemies.has(area):
 				hit_enemies.append(area)
-				area.take_damage(dash_hit_box.damage)
+				area.take_heavy_damage(dash_hit_box.damage)
 
 	# 动画播放完毕后，自动结束剑术动作
 	if sprite.animation == "sword_dash" and not sprite.is_playing():

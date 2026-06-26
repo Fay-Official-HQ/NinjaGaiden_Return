@@ -99,7 +99,7 @@ func set_facing_direction(direction: float) -> void:
 	facing_direction = 1.0 if direction > 0 else -1.0
 	animation.flip_sprite(facing_direction)
 
-func _on_hurt_box_took_damage(damage: int) -> void:
+func _on_hurt_box_took_damage(damage: int, _is_heavy: bool = false) -> void:
 	if invincible_timer > 0 or is_invincible or _is_dead:
 		return
 

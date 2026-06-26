@@ -38,13 +38,15 @@ func _physics_process(delta: float) -> void:
 	if not is_dead and abs(velocity.x) < 1.0:
 		global_position.x = prev_x
 
-func _on_took_damage(damage: int) -> void:
+func _on_took_damage(damage: int, is_heavy: bool) -> void:
 	if is_dead:
 		return
 	current_hp = max(0, current_hp - damage)
 	boss_ui.update_hp(current_hp)
 	if current_hp <= 0:
 		state_machine.change_state_by_name("BossDeathState")
+	elif is_heavy:
+		state_machine.change_state_by_name("BossHurtState")
 	else:
 		_flash_white()
 

@@ -123,7 +123,7 @@ func _face_initial_direction() -> void:
 
 # ==================== 受击 ====================
 
-func _on_took_damage(amount: int) -> void:
+func _on_took_damage(amount: int, _is_heavy: bool = false) -> void:
 	if _is_dead:
 		return
 	_current_hp -= amount

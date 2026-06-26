@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 
 # ==================== 受击（被玩家武器击中） ====================
 
-func _on_took_damage(_amount: int) -> void:
+func _on_took_damage(_amount: int, _is_heavy: bool = false) -> void:
 	_hp -= 1
 	if _hp <= 0:
 		AudioManager.play_sound(_data.death_sound)
