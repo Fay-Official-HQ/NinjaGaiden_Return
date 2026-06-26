@@ -23,8 +23,8 @@ size = Vector2(25, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vxnxg"]
 size = Vector2(25, 48)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7jte"]
-size = Vector2(23, 48)
+[sub_resource type="CircleShape2D" id="CircleShape2D_nyn4l"]
+radius = 21.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aqok"]
 size = Vector2(25, 48)
@@ -62,6 +62,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("11_8xm6s")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_6aqok")
 }],
 "loop": true,
@@ -93,6 +101,8 @@ script = ExtResource("4_1ucsr")
 [node name="BossDeathState" type="Node" parent="BossStateMachine" unique_id=1417288001]
 script = ExtResource("6_vxnxg")
 
+[node name="BossHurtState" type="Node" parent="BossStateMachine" unique_id=429618402]
+
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
 [node name="EnemyHitBox" type="Area2D" parent="AttackRoot" unique_id=173550206]
@@ -110,8 +120,8 @@ collision_layer = 32
 script = ExtResource("8_l8x66")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SlashHitBox" unique_id=131863702]
-position = Vector2(23.5, 11)
-shape = SubResource("RectangleShape2D_p7jte")
+position = Vector2(12.5, 9)
+shape = SubResource("CircleShape2D_nyn4l")
 debug_color = Color(0.99215686, 0, 0.24705882, 0.92941177)
 
 [node name="HurtRoot" type="Node2D" parent="." unique_id=193466748]
@@ -130,7 +140,7 @@ shape = SubResource("RectangleShape2D_6aqok")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
-animation = &"idle"
+animation = &"hurt"
 
 [node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
 script = ExtResource("15_qs1t1")
