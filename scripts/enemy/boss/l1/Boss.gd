@@ -62,6 +62,7 @@ func _on_took_damage(damage: int, is_heavy: bool) -> void:
 	if state_machine.current_state is BossAppearState:
 		return
 	if not (state_machine.current_state is BossBlockState) and is_on_floor() and _is_player_in_front():
+		#此处设置格挡几率
 		if not _is_player_using_finish() and randf() < 0.3:
 			state_machine.change_state_by_name("BossBlockState")
 			return

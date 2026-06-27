@@ -54,7 +54,7 @@ func update(delta: float) -> void:
 				for area in areas:
 					if area is HurtBox and not hit_enemies.has(area) and area != boss.hurt_box:
 						hit_enemies.append(area)
-						area.take_damage(boss.data.slash_damage)
+						area.take_damage(boss.data.rush_damage)
 
 		Phase.RECOVERY:
 			_recovery_timer -= delta

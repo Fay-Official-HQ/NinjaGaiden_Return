@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dmuyasnlqpd0" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_008.png" id="11_8xm6s"]
 [ext_resource type="Script" uid="uid://cdwvnlqnk4lgr" path="res://scripts/enemy/boss/l1/states/BossAppearState.gd" id="11_t0rk2"]
 [ext_resource type="Script" uid="uid://cc3cl28niiot8" path="res://scripts/enemy/boss/l1/states/BossRushState.gd" id="12_3k5pg"]
+[ext_resource type="Script" uid="uid://i52itaev4c8c" path="res://scripts/enemy/boss/l1/states/BossLaserState.gd" id="13_ghvl6"]
 [ext_resource type="Texture2D" uid="uid://crncexmbjsx8n" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_014.png" id="14_mxgb2"]
 [ext_resource type="Texture2D" uid="uid://brjp2esp71dbi" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_005.png" id="15_5kv1n"]
 [ext_resource type="Texture2D" uid="uid://q0ixs2u1t2rq" path="res://assets/sprites/enemy/boss/boss_l1/BossHPkong.png" id="15_b2w2p"]
@@ -30,6 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://t5ucmggw4ho0" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_010.png" id="23_7go5v"]
 [ext_resource type="Texture2D" uid="uid://by742d8kq1mo7" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_009.png" id="23_qa0kr"]
 [ext_resource type="Texture2D" uid="uid://or2u2ndrqlf8" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_011.png" id="24_3k5pg"]
+[ext_resource type="Texture2D" uid="uid://dpavq812jpsrp" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_016.png" id="24_oi1yb"]
+[ext_resource type="Texture2D" uid="uid://iwrvfktmvnpn" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_015.png" id="25_ghvl6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(25, 48)
@@ -127,6 +130,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("24_oi1yb")
+}],
+"loop": false,
+"name": &"laser",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_ghvl6")
+}],
+"loop": true,
+"name": &"lasercharge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("23_7go5v")
 }, {
 "duration": 2.0,
@@ -158,7 +177,7 @@ animations = [{
 
 [node name="Boss1" type="CharacterBody2D" unique_id=389371954]
 collision_layer = 2
-collision_mask = 669
+collision_mask = 668
 script = ExtResource("1_722h2")
 data = ExtResource("2_p7jte")
 
@@ -198,6 +217,10 @@ script = ExtResource("11_t0rk2")
 
 [node name="BossRushState" type="Node" parent="BossStateMachine" unique_id=1508599563]
 script = ExtResource("12_3k5pg")
+
+[node name="BossLaserState" type="Node" parent="BossStateMachine" unique_id=903648566]
+script = ExtResource("13_ghvl6")
+metadata/_custom_type_script = "uid://i52itaev4c8c"
 
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
@@ -245,9 +268,7 @@ shape = SubResource("RectangleShape2D_6aqok")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
-animation = &"rush"
-frame = 1
-frame_progress = 1.0
+animation = &"laser"
 
 [node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
 script = ExtResource("15_qs1t1")

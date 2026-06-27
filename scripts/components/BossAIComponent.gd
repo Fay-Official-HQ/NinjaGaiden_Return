@@ -9,7 +9,7 @@ var _state_index: int = 0
 const DECISION_INTERVAL: float = 1.3
 ## 轮流切换的状态列表，按顺序循环
 ## 空字符串 "" 表示继续 Idle（待机巡逻）
-const STATE_CYCLE: Array[String] = ["", "BossSlashState", "BossJumpState", "BossRushState"]
+const STATE_CYCLE: Array[String] = ["", "BossSlashState", "BossJumpState", "BossRushState", "BossLaserState"]
 
 func initialize(owner_boss: Boss) -> void:
 	boss = owner_boss
@@ -17,6 +17,8 @@ func initialize(owner_boss: Boss) -> void:
 
 func _process(delta: float) -> void:
 	if boss.is_dead:
+		return
+	if boss.state_machine.current_state and not (boss.state_machine.current_state is BossIdleState):
 		return
 	_decision_timer -= delta
 	if _decision_timer <= 0.0:
