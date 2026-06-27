@@ -72,7 +72,6 @@ func physics_update(delta: float) -> void:
 			if _shadow_timer >= SHADOW_INTERVAL:
 				_shadow_timer = 0.0
 				_spawn_shadow()
-	boss.move_and_slide()
 
 func exit() -> void:
 	_cleanup()

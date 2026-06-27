@@ -22,7 +22,7 @@ func update(delta: float) -> void:
 		state_machine.change_state_by_name("BossIdleState")
 
 func physics_update(_delta: float) -> void:
-	boss.move_and_slide()
+	pass
 
 func exit() -> void:
 	_restore_all_hitboxes()

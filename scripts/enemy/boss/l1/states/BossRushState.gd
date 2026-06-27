@@ -5,20 +5,20 @@ enum Phase { CHARGE, DASH, RECOVERY }
 
 var _phase: int = Phase.CHARGE
 var _charge_timer: float = 0.0
-var _dash_speed: float = 0.0
+var _dash_timer: float = 0.0
 var _recovery_timer: float = 0.0
-var _target_x: float = 0.0
 var _shadow_timer: float = 0.0
 var _shadows: Array[Sprite2D] = []
 var hit_box: Area2D
 var hit_enemies: Array[HurtBox] = []
 
 const CHARGE_DURATION: float = 1.0    # 蓄力时间（秒），调小加速出招
-const RECOVERY_DURATION: float = 0.8   # 冲刺后缓冲时间（秒）
-const LUNGE_FRICTION: float = 300.0   # 冲刺摩擦力，越大停得越快
-const SHADOW_INTERVAL: float = 0.02    # 残影生成间隔（秒），越小残影越密
-const SHADOW_ALPHA: float = 0.8        # 残影不透明度，1.0=全实
-const SHADOW_FADE_TIME: float = 0.2    # 残影淡出时间（秒）
+const DASH_SPEED: float = 600.0       # 冲刺速度（像素/秒）
+const MAX_DASH_TIME: float = 3.0      # 最大冲刺时间（秒），防止无限冲
+const RECOVERY_DURATION: float = 0.8  # 冲刺后缓冲时间（秒）
+const SHADOW_INTERVAL: float = 0.02   # 残影生成间隔（秒），越小残影越密
+const SHADOW_ALPHA: float = 0.8       # 残影不透明度，1.0=全实
+const SHADOW_FADE_TIME: float = 0.2   # 残影淡出时间（秒）
 
 func enter(_msg: Dictionary = {}) -> void:
 	if not boss.is_on_floor():
@@ -30,9 +30,8 @@ func enter(_msg: Dictionary = {}) -> void:
 	boss.animated_sprite.modulate = Color(0.122, 0.271, 0.161, 1.0)
 	_phase = Phase.CHARGE
 	_charge_timer = CHARGE_DURATION
-	_dash_speed = 0.0
+	_dash_timer = 0.0
 	_recovery_timer = 0.0
-	_target_x = boss.player_ref.global_position.x if boss.player_ref else boss.global_position.x
 	_shadow_timer = 0.0
 	_shadows.clear()
 	hit_enemies.clear()
@@ -69,19 +68,12 @@ func physics_update(delta: float) -> void:
 			boss.velocity.x = 0.0
 
 		Phase.DASH:
-			if _dash_speed != 0.0:
-				if boss.is_ground_ahead():
-					boss.velocity.x = _dash_speed
-					_dash_speed = move_toward(_dash_speed, 0.0, LUNGE_FRICTION * delta)
-					if abs(_dash_speed) < 10.0:
-						_dash_speed = 0.0
-						_enter_recovery()
-						return
-				else:
-					boss.velocity.x = 0.0
-					_dash_speed = 0.0
-					_enter_recovery()
-					return
+			if not boss.is_ground_ahead() or _dash_timer >= MAX_DASH_TIME:
+				boss.velocity.x = 0.0
+				_enter_recovery()
+				return
+			boss.velocity.x = boss.facing_direction * DASH_SPEED
+			_dash_timer += delta
 			_shadow_timer += delta
 			if _shadow_timer >= SHADOW_INTERVAL:
 				_shadow_timer = 0.0
@@ -90,29 +82,19 @@ func physics_update(delta: float) -> void:
 		Phase.RECOVERY:
 			boss.velocity.x = 0.0
 
-	boss.move_and_slide()
-
 func exit() -> void:
 	_cleanup()
 
 func _execute_dash() -> void:
 	_phase = Phase.DASH
+	_dash_timer = 0.0
 	boss.animated_sprite.modulate = Color.WHITE
 	boss.animated_sprite.play("rush")
-	if not boss.is_ground_ahead():
-		_dash_speed = 0.0
-		_enter_recovery()
-		return
-	var distance = abs(_target_x - boss.global_position.x)
-	if distance < 20.0:
-		distance = 20.0
-	_dash_speed = boss.facing_direction * sqrt(2.0 * LUNGE_FRICTION * distance)
 
 func _enter_recovery() -> void:
 	_phase = Phase.RECOVERY
 	_recovery_timer = RECOVERY_DURATION
 	boss.velocity = Vector2.ZERO
-	_dash_speed = 0.0
 	_enable_rush_hitbox(false)
 	boss.animated_sprite.play("rushcharge")
 
