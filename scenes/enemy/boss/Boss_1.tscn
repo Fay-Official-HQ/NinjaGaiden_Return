@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://c6sxoi1jqve73" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_013.png" id="10_8xm6s"]
 [ext_resource type="Texture2D" uid="uid://dmuyasnlqpd0" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_008.png" id="11_8xm6s"]
 [ext_resource type="Script" uid="uid://cdwvnlqnk4lgr" path="res://scripts/enemy/boss/l1/states/BossAppearState.gd" id="11_t0rk2"]
+[ext_resource type="Script" uid="uid://cc3cl28niiot8" path="res://scripts/enemy/boss/l1/states/BossRushState.gd" id="12_3k5pg"]
 [ext_resource type="Texture2D" uid="uid://crncexmbjsx8n" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_014.png" id="14_mxgb2"]
 [ext_resource type="Texture2D" uid="uid://brjp2esp71dbi" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_005.png" id="15_5kv1n"]
 [ext_resource type="Texture2D" uid="uid://q0ixs2u1t2rq" path="res://assets/sprites/enemy/boss/boss_l1/BossHPkong.png" id="15_b2w2p"]
@@ -26,6 +27,9 @@
 [ext_resource type="Texture2D" uid="uid://hs2i154loo44" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_001.png" id="17_5kv1n"]
 [ext_resource type="Script" uid="uid://ce0epb6f57ru4" path="res://scripts/enemy/boss/l1/states/BossHurtState.gd" id="17_bqk6a"]
 [ext_resource type="Texture2D" uid="uid://btak5hiy0tpjj" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_006.png" id="18_mx7v5"]
+[ext_resource type="Texture2D" uid="uid://t5ucmggw4ho0" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_010.png" id="23_7go5v"]
+[ext_resource type="Texture2D" uid="uid://by742d8kq1mo7" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_009.png" id="23_qa0kr"]
+[ext_resource type="Texture2D" uid="uid://or2u2ndrqlf8" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_011.png" id="24_3k5pg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(25, 48)
@@ -35,6 +39,9 @@ size = Vector2(25, 48)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nyn4l"]
 radius = 21.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3k5pg"]
+size = Vector2(27.5, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aqok"]
 size = Vector2(25, 48)
@@ -120,6 +127,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("23_7go5v")
+}, {
+"duration": 2.0,
+"texture": ExtResource("24_3k5pg")
+}],
+"loop": false,
+"name": &"rush",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_qa0kr")
+}],
+"loop": true,
+"name": &"rushcharge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("16_n4p3t")
 }, {
 "duration": 1.0,
@@ -170,6 +196,9 @@ script = ExtResource("10_1tkbw")
 [node name="BossAppearState" type="Node" parent="BossStateMachine" unique_id=840976043]
 script = ExtResource("11_t0rk2")
 
+[node name="BossRushState" type="Node" parent="BossStateMachine" unique_id=1508599563]
+script = ExtResource("12_3k5pg")
+
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
 [node name="EnemyHitBox" type="Area2D" parent="AttackRoot" unique_id=173550206]
@@ -191,6 +220,15 @@ position = Vector2(12.5, 9)
 shape = SubResource("CircleShape2D_nyn4l")
 debug_color = Color(0.99215686, 0, 0.24705882, 0.92941177)
 
+[node name="RushHitBox" type="Area2D" parent="AttackRoot" unique_id=1330417975]
+collision_layer = 32
+script = ExtResource("8_l8x66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/RushHitBox" unique_id=1613095908]
+position = Vector2(16.25, 8)
+shape = SubResource("RectangleShape2D_3k5pg")
+debug_color = Color(0.38481212, 0.6065652, 0.23553303, 0.92941177)
+
 [node name="HurtRoot" type="Node2D" parent="." unique_id=193466748]
 
 [node name="HurtBox" type="Area2D" parent="HurtRoot" unique_id=323499813]
@@ -207,7 +245,9 @@ shape = SubResource("RectangleShape2D_6aqok")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
-animation = &"appear"
+animation = &"rush"
+frame = 1
+frame_progress = 1.0
 
 [node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
 script = ExtResource("15_qs1t1")
