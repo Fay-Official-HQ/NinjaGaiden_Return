@@ -20,8 +20,10 @@
 [ext_resource type="Script" uid="uid://cc3cl28niiot8" path="res://scripts/enemy/boss/l1/states/BossRushState.gd" id="12_3k5pg"]
 [ext_resource type="Script" uid="uid://i52itaev4c8c" path="res://scripts/enemy/boss/l1/states/BossLaserState.gd" id="13_ghvl6"]
 [ext_resource type="Texture2D" uid="uid://crncexmbjsx8n" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_014.png" id="14_mxgb2"]
+[ext_resource type="Script" uid="uid://o27hc1acmfd" path="res://scripts/enemy/boss/l1/states/BossWalkState.gd" id="14_nll21"]
 [ext_resource type="Texture2D" uid="uid://brjp2esp71dbi" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_005.png" id="15_5kv1n"]
 [ext_resource type="Texture2D" uid="uid://q0ixs2u1t2rq" path="res://assets/sprites/enemy/boss/boss_l1/BossHPkong.png" id="15_b2w2p"]
+[ext_resource type="Script" uid="uid://c2so0akqdv3v5" path="res://scripts/enemy/boss/l1/states/BossGroundWaveState.gd" id="15_iwekj"]
 [ext_resource type="Script" uid="uid://c0xb2g70druks" path="res://scripts/enemy/boss/l1/BossUI.gd" id="15_qs1t1"]
 [ext_resource type="Texture2D" uid="uid://dpdyh2k3npksn" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_000.png" id="16_n4p3t"]
 [ext_resource type="Texture2D" uid="uid://c5clak2fmn0vx" path="res://assets/sprites/enemy/boss/boss_l1/BossHPman.png" id="16_nyn4l"]
@@ -32,7 +34,9 @@
 [ext_resource type="Texture2D" uid="uid://by742d8kq1mo7" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_009.png" id="23_qa0kr"]
 [ext_resource type="Texture2D" uid="uid://or2u2ndrqlf8" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_011.png" id="24_3k5pg"]
 [ext_resource type="Texture2D" uid="uid://dpavq812jpsrp" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_016.png" id="24_oi1yb"]
+[ext_resource type="Texture2D" uid="uid://cm6venmsgf5ly" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_003.png" id="25_7qlyp"]
 [ext_resource type="Texture2D" uid="uid://iwrvfktmvnpn" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_015.png" id="25_ghvl6"]
+[ext_resource type="Texture2D" uid="uid://lh7xsf263r71" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_004.png" id="26_iwekj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(25, 48)
@@ -102,6 +106,20 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6aqok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_7qlyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_iwekj")
+}],
+"loop": false,
+"name": &"ground_wave",
 "speed": 5.0
 }, {
 "frames": [{
@@ -222,6 +240,13 @@ script = ExtResource("12_3k5pg")
 script = ExtResource("13_ghvl6")
 metadata/_custom_type_script = "uid://i52itaev4c8c"
 
+[node name="BossWalkState" type="Node" parent="BossStateMachine" unique_id=1163623643]
+script = ExtResource("14_nll21")
+
+[node name="BossGroundWaveState" type="Node" parent="BossStateMachine" unique_id=1762255199]
+script = ExtResource("15_iwekj")
+metadata/_custom_type_script = "uid://c2so0akqdv3v5"
+
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
 [node name="EnemyHitBox" type="Area2D" parent="AttackRoot" unique_id=173550206]
@@ -268,7 +293,9 @@ shape = SubResource("RectangleShape2D_6aqok")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
-animation = &"laser"
+animation = &"ground_wave"
+frame = 2
+frame_progress = 1.0
 
 [node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
 script = ExtResource("15_qs1t1")

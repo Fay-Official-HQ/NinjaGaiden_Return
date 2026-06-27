@@ -8,6 +8,7 @@ class_name BossData
 @export var rush_damage: int = 3
 @export var slash_damage: int = 2
 @export var slash_lunge_distance: float = 15.0
+@export var ground_wave_damage: int = 2
 @export var attack_cooldown: float = 1.5
 @export var hurt_invincible_time: float = 0.5
 # 受重击后的硬直持续时间（秒），期间关闭所有攻击框

@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dq767vwk6d716"]
+
+[ext_resource type="Script" uid="uid://dx5c2wh230k4d" path="res://scripts/enemy/boss/l1/BossGroundWave.gd" id="1_vsmoj"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="2_3ir0b"]
+[ext_resource type="Texture2D" uid="uid://bishwdhgokfok" path="res://assets/sprites/enemy/boss/boss_l1/dibo3.png" id="5_l3lha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xu8t0"]
+size = Vector2(16, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ir0b"]
+size = Vector2(16, 17)
+
+[node name="BossGroundWave" type="Area2D" unique_id=912245266]
+collision_layer = 2
+script = ExtResource("1_vsmoj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1981118488]
+position = Vector2(0, -16)
+texture = ExtResource("5_l3lha")
+
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=752903380]
+position = Vector2(0, -16)
+collision_layer = 32
+script = ExtResource("2_3ir0b")
+damage = 2
+metadata/_custom_type_script = "uid://cflbsmpgemw31"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1474759531]
+position = Vector2(-9, 8.5)
+shape = SubResource("RectangleShape2D_xu8t0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1743141125]
+position = Vector2(-9, -7.5)
+shape = SubResource("RectangleShape2D_3ir0b")

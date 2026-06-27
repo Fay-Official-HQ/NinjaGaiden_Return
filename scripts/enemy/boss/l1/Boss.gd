@@ -69,6 +69,9 @@ func _on_took_damage(damage: int, is_heavy: bool) -> void:
 	if state_machine.current_state is BossBlockState and _is_player_in_front():
 		print("【Boss】正面格挡")
 		return
+	if state_machine.current_state.name == "BossWalkState" and _is_player_in_front():
+		print("【Boss】移动格挡")
+		return
 	current_hp = max(0, current_hp - damage)
 	boss_ui.update_hp(current_hp)
 	if current_hp <= 0:

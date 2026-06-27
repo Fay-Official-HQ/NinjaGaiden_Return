@@ -9,7 +9,7 @@ var _state_index: int = 0
 const DECISION_INTERVAL: float = 1.3
 ## 轮流切换的状态列表，按顺序循环
 ## 空字符串 "" 表示继续 Idle（待机巡逻）
-const STATE_CYCLE: Array[String] = ["", "BossSlashState", "BossJumpState", "BossRushState", "BossLaserState"]
+const STATE_CYCLE: Array[String] = ["", "BossWalkState", "BossSlashState", "BossJumpState", "BossGroundWaveState", "BossRushState", "BossLaserState"]
 
 func initialize(owner_boss: Boss) -> void:
 	boss = owner_boss
