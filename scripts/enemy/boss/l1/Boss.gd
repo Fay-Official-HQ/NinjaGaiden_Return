@@ -16,6 +16,8 @@ class_name Boss
 var player_ref: Player
 var current_hp: int
 var is_dead: bool = false
+var is_invincible: bool = false
+var ignore_gravity: bool = false
 var facing_direction: float = 1.0
 var _flash_tween: Tween
 ## 由 BossSpawner 在实例化后、add_child 前设置，表示首次生成
@@ -46,7 +48,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
-	if not is_on_floor():
+	if not ignore_gravity and not is_on_floor():
 		velocity.y += 980.0 * delta
 	var prev_x = global_position.x
 	state_machine.physics_update(delta)
@@ -57,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		trigger_appear_if_alive()
 
 func _on_took_damage(damage: int, is_heavy: bool) -> void:
-	if is_dead:
+	if is_dead or is_invincible:
 		return
 	if state_machine.current_state is BossAppearState:
 		return

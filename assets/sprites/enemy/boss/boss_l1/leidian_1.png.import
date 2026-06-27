@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr3gtnhtfenjx"
-path="res://.godot/imported/leidian_001.png-52825ee216377f600ce94430a3a591c2.ctex"
+uid="uid://b0q7nps0qgb2c"
+path="res://.godot/imported/leidian_1.png-c1c873140ec7cc0e404b4d7d9451c368.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/boss/boss_l1/leidian_001.png"
-dest_files=["res://.godot/imported/leidian_001.png-52825ee216377f600ce94430a3a591c2.ctex"]
+source_file="res://assets/sprites/enemy/boss/boss_l1/leidian_1.png"
+dest_files=["res://.godot/imported/leidian_1.png-c1c873140ec7cc0e404b4d7d9451c368.ctex"]
 
 [params]
 

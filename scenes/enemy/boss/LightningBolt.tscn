@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://ckxwr34eamkud"]
+
+[ext_resource type="Script" uid="uid://c2rnkpbu04fq3" path="res://scripts/enemy/boss/l1/LightningBolt.gd" id="1_56tp4"]
+[ext_resource type="Texture2D" uid="uid://b0q7nps0qgb2c" path="res://assets/sprites/enemy/boss/boss_l1/leidian_1.png" id="2_56tp4"]
+[ext_resource type="Texture2D" uid="uid://c2genjkwja40i" path="res://assets/sprites/enemy/boss/boss_l1/leidian_2.png" id="3_2gr8g"]
+[ext_resource type="Texture2D" uid="uid://cakj4pjk6qhh3" path="res://assets/sprites/enemy/boss/boss_l1/leidian_3.png" id="4_0lp48"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="5_2gr8g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2gr8g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_56tp4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2gr8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0lp48")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdnbw"]
+size = Vector2(5.5, 252)
+
+[node name="LightningBolt" type="Area2D" unique_id=2136638655]
+script = ExtResource("1_56tp4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=23034268]
+position = Vector2(-14, -143)
+sprite_frames = SubResource("SpriteFrames_2gr8g")
+frame = 2
+frame_progress = 1.0
+centered = false
+
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1746721500]
+position = Vector2(-14, -143)
+collision_layer = 32
+script = ExtResource("5_2gr8g")
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1224768459]
+position = Vector2(14.25, 143)
+shape = SubResource("RectangleShape2D_rdnbw")
