@@ -1,0 +1,274 @@
+---
+
+# 《影之守护者》BOSS 状态与招式完整规范
+
+## 一、整体架构
+
+```
+Boss_1.tscn
+├─ Boss (CharacterBody2D)        ← 主类
+├─ BossStateMachine (Node)       ← 状态机
+│  ├─ BossIdleState              ← 待机巡逻
+│  ├─ BossWalkState              ← 移动格挡
+│  ├─ BossSlashState             ← 斩击
+│  ├─ BossJumpState              ← 跳跃
+│  ├─ BossGroundWaveState        ← 地波
+│  ├─ BossRushState              ← 冲刺
+│  ├─ BossLaserState             ← 激光
+│  ├─ BossLightningState         ← 雷电必杀技
+│  ├─ BossBlockState             ← 格挡
+│  ├─ BossHurtState              ← 受击
+│  ├─ BossDeathState             ← 死亡
+│  └─ BossAppearState            ← 出现
+├─ BossAIComponent (Node)        ← AI 决策器（需要专家开发）
+└─ BossUI (CanvasLayer)          ← 血条 UI
+```
+
+### 关键属性（`Boss.gd`）
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| `player_ref` | Player | 玩家引用 |
+| `current_hp` | int | 当前血量 |
+| `is_dead` | bool | 是否死亡 |
+| `is_invincible` | bool | 是否无敌（雷电期间用） |
+| `ignore_gravity` | bool | 是否无视重力（雷电期间用） |
+| `facing_direction` | float | 1.0=朝右，-1.0=朝左 |
+| `appear_target_pos` | Vector2 | BOSS 显现固定位置（BossSpawner 传入） |
+
+### 关键方法
+
+| 方法 | 说明 |
+|------|------|
+| `get_ground_at(x: float) -> Vector2` | 获取指定 X 坐标的地面位置 |
+| `is_ground_ahead() -> bool` | 检测 BOSS 前方是否有地面 |
+| `set_facing_direction(dir: float)` | 设置朝向（影响 flip_h） |
+| `_is_player_in_front() -> bool` | 检测玩家是否在 BOSS 正面 |
+| `trigger_appear_if_alive()` | 如果还活着触发出现动画 |
+
+---
+
+## 二、各状态详细说明
+
+### 1. [BossIdleState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossIdleState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `idle` |
+| 行为 | 站定面向玩家，每帧调用 `ai_component.get_next_action()` 获取决策 |
+| 决策接口 | `ai_component.get_next_action() -> String`，返回**状态节点名称**（如 `"BossSlashState"`）或空字符串（继续 Idle） |
+
+### 2. [BossWalkState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossWalkState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `walk`（2帧，speed=5.0，loop） |
+| 持续时间 | **3 秒**后自动回到 Idle |
+| 移动速度 | `BossData.move_speed = 80` |
+| 行为 | 朝玩家方向缓慢行走，保持面向玩家 |
+| 特殊 | **100% 正面格挡**（移动期间正面受击不掉血不打断） |
+
+### 3. [BossSlashState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossSlashState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `attackcharge`（蓄力0.4s）→ `attack`（挥砍） |
+| 伤害 | `BossData.slash_damage = 2` |
+| 攻击框 | `AttackRoot/SlashHitBox`（圆形，radius=21.5） |
+| 突进 | 蓄力后向前突进 `slash_lunge_distance = 15px` |
+| 残影 | 攻击时生成残影效果 |
+| 可被打断 | 否（一旦开始执行不可打断） |
+
+### 4. [BossJumpState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossJumpState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `crouch`（蓄力0.7s）→ `jump`（跳跃0.6s）→ `crouch`（落地0.7s） |
+| 行为 | 朝玩家位置跳跃抛物线（弧高90px） |
+| 特殊 | **血量 ≥ 32 时不释放此状态**（AI 已自动跳过） |
+| 用途 | 跳到玩家位置进行压制 |
+
+### 5. [BossGroundWaveState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossGroundWaveState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `ground_wave`（3帧，loop=false，speed=5.0） |
+| 伤害 | `BossData.ground_wave_damage = 2` |
+| 行为 | 播放动画 → 在脚前连续生成 3 个地波投射物 |
+| 地波间隔 | `0.8 秒` |
+| 地波偏移 | BOSS 面朝方向前方 `25px` |
+| 地波投射物 | [BossGroundWave](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/BossGroundWave.gd) |
+| | Area2D，速度 220px/s，沿地面飞行 |
+| | **每帧射线检测**：前方/下方是否有地面 → 没地面则销毁 |
+| | 最长存活 8 秒兜底 |
+| 攻击框 | EnemyHitBox组件（矩形16×17） |
+
+### 6. [BossRushState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossRushState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `rushcharge`（蓄力1.0s，身体变绿）→ `rush`（冲刺，2帧） |
+| 伤害 | `BossData.rush_damage = 3` |
+| 速度 | **600 px/s**（快速） |
+| 攻击框 | `AttackRoot/RushHitBox`（矩形27.5×14） |
+| 最大时间 | 冲刺 **3 秒**后自动停下 |
+| 残影 | 冲刺时密集残影（间隔0.02s） |
+| 碰撞 | Boss `collision_mask = 668`（去掉 Layer1 Player），不卡玩家 |
+| 特殊 | 前方无地面时立即刹车进入恢复 |
+
+### 7. [BossLaserState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossLaserState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `lasercharge`（蓄力1.0s，身体变红闪烁）→ `laser`（释放） |
+| 伤害 | **6**（固定值，EnemyHitBox 设置） |
+| 行为 | 蓄力期间生成 **红色闪烁预警线**（长500px，对应战斗屏幕宽度） |
+| | 释放时生成 [BossLaser](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/BossLaser.gd) 投射物 |
+| 激光特性 | Area2D，**边伸长边飞行** |
+| | 速度 1500px/s，最大长度 2000px |
+| | 碰撞框随精灵同步伸长 |
+| | 最长存活 5 秒兜底 |
+| 特殊 | 朝玩家方向释放，BOSS 全程不移动 |
+
+### 8. [BossLightningState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossLightningState.gd)（必杀技）
+
+| 阶段 | 持续时间 | 行为 |
+|------|---------|------|
+| **CROUCH_CHARGE** | 1.0s | 下蹲蓄力，播放 `crouch` |
+| **JUMP** | 到最高点 ≈0.35s | 跳到空中（初速 -350px/s），播放 `jump` |
+| **VANISH** | 1.0s | 播放 `vanish` 动画 + 逐渐淡出，**无敌 + 无视重力** |
+| **STRIKES** | 3×0.8s | 连续召唤 3 道雷电劈向玩家，每道间隔 0.8s |
+| **DONE** | 1.0s | 等待后，瞬移到固定位置（`appear_target_pos`）淡入出现 |
+
+**雷电投射物** [LightningBolt](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/LightningBolt.gd)：
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `default`（3帧，leidian_000~002，speed=5.0，loop=false） |
+| 伤害 | **3**（EnemyHitBox 设置） |
+| 伤害时机 | 仅第 2、3 帧开启碰撞（给玩家反应时间） |
+| 特效 | 第 2 帧时**全屏白色闪烁**（0.15s 淡出） |
+| 生命周期 | 0.6s 自动销毁 |
+| 攻击框 | EnemyHitBox 组件（矩形 7×282） |
+| 位置 | X=玩家当前X±随机30px，Y固定（地面） |
+
+### 9. [BossBlockState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossBlockState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `block` |
+| 最大时间 | 3 秒后自动回到 Idle |
+| 触发 | Idle 状态下正面受击，**30% 概率触发** |
+| 特殊 | 期间正面 100% 格挡（不掉血不打断），但受到**必杀技**攻击时不可防御 |
+| 检测条件 | `_is_player_using_finish()` 检查玩家是否龙闪状态 |
+
+### 10. [BossHurtState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossHurtState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `hurt` |
+| 持续时间 | `BossData.hurt_duration = 0.8s` |
+| 行为 | 击退 `knockback_distance = 15px`，关闭所有攻击框，白色闪烁 |
+| 硬直结束后 | 恢复攻击框，回到 Idle |
+
+### 11. [BossDeathState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossDeathState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `death` |
+| 流程 | 播放死亡动画 2s → 隐藏 → 1s 后切换场景 |
+
+### 12. [BossAppearState](file:///d:/Godot/GodotProject/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossAppearState.gd)
+
+| 项目 | 内容 |
+|------|------|
+| 动画 | `appear` |
+| 流程 | FADE_OUT（1s）→ HIDDEN（2s，瞬移）→ FADE_IN（1s）→ Idle |
+| 参数 | `{"target_pos": Vector2}` 指定出现位置 |
+
+---
+
+## 三、供 AI 组件使用的接口
+
+### 状态机接口
+
+```gdscript
+# 通过状态名切换（状态节点名 = 类名）
+state_machine.change_state_by_name("BossSlashState")
+state_machine.change_state_by_name("BossSlashState", {"extra_param": value})
+
+# 当前状态判断
+state_machine.current_state is BossSlashState
+state_machine.current_state.name == "BossSlashState"
+```
+
+### BossAIComponent 当前实现
+
+`AI 决策器（BossAIComponent）` 结构：
+
+```gdscript
+const DECISION_INTERVAL: float = 1.3
+const STATE_CYCLE: Array[String] = [
+    "",                              # 跳过，继续 Idle
+    "BossWalkState",                 # 移动格挡
+    "BossSlashState",                # 斩击
+    "BossLightningState",            # 雷电必杀技
+    "BossJumpState",                 # 跳跃
+    "BossGroundWaveState",           # 地波
+    "BossRushState",                 # 冲刺
+    "BossLaserState",                # 激光
+]
+
+# 外部条件：BossJumpState 在血量 >= 32 时不释放
+if _pending_action == "BossJumpState" and boss.current_hp >= 32:
+    _pending_action = ""
+
+# IdleState 每帧调用，获取决策的动作
+func get_next_action() -> String
+```
+
+### BOSS 关键数据（`BossData.tres`）
+
+| 字段 | 值 | 说明 |
+|------|----|------|
+| `max_hp` | 32 | 最大血量 |
+| `move_speed` | 80 | 行走速度 |
+| `rush_speed` | 400 | 冲刺速度 |
+| `slash_damage` | 2 | 斩击伤害 |
+| `rush_damage` | 3 | 冲刺伤害 |
+| `ground_wave_damage` | 2 | 地波伤害 |
+| `slash_lunge_distance` | 15 | 斩击突进距离 |
+| `attack_cooldown` | 1.5 | 攻击冷却 |
+| `hurt_duration` | 0.8 | 硬直时间 |
+| `knockback_distance` | 15 | 击退距离 |
+| `death_anim_duration` | 3.0 | 死亡动画时间 |
+
+---
+
+## 五、专家开发 AI 决策器的参考建议
+
+### 输入状态
+
+AI 组件每帧可以获取：
+
+```gdscript
+boss.player_ref                              # 玩家引用
+boss.player_ref.global_position               # 玩家位置
+boss.player_ref.state_machine.current_state   # 玩家当前状态
+boss.current_hp                               # BOSS 血量
+boss.is_on_floor()                            # BOSS 是否在地面
+boss._is_player_in_front()                    # 玩家是否在正面
+boss.is_ground_ahead()                        # 前方是否有地面
+boss.facing_direction                         # BOSS 朝向
+```
+
+### 推荐决策逻辑
+
+| 条件 | 推荐状态 |
+|------|---------|
+| 玩家在远处 | `BossWalkState`（靠近） |
+| 玩家在正面近距离 | `BossSlashState` 或 `BossRushState` |
+| 玩家在头顶/跳跃中 | `BossJumpState` |
+| 玩家在远处 | `BossLaserState` 或 `BossGroundWaveState` |
+| BOSS 血量低于 50% | 提高 `BossLightningState` 优先级 |
+| 玩家刚释放完技能 | `BossRushState`（追击） |
