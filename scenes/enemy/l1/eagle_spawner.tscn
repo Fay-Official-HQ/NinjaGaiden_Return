@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5tdx1pwwyte"]
 
-[ext_resource type="Script" uid="uid://bn04io0c2w2u2" path="res://scripts/enemy/flying/EagleSpawner.gd" id="1_a4dtq"]
+[ext_resource type="Script" uid="uid://bn04io0c2w2u2" path="res://scripts/enemy/l1/EagleSpawner.gd" id="1_a4dtq"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpiv2"]
 size = Vector2(20, 167)

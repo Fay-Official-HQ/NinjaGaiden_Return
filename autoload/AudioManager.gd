@@ -66,6 +66,11 @@ func resume_bgm() -> void:
 	_bgm_player.stream_paused = false
 
 
+## 立即停止 BGM（用于BOSS死亡等需要立刻静音的场合）
+func stop_bgm() -> void:
+	_bgm_player.stop()
+
+
 ## BGM 淡出（用于关卡切换过渡）
 ## 在指定 duration 秒内将 BGM 音量逐渐降到 -80dB（静音）
 func fade_out_bgm(duration: float = 2.0) -> void:

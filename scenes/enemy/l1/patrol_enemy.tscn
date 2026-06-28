@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bxorj7hex2om3"]
 
-[ext_resource type="Script" uid="uid://cipkedgruap7c" path="res://scripts/enemy/patrol/PatrolEnemy.gd" id="1_v6v30"]
+[ext_resource type="Script" uid="uid://cipkedgruap7c" path="res://scripts/enemy/l1/PatrolEnemy.gd" id="1_v6v30"]
 [ext_resource type="Resource" uid="uid://lq5d2c5b22e7" path="res://resources/enemy/PatrolEnemyData.tres" id="2_twyf4"]
 [ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_karv7"]
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_gtjm1"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cwf01sq4y7qi0" path="res://assets/sprites/enemy/l1/sandaixiaoguai_001.png" id="8_uj18t"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_0ixe7"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_bqsfk"]
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
 animations = [{

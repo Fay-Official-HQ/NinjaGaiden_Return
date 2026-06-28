@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0qr5r2t7s6vh"]
 
-[ext_resource type="Script" uid="uid://didehcvjr5ade" path="res://scripts/enemy/flying/FlyingNinja.gd" id="1"]
+[ext_resource type="Script" uid="uid://didehcvjr5ade" path="res://scripts/enemy/l1/FlyingNinja.gd" id="1"]
 [ext_resource type="Resource" uid="uid://bbovj0kfu870t" path="res://resources/enemy/FlyingNinjaData.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://p8yxm1s2imt3" path="res://assets/sprites/enemy/l1/feiren_000.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://3sq7c5urtp12" path="res://assets/sprites/enemy/l1/feiren_001.png" id="4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="10"]
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vg3h6"]
 animations = [{

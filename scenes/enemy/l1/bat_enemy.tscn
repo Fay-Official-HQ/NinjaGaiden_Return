@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b20twcl27losj"]
 
-[ext_resource type="Script" uid="uid://bdnbwaea5410" path="res://scripts/enemy/flying/BatEnemy.gd" id="1_0na6w"]
+[ext_resource type="Script" uid="uid://bdnbwaea5410" path="res://scripts/enemy/l1/BatEnemy.gd" id="1_0na6w"]
 [ext_resource type="Script" uid="uid://dwrt47fee4y1x" path="res://resources/enemy/BatData.gd" id="2_0na6w"]
 [ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_tp06s"]
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_bevwy"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://70r5ee0p74q2" path="res://assets/sprites/enemy/l1/feixingguai_001.png" id="8_d8t03"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_0ca73"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_h1eil"]
+
 
 [sub_resource type="Resource" id="Resource_ni43t"]
 script = ExtResource("2_0na6w")

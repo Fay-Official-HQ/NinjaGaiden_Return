@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://pqwepyyk74gp"]
+
+[ext_resource type="Texture2D" uid="uid://dkqqenrpqx705" path="res://assets/shaders/baidian.png" id="1_ek2pk"]
+[ext_resource type="Script" uid="uid://26ek5nfkf1sc" path="res://scripts/effects/HorizontalSlash.gd" id="2_60vvs"]
+
+[node name="HorizontalSlash" type="Node2D" unique_id=1870712423]
+script = ExtResource("2_60vvs")
+
+[node name="SlashLine" type="Sprite2D" parent="." unique_id=52490409]
+texture = ExtResource("1_ek2pk")

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbmqyysl45xg8"]
 
 [ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="1_igkk7"]
-[ext_resource type="Script" uid="uid://desgfytlc52tl" path="res://scripts/enemy/flying/EagleEnemy.gd" id="1_yxwov"]
+[ext_resource type="Script" uid="uid://desgfytlc52tl" path="res://scripts/enemy/l1/EagleEnemy.gd" id="1_yxwov"]
 [ext_resource type="Resource" uid="uid://coajf3e47ctit" path="res://resources/enemy/EagleData.tres" id="2_fr86k"]
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="2_wxsy8"]
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="3_jmnu3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dwyei6m22bcpw" path="res://assets/sprites/enemy/l1/laoyingr2.png" id="6_odj3b"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="7_vocqn"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="8_yxwov"]
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vg3h6"]
 animations = [{

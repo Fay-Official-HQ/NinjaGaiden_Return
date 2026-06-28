@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dlcwqt1tttxme"]
+
+[ext_resource type="Texture2D" uid="uid://botwaronfvdd0" path="res://assets/sprites/enemy/boss/boss_l1/baozhalizi.png" id="1_epufd"]
+[ext_resource type="Script" uid="uid://ilnxgxopxtfw" path="res://scripts/enemy/boss/l1/Explosion.gd" id="2_4ggfy"]
+
+[sub_resource type="Gradient" id="Gradient_vhvit"]
+offsets = PackedFloat32Array(0, 0.4, 0.7, 1)
+colors = PackedColorArray(1, 0.9333, 0, 1, 1, 0.5333, 0, 1, 1, 0.1333, 0, 0.7843, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gqokm"]
+gradient = SubResource("Gradient_vhvit")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ldhye"]
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 80, 0)
+scale_min = 0.5
+scale_max = 2.0
+rotation_min = 0.0
+rotation_max = 360.0
+color_ramp = SubResource("GradientTexture1D_gqokm")
+
+[node name="Explosion" type="GPUParticles2D" unique_id=1058759323]
+emitting = false
+amount = 25
+texture = ExtResource("1_epufd")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-200, -200, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_ldhye")
+script = ExtResource("2_4ggfy")

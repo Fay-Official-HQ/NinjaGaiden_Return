@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cxo4iprmk5ckn"]
 
-[ext_resource type="Script" uid="uid://b7425jrjllacy" path="res://scripts/enemy/flying/FlyingNinjaSpawner.gd" id="1"]
+[ext_resource type="Script" uid="uid://b7425jrjllacy" path="res://scripts/enemy/l1/FlyingNinjaSpawner.gd" id="1"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpiv2"]
 size = Vector2(20, 167)

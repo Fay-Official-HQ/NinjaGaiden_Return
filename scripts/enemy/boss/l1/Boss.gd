@@ -65,7 +65,7 @@ func _on_took_damage(damage: int, is_heavy: bool) -> void:
 		return
 	if not (state_machine.current_state is BossBlockState) and is_on_floor() and _is_player_in_front():
 		#此处设置格挡几率
-		if not _is_player_using_finish() and randf() < 0.3:
+		if not _is_player_using_finish() and randf() < 0.15:
 			state_machine.change_state_by_name("BossBlockState")
 			return
 	if state_machine.current_state is BossBlockState and _is_player_in_front():
@@ -77,7 +77,11 @@ func _on_took_damage(damage: int, is_heavy: bool) -> void:
 	current_hp = max(0, current_hp - damage)
 	boss_ui.update_hp(current_hp)
 	if current_hp <= 0:
-		state_machine.change_state_by_name("BossDeathState")
+		var director = get_node_or_null("BossUI/BossDeathDirector") as BossDeathDirector
+		if director:
+			director.play_death_sequence(self)
+		else:
+			state_machine.change_state_by_name("BossDeathState")
 	elif is_heavy:
 		state_machine.change_state_by_name("BossHurtState")
 	else:

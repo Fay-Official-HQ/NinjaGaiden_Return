@@ -1,0 +1,32 @@
+1.改用条件权重分配。每次决策时，根据当前战场形势计算各技能的权重，然后“摇号”执行。
+
+2. 距离分区，通过离玩家的x轴距离差值，将战场划分为三个区域：
+​近距离（< 40px）：优先触发 BossSlashState；近战下如果触发BossBlockState，且BOSS处于强化状态（血量小于等于10)，会防御0.3秒后提前结束防御并且使用BossSlashState反击（反击时BOSS挥砍BossSlashState的状态仅仅蓄力0.2秒，且处于无敌状态，身体变金黄)
+​中距离（40px - 150px）：属于压制区。优先使用 BossRushState、BossJumpState
+​远距离（> 150px）：属于远程对峙。交替使用 BossLaserState与 BossGroundWaveState
+
+3.玩家状态“读指令”。检测玩家状态，如果玩家处在空中，提高使用BossJumpState、BossLaserState权重；如果过去5秒内玩家释放忍术超过3次，提高格挡几率到80%，持续5秒（BOSS在五秒内变为金黄色），读指令模式建议使用单独组件实现
+
+4.格挡模式改变:BOSS处在地面且BOSS不处于BossLaserState和BossGroundWaveState状态即可触发格挡；格挡时间从3秒减少到2秒；格挡几率随着BOSS血量变化，24到32血格挡几率15%，10到23格挡几率30%，血量少于10格挡几率为80%
+
+5.BOSS强化模式:BOSS血量分为3阶段，24到32血时候决策时间为1.3秒，10到23决策时间为0.8秒，血量少于10决策时间为0.5秒且身体变为金黄色。
+
+6.移动状态调整:移动逼近玩家状态从固定秒数调整到随机逼近玩家1到3秒。
+
+7.调整必杀技:必杀技只有血量低于24才会触发，血量低于24时候第一次受到攻击必定触发；血量小于等于10时候大幅提升必杀使用几率；
+
+8.Combo 压制:释放地波BossGroundWaveState如果有一个命中，那么结束后必定接BossLaserState状态发射激光
+
+9.关于“读指令（忍术反制）”独立组件的建议（针对第 3 点）提到使用单独组件来实现读指令是非常聪明的架构。​建议在 Player 节点上发信号：不要让 BOSS 每帧去拉取（Pull）玩家的忍术历史，而是让 Player.gd 在每次成功释放忍术时，发射一个信号：signal ninjutsu_used。BossAIComponent 挂载监听器：BOSS 的读指令组件直接连接（Connect）这个信号。组件内部用一个简单的数组存储时间戳，只要数组长度在 5 秒内达到 3，立刻触发 BOSS 的“金身爆气格挡模式”（格挡率升至 80%）。
+
+10.视觉同步：变为金黄色可以通过一个简单的自定义 Shader（把 Sprite 的 modulate 或乘算颜色调成金黄），或者直接在 Sprite2D 的 material 上动态调节一个 flash_color 属性。
+
+11.地波的实现，是由 BOSS 脚前生成的 3 个投射物（Area2D）。当 BossGroundWave 的 body_entered 信号检测到玩家并造成伤害时，需要向 BOSS 发回一个“我中了！”的反馈。
+# 在地波实例化时，将 boss 或 AI 组件的引用传给地波
+new_wave.hit_player.connect(func(): ai_component.force_next_action = "BossLaserState")
+当 AI 组件在 get_next_action() 决策时，优先判断 force_next_action 是否有值，如果有，直接无视权重强行返回 "BossLaserState" 并清空该变量
+心机设计（血量低于10强化状态下)，正如你设计的一样，地波受击会让玩家产生短暂的僵直或硬直，此时必定接激光，这就形成了一个经典的不可控二连追击。可以把激光的预警线（原本 1.0s）在 Combo 触发时缩短到 0.4s，给玩家一种“一旦中了地波就大祸临头”的极限压迫感。  
+
+
+
+

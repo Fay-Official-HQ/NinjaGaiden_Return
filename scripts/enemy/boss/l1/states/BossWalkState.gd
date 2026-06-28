@@ -3,7 +3,7 @@ class_name BossWalkState
 
 var _walk_timer: float = 0.0
 
-const WALK_DURATION: float = 3.0
+const WALK_DURATION: float = 1.0
 
 func enter(_msg: Dictionary = {}) -> void:
 	boss.animated_sprite.play("walk")
