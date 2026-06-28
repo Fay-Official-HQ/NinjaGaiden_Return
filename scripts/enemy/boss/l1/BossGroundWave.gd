@@ -1,6 +1,8 @@
 extends Area2D
 class_name BossGroundWave
 
+signal hit_player
+
 const SPEED: float = 220.0
 const MAX_LIFETIME: float = 8.0
 const RAY_UP_OFFSET: float = 25.0
@@ -14,6 +16,15 @@ var _life: float = 0.0
 func initialize(dir: float, spawn_pos: Vector2) -> void:
 	direction = dir
 	global_position = spawn_pos
+
+func _ready() -> void:
+	var hitbox = $EnemyHitBox
+	if hitbox:
+		hitbox.area_entered.connect(_on_hitbox_hit_player)
+
+func _on_hitbox_hit_player(area: Area2D) -> void:
+	if area is HurtBox and not area.is_boss:
+		hit_player.emit()
 
 func _physics_process(delta: float) -> void:
 	_life += delta

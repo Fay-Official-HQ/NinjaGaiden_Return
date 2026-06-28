@@ -33,6 +33,7 @@ func update(delta: float) -> void:
 				boss.velocity.y = JUMP_VELOCITY_Y
 				boss.velocity.x = 0.0
 				boss.animated_sprite.play("jump")
+				AudioManager.play_sound(&"tiaoyue")
 				_phase = Phase.JUMP
 
 		Phase.JUMP:
@@ -83,6 +84,7 @@ func exit() -> void:
 		_reappear_tween.kill()
 
 func _summon_lightning(strike_num: int) -> void:
+	AudioManager.play_sound(&"leidian")
 	var player = boss.player_ref
 	if not player:
 		return

@@ -28,6 +28,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	_face_player()
 	boss.animated_sprite.play("rushcharge")
 	boss.animated_sprite.modulate = Color(0.122, 0.271, 0.161, 1.0)
+	AudioManager.play_sound(&"shibingxuli")
 	_phase = Phase.CHARGE
 	_charge_timer = CHARGE_DURATION
 	_dash_timer = 0.0
@@ -90,6 +91,7 @@ func _execute_dash() -> void:
 	_dash_timer = 0.0
 	boss.animated_sprite.modulate = Color.WHITE
 	boss.animated_sprite.play("rush")
+	AudioManager.play_sound(&"jianqianchong")
 
 func _enter_recovery() -> void:
 	_phase = Phase.RECOVERY

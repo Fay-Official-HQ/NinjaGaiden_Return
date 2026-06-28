@@ -80,6 +80,7 @@ func _remove_silhouettes() -> void:
 
 
 func _spawn_slash() -> void:
+	AudioManager.play_sound(&"chujue")
 	var slash = _slash_scene.instantiate()
 	slash.position = _frozen_canvas_transform * _boss.global_position
 	add_child(slash)
@@ -93,19 +94,26 @@ func _disable_attack_hitboxes(boss: Boss) -> void:
 				child.collision_layer = 0
 				child.collision_mask = 0
 
+func _safe_freeze_before_capture(boss: Boss) -> void:
+	boss.is_dead = true
+	boss.ignore_gravity = false
+	boss.is_invincible = false
+	boss.velocity = Vector2.ZERO
+
 
 func play_death_sequence(boss: Boss) -> void:
 	if _is_playing:
 		return
 	_is_playing = true
-	AudioManager.stop_bgm()
-	AudioManager.play_sound(&"disiwang")
+	AudioManager.fade_out_bgm(3.0)
+	AudioManager.play_sound(&"dingling")
 	_boss = boss
 
 	boss.collision_layer = 0
 	boss.collision_mask = 0
 	_disable_attack_hitboxes(boss)
 
+	_safe_freeze_before_capture(boss)
 	_capture_freeze_frame(boss)
 
 	screen_fade_rect.color = Color(1, 1, 1, 1)
@@ -139,6 +147,7 @@ func _phase_recover() -> void:
 		_boss.player_ref.visible = true
 
 	_boss.state_machine.change_state_by_name("BossDeathState", {"director": self})
+	AudioManager.play_sound(&"bosssiwang")
 
 	var sink_target_y = _boss.global_position.y + SINK_DISTANCE
 	create_tween().tween_property(_boss, "global_position:y", sink_target_y, DEATH_ANIM_DURATION)

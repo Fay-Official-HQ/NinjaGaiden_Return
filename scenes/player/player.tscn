@@ -585,7 +585,6 @@ collision_mask = 66
 monitoring = false
 monitorable = false
 script = ExtResource("22_bysbl")
-damage = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/HitBox" unique_id=324037649]
 position = Vector2(19, -5)

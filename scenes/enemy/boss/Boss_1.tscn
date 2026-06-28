@@ -335,7 +335,7 @@ visible = false
 modulate = Color(1, 1, 1, 0.5882353)
 position = Vector2(0, 14)
 sprite_frames = SubResource("SpriteFrames_d6s7n")
-frame_progress = 0.22495046
+frame_progress = 0.63516915
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")

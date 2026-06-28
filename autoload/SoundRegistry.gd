@@ -25,10 +25,17 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/se/disiwang.tres",
 	"res://resources/audio/se/disiwang2.tres",
 	"res://resources/audio/se/rengbiao.tres",
+	"res://resources/audio/se/jiguang.tres",
+	"res://resources/audio/se/bosssiwang.tres",
+	"res://resources/audio/se/leidian.tres",
 	"res://resources/audio/se/shibingfashe.tres",
 	"res://resources/audio/se/shibingxuli.tres",
+	"res://resources/audio/se/chujue.tres",
+	"res://resources/audio/se/dingling.tres",
+	"res://resources/audio/se/fangyu.tres",
 	"res://resources/audio/se/zanting.tres",
 	"res://resources/audio/bgm/wind1.tres",
+	"res://resources/audio/bgm/zhandou1.tres",
 ]
 
 func _ready() -> void:

@@ -42,6 +42,9 @@ func physics_update(delta: float) -> void:
 		Phase.CHARGE:
 			boss.velocity.x = 0.0
 		Phase.JUMP:
+			if delta <= 0.0:
+				boss.velocity.x = 0.0
+				return
 			_jump_progress += delta / JUMP_DURATION
 			if _jump_progress >= 1.0:
 				boss.global_position = _target_pos
@@ -67,6 +70,7 @@ func _start_jump() -> void:
 	_jump_progress = 0.0
 	boss.animated_sprite.play("jump")
 	boss.set_facing_direction(_jump_dir)
+	AudioManager.play_sound(&"tiaoyue")
 
 func _start_land() -> void:
 	_phase = Phase.LAND

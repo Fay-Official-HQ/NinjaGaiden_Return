@@ -1,12 +1,15 @@
 extends BossState
 class_name BossBlockState
 
-const MAX_BLOCK_TIME: float = 3.0
+const MAX_BLOCK_TIME: float = 1.0
+const COUNTER_TIME: float = 0.3
 var _block_timer: float = 0.0
+var _can_counter: bool = false
 
-func enter(_msg: Dictionary = {}) -> void:
+func enter(msg: Dictionary = {}) -> void:
 	boss.velocity = Vector2.ZERO
 	_block_timer = MAX_BLOCK_TIME
+	_can_counter = msg.get("counter", false)
 	boss.animated_sprite.play("block")
 	_face_player()
 
@@ -16,6 +19,9 @@ func update(delta: float) -> void:
 		return
 	_face_player()
 	_block_timer -= delta
+	if boss.is_enhanced and _can_counter and (MAX_BLOCK_TIME - _block_timer) >= COUNTER_TIME:
+		state_machine.change_state_by_name("BossSlashState", {"counter": true})
+		return
 	if _block_timer <= 0.0:
 		state_machine.change_state_by_name("BossIdleState")
 

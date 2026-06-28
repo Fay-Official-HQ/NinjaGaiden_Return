@@ -10,7 +10,6 @@ var _laser_scene: PackedScene = preload("res://scenes/enemy/boss/boss_laser.tscn
 var _charge_modulate_direction: float = 1.0
 var _warning_line: Sprite2D
 var _warning_alpha_timer: float = 0.0
-
 const CHARGE_DURATION: float = 1.0
 const WARNING_LINE_LENGTH: float = 500.0   # 预警线长度（像素），=战斗屏幕宽度
 const WARNING_LINE_HEIGHT: float = 10.0  # 预警线高度（像素）
@@ -20,6 +19,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	_face_player()
 	boss.animated_sprite.play("lasercharge")
 	boss.animated_sprite.modulate = Color(0.8, 0.0, 0.0, 1.0)
+	AudioManager.play_sound(&"shibingxuli")
 	_charge_modulate_direction = 1.0
 	_warning_alpha_timer = 0.0
 	_create_warning_line()
@@ -59,6 +59,7 @@ func _fire_laser() -> void:
 	_fire_timer = BossLaser.MAX_LENGTH / BossLaser.SPEED + 0.3
 	boss.animated_sprite.modulate = Color.WHITE
 	boss.animated_sprite.play("laser")
+	AudioManager.play_sound(&"jiguang")
 	_destroy_warning_line()
 	var laser = _laser_scene.instantiate() as BossLaser
 	laser.initialize(boss.facing_direction, boss.global_position)

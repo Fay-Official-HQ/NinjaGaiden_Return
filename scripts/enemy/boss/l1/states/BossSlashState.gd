@@ -10,20 +10,28 @@ var hit_enemies: Array[HurtBox] = []
 var _lunge_velocity: float = 0.0
 var _shadow_timer: float = 0.0
 var _shadows: Array[Sprite2D] = []
+var _is_counter: bool = false
 
 const CHARGE_DURATION: float = 0.4
+const COUNTER_CHARGE_DURATION: float = 0.2
 const LUNGE_FRICTION: float = 800.0
 const SHADOW_INTERVAL: float = 0.04
 const SHADOW_ALPHA: float = 0.5
 const SHADOW_FADE_TIME: float = 0.15
 
-func enter(_msg: Dictionary = {}) -> void:
+func enter(msg: Dictionary = {}) -> void:
 	boss.velocity = Vector2.ZERO
 	_face_player()
 	boss.animated_sprite.play("attackcharge")
 	boss.animated_sprite.modulate = Color(0.122, 0.271, 0.161, 1.0)
 	_phase = Phase.CHARGE
-	_charge_timer = CHARGE_DURATION
+	_is_counter = msg.get("counter", false)
+	if _is_counter:
+		_charge_timer = COUNTER_CHARGE_DURATION
+		boss.is_invincible = true
+		boss._show_gold_overlay()
+	else:
+		_charge_timer = CHARGE_DURATION
 	_lunge_velocity = 0.0
 	_shadow_timer = 0.0
 	_shadows.clear()
@@ -80,6 +88,7 @@ func _execute_attack() -> void:
 	_phase = Phase.ATTACK
 	boss.animated_sprite.modulate = Color.WHITE
 	boss.animated_sprite.play("attack")
+	AudioManager.play_sound(&"jianxiapi")
 	if hit_box:
 		hit_box.set_deferred("monitoring", true)
 	if boss.is_ground_ahead():
@@ -112,6 +121,13 @@ func _cleanup() -> void:
 	if attack_root:
 		attack_root.scale.x = 1.0
 	boss.animated_sprite.modulate = Color.WHITE
+	if _is_counter:
+		_is_counter = false
+		boss.is_invincible = false
+		if boss.is_enhanced or boss._is_ninjutsu_overdrive:
+			boss._show_gold_overlay()
+		else:
+			boss._hide_gold_overlay()
 
 func _face_player() -> void:
 	if boss.player_ref:

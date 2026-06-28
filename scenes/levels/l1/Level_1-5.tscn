@@ -110,12 +110,10 @@ position = Vector2(-216, 98)
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("6_u5yul")]
-position = Vector2(-266.41943, 57.374557)
-consumable_type = 3
+position = Vector2(-56, 57)
 
 [node name="Item2" parent="Items" unique_id=647059776 instance=ExtResource("6_u5yul")]
-position = Vector2(-211, 57)
-consumable_type = 2
+position = Vector2(139, 57)
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 

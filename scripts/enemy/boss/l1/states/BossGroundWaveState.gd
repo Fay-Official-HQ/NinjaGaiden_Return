@@ -6,6 +6,7 @@ enum Phase { CHARGE, SPAWNING, FINISH }
 var _phase: int = Phase.CHARGE
 var _spawn_count: int = 0
 var _spawn_timer: float = 0.0
+var _combo_triggered: bool = false
 
 const WAVE_COUNT: int = 3
 const SPAWN_INTERVAL: float = 0.8
@@ -20,6 +21,8 @@ func enter(_msg: Dictionary = {}) -> void:
 	_phase = Phase.CHARGE
 	_spawn_count = 0
 	_spawn_timer = SPAWN_INTERVAL
+	_combo_triggered = false
+	boss.ai_component.force_action("")
 
 func update(delta: float) -> void:
 	match _phase:
@@ -28,6 +31,8 @@ func update(delta: float) -> void:
 				_phase = Phase.SPAWNING
 				_spawn_timer = 0.0
 		Phase.SPAWNING:
+			if _combo_triggered:
+				return
 			_spawn_timer -= delta
 			if _spawn_timer <= 0.0 and _spawn_count < WAVE_COUNT:
 				_spawn_wave()
@@ -37,6 +42,8 @@ func update(delta: float) -> void:
 				_phase = Phase.FINISH
 				_spawn_timer = 0.3
 		Phase.FINISH:
+			if _combo_triggered:
+				return
 			_spawn_timer -= delta
 			if _spawn_timer <= 0.0:
 				state_machine.change_state_by_name("BossIdleState")
@@ -45,6 +52,7 @@ func physics_update(_delta: float) -> void:
 	boss.velocity.x = 0.0
 
 func _spawn_wave() -> void:
+	AudioManager.play_sound(&"shibingfashe")
 	var wave = _ground_wave_scene.instantiate() as BossGroundWave
 	var ground_pos = boss.get_ground_at(boss.global_position.x)
 	var spawn_pos = Vector2(
@@ -52,7 +60,17 @@ func _spawn_wave() -> void:
 		ground_pos.y
 	)
 	wave.initialize(boss.facing_direction, spawn_pos)
+	if boss.is_enhanced:
+		wave.hit_player.connect(_on_wave_hit_player)
 	boss.get_parent().add_child(wave)
+
+func _on_wave_hit_player() -> void:
+	if _combo_triggered:
+		return
+	_combo_triggered = true
+	_phase = Phase.FINISH
+	print("【BossCombo】强化地波命中！提前结束→激光")
+	state_machine.change_state_by_name("BossLaserState", {"combo": true})
 
 func _face_player() -> void:
 	if boss.player_ref:

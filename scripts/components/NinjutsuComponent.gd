@@ -4,6 +4,7 @@ class_name NinjutsuComponent
 
 signal mp_changed(current_mp: int)
 signal ninjutsu_switched(index: int, name: String)
+signal ninjutsu_used
 
 @export var mp_cost: int = 1
 @export var ninjutsu_names: Array[String] = ["火焰", "火球", "棱刃", "回旋镖"]
@@ -50,6 +51,7 @@ func cast_ninjutsu(facing_override: float = 0.0) -> void:
 
 	current_mp -= mp_cost
 	mp_changed.emit(current_mp)
+	ninjutsu_used.emit()
 
 	match current_ninjutsu_index:
 		0:

@@ -3,11 +3,12 @@ class_name BossWalkState
 
 var _walk_timer: float = 0.0
 
-const WALK_DURATION: float = 1.0
+const WALK_DURATION_MIN: float = 1.0
+const WALK_DURATION_MAX: float = 3.0
 
 func enter(_msg: Dictionary = {}) -> void:
 	boss.animated_sprite.play("walk")
-	_walk_timer = WALK_DURATION
+	_walk_timer = randf_range(WALK_DURATION_MIN, WALK_DURATION_MAX)
 
 func update(delta: float) -> void:
 	if not boss.player_ref:
