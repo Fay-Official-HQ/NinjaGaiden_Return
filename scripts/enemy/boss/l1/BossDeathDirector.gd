@@ -3,7 +3,6 @@ class_name BossDeathDirector
 
 @onready var screen_fade_rect: ColorRect = $ScreenFadeRect
 
-var _explosion_scene: PackedScene = preload("res://scenes/enemy/boss/Explosion.tscn")
 var _slash_scene: PackedScene = preload("res://scenes/effects/HorizontalSlash.tscn")
 var _boss: Boss
 var _is_playing: bool = false
@@ -18,11 +17,13 @@ var _frozen_boss_flip: bool
 var _frozen_player_flip: bool
 var _frozen_canvas_transform: Transform2D
 
-const FREEZE_DURATION: float = 1.0
+#定格时长
+const FREEZE_DURATION: float = 1.2
+#红光闪过时间点
+const SLASH_DELAY: float = 0.7
 const DEATH_ANIM_DURATION: float = 5.0
 const FADE_OUT_DURATION: float = 3.0
 const BLACK_HOLD_DURATION: float = 2.0
-const EXPLOSION_INTERVAL: float = 0.15
 #下沉距离
 const SINK_DISTANCE: float = 15.0
 
@@ -78,10 +79,9 @@ func _remove_silhouettes() -> void:
 		_player_silhouette = null
 
 
-func _spawn_slash(boss: Boss) -> void:
+func _spawn_slash() -> void:
 	var slash = _slash_scene.instantiate()
-	slash.position = _frozen_canvas_transform * boss.global_position
-	slash._direction = 1.0
+	slash.position = _frozen_canvas_transform * _boss.global_position
 	add_child(slash)
 
 
@@ -108,8 +108,6 @@ func play_death_sequence(boss: Boss) -> void:
 
 	_capture_freeze_frame(boss)
 
-	_spawn_slash(boss)
-
 	screen_fade_rect.color = Color(1, 1, 1, 1)
 	_create_silhouettes()
 
@@ -117,6 +115,9 @@ func play_death_sequence(boss: Boss) -> void:
 	boss.visible = false
 	if boss.player_ref:
 		boss.player_ref.visible = false
+
+	get_tree().create_timer(SLASH_DELAY, true, false, true).timeout.connect(
+		func(): _spawn_slash(), CONNECT_ONE_SHOT)
 
 	Engine.time_scale = 0.0
 
@@ -138,7 +139,6 @@ func _phase_recover() -> void:
 		_boss.player_ref.visible = true
 
 	_boss.state_machine.change_state_by_name("BossDeathState", {"director": self})
-	_spawn_explosions_loop()
 
 	var sink_target_y = _boss.global_position.y + SINK_DISTANCE
 	create_tween().tween_property(_boss, "global_position:y", sink_target_y, DEATH_ANIM_DURATION)
@@ -164,18 +164,7 @@ func _phase_black_hold() -> void:
 
 
 
-func _spawn_explosions_loop() -> void:
-	var duration = DEATH_ANIM_DURATION
-	while duration > 0 and is_instance_valid(_boss) and not _boss.is_queued_for_deletion():
-		var exp_inst = _explosion_scene.instantiate()
-		exp_inst.emitting = true
-		exp_inst.restart()
-		var random_offset = Vector2(randf_range(-20, 20), randf_range(-20, 20))
-		exp_inst.global_position = _boss.global_position + random_offset
-		get_tree().current_scene.add_child(exp_inst)
 
-		await get_tree().create_timer(EXPLOSION_INTERVAL).timeout
-		duration -= EXPLOSION_INTERVAL
 
 
 func _end_level() -> void:

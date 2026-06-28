@@ -11,6 +11,10 @@ func enter(msg: Dictionary = {}) -> void:
 		boss.ignore_gravity = true
 
 	boss.animated_sprite.play("death")
+	var death_effect = boss.get_node_or_null("Visual/DeathEffectAnim")
+	if death_effect:
+		death_effect.visible = true
+		death_effect.play("default")
 
 	var director = msg.get("director", null)
 	if not director:

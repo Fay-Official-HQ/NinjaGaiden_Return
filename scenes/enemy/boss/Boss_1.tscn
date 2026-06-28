@@ -40,6 +40,10 @@
 [ext_resource type="Texture2D" uid="uid://lh7xsf263r71" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_004.png" id="26_iwekj"]
 [ext_resource type="Texture2D" uid="uid://br65ia7cq45je" path="res://assets/sprites/enemy/boss/boss_l1/boss_l1_007.png" id="35_dhkug"]
 [ext_resource type="PackedScene" uid="uid://d4nn2sespo5vb" path="res://scenes/enemy/boss/BossDeathDirector.tscn" id="36_8m2hq"]
+[ext_resource type="Texture2D" uid="uid://dxbx5m6w6r43g" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang01.png" id="37_w3kw2"]
+[ext_resource type="Texture2D" uid="uid://dcqhb08e8l8w0" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang02.png" id="38_osayh"]
+[ext_resource type="Texture2D" uid="uid://d0vwu7qhypr3g" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang03.png" id="39_jnvxg"]
+[ext_resource type="Texture2D" uid="uid://ba6veoul7131f" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang04.png" id="40_qmmie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(25, 48)
@@ -55,6 +59,26 @@ size = Vector2(27.5, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aqok"]
 size = Vector2(25, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6s7n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_w3kw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_osayh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_jnvxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_qmmie")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sb8oc"]
 animations = [{
@@ -305,6 +329,13 @@ position = Vector2(-0.5, 11)
 shape = SubResource("RectangleShape2D_6aqok")
 
 [node name="Visual" type="Node2D" parent="." unique_id=636072712]
+
+[node name="DeathEffectAnim" type="AnimatedSprite2D" parent="Visual" unique_id=1597553453]
+visible = false
+modulate = Color(1, 1, 1, 0.5882353)
+position = Vector2(0, 14)
+sprite_frames = SubResource("SpriteFrames_d6s7n")
+frame_progress = 0.22495046
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
