@@ -2,7 +2,7 @@ extends Node2D
 
 @export var slash_width: float = 600.0
 @export var slash_height: float = 2.0
-@export var slash_color: Color = Color(1, 0.15, 0.15, 0.95)
+@export var slash_color: Color = Color(1, 0.0, 0.0, 1.0)
 @export var duration: float = 0.3
 
 var _start_pos: Vector2

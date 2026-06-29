@@ -116,7 +116,7 @@ func play_death_sequence(boss: Boss) -> void:
 	_safe_freeze_before_capture(boss)
 	_capture_freeze_frame(boss)
 
-	screen_fade_rect.color = Color(1, 1, 1, 1)
+	screen_fade_rect.color = Color(0.3, 0.05, 0.05, 1.0)
 	_create_silhouettes()
 
 	boss.boss_ui.hide_with_animation()
