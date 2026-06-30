@@ -57,12 +57,41 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/se/zanting.tres",
 ]
 
+var _pending_paths: Array[String] = []
+
 func _ready() -> void:
 	for path in _audio_files:
-		var res := load(path) as SoundEventResource
-		if res and res.event_id != "":
-			_registry[res.event_id] = res
-			print("【音频系统】成功登记声音：" + str(res.event_id))
+		ResourceLoader.load_threaded_request(path, "", true, ResourceLoader.CACHE_MODE_REPLACE)
+		_pending_paths.append(path)
+
+func _process(_delta: float) -> void:
+	var i = 0
+	while i < _pending_paths.size():
+		var path = _pending_paths[i]
+		match ResourceLoader.load_threaded_get_status(path):
+			ResourceLoader.THREAD_LOAD_LOADED:
+				var res = ResourceLoader.load_threaded_get(path) as SoundEventResource
+				if res and res.event_id != "":
+					_registry[res.event_id] = res
+					print("【音频系统】登记声音: ", res.event_id)
+				_pending_paths.remove_at(i)
+			ResourceLoader.THREAD_LOAD_FAILED:
+				print("【音频系统】加载失败: ", path)
+				_pending_paths.remove_at(i)
+			_:
+				i += 1
 
 func get_event(event_id: StringName) -> SoundEventResource:
-	return _registry.get(event_id, null)
+	if _registry.has(event_id):
+		return _registry[event_id]
+	# 后台还没加载完时，按需同步回退
+	var i = 0
+	while i < _pending_paths.size():
+		var path = _pending_paths[i]
+		var res = load(path) as SoundEventResource
+		if res and res.event_id == event_id:
+			_registry[event_id] = res
+			_pending_paths.remove_at(i)
+			return res
+		i += 1
+	return null

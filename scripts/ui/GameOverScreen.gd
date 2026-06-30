@@ -125,10 +125,10 @@ func _confirm_selection():
 # ============================================================
 
 func _restart_level():
-	# 等 ConfirmSFX 播放出来，在这里设置时间
 	await get_tree().create_timer(1.0).timeout
 
 	UIManager.visible = true
+	SceneTransition.set_overlay_alpha(1.0)
 
 	if return_scene != "":
 		get_tree().change_scene_to_file(return_scene)

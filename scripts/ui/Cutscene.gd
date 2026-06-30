@@ -174,16 +174,13 @@ func _go_to_level():
 		return
 	_transitioning = true
 
-	# 恢复 HUD 显示，停止音乐
 	UIManager.visible = true
 	bgm.stop()
 
-	# 从映射表查关卡路径
 	var scene_path = CHAPTER_SCENE_MAP.get(target_chapter)
 	if scene_path:
 		get_tree().change_scene_to_file(scene_path)
 	else:
-		# 万一没配置映射，打印错误防止静默崩溃
 		push_error("Cutscene: 未找到章节 %d 对应的关卡场景路径" % target_chapter)
 
 
