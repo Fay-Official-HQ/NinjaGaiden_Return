@@ -3,7 +3,27 @@ extends Node
 var _registry: Dictionary = {}
 
 var _audio_files: Array[String] = [
+	# BGM
 	"res://resources/audio/bgm/bgml1.tres",
+	"res://resources/audio/bgm/wind1.tres",
+	"res://resources/audio/bgm/zhandou1.tres",
+	"res://resources/audio/bgm/zhandou2.tres",
+	"res://resources/audio/bgm/zhandou3.tres",
+	"res://resources/audio/bgm/bgm2_1.tres",
+	"res://resources/audio/bgm/bgm2_2.tres",
+	"res://resources/audio/bgm/bgm3_1.tres",
+	"res://resources/audio/bgm/bgm4_1.tres",
+	"res://resources/audio/bgm/bgm4_2.tres",
+	"res://resources/audio/bgm/bgm5_1.tres",
+	"res://resources/audio/bgm/bgm6_1.tres",
+	"res://resources/audio/bgm/bgm7_1.tres",
+	"res://resources/audio/bgm/bgm7_2.tres",
+	"res://resources/audio/bgm/bgm7_3.tres",
+	"res://resources/audio/bgm/dark_aura_1.tres",
+	"res://resources/audio/bgm/dark_aura_2.tres",
+	"res://resources/audio/bgm/end_good.tres",
+	"res://resources/audio/bgm/end_bad.tres",
+	# 玩家音效
 	"res://resources/audio/player/bishaji.tres",
 	"res://resources/audio/player/gongji.tres",
 	"res://resources/audio/player/hanjiao.tres",
@@ -22,6 +42,7 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/player/siwang.tres",
 	"res://resources/audio/player/tiaoyue.tres",
 	"res://resources/audio/player/yinshen.tres",
+	# 音效
 	"res://resources/audio/se/disiwang.tres",
 	"res://resources/audio/se/disiwang2.tres",
 	"res://resources/audio/se/rengbiao.tres",
@@ -34,10 +55,6 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/se/dingling.tres",
 	"res://resources/audio/se/fangyu.tres",
 	"res://resources/audio/se/zanting.tres",
-	"res://resources/audio/bgm/wind1.tres",
-	"res://resources/audio/bgm/zhandou1.tres",
-	"res://resources/audio/bgm/bgm2_1.tres",
-	"res://resources/audio/bgm/bgm2_2.tres",
 ]
 
 func _ready() -> void:
