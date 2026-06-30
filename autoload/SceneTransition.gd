@@ -60,3 +60,9 @@ func fade_in(duration: float = 1.0) -> void:
 ## 直接设置遮罩透明度（供紧急情况使用）
 func set_overlay_alpha(alpha: float) -> void:
 	_overlay.color.a = alpha
+
+## 安全清除遮罩：先保持全黑，等一帧新场景渲染完后才清除，防止场景切换瞬间闪白/闪瓦片
+func clear_overlay_safe() -> void:
+	_overlay.color.a = 1.0
+	await get_tree().process_frame
+	_overlay.color.a = 0.0

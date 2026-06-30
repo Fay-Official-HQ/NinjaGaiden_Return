@@ -53,9 +53,11 @@ func _process(delta: float) -> void:
 	if not visible:
 		return
 
-	# 暂停输入检测（只在有 player 的关卡生效，菜单界面不触发）
-	if Input.is_action_just_pressed("pass") and get_tree().get_first_node_in_group("player"):
-		_toggle_pause()
+	# 暂停输入检测（只在有 player 且玩家未死亡时生效）
+	if Input.is_action_just_pressed("pass"):
+		var player_node = get_tree().get_first_node_in_group("player")
+		if player_node and not player_node._is_dead:
+			_toggle_pause()
 
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:

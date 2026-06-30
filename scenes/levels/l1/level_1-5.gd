@@ -36,7 +36,7 @@ extends Node2D
 # ════════════════════════════════════════════════════════════
 
 func _ready() -> void:
-	SceneTransition.set_overlay_alpha(0.0)
+	SceneTransition.clear_overlay_safe()
 	AudioManager.play_sound(&"wind1")
 
 	# 根据入口点定位玩家
