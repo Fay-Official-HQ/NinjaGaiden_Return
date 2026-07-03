@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/environment/hanging_platform.tscn" id="4_61fia"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="5_dfm6l"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="6_m57ok"]
+[ext_resource type="PackedScene" uid="uid://d3afh7ynnnfs6" path="res://scenes/enemy/l2/monster_soldier.tscn" id="9_3l38j"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="17_3drc7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8moxo"]
@@ -228,6 +229,9 @@ position = Vector2(0, 123)
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="MonsterSoldier" parent="enemys" unique_id=634735606 instance=ExtResource("9_3l38j")]
+position = Vector2(300, 224)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 position = Vector2(4386, 17)

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ey8ro8a20f2m"]
+[gd_scene format=3 uid="uid://df6eksx6eqcrx"]
 
 [ext_resource type="Script" uid="uid://dk54b1qofhif8" path="res://scripts/projectile/SoldierLaser.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://belrly4sghr5n" path="res://assets/sprites/enemy/l1/jiguang.png" id="2"]
