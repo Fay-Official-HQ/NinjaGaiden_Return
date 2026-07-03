@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byf6vcu8xuh32"
-path="res://.godot/imported/qiangren1.png-00b70b8fe872202933bb6d8655968b33.ctex"
+uid="uid://jw5dhaph5md5"
+path="res://.godot/imported/direnl2__003.png-4dfe28b0648810d8c813277c4a647ce7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/l2/qiangren1.png"
-dest_files=["res://.godot/imported/qiangren1.png-00b70b8fe872202933bb6d8655968b33.ctex"]
+source_file="res://assets/sprites/enemy/l2/direnl2__003.png"
+dest_files=["res://.godot/imported/direnl2__003.png-4dfe28b0648810d8c813277c4a647ce7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6u0snroryqr6"
-path="res://.godot/imported/shilaimu1.png-6a4a437da2b7cfe794529636a3406d48.ctex"
+uid="uid://drij71ociqph2"
+path="res://.godot/imported/direnl2__002.png-73aa6b25126a42b26457d3e6f00e6f03.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/l2/shilaimu1.png"
-dest_files=["res://.godot/imported/shilaimu1.png-6a4a437da2b7cfe794529636a3406d48.ctex"]
+source_file="res://assets/sprites/enemy/l2/direnl2__002.png"
+dest_files=["res://.godot/imported/direnl2__002.png-73aa6b25126a42b26457d3e6f00e6f03.ctex"]
 
 [params]
 

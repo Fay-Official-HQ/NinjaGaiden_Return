@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_vgfwx"]
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_ocu84"]
 [ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="6_noqyj"]
-[ext_resource type="Texture2D" uid="uid://boe2t32m2masa" path="res://assets/sprites/enemy/l2/direnl2_4.png" id="7_1d565"]
-[ext_resource type="Texture2D" uid="uid://jx452cm78s0l" path="res://assets/sprites/enemy/l2/direnl2_3.png" id="8_u0npw"]
+[ext_resource type="Texture2D" uid="uid://drij71ociqph2" path="res://assets/sprites/enemy/l2/direnl2__002.png" id="6_r8y8m"]
+[ext_resource type="Texture2D" uid="uid://jw5dhaph5md5" path="res://assets/sprites/enemy/l2/direnl2__003.png" id="7_u0npw"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_yule8"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_ro8t1"]
 
@@ -31,7 +31,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_1d565")
+"texture": ExtResource("7_u0npw")
 }],
 "loop": true,
 "name": &"idle",
@@ -39,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_1d565")
+"texture": ExtResource("7_u0npw")
 }],
 "loop": false,
 "name": &"shoot",
@@ -47,10 +47,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_u0npw")
+"texture": ExtResource("6_r8y8m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_1d565")
+"texture": ExtResource("7_u0npw")
 }],
 "loop": true,
 "name": &"walk",
@@ -67,7 +67,7 @@ size = Vector2(17, 32)
 size = Vector2(17, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
-size = Vector2(260, 31)
+size = Vector2(424, 31)
 
 [node name="MonsterSoldier" type="CharacterBody2D" unique_id=634735606]
 collision_layer = 2
@@ -75,9 +75,9 @@ collision_mask = 140
 script = ExtResource("1_r8y8m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=468094849]
-position = Vector2(11, -3)
+position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_soldier")
-animation = &"walk"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=965303556]
 position = Vector2(-0.5, 0)
@@ -103,7 +103,6 @@ shape = SubResource("RectangleShape2D_hit")
 [node name="DetectRange" type="Area2D" parent="." unique_id=858862171]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=545219636]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_detect")
 
 [node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=1939299372]

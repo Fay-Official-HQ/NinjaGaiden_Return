@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj7f8u8sjsgmi"
-path="res://.godot/imported/direnl2_6.png-674d848f0c423c240bedbb73b8cf3ca0.ctex"
+uid="uid://cx14g5dibhxbd"
+path="res://.godot/imported/direnl2__001.png-1cfb698bde68a9f23cab92698307edce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/l2/direnl2_6.png"
-dest_files=["res://.godot/imported/direnl2_6.png-674d848f0c423c240bedbb73b8cf3ca0.ctex"]
+source_file="res://assets/sprites/enemy/l2/direnl2__001.png"
+dest_files=["res://.godot/imported/direnl2__001.png-1cfb698bde68a9f23cab92698307edce.ctex"]
 
 [params]
 

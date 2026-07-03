@@ -14,7 +14,7 @@ var _shoot_cooldown: float = 0.0
 
 var _max_hp: int = 1
 var _move_speed: float = 20.0
-var _charge_duration: float = 1.0
+var _charge_duration: float = 0.5
 var _attack_cooldown: float = 1.0
 var _laser_speed: float = 350.0
 var _shoot_sound: StringName = &"shibingfashe"
