@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://6p404iw2tco6"]
+
+[ext_resource type="Script" uid="uid://b11idp4jt6dpn" path="res://scripts/enemy/l2/chaser_monster_spawner.gd" id="1_kjvi8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(20, 167)
+
+[node name="ChaserMonsterSpawner" type="Node2D" unique_id=90267948]
+script = ExtResource("1_kjvi8")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1380519189]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=812222112]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_trigger")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=1893374063]
+position = Vector2(172, -54)

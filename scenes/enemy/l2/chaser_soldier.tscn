@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bcs4tymbwkgsf"]
+
+[ext_resource type="Script" uid="uid://csqgvp2bdvmiv" path="res://scripts/enemy/l2/chaser_soldier.gd" id="1_c2ge4"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_c2ge4"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_0rq25"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_1p2yk"]
+[ext_resource type="Texture2D" uid="uid://bfoww0yyrpyty" path="res://assets/sprites/enemy/l2/direnl2__004.png" id="5_amxkn"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_ord5j"]
+[ext_resource type="Texture2D" uid="uid://btqvwxovvuc2" path="res://assets/sprites/enemy/l2/direnl2__005.png" id="6_lsibq"]
+[ext_resource type="Texture2D" uid="uid://dygh3c4bak2ns" path="res://assets/sprites/enemy/l2/sheji.png" id="7_lsibq"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="8_r16tp"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="9_yh52a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_soldier"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_c2ge4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0rq25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1p2yk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ord5j")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_lsibq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_amxkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lsibq")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_lsibq")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
+size = Vector2(424, 31)
+
+[node name="ChaserSoldier" type="CharacterBody2D" unique_id=634735606 groups=["enemy", "fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 140
+script = ExtResource("1_c2ge4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=468094849]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_soldier")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=965303556]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=987781398]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("8_r16tp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2119140954]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=482527051]
+collision_layer = 32
+script = ExtResource("9_yh52a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=575196810]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=858862171]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=545219636]
+shape = SubResource("RectangleShape2D_detect")
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=1939299372]
+target_position = Vector2(-5, 20)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=1789595564]
+target_position = Vector2(5, 20)
+collision_mask = 12

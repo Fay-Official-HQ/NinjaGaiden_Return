@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bupeighksa78m"]
 
 [ext_resource type="Script" uid="uid://dh5rhsjgyymxa" path="res://scripts/enemy/l1/ChaserNinja.gd" id="1"]
-[ext_resource type="Resource" path="res://resources/enemy/ChaserNinjaData.tres" id="2"]
+[ext_resource type="Resource" uid="uid://csyh8h5ckxua0" path="res://resources/enemy/ChaserNinjaData.tres" id="2"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="3"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://1n3qqco11mng" path="res://assets/sprites/enemy/l1/hunhun_1.png" id="5"]
@@ -51,7 +51,7 @@ size = Vector2(18, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
 size = Vector2(18, 32)
 
-[node name="ChaserNinja" type="CharacterBody2D" unique_id=1833051193 groups=["enemy"]]
+[node name="ChaserNinja" type="CharacterBody2D" unique_id=1833051193 groups=["enemy", "fall_vulnerable"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1")
