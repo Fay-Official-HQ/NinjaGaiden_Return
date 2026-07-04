@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://byepbp4mu5ywy"]
+
+[ext_resource type="Script" uid="uid://ckp38okahly0w" path="res://scripts/enemy/l2/hopper.gd" id="1_vujhu"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_s45lq"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_vujhu"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_8w2wm"]
+[ext_resource type="Texture2D" uid="uid://bqq5re0xg0c8t" path="res://assets/sprites/enemy/l2/direnl2_2__000.png" id="5_ba024"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_u6cm1"]
+[ext_resource type="Texture2D" uid="uid://dbcdishql0ni5" path="res://assets/sprites/enemy/l2/gungun_000.png" id="6_s45lq"]
+[ext_resource type="Texture2D" uid="uid://di7qjop7b7vd2" path="res://assets/sprites/enemy/l2/gungun_001.png" id="7_vujhu"]
+[ext_resource type="Texture2D" uid="uid://bhk87vtn0qc5f" path="res://assets/sprites/enemy/l2/gungun_002.png" id="8_8w2wm"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_deq5i"]
+[ext_resource type="Texture2D" uid="uid://dvqvtauwrsgkh" path="res://assets/sprites/enemy/l2/gungun_003.png" id="9_u6cm1"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_i7s85"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crouch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s45lq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vujhu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8w2wm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u6cm1")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ba024")
+}],
+"loop": true,
+"name": &"hop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ba024")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_s45lq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vujhu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8w2wm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u6cm1")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(20, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(20, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(20, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
+size = Vector2(284.6875, 353)
+
+[node name="Hopper" type="CharacterBody2D" unique_id=1656441098]
+collision_layer = 2
+collision_mask = 524
+script = ExtResource("1_vujhu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
+sprite_frames = SubResource("SpriteFrames_crouch")
+animation = &"jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
+position = Vector2(2, 6)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=451901895]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_deq5i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1636328222]
+position = Vector2(2, 6)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=862567462]
+collision_layer = 32
+script = ExtResource("10_i7s85")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1906925241]
+position = Vector2(2, 6)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=89548439]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=823214000]
+shape = SubResource("RectangleShape2D_detect")
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=2037931396]
+target_position = Vector2(-16, 60)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=1978809870]
+target_position = Vector2(16, 60)
+collision_mask = 12
