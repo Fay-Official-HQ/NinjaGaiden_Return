@@ -1,7 +1,7 @@
 extends Area2D
 class_name MonsterSoldierLaser
 
-var _direction: float = 1.0
+var _direction: Vector2 = Vector2.RIGHT
 var _speed: float
 var _hp: int = 1
 var _death_sound: StringName = &"disiwang"
@@ -19,17 +19,16 @@ func _ready() -> void:
 		hurt_box.took_damage.connect(_on_took_damage)
 
 
-func initialize(dir: float, speed: float, angle_deg: float = 0.0) -> void:
-	_direction = dir
+func initialize(direction: Vector2, speed: float) -> void:
+	_direction = direction.normalized()
 	_speed = speed
-	anim.flip_h = dir < 0
-	rotation_degrees = angle_deg
+	anim.flip_h = _direction.x < 0
+	rotation = _direction.angle()
 	anim.play("flying")
 
 
 func _process(delta: float) -> void:
-	var movement = Vector2(_direction * _speed, 0.0).rotated(rotation)
-	global_position += movement * delta
+	global_position += _direction * _speed * delta
 
 
 func _on_screen_exited() -> void:

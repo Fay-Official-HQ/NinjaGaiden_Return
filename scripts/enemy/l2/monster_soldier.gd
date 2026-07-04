@@ -106,7 +106,7 @@ func _update_shoot(delta: float) -> void:
 
 func _shoot_laser() -> void:
 	var laser_scene = preload("res://scenes/enemy/l2/monster_laser.tscn")
-	var dir = 1.0 if facing_right else -1.0
+	var base_dir = Vector2.RIGHT if facing_right else Vector2.LEFT
 	var origin = global_position + Vector2(14 if facing_right else -14, -3)
 	var spread_angles = [-30.0, 0.0, 30.0]
 
@@ -114,7 +114,7 @@ func _shoot_laser() -> void:
 		var laser = laser_scene.instantiate()
 		laser.global_position = origin
 		get_tree().current_scene.add_child(laser)
-		laser.initialize(dir, _laser_speed, angle * dir)
+		laser.initialize(base_dir.rotated(deg_to_rad(angle)), _laser_speed)
 
 	anim.play("shoot")
 
