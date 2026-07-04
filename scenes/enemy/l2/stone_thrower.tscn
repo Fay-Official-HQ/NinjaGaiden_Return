@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dhl1niqlcxgh1"]
+
+[ext_resource type="Script" uid="uid://c8ltseewd2krj" path="res://scripts/enemy/l2/stone_thrower.gd" id="1_60paa"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_6y4p0"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_oh47f"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_bbuae"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_ax8ox"]
+[ext_resource type="Texture2D" uid="uid://cme0exet3sutp" path="res://assets/sprites/enemy/l2/direnl2_2__005.png" id="6_jhj5a"]
+[ext_resource type="Texture2D" uid="uid://spuln6xli2ca" path="res://assets/sprites/enemy/l2/direnl2_2__006.png" id="7_n0w1o"]
+[ext_resource type="Texture2D" uid="uid://b2uqha0um1yg2" path="res://assets/sprites/enemy/l2/direnl2_2__007.png" id="8_etq6l"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_0awim"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_hv48l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crouch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6y4p0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_oh47f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bbuae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ax8ox")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jhj5a")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_n0w1o")
+}, {
+"duration": 2.0,
+"texture": ExtResource("8_etq6l")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(20, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(20, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(20, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
+size = Vector2(436.75, 257.5)
+
+[node name="StoneThrower" type="CharacterBody2D" unique_id=1656441098]
+collision_layer = 2
+collision_mask = 524
+script = ExtResource("1_60paa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
+sprite_frames = SubResource("SpriteFrames_crouch")
+animation = &"throw"
+offset = Vector2(0, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
+position = Vector2(-1, 6.5)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=451901895]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_0awim")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1636328222]
+position = Vector2(-1, 6.5)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=862567462]
+collision_layer = 32
+script = ExtResource("10_hv48l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1906925241]
+position = Vector2(-1, 6.5)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=89548439]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=823214000]
+position = Vector2(0, 92)
+shape = SubResource("RectangleShape2D_detect")
