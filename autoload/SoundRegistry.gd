@@ -6,6 +6,7 @@ var _audio_files: Array[String] = [
 	# BGM
 	"res://resources/audio/bgm/bgml1.tres",
 	"res://resources/audio/bgm/wind1.tres",
+	"res://resources/audio/bgm/wind2.tres",
 	"res://resources/audio/bgm/zhandou1.tres",
 	"res://resources/audio/bgm/zhandou2.tres",
 	"res://resources/audio/bgm/zhandou3.tres",

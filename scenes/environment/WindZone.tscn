@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cvcbl6pipg1wo"]
+
+[ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="1_77r21"]
+[ext_resource type="Script" uid="uid://v0ta182eq2p2" path="res://scripts/environment/wind_zone.gd" id="1_kq3ei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggqa8"]
+size = Vector2(104.75, 369)
+
+[node name="WindZone" type="Area2D" unique_id=1483867348]
+script = ExtResource("1_kq3ei")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1854189898]
+shape = SubResource("RectangleShape2D_ggqa8")
+debug_color = Color(0.18431373, 0.43137255, 0.32941177, 0.64705884)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=100000001]
+
+[node name="WindLabel" type="Label" parent="CanvasLayer" unique_id=2133230735]
+visible = false
+offset_left = 210.0
+offset_top = 77.0
+offset_right = 290.0
+offset_bottom = 100.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_77r21")
+theme_override_font_sizes/font_size = 10
+
+[node name="WindParticles" type="Node2D" parent="CanvasLayer" unique_id=747196930]

@@ -34,7 +34,7 @@ extends Node2D
 
 func _ready() -> void:
 	SceneTransition.clear_overlay_safe()
-	AudioManager.play_sound(&"bgm2_1")
+	#AudioManager.play_sound(&"bgm2_1")
 
 	# 根据入口点定位玩家
 	_place_player_at_entry()

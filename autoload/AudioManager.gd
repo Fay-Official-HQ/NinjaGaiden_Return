@@ -107,3 +107,47 @@ func _play_sfx(event: SoundEventResource) -> void:
 	target_player.pitch_scale = final_pitch
 	target_player.bus = event.bus
 	target_player.play()
+
+
+## SFX 淡入播放：从静音逐渐升到目标音量，返回播放器引用
+func play_sfx_fade_in(event_id: StringName, fade_in_duration: float = 0.0) -> AudioStreamPlayer:
+	var event = SoundRegistry.get_event(event_id)
+	if event == null:
+		print("【音频系统警告】找不到事件 ID: ", event_id)
+		return null
+	var target_player = _find_idle_sfx_player()
+	if target_player == null:
+		return null
+	var final_pitch = event.pitch
+	if event.pitch_variance > 0.0:
+		final_pitch += randf_range(-event.pitch_variance, event.pitch_variance)
+	target_player.stream = event.stream
+	target_player.bus = event.bus
+	target_player.pitch_scale = final_pitch
+	target_player.volume_db = -80.0
+	target_player.play()
+	if fade_in_duration > 0.0:
+		var tw = create_tween()
+		tw.tween_property(target_player, "volume_db", event.volume_db, fade_in_duration).set_trans(Tween.TRANS_LINEAR)
+	else:
+		target_player.volume_db = event.volume_db
+	return target_player
+
+
+## SFX 淡出停止：逐渐静音后停止播放
+func stop_sfx_fade_out(player: AudioStreamPlayer, fade_out_duration: float = 1.5) -> void:
+	if not is_instance_valid(player) or not player.playing:
+		return
+	var tw = create_tween()
+	tw.tween_property(player, "volume_db", -80.0, fade_out_duration).set_trans(Tween.TRANS_LINEAR)
+	tw.tween_callback(player.stop)
+
+
+# 内部：找一个空闲 SFX 播放器
+func _find_idle_sfx_player() -> AudioStreamPlayer:
+	for player in _sfx_players:
+		if not player.playing:
+			return player
+	var p = _sfx_players[0]
+	p.stop()
+	return p
