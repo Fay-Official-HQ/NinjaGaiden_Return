@@ -97,5 +97,5 @@ shape = SubResource("RectangleShape2D_hit")
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=823214000]
-position = Vector2(0, 92)
+position = Vector2(0, 42)
 shape = SubResource("RectangleShape2D_detect")
