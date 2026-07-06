@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_0ixe7"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_bqsfk"]
 
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
 animations = [{
 "frames": [{
@@ -74,7 +73,7 @@ size = Vector2(22, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yu1m"]
 size = Vector2(22, 32)
 
-[node name="PatrolEnemy" type="CharacterBody2D" unique_id=1227478862]
+[node name="PatrolEnemy" type="CharacterBody2D" unique_id=1227478862 groups=["enemy", "fall_vulnerable"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_v6v30")

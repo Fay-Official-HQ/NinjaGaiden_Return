@@ -17,11 +17,11 @@ func physics_update(_delta: float) -> void:
 		state_machine.change_state(player.idle_state)
 		return
 
-	# 2. 下蹲时发动下蹲攻击
+	# 2. 下蹲时发动下蹲攻击（和原来一样，短按 J 瞬发）
 	if Input.is_action_just_pressed("attack"):
 		state_machine.change_state(state_machine.get_node("CrouchAttackState"))
 		return
-		
+
 	# 3. 下蹲时释放忍术
 	if Input.is_action_just_pressed("ninjutsu"):
 		state_machine.change_state(state_machine.get_node("GroundNinjutsuState"))

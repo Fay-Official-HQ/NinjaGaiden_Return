@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be34h1adwjhdj"
-path="res://.godot/imported/dadao_003.png-c93465fc0fde105189a6d046d52f1c97.ctex"
+uid="uid://3qljdnugd1eq"
+path="res://.godot/imported/zhandadao.png-f3a00641e6ad5a7c726bf89b467c9d26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Ryu/fcjingling/dadao/dadao_003.png"
-dest_files=["res://.godot/imported/dadao_003.png-c93465fc0fde105189a6d046d52f1c97.ctex"]
+source_file="res://assets/sprites/Ryu/fcjingling/dadao/zhandadao.png"
+dest_files=["res://.godot/imported/zhandadao.png-f3a00641e6ad5a7c726bf89b467c9d26.ctex"]
 
 [params]
 

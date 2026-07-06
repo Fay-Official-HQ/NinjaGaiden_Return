@@ -65,9 +65,11 @@
 [ext_resource type="Texture2D" uid="uid://umkmklhlxik1" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_005.png" id="39_pwfqx"]
 [ext_resource type="Texture2D" uid="uid://cuvp201nxr5bv" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_006.png" id="40_kssj8"]
 [ext_resource type="Texture2D" uid="uid://cg35nawxuvama" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_007.png" id="41_8lfxt"]
+[ext_resource type="Texture2D" uid="uid://db5oapl2tix42" path="res://assets/sprites/Ryu/fcjingling/dadao/dundadao.png" id="41_hdu4s"]
 [ext_resource type="Texture2D" uid="uid://0qne33xiivrf" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_008.png" id="42_8lfxt"]
 [ext_resource type="Texture2D" uid="uid://bfq3r0lu7dms7" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_009.png" id="43_lclul"]
 [ext_resource type="Texture2D" uid="uid://cimwmh6sx4aqw" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_003.png" id="44_0ncpa"]
+[ext_resource type="Texture2D" uid="uid://3qljdnugd1eq" path="res://assets/sprites/Ryu/fcjingling/dadao/zhandadao.png" id="44_0wr6q"]
 [ext_resource type="Texture2D" uid="uid://bbc27w5k70gpr" path="res://assets/sprites/Ryu/tpjingling/beizhan/beizhan.png" id="44_rw8a5"]
 [ext_resource type="Texture2D" uid="uid://b30ldriejrbrd" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_004.png" id="45_upxxc"]
 [ext_resource type="Texture2D" uid="uid://dy711ftrq1ajb" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_005.png" id="46_ln3h3"]
@@ -77,6 +79,7 @@
 [ext_resource type="Texture2D" uid="uid://br41mnre27113" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_008.png" id="49_w8qe1"]
 [ext_resource type="Texture2D" uid="uid://drmn71juut602" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_009.png" id="50_hdvrm"]
 [ext_resource type="Texture2D" uid="uid://c6u23hpkbpw28" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_010.png" id="51_5xbmr"]
+[ext_resource type="Texture2D" uid="uid://bb1yh8mxhfcn8" path="res://assets/sprites/Ryu/fcjingling/dadao/miesha.png" id="52_hdu4s"]
 [ext_resource type="Texture2D" uid="uid://83p1ek6iykrg" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_011.png" id="52_hir57"]
 [ext_resource type="Texture2D" uid="uid://dqur54a73cjy2" path="res://assets/sprites/Ryu/fcjingling/paqiang/qiangmian_003.png" id="57_hdvrm"]
 [ext_resource type="Texture2D" uid="uid://nf7u5mix72c" path="res://assets/sprites/Ryu/fcjingling/paqiang/qiangmian_004.png" id="58_7072n"]
@@ -96,6 +99,8 @@
 [ext_resource type="Texture2D" uid="uid://dxja886d8v1kp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_007.png" id="79_5miun"]
 [ext_resource type="Texture2D" uid="uid://boebc2inlywh3" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_007.png" id="79_hf5gj"]
 [ext_resource type="Script" uid="uid://cx404cfavlvyk" path="res://scripts/components/AttackHitBox.gd" id="attack_hitbox"]
+[ext_resource type="Script" uid="uid://bunm58w2ygaal" path="res://scripts/player/states/ExterminateChainState.gd" id="exterminate_chain"]
+[ext_resource type="Script" uid="uid://cxt2a2g0phsoc" path="res://scripts/player/states/ExterminateReleaseState.gd" id="exterminate_release"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5stf6"]
 size = Vector2(14, 30)
@@ -127,6 +132,48 @@ size = Vector2(13, 31)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_npwbq"]
 animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("11_1hh02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_hdu4s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_geaob")
+}],
+"loop": false,
+"name": &"Exec_Air",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_kxw46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_hdu4s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_5q8fn")
+}],
+"loop": false,
+"name": &"Exec_Crouch",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_x3qp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_0wr6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_mndc6")
+}],
+"loop": false,
+"name": &"Exec_Stand",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 0.25,
 "texture": ExtResource("11_1hh02")
@@ -483,6 +530,9 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_88c1f"]
+radius = 250.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1811321606 groups=["player"]]
 z_index = 100
 collision_mask = 652
@@ -572,6 +622,12 @@ script = ExtResource("18_ln3h3")
 
 [node name="DragonFlashState" type="Node" parent="StateMachine" unique_id=1936464250]
 script = ExtResource("24_0y4ya")
+
+[node name="ExterminateReleaseState" type="Node" parent="StateMachine" unique_id=63017502]
+script = ExtResource("exterminate_release")
+
+[node name="ExterminateChainState" type="Node" parent="StateMachine" unique_id=856910947]
+script = ExtResource("exterminate_chain")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=550098258]
 position = Vector2(-1, 7)
@@ -669,10 +725,10 @@ debug_color = Color(0.77392095, 0.43947607, 0.13655847, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"fall"
+animation = &"idle"
 autoplay = "idle"
 frame = 1
-frame_progress = 0.33043617
+frame_progress = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]
 
@@ -687,5 +743,12 @@ target_position = Vector2(0, -20)
 collision_mask = 12
 
 [node name="ShadowContainer" type="Node2D" parent="." unique_id=1228282928]
+
+[node name="ExterminateDetector" type="Area2D" parent="." unique_id=2146233577]
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExterminateDetector" unique_id=524675138]
+shape = SubResource("CircleShape2D_88c1f")
 
 [connection signal="frame_changed" from="Visual/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

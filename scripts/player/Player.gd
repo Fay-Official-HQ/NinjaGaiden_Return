@@ -15,7 +15,7 @@ class_name Player
 @onready var hurtbox_collision: CollisionShape2D = $HurtRoot/HurtBox/CollisionShape2D
 @onready var ninjutsu: NinjutsuComponent = $Components/NinjutsuComponent
 @onready var sword: SwordComponent = $Components/SwordComponent
-
+@onready var exterminate_detector: Area2D = $ExterminateDetector
 
 # 状态节点引用
 @onready var idle_state: IdleState = $StateMachine/IdleState
@@ -42,6 +42,17 @@ var is_invincible: bool = false
 var is_gravity_disabled: bool = false
 # 当前所在的单面攀爬墙检测区（由 ClimbableWall 设置）
 var current_climbable_wall: ClimbableWall = null
+
+# ── 灭杀系统字段 ──
+var exterminate_stacks: int = 0
+var exterminate_remaining_chains: int = 0
+var exterminate_chain_active: bool = false
+var exterminate_chain_timer: float = 0.0
+
+# ── 灭杀蓄力跟踪（独立于 J 键攻击，完全使用 H 键）──
+var _charge_hold_time: float = -1.0
+var _charge_energy_timer: float = 0.0
+var _charge_visual_active: bool = false
 
 # HurtBox 原始参数（用于下蹲切换恢复）
 var _normal_hurtbox_size: Vector2
@@ -74,6 +85,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	input.update_input()
 	input.update_buffer(delta)
+	_update_charge(delta)
+	_update_exterminate_chain(delta)
 	state_machine.update(delta)
 
 	if invincible_timer > 0:
@@ -102,6 +115,8 @@ func set_facing_direction(direction: float) -> void:
 func _on_hurt_box_took_damage(damage: int, _is_heavy: bool = false) -> void:
 	if invincible_timer > 0 or is_invincible or _is_dead:
 		return
+
+	_cancel_charge()
 
 	current_hp -= damage
 	print("玩家受伤，当前HP：", current_hp)
@@ -182,3 +197,154 @@ func check_climbable_wall() -> bool:
 		return false
 	state_machine.change_state($StateMachine/WallState, {"climbable_wall": wall})
 	return true
+
+
+# ────────── 灭杀链式计时 ──────────
+func _update_exterminate_chain(delta: float) -> void:
+	if not exterminate_chain_active:
+		return
+
+	exterminate_chain_timer -= delta
+	if exterminate_chain_timer <= 0:
+		_end_exterminate_chain()
+		return
+
+	if Input.is_action_just_pressed("exterminate"):
+		var target = _find_nearest_enemy_in_detector()
+		if not target:
+			return
+
+		exterminate_chain_active = false
+		state_machine.change_state(
+			$StateMachine/ExterminateChainState,
+			{"target": target, "chains": exterminate_remaining_chains}
+		)
+
+
+func _find_nearest_enemy_in_detector() -> Node2D:
+	var nearest_dist = INF
+	var nearest: Node2D = null
+
+	# 方案A：检测 PhysicsBody2D 敌人（PatrolEnemy、ChaserNinja 等）
+	for body in exterminate_detector.get_overlapping_bodies():
+		if not is_instance_valid(body) or body == self:
+			continue
+		if _is_node_dead(body):
+			continue
+		if body is BaseEnemy:
+			var dist = global_position.distance_squared_to(body.global_position)
+			if dist < nearest_dist:
+				nearest_dist = dist
+				nearest = body
+
+	if nearest:
+		return nearest
+
+	# 方案B：检测 Area2D 敌人（BatEnemy、EagleEnemy 等飞行类）
+	for area in exterminate_detector.get_overlapping_areas():
+		if not is_instance_valid(area):
+			continue
+		if _is_node_dead(area):
+			continue
+		if area.get_parent() == self:
+			continue
+		if area is BatEnemy or area is EagleEnemy:
+			var dist = global_position.distance_squared_to(area.global_position)
+			if dist < nearest_dist:
+				nearest_dist = dist
+				nearest = area
+		elif area is HurtBox:
+			var enemy = area.owner
+			if is_instance_valid(enemy) and not _is_node_dead(enemy):
+				if enemy is BaseEnemy or enemy is BatEnemy or enemy is EagleEnemy:
+					var dist = global_position.distance_squared_to(enemy.global_position)
+					if dist < nearest_dist:
+						nearest_dist = dist
+						nearest = enemy
+
+	if nearest:
+		return nearest
+
+	# 方案C：全场景距离回退（防物理帧延迟）
+	var circle_radius = 250.0
+	var all_enemies = get_tree().get_nodes_in_group("enemy")
+	for enemy in all_enemies:
+		if not is_instance_valid(enemy) or _is_node_dead(enemy):
+			continue
+		var dist = global_position.distance_squared_to(enemy.global_position)
+		if dist < circle_radius * circle_radius and dist < nearest_dist:
+			nearest_dist = dist
+			nearest = enemy
+
+	return nearest
+
+
+# ────────── 灭杀蓄力跟踪 ──────────
+func _update_charge(delta: float) -> void:
+	if Input.is_action_just_pressed("exterminate"):
+		_charge_hold_time = 0.0
+		exterminate_stacks = 0
+		_charge_energy_timer = 0.0
+		_charge_visual_active = false
+
+	if Input.is_action_pressed("exterminate") and _charge_hold_time >= 0:
+		_charge_hold_time += delta
+		if _charge_hold_time >= 0.3:
+			if not _charge_visual_active:
+				_charge_visual_active = true
+				AudioManager.play_sound(&"renshuhuoqiu")
+			_charge_energy_timer += delta
+			if _charge_energy_timer >= 0.5 and exterminate_stacks < 6:
+				exterminate_stacks += 1
+				_charge_energy_timer -= 0.5
+			if invincible_timer <= 0 and not is_invincible and not _is_dead:
+				var redness = min((_charge_hold_time - 0.3) / 2.7, 1.0)
+				animated_sprite.modulate = Color(1.0, 1.0 - redness * 0.8, 1.0 - redness * 0.8)
+
+	if Input.is_action_just_released("exterminate"):
+		if _charge_hold_time >= 0.3:
+			var current = state_machine.current_state
+			var anim_name = "Exec_Stand"
+			if current is JumpState or current is FallState:
+				anim_name = "Exec_Air"
+			elif current is CrouchState:
+				anim_name = "Exec_Crouch"
+			state_machine.change_state(
+				$StateMachine/ExterminateReleaseState,
+				{"energy": exterminate_stacks, "anim_name": anim_name}
+			)
+		else:
+			_cancel_charge()
+
+	if not Input.is_action_pressed("exterminate") and not Input.is_action_just_pressed("exterminate"):
+		if _charge_hold_time >= 0:
+			_cancel_charge()
+
+
+func _cancel_charge() -> void:
+	_charge_hold_time = -1.0
+	exterminate_stacks = 0
+	_charge_visual_active = false
+	if not exterminate_chain_active:
+		if invincible_timer <= 0 and not is_invincible:
+			animated_sprite.modulate = Color.WHITE
+			animated_sprite.modulate.a = 1.0
+
+
+func _end_exterminate_chain() -> void:
+	exterminate_chain_active = false
+	exterminate_remaining_chains = 0
+	exterminate_chain_timer = 0.0
+	if invincible_timer <= 0 and not is_invincible:
+		animated_sprite.modulate = Color.WHITE
+		animated_sprite.modulate.a = 1.0
+
+
+func _is_node_dead(node: Node2D) -> bool:
+	if not is_instance_valid(node):
+		return true
+	if "is_dead" in node and node.is_dead:
+		return true
+	if "_is_dead" in node and node._is_dead:
+		return true
+	return false

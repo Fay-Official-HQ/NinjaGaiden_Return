@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdn03lq3jrucn"
-path="res://.godot/imported/dadao_000.png-8ef6dd60796d4c8ad434327190eb5862.ctex"
+uid="uid://bb1yh8mxhfcn8"
+path="res://.godot/imported/miesha.png-b4c22a00b51074b191cfa303b76e5a34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Ryu/fcjingling/dadao/dadao_000.png"
-dest_files=["res://.godot/imported/dadao_000.png-8ef6dd60796d4c8ad434327190eb5862.ctex"]
+source_file="res://assets/sprites/Ryu/fcjingling/dadao/miesha.png"
+dest_files=["res://.godot/imported/miesha.png-b4c22a00b51074b191cfa303b76e5a34.ctex"]
 
 [params]
 

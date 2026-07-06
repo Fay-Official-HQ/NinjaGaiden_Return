@@ -24,7 +24,7 @@ func update(_delta: float) -> void:
 			air_imbalance = true
 		state_machine.change_state(state_machine.get_node("AirAttackState"), {"imbalance": air_imbalance})
 		return
-		
+
 	if Input.is_action_just_pressed("ninjutsu"):
 		var move_dir = player.input.move_direction
 		var air_imbalance = false

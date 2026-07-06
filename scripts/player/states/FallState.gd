@@ -17,16 +17,15 @@ func enter(msg: Dictionary = {}) -> void:
 		player.animation.play("fall")
 
 func update(_delta: float) -> void:
-	# 1. 触发空中攻击
+	# 1. 触发空中攻击（和原来一样，短按 J 瞬发）
 	if Input.is_action_just_pressed("attack"):
 		var move_dir = player.input.move_direction
 		var air_imbalance = is_imbalance
 		if move_dir != 0 and move_dir != player.facing_direction:
 			air_imbalance = true
-			
 		state_machine.change_state(state_machine.get_node("AirAttackState"), {"imbalance": air_imbalance})
 		return
-		
+
 	# 2. 触发空中忍术
 	if Input.is_action_just_pressed("ninjutsu"):
 		var move_dir = player.input.move_direction
