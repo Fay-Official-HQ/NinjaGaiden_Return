@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://byepbp4mu5ywy" path="res://scenes/enemy/l2/hopper.tscn" id="17_y5sjq"]
 [ext_resource type="PackedScene" uid="uid://6p404iw2tco6" path="res://scenes/enemy/l2/chaser_monster_spawner.tscn" id="18_y5sjq"]
 [ext_resource type="PackedScene" path="res://scenes/enemy/l2/chaser_soldier_spawner.tscn" id="19_kh70i"]
-[ext_resource type="Script" uid="uid://dg3loecxi0yrp" path="res://resources/enemy/PatrolEnemyData.gd" id="22_hhhw0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8moxo"]
 texture = ExtResource("2_61fia")
@@ -162,16 +161,6 @@ size = Vector2(209, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
 size = Vector2(8, 32)
-
-[sub_resource type="Resource" id="Resource_j0ybu"]
-script = ExtResource("22_hhhw0")
-move_speed = 1.0
-metadata/_custom_type_script = "uid://dg3loecxi0yrp"
-
-[sub_resource type="Resource" id="Resource_hwcdl"]
-script = ExtResource("22_hhhw0")
-move_speed = 1.0
-metadata/_custom_type_script = "uid://dg3loecxi0yrp"
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_30yi0")
@@ -512,14 +501,6 @@ position = Vector2(4386, -16)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [node name="test" type="Node" parent="." unique_id=1907806501]
-
-[node name="PatrolEnemy" parent="test" unique_id=880972296 instance=ExtResource("12_ujr4u")]
-position = Vector2(127.48021, 204.80547)
-data = SubResource("Resource_j0ybu")
-
-[node name="PatrolEnemy2" parent="test" unique_id=440960237 instance=ExtResource("12_ujr4u")]
-position = Vector2(224, 214)
-data = SubResource("Resource_hwcdl")
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
 [editable path="enemys/FlyingNinjaSpawner"]

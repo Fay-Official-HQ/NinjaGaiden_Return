@@ -100,6 +100,7 @@
 [ext_resource type="Texture2D" uid="uid://boebc2inlywh3" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_007.png" id="79_hf5gj"]
 [ext_resource type="Script" uid="uid://cx404cfavlvyk" path="res://scripts/components/AttackHitBox.gd" id="attack_hitbox"]
 [ext_resource type="Script" uid="uid://bunm58w2ygaal" path="res://scripts/player/states/ExterminateChainState.gd" id="exterminate_chain"]
+[ext_resource type="Script" uid="uid://db3h7bsgsmthe" path="res://scripts/components/ExterminateHitBox.gd" id="exterminate_hitbox"]
 [ext_resource type="Script" uid="uid://cxt2a2g0phsoc" path="res://scripts/player/states/ExterminateReleaseState.gd" id="exterminate_release"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5stf6"]
@@ -113,6 +114,9 @@ size = Vector2(30, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymths"]
 size = Vector2(31, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0anf"]
+size = Vector2(45, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0y4ya"]
 size = Vector2(246.75, 111)
@@ -530,9 +534,6 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_88c1f"]
-radius = 250.0
-
 [node name="Player" type="CharacterBody2D" unique_id=1811321606 groups=["player"]]
 z_index = 100
 collision_mask = 652
@@ -667,6 +668,18 @@ script = ExtResource("24_3p0jd")
 position = Vector2(19.5, 5.5)
 shape = SubResource("RectangleShape2D_ymths")
 
+[node name="ExterminateHitBox" type="Area2D" parent="AttackRoot" unique_id=750889473]
+collision_layer = 16
+collision_mask = 66
+monitoring = false
+monitorable = false
+script = ExtResource("exterminate_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/ExterminateHitBox" unique_id=430205010]
+position = Vector2(22.5, 6)
+shape = SubResource("RectangleShape2D_p0anf")
+debug_color = Color(0, 0, 0.07058824, 0.41960785)
+
 [node name="DragonFlashHitBox" type="Area2D" parent="AttackRoot" unique_id=2072884072]
 collision_layer = 16
 collision_mask = 66
@@ -723,14 +736,15 @@ debug_color = Color(0.77392095, 0.43947607, 0.13655847, 0.41960785)
 
 [node name="Visual" type="Node2D" parent="." unique_id=174212603]
 
+[node name="ChargeMist" type="Node2D" parent="Visual" unique_id=275845467]
+position = Vector2(0, 5)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"idle"
+animation = &"Exec_Air"
 autoplay = "idle"
-frame = 1
+frame = 2
 frame_progress = 1.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=1285631456]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1949881614]
 position = Vector2(0, 38)
@@ -743,12 +757,5 @@ target_position = Vector2(0, -20)
 collision_mask = 12
 
 [node name="ShadowContainer" type="Node2D" parent="." unique_id=1228282928]
-
-[node name="ExterminateDetector" type="Area2D" parent="." unique_id=2146233577]
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExterminateDetector" unique_id=524675138]
-shape = SubResource("CircleShape2D_88c1f")
 
 [connection signal="frame_changed" from="Visual/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

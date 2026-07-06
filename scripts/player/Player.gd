@@ -15,7 +15,8 @@ class_name Player
 @onready var hurtbox_collision: CollisionShape2D = $HurtRoot/HurtBox/CollisionShape2D
 @onready var ninjutsu: NinjutsuComponent = $Components/NinjutsuComponent
 @onready var sword: SwordComponent = $Components/SwordComponent
-@onready var exterminate_detector: Area2D = $ExterminateDetector
+@onready var charge_mist: Node2D = $Visual/ChargeMist
+
 
 # 状态节点引用
 @onready var idle_state: IdleState = $StateMachine/IdleState
@@ -53,6 +54,10 @@ var exterminate_chain_timer: float = 0.0
 var _charge_hold_time: float = -1.0
 var _charge_energy_timer: float = 0.0
 var _charge_visual_active: bool = false
+var _charge_sfx_player: AudioStreamPlayer = null
+var _charge_mist_timer: float = 0.0
+
+var _shaqi_texture = preload("res://assets/sprites/Ryu/lizitexiao/shaqi.png")
 
 # HurtBox 原始参数（用于下蹲切换恢复）
 var _normal_hurtbox_size: Vector2
@@ -199,9 +204,11 @@ func check_climbable_wall() -> bool:
 	return true
 
 
-# ────────── 灭杀链式计时 ──────────
+# ────────── 灭杀链式计时（仅负责首次进入连斩状态）──────────
 func _update_exterminate_chain(delta: float) -> void:
 	if not exterminate_chain_active:
+		return
+	if state_machine.current_state is ExterminateChainState:
 		return
 
 	exterminate_chain_timer -= delta
@@ -225,54 +232,14 @@ func _find_nearest_enemy_in_detector() -> Node2D:
 	var nearest_dist = INF
 	var nearest: Node2D = null
 
-	# 方案A：检测 PhysicsBody2D 敌人（PatrolEnemy、ChaserNinja 等）
-	for body in exterminate_detector.get_overlapping_bodies():
-		if not is_instance_valid(body) or body == self:
-			continue
-		if _is_node_dead(body):
-			continue
-		if body is BaseEnemy:
-			var dist = global_position.distance_squared_to(body.global_position)
-			if dist < nearest_dist:
-				nearest_dist = dist
-				nearest = body
-
-	if nearest:
-		return nearest
-
-	# 方案B：检测 Area2D 敌人（BatEnemy、EagleEnemy 等飞行类）
-	for area in exterminate_detector.get_overlapping_areas():
-		if not is_instance_valid(area):
-			continue
-		if _is_node_dead(area):
-			continue
-		if area.get_parent() == self:
-			continue
-		if area is BatEnemy or area is EagleEnemy:
-			var dist = global_position.distance_squared_to(area.global_position)
-			if dist < nearest_dist:
-				nearest_dist = dist
-				nearest = area
-		elif area is HurtBox:
-			var enemy = area.owner
-			if is_instance_valid(enemy) and not _is_node_dead(enemy):
-				if enemy is BaseEnemy or enemy is BatEnemy or enemy is EagleEnemy:
-					var dist = global_position.distance_squared_to(enemy.global_position)
-					if dist < nearest_dist:
-						nearest_dist = dist
-						nearest = enemy
-
-	if nearest:
-		return nearest
-
-	# 方案C：全场景距离回退（防物理帧延迟）
-	var circle_radius = 250.0
 	var all_enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in all_enemies:
 		if not is_instance_valid(enemy) or _is_node_dead(enemy):
 			continue
+		if enemy == self:
+			continue
 		var dist = global_position.distance_squared_to(enemy.global_position)
-		if dist < circle_radius * circle_radius and dist < nearest_dist:
+		if dist < nearest_dist:
 			nearest_dist = dist
 			nearest = enemy
 
@@ -281,7 +248,11 @@ func _find_nearest_enemy_in_detector() -> Node2D:
 
 # ────────── 灭杀蓄力跟踪 ──────────
 func _update_charge(delta: float) -> void:
+	if state_machine.current_state is ExterminateChainState:
+		return
 	if Input.is_action_just_pressed("exterminate"):
+		if sword.current_tp <= 0:
+			return
 		_charge_hold_time = 0.0
 		exterminate_stacks = 0
 		_charge_energy_timer = 0.0
@@ -292,18 +263,34 @@ func _update_charge(delta: float) -> void:
 		if _charge_hold_time >= 0.3:
 			if not _charge_visual_active:
 				_charge_visual_active = true
-				AudioManager.play_sound(&"renshuhuoqiu")
+				_charge_sfx_player = AudioManager.play_sfx_fade_in(&"xuli", 0.0)
 			_charge_energy_timer += delta
-			if _charge_energy_timer >= 0.5 and exterminate_stacks < 6:
-				exterminate_stacks += 1
-				_charge_energy_timer -= 0.5
-			if invincible_timer <= 0 and not is_invincible and not _is_dead:
-				var redness = min((_charge_hold_time - 0.3) / 2.7, 1.0)
-				animated_sprite.modulate = Color(1.0, 1.0 - redness * 0.8, 1.0 - redness * 0.8)
+			_charge_mist_timer += delta
+			if _charge_mist_timer >= randf_range(0.02, 0.05):
+				_charge_mist_timer = 0.0
+				_spawn_shaqi()
+				_spawn_shaqi()
+			if _charge_energy_timer >= 0.5 and exterminate_stacks < 14:
+				if sword.current_tp >= 1:
+					sword.current_tp -= 1
+					sword.tp_changed.emit(sword.current_tp)
+					exterminate_stacks += 1
+					_charge_energy_timer -= 0.5
+				else:
+					_charge_energy_timer = 0.0
+					_stop_charge_sfx()
 
 	if Input.is_action_just_released("exterminate"):
 		if _charge_hold_time >= 0.3:
 			var current = state_machine.current_state
+			if current is WallState or current is HangState:
+				_cancel_charge()
+				return
+			if exterminate_stacks <= 0:
+				_cancel_charge()
+				return
+			_stop_charge_sfx()
+			animated_sprite.modulate = Color.WHITE
 			var anim_name = "Exec_Stand"
 			if current is JumpState or current is FallState:
 				anim_name = "Exec_Air"
@@ -321,7 +308,27 @@ func _update_charge(delta: float) -> void:
 			_cancel_charge()
 
 
+func _spawn_shaqi() -> void:
+	var s = Sprite2D.new()
+	s.texture = _shaqi_texture
+	s.modulate.a = randf_range(0.4, 0.7)
+	var sc = randf_range(0.5, 0.9)
+	s.scale = Vector2(sc, sc)
+	s.position.x = randf_range(-12, 12)
+	s.position.y = 0
+	charge_mist.add_child(s)
+
+	var rise = randf_range(30, 50)
+	var duration = randf_range(0.4, 0.6)
+	var tw = create_tween()
+	tw.tween_property(s, "position:y", -rise, duration)
+	tw.set_parallel(true)
+	tw.tween_property(s, "modulate:a", 0.0, duration - 0.1)
+	tw.tween_callback(s.queue_free).set_delay(duration)
+
+
 func _cancel_charge() -> void:
+	_stop_charge_sfx()
 	_charge_hold_time = -1.0
 	exterminate_stacks = 0
 	_charge_visual_active = false
@@ -338,6 +345,12 @@ func _end_exterminate_chain() -> void:
 	if invincible_timer <= 0 and not is_invincible:
 		animated_sprite.modulate = Color.WHITE
 		animated_sprite.modulate.a = 1.0
+
+
+func _stop_charge_sfx() -> void:
+	if _charge_sfx_player:
+		_charge_sfx_player.stop()
+		_charge_sfx_player = null
 
 
 func _is_node_dead(node: Node2D) -> bool:

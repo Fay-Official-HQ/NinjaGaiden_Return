@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="7_vocqn"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="8_yxwov"]
 
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_vg3h6"]
 animations = [{
 "frames": [{
@@ -57,7 +56,7 @@ size = Vector2(20, 30)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uar62"]
 size = Vector2(20, 18)
 
-[node name="EagleEnemy" type="Area2D" unique_id=2001263754]
+[node name="EagleEnemy" type="Area2D" unique_id=2001263754 groups=["enemy"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_yxwov")

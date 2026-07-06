@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="10"]
 
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_vg3h6"]
 animations = [{
 "frames": [{
@@ -57,7 +56,7 @@ size = Vector2(20, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
 size = Vector2(20, 32)
 
-[node name="FlyingNinja" type="Area2D" unique_id=30580118]
+[node name="FlyingNinja" type="Area2D" unique_id=30580118 groups=["enemy"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1")

@@ -25,6 +25,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	AudioManager.play_sound(&"jianxiapi")
 	print("【下劈】释放成功！剩余TP:", player.sword.current_tp, " 冷却5秒")
 
+	player.is_invincible = true
 	player.animation.play("sword_downslash")
 
 	# 轻微下压 + 常速重力(1.0x),保证动画播完再落地
@@ -66,6 +67,7 @@ func physics_update(_delta: float) -> void:
 	player.move_and_slide()
 
 func exit() -> void:
+	player.is_invincible = false
 	_exit_hitbox()
 
 func _fallback_to_neutral() -> void:

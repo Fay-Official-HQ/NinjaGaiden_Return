@@ -26,6 +26,7 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/bgm/end_bad.tres",
 	# 玩家音效
 	"res://resources/audio/player/bishaji.tres",
+	"res://resources/audio/player/cuoa.tres",
 	"res://resources/audio/player/gongji.tres",
 	"res://resources/audio/player/hanjiao.tres",
 	"res://resources/audio/player/HPhuifu.tres",
@@ -39,6 +40,7 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/player/renshuhuoyan.tres",
 	"res://resources/audio/player/renshuhuoqiu.tres",
 	"res://resources/audio/player/renshulengren.tres",
+	"res://resources/audio/player/xuli.tres",
 	"res://resources/audio/player/shoushang.tres",
 	"res://resources/audio/player/siwang.tres",
 	"res://resources/audio/player/tiaoyue.tres",

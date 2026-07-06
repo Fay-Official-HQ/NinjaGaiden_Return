@@ -58,7 +58,7 @@ size = Vector2(6, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0cxo"]
 size = Vector2(291, 275)
 
-[node name="SlimeEnemy" type="CharacterBody2D" unique_id=1695455234]
+[node name="SlimeEnemy" type="CharacterBody2D" unique_id=1695455234 groups=["enemy"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_7bboy")

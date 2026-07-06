@@ -23,6 +23,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.sword.start_cooldown("dash")
 	print("【突进】释放成功！剩余TP:", player.sword.current_tp, "  冷却 5 秒")
 
+	player.is_invincible = true
 	player.animation.play("sword_dash")
 	
 	player.velocity.x = player.facing_direction * player.data.walk_speed * dash_speed_multiplier
@@ -71,6 +72,7 @@ func physics_update(_delta: float) -> void:
 	player.move_and_slide()
 
 func exit() -> void:
+	player.is_invincible = false
 	_exit_dash()
 
 func _fallback_to_neutral() -> void:

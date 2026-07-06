@@ -5,9 +5,10 @@ var _energy: int = 0
 var _killed_any: bool = false
 var _hit_enemies: Array[HurtBox] = []
 var _attack_root: Node2D
-var _dash_box: SwordHitBox
+var _dash_box: ExterminateHitBox
 var _release_timer: float = 0.0
 var _execution_duration: float = 0.0
+var _frame_duration: float = 0.0
 var _anim_name: String = "Exec_Air"
 
 func enter(msg: Dictionary = {}) -> void:
@@ -21,19 +22,22 @@ func enter(msg: Dictionary = {}) -> void:
 	var frame_count = sprite.sprite_frames.get_frame_count(_anim_name)
 	var speed = sprite.sprite_frames.get_animation_speed(_anim_name)
 	_execution_duration = frame_count / speed
+	_frame_duration = 1.0 / speed
 
 	player.animation.play(_anim_name)
 	AudioManager.play_sound(&"bishaji")
 
 	_attack_root = player.get_node("AttackRoot") as Node2D
-	_dash_box = _attack_root.get_node("SwordDashBox") as SwordHitBox
+	_dash_box = _attack_root.get_node("ExterminateHitBox") as ExterminateHitBox
 	if _attack_root:
 		_attack_root.scale.x = player.facing_direction
+	if _dash_box:
+		_dash_box.set_crouch(_anim_name == "Exec_Crouch")
 
 func update(delta: float) -> void:
 	_release_timer += delta
 
-	if _dash_box and not _dash_box.monitoring and _release_timer >= _execution_duration * 0.33:
+	if _dash_box and not _dash_box.monitoring and _release_timer >= _frame_duration:
 		_dash_box.set_deferred("monitoring", true)
 
 	if _dash_box and _dash_box.monitoring:
@@ -42,6 +46,7 @@ func update(delta: float) -> void:
 			if area is HurtBox and not _hit_enemies.has(area):
 				_hit_enemies.append(area)
 				var damage = 1 + _energy
+				print("【灭杀】蓄力攻击造成伤害: ", damage)
 				area.take_damage(damage)
 				var enemy = area.owner
 				if is_instance_valid(enemy):
@@ -62,8 +67,16 @@ func update(delta: float) -> void:
 		return
 
 func physics_update(_delta: float) -> void:
-	player.velocity.x = 0.0
-	player.velocity.y = 0.0
+	if _anim_name == "Exec_Air":
+		var move_dir = player.input.move_direction
+		if move_dir != 0:
+			player.velocity.x = move_dir * player.data.walk_speed
+			player.set_facing_direction(move_dir)
+		else:
+			player.velocity.x = 0.0
+	else:
+		player.velocity.x = 0.0
+		player.velocity.y = 0.0
 	player.move_and_slide()
 
 func exit() -> void:

@@ -69,7 +69,7 @@ size = Vector2(17, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
 size = Vector2(424, 31)
 
-[node name="MonsterSoldier" type="CharacterBody2D" unique_id=634735606]
+[node name="MonsterSoldier" type="CharacterBody2D" unique_id=634735606 groups=["enemy"]]
 collision_layer = 2
 collision_mask = 140
 script = ExtResource("1_r8y8m")

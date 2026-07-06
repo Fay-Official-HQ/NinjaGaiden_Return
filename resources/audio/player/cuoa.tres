@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://cryc2uogy7kil"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_8b07x"]
+[ext_resource type="AudioStream" uid="uid://bunxq8plqe5dp" path="res://assets/audio/player/cuoa.ogg" id="2_t61fi"]
+
+[resource]
+script = ExtResource("1_8b07x")
+event_id = &"cuoa"
+stream = ExtResource("2_t61fi")
+volume_db = -15.0
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

@@ -25,6 +25,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	AudioManager.play_sound(&"jianshangtiao")
 	print("【上挑】释放成功！剩余TP:", player.sword.current_tp, "  冷却 5 秒")
 
+	player.is_invincible = true
 	player.animation.play("sword_uppercut")
 	# 向上跃起（跳跃力的 1.2 倍）
 	player.velocity.y = -player.data.jump_force * 1.2
@@ -67,6 +68,7 @@ func physics_update(_delta: float) -> void:
 	player.move_and_slide()
 
 func exit() -> void:
+	player.is_invincible = false
 	_exit_hitbox()
 
 # 关闭攻击框 + 清空命中列表

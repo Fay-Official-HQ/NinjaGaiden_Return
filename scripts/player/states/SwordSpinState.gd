@@ -24,6 +24,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	AudioManager.play_sound(&"jianxuanzhuan") 
 	print("【旋斩】释放成功！剩余TP:", player.sword.current_tp, "  冷却 5 秒")
 
+	player.is_invincible = true
 	player.animation.play("sword_spin")
 	player.set_hurtbox_crouch(true)
 
@@ -76,6 +77,7 @@ func physics_update(_delta: float) -> void:
 	player.move_and_slide()
 
 func exit() -> void:
+	player.is_invincible = false
 	_exit_hitbox()
 	player.set_hurtbox_crouch(false)
 	var attack_root = player.get_node("AttackRoot") as Node2D

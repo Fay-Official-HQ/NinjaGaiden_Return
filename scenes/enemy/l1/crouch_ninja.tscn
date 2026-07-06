@@ -63,7 +63,7 @@ size = Vector2(17, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
 size = Vector2(367, 274.5)
 
-[node name="CrouchNinja" type="CharacterBody2D" unique_id=1656441098]
+[node name="CrouchNinja" type="CharacterBody2D" unique_id=1656441098 groups=["enemy"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1")

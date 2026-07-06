@@ -4,6 +4,4 @@
 
 [resource]
 script = ExtResource("1_pmmo0")
-initial_tp = 0
-initial_mp = 0
 metadata/_custom_type_script = "uid://bhuwkajpoc3ub"
