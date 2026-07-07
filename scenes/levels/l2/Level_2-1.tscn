@@ -459,7 +459,7 @@ position = Vector2(3667, 126)
 attack_type = 1
 
 [node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner8" index="1" unique_id=1423050258]
-position = Vector2(-40, 177)
+position = Vector2(-25, 177)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
