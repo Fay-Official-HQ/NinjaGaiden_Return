@@ -12,7 +12,7 @@ func physics_update(_delta: float) -> void:
 		state_machine.change_state(state_machine.get_node("GroundAttackState"))
 		return
 
-	# 触发剑术备战 (急停进入架势)
+	# 触发剑术备战 (急停进入架势) — L 键按住时自动带格挡效果
 	if Input.is_action_pressed("special_move"):
 		state_machine.change_state(state_machine.get_node("SwordReadyState"))
 		return

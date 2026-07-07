@@ -16,8 +16,8 @@ var _played_pause_sound: bool = false
 var ninjutsu_textures: Array[Texture2D] = [
 	preload("res://assets/sprites/ui/fire_ninjutsu.png"),
 	preload("res://assets/sprites/ui/fireball_ninjutsu.png"),
-	preload("res://assets/sprites/ui/edge_blade_ninjutsu.png"),
 	preload("res://assets/sprites/ui/boomerang_ninjutsu.png"),
+	preload("res://assets/sprites/ui/edge_blade_ninjutsu.png"),
 ]
 
 var cd_masks: Dictionary = {}

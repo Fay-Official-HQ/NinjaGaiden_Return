@@ -60,6 +60,7 @@ func update(delta: float) -> void:
 			player.exterminate_remaining_chains = _energy
 			player.exterminate_chain_timer = 0.5
 			player.exterminate_chain_active = true
+			player.exterminate_was_ground = _anim_name != "Exec_Air"
 		if player.is_on_floor():
 			state_machine.change_state(player.idle_state)
 		else:

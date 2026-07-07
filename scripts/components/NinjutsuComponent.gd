@@ -7,7 +7,7 @@ signal ninjutsu_switched(index: int, name: String)
 signal ninjutsu_used
 
 @export var mp_cost: int = 1
-@export var ninjutsu_names: Array[String] = ["火焰", "火球", "棱刃", "回旋镖"]
+@export var ninjutsu_names: Array[String] = ["火焰", "火球", "回旋镖", "棱刃"]
 
 var current_mp: int = 0
 var current_ninjutsu_index: int = 0
@@ -17,14 +17,26 @@ var _fireball_scene: PackedScene = preload("res://scenes/ninjutsu/fireball_ninju
 var _edge_blade_scene: PackedScene = preload("res://scenes/ninjutsu/edge_blade_ninjutsu.tscn")
 var _boomerang_scene: PackedScene = preload("res://scenes/ninjutsu/boomerang_ninjutsu.tscn")
 
+var _player_ref: Player = null
+
 func _ready() -> void:
+	_player_ref = owner as Player
 	var player_data = _get_player_data()
 	if player_data:
 		current_mp = player_data.initial_mp
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("switch_ninjutsu"):
-		switch_ninjutsu()
+	if not _player_ref:
+		return
+	if Input.is_action_pressed("switch_ninjutsu"):
+		if Input.is_action_just_pressed("nav_up"):
+			_set_ninjutsu(0)
+		elif Input.is_action_just_pressed("nav_down"):
+			_set_ninjutsu(1)
+		elif Input.is_action_just_pressed("nav_right"):
+			_set_ninjutsu(2 if _player_ref.facing_direction > 0 else 3)
+		elif Input.is_action_just_pressed("nav_left"):
+			_set_ninjutsu(3 if _player_ref.facing_direction > 0 else 2)
 
 func _get_player_data() -> PlayerData:
 	var player = get_parent().owner as Player
@@ -37,10 +49,14 @@ func add_mp(amount: int) -> void:
 	current_mp = clampi(current_mp + amount, 0, max_mp)
 	mp_changed.emit(current_mp)
 
-func switch_ninjutsu() -> void:
-	current_ninjutsu_index = (current_ninjutsu_index + 1) % ninjutsu_names.size()
+func _set_ninjutsu(index: int) -> void:
+	if index < 0 or index >= ninjutsu_names.size():
+		return
+	if current_ninjutsu_index == index:
+		return
+	current_ninjutsu_index = index
 	var ninjutsu_name = ninjutsu_names[current_ninjutsu_index]
-	print("切换忍术：", ninjutsu_name)
+	print("切换忍术：", ninjutsu_name, " (索引=", index, ")")
 	ninjutsu_switched.emit(current_ninjutsu_index, ninjutsu_name)
 
 func cast_ninjutsu(facing_override: float = 0.0) -> void:
@@ -59,9 +75,9 @@ func cast_ninjutsu(facing_override: float = 0.0) -> void:
 		1:
 			_cast_fireball(facing_override)
 		2:
-			_cast_edgeblade(facing_override)
-		3:
 			_cast_boomerang(facing_override)
+		3:
+			_cast_edgeblade(facing_override)
 
 func _get_player() -> Player:
 	return get_parent().owner as Player

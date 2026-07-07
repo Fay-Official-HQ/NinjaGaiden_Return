@@ -63,7 +63,7 @@ animation = &"flying"
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_05kig")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=107738264]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=107738264 groups=["blockable"]]
 collision_layer = 32
 script = ExtResource("3_we8gu")
 

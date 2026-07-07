@@ -62,7 +62,7 @@ animation = &"flying"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1624574917]
 shape = SubResource("CircleShape2D_hfsxh")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340 groups=["blockable"]]
 collision_layer = 32
 script = ExtResource("7_wrnl2")
 

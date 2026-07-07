@@ -96,9 +96,10 @@ func _cancel_to_neutral() -> void:
 		state_machine.change_state(player.idle_state)
 
 func _keep_stance() -> void:
-	if not player.is_on_floor():
+	if player.is_on_floor():
+		if player.animation.sprite.animation != "sword_ready":
+			player.animation.play("sword_ready")
 		player.movement.stop()
-		player.move_and_slide()
-		return
-	player.movement.stop()
+	else:
+		player.movement.stop()
 	player.move_and_slide()

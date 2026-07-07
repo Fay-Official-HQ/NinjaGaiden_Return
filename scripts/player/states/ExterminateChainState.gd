@@ -2,7 +2,7 @@ extends State
 class_name ExterminateChainState
 
 const CHAIN_WINDOW = 0.3
-const MAX_CHAIN_DISTANCE = 400.0
+const MAX_CHAIN_DISTANCE = 300.0
 
 var _chains_remaining: int = 0
 var _chain_timer: float = 0.0
@@ -113,7 +113,9 @@ func _finish_chain() -> void:
 	player.exterminate_chain_timer = 0.0
 	player.is_invincible = false
 
-	player.global_position.y -= 20
+	if player.exterminate_was_ground:
+		player.global_position.y -= 20
+	player.exterminate_was_ground = false
 
 	var sprite = player.animated_sprite
 	sprite.modulate = Color.CYAN

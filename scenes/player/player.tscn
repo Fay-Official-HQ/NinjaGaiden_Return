@@ -534,6 +534,9 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhgc7"]
+size = Vector2(18, 33)
+
 [node name="Player" type="CharacterBody2D" unique_id=1811321606 groups=["player"]]
 z_index = 100
 collision_mask = 652
@@ -741,10 +744,11 @@ position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"Exec_Air"
+animation = &"sword_ready"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
+
+[node name="BlockSparkPos" type="Marker2D" parent="Visual" unique_id=1902681224]
+position = Vector2(17, 2)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1949881614]
 position = Vector2(0, 38)
@@ -758,4 +762,13 @@ collision_mask = 12
 
 [node name="ShadowContainer" type="Node2D" parent="." unique_id=1228282928]
 
-[connection signal="frame_changed" from="Visual/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[node name="BlockDetector" type="Area2D" parent="." unique_id=91223820]
+collision_layer = 0
+collision_mask = 32
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockDetector" unique_id=1651043938]
+position = Vector2(9, 6.5)
+shape = SubResource("RectangleShape2D_lhgc7")
+debug_color = Color(0.51462346, 0.44296768, 0.9480166, 0.41960785)

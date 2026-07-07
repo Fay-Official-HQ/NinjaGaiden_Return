@@ -21,7 +21,7 @@ texture = ExtResource("2")
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_n0vh8")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340 groups=["blockable"]]
 collision_layer = 32
 script = ExtResource("3")
 

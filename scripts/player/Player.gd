@@ -16,7 +16,8 @@ class_name Player
 @onready var ninjutsu: NinjutsuComponent = $Components/NinjutsuComponent
 @onready var sword: SwordComponent = $Components/SwordComponent
 @onready var charge_mist: Node2D = $Visual/ChargeMist
-
+@onready var block_detector: Area2D = $BlockDetector
+@onready var block_spark_pos: Marker2D = $Visual/BlockSparkPos
 
 # 状态节点引用
 @onready var idle_state: IdleState = $StateMachine/IdleState
@@ -49,6 +50,7 @@ var exterminate_stacks: int = 0
 var exterminate_remaining_chains: int = 0
 var exterminate_chain_active: bool = false
 var exterminate_chain_timer: float = 0.0
+var exterminate_was_ground: bool = false
 
 # ── 灭杀蓄力跟踪（独立于 J 键攻击，完全使用 H 键）──
 var _charge_hold_time: float = -1.0
@@ -58,6 +60,7 @@ var _charge_sfx_player: AudioStreamPlayer = null
 var _charge_mist_timer: float = 0.0
 
 var _shaqi_texture = preload("res://assets/sprites/Ryu/lizitexiao/shaqi.png")
+var _spark_texture = preload("res://assets/shaders/huohua.png")
 
 # HurtBox 原始参数（用于下蹲切换恢复）
 var _normal_hurtbox_size: Vector2
@@ -85,8 +88,11 @@ func _ready() -> void:
 
 	# 从全局状态管理器恢复 HP/MP/TP（跨小关卡持久化）
 	PlayerStateManager.apply(self)
-			
-			
+
+	# 格挡检测器
+	block_detector.area_entered.connect(_on_block_detector_entered)
+
+
 func _process(delta: float) -> void:
 	input.update_input()
 	input.update_buffer(delta)
@@ -104,6 +110,12 @@ func _process(delta: float) -> void:
 		if _was_invincible:
 			_was_invincible = false
 			_check_overlapping_enemy_after_invincibility()
+
+	# 控制格挡检测 — 地面站立且剑术姿势时才启用
+	var can_block = state_machine.current_state is SwordReadyState and is_on_floor()
+	block_detector.monitoring = can_block
+	if can_block:
+		block_detector.scale.x = facing_direction
 
 func _physics_process(delta: float) -> void:
 	if not is_gravity_disabled:
@@ -270,12 +282,13 @@ func _update_charge(delta: float) -> void:
 				_charge_mist_timer = 0.0
 				_spawn_shaqi()
 				_spawn_shaqi()
-			if _charge_energy_timer >= 0.5 and exterminate_stacks < 14:
+			if _charge_energy_timer >= 0.5 and exterminate_stacks < 7:
 				if sword.current_tp >= 1:
 					sword.current_tp -= 1
 					sword.tp_changed.emit(sword.current_tp)
 					exterminate_stacks += 1
 					_charge_energy_timer -= 0.5
+					_update_charge_color()
 				else:
 					_charge_energy_timer = 0.0
 					_stop_charge_sfx()
@@ -326,10 +339,24 @@ func _spawn_shaqi() -> void:
 	tw.tween_property(s, "modulate:a", 0.0, duration - 0.1)
 	tw.tween_callback(s.queue_free).set_delay(duration)
 
+#根据蓄力层数调整身体颜色
+func _update_charge_color() -> void:
+	if exterminate_stacks >= 7:
+		animated_sprite.modulate = Color(0.3, 0, 0)
+	elif exterminate_stacks >= 5:
+		animated_sprite.modulate = Color(0.4, 0.2, 0.2)
+	elif exterminate_stacks >= 3:
+		animated_sprite.modulate = Color(0.6, 0.4, 0.4)
+	elif exterminate_stacks >= 1:
+		animated_sprite.modulate = Color(0.8, 0.65, 0.65)
+	else:
+		animated_sprite.modulate = Color(1, 1, 1)
+
 
 func _cancel_charge() -> void:
 	_stop_charge_sfx()
 	_charge_hold_time = -1.0
+	animated_sprite.modulate = Color.WHITE
 	exterminate_stacks = 0
 	_charge_visual_active = false
 	if not exterminate_chain_active:
@@ -361,3 +388,43 @@ func _is_node_dead(node: Node2D) -> bool:
 	if "_is_dead" in node and node._is_dead:
 		return true
 	return false
+
+
+func _on_block_detector_entered(area: Area2D) -> void:
+	if not area.is_in_group("blockable"):
+		return
+	if not (state_machine.current_state is SwordReadyState):
+		return
+	# 判断是否来自正面
+	var attack_dir = sign(area.global_position.x - global_position.x)
+	if attack_dir != 0 and attack_dir != facing_direction:
+		return
+	AudioManager.play_sound(&"fangyu")
+	_spawn_block_spark()
+	var projectile = area.get_parent()
+	if is_instance_valid(projectile):
+		projectile.queue_free()
+
+
+func _spawn_block_spark() -> void:
+	for i in 5:
+		var s = Sprite2D.new()
+		s.texture = _spark_texture
+		s.modulate = Color.WHITE
+		s.scale = Vector2(randf_range(0.8, 1.5), randf_range(0.8, 1.5))
+		s.rotation = randf_range(0, TAU)
+		var start_pos = block_spark_pos.position + Vector2(randf_range(-6, 6), randf_range(-4, 4))
+		s.position = start_pos
+		s.z_index = 100
+		add_child(s)
+		var peak_x = start_pos.x + (-facing_direction) * randf_range(25, 50)
+		var peak_y = start_pos.y - randf_range(15, 30)
+		var land_y = peak_y + randf_range(25, 45)
+		var rise_time = 0.1
+		var fall_time = randf_range(0.12, 0.18)
+		var tw = create_tween()
+		tw.set_parallel(true)
+		tw.tween_property(s, "modulate:a", 0.0, rise_time + fall_time)
+		tw.tween_property(s, "position", Vector2(peak_x, peak_y), rise_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		tw.tween_property(s, "position:y", land_y, fall_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD).set_delay(rise_time)
+		tw.tween_callback(s.queue_free).set_delay(rise_time + fall_time)
