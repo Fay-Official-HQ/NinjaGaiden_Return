@@ -500,8 +500,6 @@ spawn_point = "entry_right"
 position = Vector2(4386, -16)
 shape = SubResource("RectangleShape2D_nd8jy")
 
-[node name="test" type="Node" parent="." unique_id=1907806501]
-
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
 [editable path="enemys/FlyingNinjaSpawner"]
 [editable path="enemys/FlyingNinjaSpawner2"]
