@@ -359,10 +359,6 @@ func _cancel_charge() -> void:
 	animated_sprite.modulate = Color.WHITE
 	exterminate_stacks = 0
 	_charge_visual_active = false
-	if not exterminate_chain_active:
-		if invincible_timer <= 0 and not is_invincible:
-			animated_sprite.modulate = Color.WHITE
-			animated_sprite.modulate.a = 1.0
 
 
 func _end_exterminate_chain() -> void:
