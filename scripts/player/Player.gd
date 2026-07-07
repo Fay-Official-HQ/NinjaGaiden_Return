@@ -50,7 +50,7 @@ var exterminate_stacks: int = 0
 var exterminate_remaining_chains: int = 0
 var exterminate_chain_active: bool = false
 var exterminate_chain_timer: float = 0.0
-var exterminate_was_ground: bool = false
+
 
 # ── 灭杀蓄力跟踪（独立于 J 键攻击，完全使用 H 键）──
 var _charge_hold_time: float = -1.0

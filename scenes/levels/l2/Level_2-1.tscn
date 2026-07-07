@@ -256,10 +256,10 @@ position = Vector2(1441, 210)
 
 [node name="Item5" parent="Items" unique_id=860195464 instance=ExtResource("9_3l38j")]
 position = Vector2(1797, 162)
+consumable_type = 3
 
 [node name="Item6" parent="Items" unique_id=1846714787 instance=ExtResource("9_3l38j")]
 position = Vector2(2761, 152)
-consumable_type = 3
 
 [node name="Item3" parent="Items" unique_id=181313421 instance=ExtResource("9_3l38j")]
 position = Vector2(3251, 119)

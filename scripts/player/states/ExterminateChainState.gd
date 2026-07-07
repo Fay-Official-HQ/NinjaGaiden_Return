@@ -30,6 +30,7 @@ func enter(msg: Dictionary = {}) -> void:
 	player.animated_sprite.modulate.a = 0.0
 	player.is_invincible = true
 	player.is_gravity_disabled = true
+	player.velocity = Vector2.ZERO
 
 
 func update(_delta: float) -> void:
@@ -58,6 +59,8 @@ func update(_delta: float) -> void:
 
 
 func physics_update(_delta: float) -> void:
+	if not _is_active:
+		return
 	player.velocity.x = 0.0
 	player.move_and_slide()
 
@@ -111,18 +114,14 @@ func _finish_chain() -> void:
 	player.exterminate_chain_active = false
 	player.exterminate_remaining_chains = 0
 	player.exterminate_chain_timer = 0.0
-	player.is_invincible = false
 
-	if player.exterminate_was_ground:
-		player.global_position.y -= 20
-	player.exterminate_was_ground = false
+	player.global_position.y -= 20
 
 	var sprite = player.animated_sprite
 	sprite.modulate = Color.CYAN
 	sprite.modulate.a = 1.0
 	sprite.position.x = -20.0
-
-	state_machine.change_state(player.fall_state)
+	player.animation.play("fall")
 
 	var tree = player.get_tree()
 	var fade = tree.create_tween().set_parallel(true)
@@ -135,7 +134,9 @@ func _finish_chain() -> void:
 	shake.tween_property(sprite, "position:x", 6.0, 0.04).set_delay(0.08)
 	shake.tween_property(sprite, "position:x", -4.0, 0.04).set_delay(0.12)
 	shake.tween_callback(func():
+		player.is_invincible = false
 		player.is_gravity_disabled = false
+		state_machine.change_state(player.fall_state)
 	)
 
 
