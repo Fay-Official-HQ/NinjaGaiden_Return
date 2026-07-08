@@ -703,6 +703,7 @@ script = ExtResource("attack_hitbox")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordUppercutHitBox" unique_id=1719301170]
 position = Vector2(14, 6)
 shape = SubResource("CapsuleShape2D_7u1tp")
+debug_color = Color(0.8903087, 0.31233865, 0.25073707, 0.41960785)
 
 [node name="SwordDownslashHitBox" type="Area2D" parent="AttackRoot" unique_id=1045827946]
 collision_layer = 16
@@ -744,8 +745,10 @@ position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"sword_ready"
+animation = &"sword_uppercut"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="BlockSparkPos" type="Marker2D" parent="Visual" unique_id=1902681224]
 position = Vector2(17, 2)

@@ -266,7 +266,6 @@ position = Vector2(3251, 119)
 
 [node name="Item7" parent="Items" unique_id=1103585909 instance=ExtResource("9_3l38j")]
 position = Vector2(3947, 56)
-consumable_type = 2
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
@@ -307,7 +306,6 @@ position = Vector2(82, 170)
 
 [node name="BatSpawner" parent="enemys" unique_id=761399404 instance=ExtResource("13_pmmwu")]
 position = Vector2(801, 189)
-spawn_count = 1
 
 [node name="CollisionShape2D" parent="enemys/BatSpawner/TriggerArea" parent_id_path=PackedInt32Array(761399404, 1366595315) index="0" unique_id=47906498]
 position = Vector2(-3, 3.5)
@@ -317,7 +315,6 @@ position = Vector2(159, 49)
 
 [node name="BatSpawner2" parent="enemys" unique_id=760954165 instance=ExtResource("13_pmmwu")]
 position = Vector2(909, 87)
-spawn_count = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner2" index="1" unique_id=1206789695]
 position = Vector2(173, 7)
@@ -407,7 +404,7 @@ position = Vector2(3078, 87)
 position = Vector2(281, -84)
 
 [node name="EagleSpawner3" parent="enemys" unique_id=49862843 instance=ExtResource("15_ngdy3")]
-position = Vector2(3210, 98)
+position = Vector2(3210, 95)
 
 [node name="SpawnPosition" parent="enemys/EagleSpawner3" index="1" unique_id=313397505]
 position = Vector2(-295, -95)
@@ -419,33 +416,16 @@ position = Vector2(3338, 75)
 position = Vector2(-295, -95)
 
 [node name="EagleSpawner5" parent="enemys" unique_id=819839004 instance=ExtResource("15_ngdy3")]
-position = Vector2(3463, 115)
+position = Vector2(3462, 107)
 
 [node name="SpawnPosition" parent="enemys/EagleSpawner5" index="1" unique_id=313397505]
-position = Vector2(303, 163)
-
-[node name="SpawnPosition2" type="Marker2D" parent="enemys/EagleSpawner5" unique_id=1272639452]
-position = Vector2(303, 163)
+position = Vector2(305, 163)
 
 [node name="BatSpawner3" parent="enemys" unique_id=920864380 instance=ExtResource("13_pmmwu")]
 position = Vector2(3254, 95)
-spawn_count = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner3" index="1" unique_id=1206789695]
 position = Vector2(188, 10)
-
-[node name="FlyingNinjaSpawner5" parent="enemys" unique_id=2124342337 instance=ExtResource("12_pmmwu")]
-position = Vector2(3391, 110)
-
-[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner5" index="1" unique_id=1423050258]
-position = Vector2(76, 193)
-
-[node name="FlyingNinjaSpawner6" parent="enemys" unique_id=1473807232 instance=ExtResource("12_pmmwu")]
-position = Vector2(3120, 111)
-attack_type = 1
-
-[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner6" index="1" unique_id=1423050258]
-position = Vector2(76, 193)
 
 [node name="FlyingNinjaSpawner7" parent="enemys" unique_id=401767106 instance=ExtResource("12_pmmwu")]
 position = Vector2(3299, 85)
@@ -460,6 +440,9 @@ attack_type = 1
 
 [node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner8" index="1" unique_id=1423050258]
 position = Vector2(-25, 177)
+
+[node name="Hopper2" parent="enemys" unique_id=645814800 instance=ExtResource("17_y5sjq")]
+position = Vector2(210, 187)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
@@ -519,7 +502,5 @@ shape = SubResource("RectangleShape2D_nd8jy")
 [editable path="enemys/EagleSpawner4"]
 [editable path="enemys/EagleSpawner5"]
 [editable path="enemys/BatSpawner3"]
-[editable path="enemys/FlyingNinjaSpawner5"]
-[editable path="enemys/FlyingNinjaSpawner6"]
 [editable path="enemys/FlyingNinjaSpawner7"]
 [editable path="enemys/FlyingNinjaSpawner8"]

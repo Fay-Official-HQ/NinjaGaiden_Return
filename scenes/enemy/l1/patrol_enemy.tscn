@@ -81,7 +81,7 @@ data = ExtResource("2_twyf4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
 sprite_frames = SubResource("SpriteFrames_4qnji")
-animation = &"death"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
 shape = SubResource("RectangleShape2D_68jqe")

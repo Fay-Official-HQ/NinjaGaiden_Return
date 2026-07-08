@@ -23,7 +23,6 @@ func _ready() -> void:
 	anim.play("fly")
 
 	hurtbox.took_damage.connect(_on_took_damage)
-	screen_notifier.screen_exited.connect(_on_screen_exited)
 
 
 func _process(delta: float) -> void:
@@ -36,6 +35,8 @@ func _process(delta: float) -> void:
 	time += delta
 	var offset_y = sin(time * data.sine_frequency * TAU) * data.sine_amplitude
 	position.y = start_y + offset_y
+
+	_check_far_away()
 
 
 func _on_took_damage(amount: int, _is_heavy: bool = false) -> void:
@@ -66,8 +67,14 @@ func _on_death_anim_finished() -> void:
 	queue_free()
 
 
-func _on_screen_exited() -> void:
-	if not is_dead:
+func _check_far_away() -> void:
+	var cam = get_viewport().get_camera_2d()
+	if not cam:
+		return
+	var half_view = get_viewport().get_visible_rect().size * 0.5
+	var limit_x = half_view.x + 300.0
+	var limit_y = half_view.y + 300.0
+	if abs(global_position.x - cam.global_position.x) > limit_x or abs(global_position.y - cam.global_position.y) > limit_y:
 		queue_free()
 
 

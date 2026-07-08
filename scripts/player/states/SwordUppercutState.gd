@@ -31,6 +31,9 @@ func enter(_msg: Dictionary = {}) -> void:
 	player.velocity.y = -player.data.jump_force * 1.2
 
 	hit_enemies.clear()
+	var attack_root = player.get_node("AttackRoot") as Node2D
+	if attack_root:
+		attack_root.scale.x = player.facing_direction
 	uppercut_hit_box = player.get_node("AttackRoot/SwordUppercutHitBox") as Area2D
 	if uppercut_hit_box:
 		uppercut_hit_box.set_deferred("monitoring", false)
@@ -69,6 +72,9 @@ func physics_update(_delta: float) -> void:
 
 func exit() -> void:
 	player.is_invincible = false
+	var attack_root = player.get_node("AttackRoot") as Node2D
+	if attack_root:
+		attack_root.scale.x = 1.0
 	_exit_hitbox()
 
 # 关闭攻击框 + 清空命中列表

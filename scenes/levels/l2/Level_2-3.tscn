@@ -7,7 +7,13 @@
 [ext_resource type="TileSet" uid="uid://bnek8qlnb7yu5" path="res://resources/tilesets/tileset2_1.tres" id="5_fojay"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_5emtf"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_5ih14"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_5emtf"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="8_f5un8"]
+[ext_resource type="PackedScene" uid="uid://cxo4iprmk5ckn" path="res://scenes/enemy/l1/flying_ninja_spawner.tscn" id="8_pv0bn"]
+[ext_resource type="PackedScene" uid="uid://d3afh7ynnnfs6" path="res://scenes/enemy/l2/monster_soldier.tscn" id="9_ixb6n"]
+[ext_resource type="PackedScene" uid="uid://dhl1niqlcxgh1" path="res://scenes/enemy/l2/stone_thrower.tscn" id="10_fojay"]
+[ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="11_fojay"]
+[ext_resource type="PackedScene" uid="uid://cvcbl6pipg1wo" path="res://scenes/environment/WindZone.tscn" id="13_5ih14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8moxo"]
 texture = ExtResource("2_pv0bn")
@@ -134,6 +140,15 @@ size = Vector2(55, 199)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5035, 142)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pv0bn"]
+size = Vector2(237, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5emtf"]
+size = Vector2(334.6875, 158.875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5un8"]
+size = Vector2(180.375, 353.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
 size = Vector2(8, 32)
 
@@ -182,6 +197,7 @@ tile_map_data = PackedByteArray("AADU/icAAAAKABIAAADV/iUAAAALABAAAADV/iYAAAALABE
 tile_set = ExtResource("5_fojay")
 
 [node name="collision" type="TileMapLayer" parent="Map/TileMapLayer" unique_id=930108176]
+visible = false
 light_mask = 0
 position = Vector2(-48, -9)
 tile_map_data = PackedByteArray("AADtAAUAAAAAAAAAAADtAAYAAAAAAAAAAADtAAcAAAAAAAAAAADtAAgAAAAAAAAAAADtAAkAAAAAAAAAAADtAAoAAAAAAAAAAADtAAsAAAAAAAAAAADtAAwAAAAAAAAAAADtAA0AAAAAAAAAAADtAA4AAAAAAAAAAADtAA8AAAAAAAAAAADtABAAAAAAAAAAAADtABEAAAAAAAAAAADtABIAAAAAAAAAAADtABMAAAAAAAAAAADtABQAAAAAAAAAAADtABUAAAAAAAAAAADtABYAAAAAAAAAAADtABcAAAAAAAAAAADtABgAAAAAAAAAAADtABkAAAAAAAAAAADtABoAAAAAAAAAAADtABsAAAAAAAAAAADtABwAAAAAAAAAAADtAB0AAAAAAAAAAADtAB4AAAAAAAAAAADtAB8AAAAAAAAAAADtACAAAAAAAAAAAADtACEAAAAAAAAAAADtACIAAAAAAAAAAADtACMAAAAAAAAAAADtACQAAAAAAAAAAADtACUAAAAAAAAAAADtACYAAAAAAAAAAADtACcAAAAAAAAAAADuACcAAAAAAAAAAADvACcAAAAAAAAAAADwACcAAAAAAAAAAADxACcAAAAAAAAAAADyACcAAAAAAAAAAADzACcAAAAAAAAAAAD0ACcAAAAAAAAAAAD1ACcAAAAAAAAAAAD2ACcAAAAAAAAAAAD3ACcAAAAAAAAAAAD3AD4AAAAAAAAAAADtAD4AAAAAAAAAAADuAD4AAAAAAAAAAADvAD4AAAAAAAAAAADwAD4AAAAAAAAAAADxAD4AAAAAAAAAAADyAD4AAAAAAAAAAADzAD4AAAAAAAAAAAD0AD4AAAAAAAAAAAD1AD4AAAAAAAAAAAD2AD4AAAAAAAAAAADtAD8AAAAAAAAAAADtAEAAAAAAAAAAAADtAEEAAAAAAAAAAADtAEIAAAAAAAAAAADtAEMAAAAAAAAAAADtAEQAAAAAAAAAAADtAEUAAAAAAAAAAADtAEYAAAAAAAAAAADtAEcAAAAAAAAAAADtAEgAAAAAAAAAAADtAEkAAAAAAAAAAADtAEoAAAAAAAAAAADtAEsAAAAAAAAAAADtAEwAAAAAAAAAAADtAE0AAAAAAAAAAADtAE4AAAAAAAAAAADtAE8AAAAAAAAAAADtAFAAAAAAAAAAAADmADUAAAAAAAAAAADmADYAAAAAAAAAAADmADcAAAAAAAAAAADnADUAAAAAAAAAAADnADcAAAAAAAAAAADoADUAAAAAAAAAAADoADcAAAAAAAAAAADpADUAAAAAAAAAAADpADcAAAAAAAAAAADqADUAAAAAAAAAAADqADcAAAAAAAAAAADrADUAAAAAAAAAAADrADYAAAAAAAAAAADrADcAAAAAAAAAAAA=")
@@ -210,9 +226,72 @@ position = Vector2(2556, 40)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_5emtf")]
+position = Vector2(2526, 341)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
+[node name="FlyingNinjaSpawner" parent="enemys" unique_id=774473086 instance=ExtResource("8_pv0bn")]
+position = Vector2(2554, 175)
+attack_type = 1
+
+[node name="CollisionShape2D" parent="enemys/FlyingNinjaSpawner/TriggerArea" parent_id_path=PackedInt32Array(774473086, 1502568927) index="0" unique_id=1078334481]
+position = Vector2(-108.5, -74)
+shape = SubResource("RectangleShape2D_pv0bn")
+
+[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner" index="1" unique_id=1423050258]
+position = Vector2(-50, 127)
+
+[node name="FlyingNinjaSpawner2" parent="enemys" unique_id=101975635 instance=ExtResource("8_pv0bn")]
+position = Vector2(2553, 250)
+attack_type = 1
+
+[node name="CollisionShape2D" parent="enemys/FlyingNinjaSpawner2/TriggerArea" parent_id_path=PackedInt32Array(101975635, 1502568927) index="0" unique_id=1078334481]
+position = Vector2(-108.5, -74)
+shape = SubResource("RectangleShape2D_pv0bn")
+
+[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner2" index="1" unique_id=1423050258]
+position = Vector2(-49, 125)
+
+[node name="FlyingNinjaSpawner3" parent="enemys" unique_id=8151760 instance=ExtResource("8_pv0bn")]
+position = Vector2(2546, 590)
+attack_type = 1
+
+[node name="CollisionShape2D" parent="enemys/FlyingNinjaSpawner3/TriggerArea" parent_id_path=PackedInt32Array(8151760, 1502568927) index="0" unique_id=1078334481]
+position = Vector2(-108.5, -74)
+shape = SubResource("RectangleShape2D_pv0bn")
+
+[node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner3" index="1" unique_id=1423050258]
+position = Vector2(-49, 86)
+
+[node name="MonsterSoldier" parent="enemys" unique_id=634735606 instance=ExtResource("9_ixb6n")]
+position = Vector2(2526, 385)
+
+[node name="StoneThrower" parent="enemys" unique_id=1656441098 instance=ExtResource("10_fojay")]
+position = Vector2(2599, 453)
+
+[node name="CollisionShape2D" parent="enemys/StoneThrower/DetectRange" parent_id_path=PackedInt32Array(1656441098, 89548439) index="0" unique_id=823214000]
+shape = SubResource("RectangleShape2D_5emtf")
+
+[node name="EagleSpawner" parent="enemys" unique_id=1712208962 instance=ExtResource("11_fojay")]
+position = Vector2(2562, 393)
+
+[node name="SpawnPosition" parent="enemys/EagleSpawner" index="1" unique_id=313397505]
+position = Vector2(-418, 215)
+
 [node name="environment" type="Node" parent="." unique_id=1490444642]
+
+[node name="WindZone" parent="environment" unique_id=1483867348 instance=ExtResource("13_5ih14")]
+position = Vector2(2512, 482)
+wind_speed = 135.0
+wind_duration = 3.0
+wind_direction = -1
+one_shot = false
+cooldown = 4.0
+
+[node name="CollisionShape2D" parent="environment/WindZone" index="0" unique_id=1854189898]
+position = Vector2(37.8125, -7.75)
+shape = SubResource("RectangleShape2D_f5un8")
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 position = Vector2(0, 123)
@@ -225,3 +304,10 @@ spawn_point = "entry_right"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
 position = Vector2(4386, -16)
 shape = SubResource("RectangleShape2D_nd8jy")
+
+[editable path="enemys/FlyingNinjaSpawner"]
+[editable path="enemys/FlyingNinjaSpawner2"]
+[editable path="enemys/FlyingNinjaSpawner3"]
+[editable path="enemys/StoneThrower"]
+[editable path="enemys/EagleSpawner"]
+[editable path="environment/WindZone"]

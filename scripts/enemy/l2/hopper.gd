@@ -16,9 +16,6 @@ const DEATH_SOUND: StringName = &"disiwang"
 const CHASE_DURATION: float = 3.0
 const BOUNCE_DURATION: float = 2.0
 const ROLL_DURATION: float = 0.4
-const NORMAL_HEIGHT: float = 28.0
-const ROLL_HEIGHT: float = 12.0
-const NORMAL_POS_Y: float = 6.0
 
 
 var _state: int = HopperState.HOP
@@ -34,11 +31,9 @@ var _player_in_range: bool = false
 var _jump_vy: float
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
-@onready var body_shape: CollisionShape2D = $CollisionShape2D
 @onready var hurtbox: Area2D = $HurtBox
-@onready var hurtbox_shape: CollisionShape2D = $HurtBox/CollisionShape2D
+@onready var hurtbox2: Area2D = $HurtBox2
 @onready var hitbox: Area2D = $HitBox
-@onready var hitbox_shape: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var detect_range: Area2D = $DetectRange
 @onready var floor_left: RayCast2D = $FloorDetectLeft
 @onready var floor_right: RayCast2D = $FloorDetectRight
@@ -50,6 +45,9 @@ func _ready() -> void:
 	add_to_group("fall_vulnerable")
 	if hurtbox:
 		hurtbox.took_damage.connect(_on_took_damage)
+		hurtbox2.took_damage.connect(_on_took_damage)
+		hurtbox2.monitoring = false
+		hurtbox2.monitorable = false
 	if detect_range:
 		detect_range.body_entered.connect(_on_player_entered)
 		detect_range.body_exited.connect(_on_player_exited)
@@ -86,58 +84,30 @@ func _set_state(new_state: int) -> void:
 	match _state:
 		HopperState.HOP:
 			anim.play("hop")
-			_set_collision_height(NORMAL_HEIGHT, NORMAL_POS_Y)
+			_switch_to_roll_hurtbox(false)
 			_start_position = global_position
 		HopperState.CHASE:
 			anim.play("roll")
-			_adjust_collision_for_roll()
+			_switch_to_roll_hurtbox(true)
 			_phase_timer = CHASE_DURATION
 		HopperState.BOUNCE:
 			anim.play("hop")
-			_set_collision_height(NORMAL_HEIGHT, NORMAL_POS_Y)
+			_switch_to_roll_hurtbox(false)
 			_phase_timer = BOUNCE_DURATION
 		HopperState.JUMP:
 			anim.play("jump")
-			_set_collision_height(NORMAL_HEIGHT, NORMAL_POS_Y)
+			_switch_to_roll_hurtbox(false)
 		HopperState.ROLL:
 			anim.play("roll")
-			_adjust_collision_for_roll()
+			_switch_to_roll_hurtbox(true)
 			_roll_timer = ROLL_DURATION
 
 
-func _set_collision_height(height: float, pos_y: float) -> void:
-	var body_shape_res = body_shape.shape as RectangleShape2D
-	var hurt_shape_res = hurtbox_shape.shape as RectangleShape2D
-	var hit_shape_res = hitbox_shape.shape as RectangleShape2D
-	if body_shape_res:
-		body_shape_res.size.y = height
-		body_shape.position.y = pos_y
-	if hurt_shape_res:
-		hurt_shape_res.size.y = height
-		hurtbox_shape.position.y = pos_y
-	if hit_shape_res:
-		hit_shape_res.size.y = height
-		hitbox_shape.position.y = pos_y
-
-
-
-func _adjust_collision_for_roll() -> void:
-	# 底部不动，只从上面缩
-	var normal_bottom = NORMAL_POS_Y + NORMAL_HEIGHT / 2.0
-	var roll_pos_y = normal_bottom - ROLL_HEIGHT / 2.0
-
-	var body_shape_res = body_shape.shape as RectangleShape2D
-	var hurt_shape_res = hurtbox_shape.shape as RectangleShape2D
-	var hit_shape_res = hitbox_shape.shape as RectangleShape2D
-	if body_shape_res:
-		body_shape_res.size.y = ROLL_HEIGHT
-		body_shape.position.y = roll_pos_y
-	if hurt_shape_res:
-		hurt_shape_res.size.y = ROLL_HEIGHT
-		hurtbox_shape.position.y = roll_pos_y
-	if hit_shape_res:
-		hit_shape_res.size.y = ROLL_HEIGHT
-		hitbox_shape.position.y = roll_pos_y
+func _switch_to_roll_hurtbox(rolling: bool) -> void:
+	hurtbox.monitoring = not rolling
+	hurtbox.monitorable = not rolling
+	hurtbox2.monitoring = rolling
+	hurtbox2.monitorable = rolling
 
 
 # ==================== 巡逻蹦跳 ====================

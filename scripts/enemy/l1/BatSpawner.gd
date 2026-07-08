@@ -25,7 +25,7 @@ extends Node2D
 ## ============================================================
 
 
-@export var spawn_count: int = 3             # 一次生成几只蝙蝠
+@export var spawn_count: int = 1             # 一次生成几只蝙蝠
 ##-1 向左飞，1 向右飞
 @export var spawn_direction: int = -1        # -1 向左飞，1 向右飞
 @export var spawn_offset_x: float = 20.0     # 蝙蝠之间的横向间距（像素）

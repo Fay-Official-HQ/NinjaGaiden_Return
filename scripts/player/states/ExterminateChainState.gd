@@ -2,7 +2,7 @@ extends State
 class_name ExterminateChainState
 
 const CHAIN_WINDOW = 0.3
-const MAX_CHAIN_DISTANCE = 300.0
+const MAX_CHAIN_DISTANCE = 240.0
 
 var _chains_remaining: int = 0
 var _chain_timer: float = 0.0
