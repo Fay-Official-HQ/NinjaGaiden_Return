@@ -260,7 +260,10 @@ func _find_nearest_enemy_in_detector() -> Node2D:
 
 # ────────── 灭杀蓄力跟踪 ──────────
 func _update_charge(delta: float) -> void:
-	if state_machine.current_state is ExterminateChainState:
+	var cur = state_machine.current_state
+	if cur is ExterminateChainState or cur is ExterminateReleaseState:
+		return
+	if exterminate_chain_active:
 		return
 	if Input.is_action_just_pressed("exterminate"):
 		if sword.current_tp <= 0:
@@ -283,8 +286,8 @@ func _update_charge(delta: float) -> void:
 				_charge_mist_timer = 0.0
 				_spawn_shaqi()
 				_spawn_shaqi()
-			var charge_interval = 0.25 if exterminate_stacks < 3 else 0.5
-			if _charge_energy_timer >= charge_interval and exterminate_stacks < 8:
+			var charge_interval = 0.3 if exterminate_stacks < 3 else 0.5
+			if _charge_energy_timer >= charge_interval and exterminate_stacks < 9:
 				if sword.current_tp >= 1:
 					sword.current_tp -= 1
 					sword.tp_changed.emit(sword.current_tp)
@@ -340,9 +343,11 @@ func _spawn_shaqi() -> void:
 
 #根据蓄力层数调整身体颜色
 func _update_charge_color() -> void:
-	if exterminate_stacks >= 8:
-		animated_sprite.modulate = Color(0.35, 0.03, 0.03)
-	elif exterminate_stacks >= 6:
+	if exterminate_stacks >= 9:
+		animated_sprite.modulate = Color(0.25, 0.0, 0.0, 1.0)
+	elif exterminate_stacks >= 7:
+		animated_sprite.modulate = Color(0.35, 0.05, 0.1)
+	elif exterminate_stacks >= 5:
 		animated_sprite.modulate = Color(0.4, 0.2, 0.2)
 	elif exterminate_stacks >= 3:
 		animated_sprite.modulate = Color(0.6, 0.4, 0.4)

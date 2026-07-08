@@ -13,6 +13,7 @@ func enter(_msg: Dictionary = {}) -> void:
 
 	# 先检查冷却,再消耗TP
 	if player.sword.is_on_cooldown("downslash"):
+		UIManager.show_message("飛燕 冷却中…")
 		print("【下劈】冷却中,剩余:", player.sword.get_cooldown_remaining("downslash"), "秒")
 		_fallback_to_neutral()
 		return

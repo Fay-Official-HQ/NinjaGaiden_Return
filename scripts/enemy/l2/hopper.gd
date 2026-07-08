@@ -29,6 +29,7 @@ var _roll_timer: float = 0.0
 var _player_ref: Node2D = null
 var _player_in_range: bool = false
 var _jump_vy: float
+var _jump_count: int = 0
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurtbox: Area2D = $HurtBox
@@ -76,6 +77,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if _state == HopperState.JUMP and is_on_floor():
+		_jump_count = 0
 		_set_state(HopperState.ROLL if _player_in_range else HopperState.HOP)
 
 
@@ -166,6 +168,8 @@ func _check_obstacle_jump() -> void:
 	var floor_ray = floor_right if _facing_right else floor_left
 	floor_ray.force_raycast_update()
 	if is_on_wall() or not floor_ray.is_colliding():
+		if _state == HopperState.CHASE or _state == HopperState.BOUNCE:
+			_jump_count = 1
 		_calc_jump_vy()
 		_set_state(HopperState.JUMP)
 		velocity.y = _jump_vy
@@ -194,6 +198,10 @@ func _calc_jump_vy() -> void:
 func _update_jump(_delta: float) -> void:
 	_face_player()
 	velocity.x = CHASE_SPEED * (1.0 if _facing_right else -1.0)
+	if velocity.y >= 0 and is_on_wall() and _jump_count < 6 and not is_on_floor():
+		_jump_count += 1
+		_calc_jump_vy()
+		velocity.y = _jump_vy
 
 
 # ==================== 滚动过渡 ====================

@@ -285,7 +285,7 @@ position = Vector2(-418, 215)
 position = Vector2(2512, 482)
 wind_speed = 135.0
 wind_duration = 3.0
-wind_direction = -1
+wind_direction = 1
 one_shot = false
 cooldown = 4.0
 

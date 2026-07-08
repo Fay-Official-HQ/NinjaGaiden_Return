@@ -16,6 +16,7 @@ var _chase_speed: float = 150.0
 var _bullet_speed: float = 300.0
 var _shoot_sound: StringName = &"shibingfashe"
 var _death_sound: StringName = &"disiwang"
+var _jump_count: int = 0
 
 @onready var floor_detect_left: RayCast2D = $FloorDetectLeft
 @onready var floor_detect_right: RayCast2D = $FloorDetectRight
@@ -45,6 +46,9 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	if is_on_floor():
+		_jump_count = 0
+
 
 func _update_chase(_delta: float) -> void:
 	_face_player()
@@ -66,15 +70,21 @@ func _update_chase(_delta: float) -> void:
 	if _should_jump_obstacle():
 		velocity.y = JUMP_VELOCITY_Y
 
+	if not is_on_floor() and is_on_wall() and _jump_count < 6 and velocity.y >= 0:
+		_jump_count += 1
+		velocity.y = JUMP_VELOCITY_Y
+
 
 func _should_jump_obstacle() -> bool:
 	if not is_on_floor():
 		return false
 	if is_on_wall():
+		_jump_count = 1
 		return true
 	var floor_ray = floor_detect_right if facing_right else floor_detect_left
 	floor_ray.force_raycast_update()
 	if not floor_ray.is_colliding():
+		_jump_count = 1
 		return true
 	return false
 

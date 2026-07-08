@@ -241,7 +241,7 @@ position = Vector2(2001, 437)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("6_m57ok")]
-position = Vector2(0, 123)
+position = Vector2(26, 104)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -441,16 +441,13 @@ attack_type = 1
 [node name="SpawnPosition" parent="enemys/FlyingNinjaSpawner8" index="1" unique_id=1423050258]
 position = Vector2(-25, 177)
 
-[node name="Hopper2" parent="enemys" unique_id=645814800 instance=ExtResource("17_y5sjq")]
-position = Vector2(210, 187)
-
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
 [node name="WindZone" parent="environment" unique_id=1483867348 instance=ExtResource("10_3l38j")]
 position = Vector2(1122, 154)
 wind_speed = 50.0
 wind_duration = 4.0
-wind_direction = -1
+wind_direction = 1
 
 [node name="WindZone2" parent="environment" unique_id=155667324 instance=ExtResource("10_3l38j")]
 position = Vector2(1606, 127)
@@ -459,29 +456,31 @@ wind_speed = 150.0
 [node name="WindZone3" parent="environment" unique_id=474863939 instance=ExtResource("10_3l38j")]
 position = Vector2(2892, 99)
 wind_speed = 200.0
-wind_direction = -1
+wind_direction = 1
 
 [node name="WindZone4" parent="environment" unique_id=394299249 instance=ExtResource("10_3l38j")]
 position = Vector2(3339, 59)
 wind_speed = 40.0
 wind_duration = 8.0
-wind_direction = -1
+wind_direction = 1
 
 [node name="WindZone5" parent="environment" unique_id=94381536 instance=ExtResource("10_3l38j")]
 position = Vector2(3762, -21)
 wind_speed = 200.0
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
-position = Vector2(0, 123)
+position = Vector2(3986, 303)
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
 script = ExtResource("17_3drc7")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-2.tscn"
 spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
-position = Vector2(4386, -16)
+position = Vector2(3986, 319)
 shape = SubResource("RectangleShape2D_nd8jy")
+
+[node name="test" type="Node" parent="." unique_id=1581219589]
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]
 [editable path="enemys/FlyingNinjaSpawner"]

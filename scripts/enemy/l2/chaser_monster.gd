@@ -15,6 +15,7 @@ enum State { CHASE, JUMP_ATTACK }
 
 var _state: int = State.CHASE
 var _jump_stun: float = 0.0
+var _jump_count: int = 0
 
 
 func _ready() -> void:
@@ -41,7 +42,11 @@ func _physics_process(delta: float) -> void:
 			_jump_attack_update()
 
 	move_and_slide()
-	_check_screen_exit()
+
+	if _state == State.JUMP_ATTACK and not is_on_floor() and is_on_wall() and velocity.y >= 0 and _jump_count < 6:
+		_jump_count += 1
+		velocity.y = JUMP_FORCE
+		velocity.x = CHASE_SPEED * 1.5 * (1.0 if facing_right else -1.0)
 
 
 func _chase_update() -> void:
@@ -58,12 +63,20 @@ func _chase_update() -> void:
 
 	var dist_x = abs(player.global_position.x - global_position.x)
 	if dist_x <= JUMP_DISTANCE:
+		_jump_count = 1
+		_do_jump_attack()
+		return
+
+	if is_on_wall():
+		_jump_count = 1
 		_do_jump_attack()
 
 
 func _jump_attack_update() -> void:
 	anim.play("jump")
+	velocity.x = CHASE_SPEED * 1.5 * (1.0 if facing_right else -1.0)
 	if is_on_floor():
+		_jump_count = 0
 		_state = State.CHASE
 		_jump_stun = JUMP_STUN
 		_face_player()
@@ -87,16 +100,6 @@ func _die() -> void:
 	set_physics_process(false)
 	anim.play("death")
 	anim.animation_finished.connect(_on_death_anim_finished, CONNECT_ONE_SHOT)
-
-
-func _check_screen_exit() -> void:
-	var viewport_rect = get_viewport_rect()
-	var canvas_transform = get_viewport().get_canvas_transform()
-	var screen_pos = canvas_transform * global_position
-	if screen_pos.x < -SCREEN_MARGIN or screen_pos.x > viewport_rect.size.x + SCREEN_MARGIN:
-		queue_free()
-	if screen_pos.y < -SCREEN_MARGIN or screen_pos.y > viewport_rect.size.y + SCREEN_MARGIN:
-		queue_free()
 
 
 func _face_player() -> void:

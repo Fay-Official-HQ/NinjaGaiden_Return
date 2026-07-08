@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://6p404iw2tco6" path="res://scenes/enemy/l2/chaser_monster_spawner.tscn" id="14_u8dmd"]
 [ext_resource type="PackedScene" uid="uid://dhl1niqlcxgh1" path="res://scenes/enemy/l2/stone_thrower.tscn" id="15_3rn4e"]
 [ext_resource type="PackedScene" uid="uid://cxo4iprmk5ckn" path="res://scenes/enemy/l1/flying_ninja_spawner.tscn" id="16_8mjof"]
-[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="17_u8dmd"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="21_2h00l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8moxo"]
@@ -307,9 +306,6 @@ position = Vector2(761, 75)
 [node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner2" index="1" unique_id=1893374063]
 position = Vector2(-269, -55)
 
-[node name="PatrolEnemy" parent="enemys" unique_id=1778704903 instance=ExtResource("17_u8dmd")]
-position = Vector2(483, 105)
-
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
 [node name="WindZone" parent="environment" unique_id=1483867348 instance=ExtResource("12_ocs55")]
@@ -317,7 +313,7 @@ position = Vector2(1588.6934, 166.56851)
 wind_duration = 3.0
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
-position = Vector2(0, 123)
+position = Vector2(2556, 42)
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
 script = ExtResource("21_2h00l")

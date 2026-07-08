@@ -18,8 +18,9 @@ const WIND_TEX = preload("res://assets/sprites/map/wind.png")
 @export_range(30.0, 200.0) var wind_speed: float = 60.0
 ## 刮风持续时间（秒），范围2~10秒
 @export_range(2.0, 10.0) var wind_duration: float = 2.0
-## 风向：1 = 東（推向右），-1 = 西（推向左）
-@export var wind_direction: int = 1
+enum WindDir { 東, 西, 隨機 }
+## 风向：東=推向右，西=推向左，隨機=每次刮风随机选一个方向
+@export var wind_direction: WindDir = WindDir.東
 @export var one_shot: bool = true    # 是否只触发一次：true=单次，false=可重复
 ## 冷却时间（秒），触发结束后再次进入的等待间隔
 @export var cooldown: float = 3.0
@@ -31,6 +32,7 @@ var _wind_timer: float = 0.0
 var _last_trigger_time: float = -INF
 var _stop_spawning: bool = false
 var _sfx_player: AudioStreamPlayer = null
+var _current_dir_sign: float = 1.0
 
 @onready var _wind_container: Node2D = $CanvasLayer/WindParticles
 @onready var _label: Label = $CanvasLayer/WindLabel
@@ -56,7 +58,11 @@ func _on_body_entered(body: Node2D) -> void:
 func _start_sequence() -> void:
 	_state = ZoneState.WARNING
 
-	_label.text = "風往東邊吹" if wind_direction > 0 else "風往西邊吹"
+	if wind_direction == WindDir.隨機:
+		_current_dir_sign = -1.0 if randf() > 0.5 else 1.0
+	else:
+		_current_dir_sign = 1.0 if wind_direction == WindDir.東 else -1.0
+	_label.text = "風往東邊吹" if _current_dir_sign > 0 else "風往西邊吹"
 
 	await get_tree().create_timer(SOUND_DELAY).timeout
 	if _state != ZoneState.WARNING:
@@ -98,6 +104,7 @@ func _start_wind() -> void:
 func _spawn_wind_line(screen: Vector2) -> void:
 	if _state != ZoneState.WIND or _stop_spawning:
 		return
+	var dir = _current_dir_sign
 	var sprite = Sprite2D.new()
 	sprite.texture = WIND_TEX
 	sprite.modulate = Color(1, 1, 1, 1)
@@ -107,7 +114,7 @@ func _spawn_wind_line(screen: Vector2) -> void:
 	var speed = randf_range(400.0, 800.0)
 	var travel = screen.x + 120
 	var delay = randf_range(0, 0.3)
-	if wind_direction > 0:
+	if dir > 0:
 		sprite.position.x = -60
 		sprite.flip_h = false
 	else:
@@ -116,7 +123,7 @@ func _spawn_wind_line(screen: Vector2) -> void:
 	_wind_container.add_child(sprite)
 	var tw = create_tween()
 	tw.tween_interval(delay)
-	tw.tween_property(sprite, "position:x", sprite.position.x + wind_direction * travel, travel / speed)
+	tw.tween_property(sprite, "position:x", sprite.position.x + dir * travel, travel / speed)
 	tw.tween_callback(sprite.queue_free)
 	tw.tween_callback(_spawn_wind_line.bind(screen))
 
@@ -139,7 +146,7 @@ func _physics_process(delta: float) -> void:
 		_end_wind()
 		return
 	if is_instance_valid(_player):
-		_player.move_and_collide(Vector2(wind_direction * wind_speed * delta, 0))
+		_player.move_and_collide(Vector2(_current_dir_sign * wind_speed * delta, 0))
 
 
 # ==================== 结束刮风 ====================

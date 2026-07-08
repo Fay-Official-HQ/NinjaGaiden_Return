@@ -13,6 +13,7 @@ func enter(_msg: Dictionary = {}) -> void:
 
 	# 先检查冷却，再消耗 TP，最后开始冷却
 	if player.sword.is_on_cooldown("uppercut"):
+		UIManager.show_message("翔鶴 冷却中…")
 		print("【上挑】冷却中，剩余:", player.sword.get_cooldown_remaining("uppercut"), "秒")
 		_fallback_to_neutral()
 		return

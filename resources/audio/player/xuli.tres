@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://ckb06e5534ghk"]
 
 [ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_led3d"]
-[ext_resource type="AudioStream" uid="uid://by2ng7dkx4wux" path="res://assets/audio/player/xuli2.ogg" id="2_n2f7r"]
+[ext_resource type="AudioStream" uid="uid://lo60vfnyuofh" path="res://assets/audio/player/xuli2.ogg" id="2_n2f7r"]
 
 [resource]
 script = ExtResource("1_led3d")

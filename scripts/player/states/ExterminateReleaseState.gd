@@ -25,7 +25,10 @@ func enter(msg: Dictionary = {}) -> void:
 	_frame_duration = 1.0 / speed
 
 	player.animation.play(_anim_name)
-	AudioManager.play_sound(&"bishaji")
+	if _energy >= 9:
+		AudioManager.play_sound(&"bishaji")
+	else:
+		AudioManager.play_sound(&"jianxiapi")
 
 	_attack_root = player.get_node("AttackRoot") as Node2D
 	_dash_box = _attack_root.get_node("ExterminateHitBox") as ExterminateHitBox

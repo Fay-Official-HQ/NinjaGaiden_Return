@@ -22,6 +22,8 @@ var _chain_origin: Vector2
 
 
 func enter(msg: Dictionary = {}) -> void:
+	player._cancel_charge()
+
 	_chains_remaining = msg.get("chains", 0)
 	_is_active = true
 	_chain_timer = CHAIN_WINDOW

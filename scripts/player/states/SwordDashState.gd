@@ -13,6 +13,7 @@ var hit_enemies: Array[HurtBox] = []
 
 func enter(_msg: Dictionary = {}) -> void:
 	if player.sword.is_on_cooldown("dash"):
+		UIManager.show_message("朧一字文 冷却中…")
 		print("【突进】冷却中，剩余:", player.sword.get_cooldown_remaining("dash"), "秒")
 		_fallback_to_neutral()
 		return

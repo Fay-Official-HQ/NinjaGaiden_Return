@@ -50,6 +50,7 @@ var _pause_before_final_timer: float = 0.0  # 最后一击前的停顿计时器
 
 func enter(_msg: Dictionary = {}) -> void:
 	if player.sword.is_on_cooldown("finish"):
+		UIManager.show_message("真龍閃華 冷却中")
 		print("【必杀技】冷却中，剩余:", player.sword.get_cooldown_remaining("finish"), "秒")
 		if player.is_on_floor():
 			state_machine.change_state(player.idle_state)
