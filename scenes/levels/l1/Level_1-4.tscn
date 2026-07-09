@@ -233,7 +233,7 @@ size = Vector2(9.5, 10)
 size = Vector2(243, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qk0j"]
-size = Vector2(476, 253)
+size = Vector2(447, 255)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg1rg"]
 size = Vector2(445, 322.48267)
@@ -467,7 +467,7 @@ position = Vector2(2047, 419)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("5_xt0kh")]
-position = Vector2(1800, 206)
+position = Vector2(-4, 307)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -663,13 +663,13 @@ lock_y = true
 offset_y = -100.0
 
 [node name="CollisionShape2D" parent="CameraZone/CameraZone" index="0" unique_id=1778439333]
-position = Vector2(116.50781, -27.017344)
+position = Vector2(102.00781, -26.017344)
 shape = SubResource("RectangleShape2D_6qk0j")
 
 [node name="CameraZone2" parent="CameraZone" unique_id=526875057 instance=ExtResource("9_r5wqv")]
 position = Vector2(2537, 28)
 lock_x = true
-offset_y = -80.0
+offset_y = -100.0
 
 [node name="CollisionShape2D" parent="CameraZone/CameraZone2" index="0" unique_id=1778439333]
 position = Vector2(106.5, -59.75867)
