@@ -469,7 +469,7 @@ position = Vector2(3762, -21)
 wind_speed = 200.0
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
-position = Vector2(3986, 303)
+position = Vector2(3986, 291)
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
 script = ExtResource("17_3drc7")
@@ -477,7 +477,7 @@ target_scene = "res://scenes/levels/l2/Level_2-2.tscn"
 spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
-position = Vector2(3986, 319)
+position = Vector2(3986, 331)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [node name="test" type="Node" parent="." unique_id=1581219589]

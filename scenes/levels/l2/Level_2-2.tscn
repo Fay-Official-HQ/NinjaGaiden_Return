@@ -148,8 +148,11 @@ size = Vector2(18.692413, 187)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5035, 142)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
-size = Vector2(8, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8dmd"]
+size = Vector2(17.000061, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rn4e"]
+size = Vector2(27.18982, 37.98935)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_c1hc3")
@@ -223,7 +226,7 @@ position = Vector2(2001, 424)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("8_gtl8w")]
-position = Vector2(2556, 42)
+position = Vector2(2556, 40)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -315,14 +318,26 @@ wind_duration = 3.0
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 position = Vector2(2556, 42)
 
+[node name="entry_left" type="Marker2D" parent="." unique_id=1681453210]
+position = Vector2(408, 281)
+
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
 script = ExtResource("21_2h00l")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-1.tscn"
 spawn_point = "entry_right"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
-position = Vector2(4386, -16)
-shape = SubResource("RectangleShape2D_nd8jy")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=1860258938]
+position = Vector2(2562, 13)
+shape = SubResource("RectangleShape2D_u8dmd")
+
+[node name="TransitionZoneL" type="Area2D" parent="." unique_id=1532454475]
+script = ExtResource("21_2h00l")
+target_scene = "res://scenes/levels/l2/Level_2-3.tscn"
+spawn_point = "entry_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=992423476]
+position = Vector2(418, 324)
+shape = SubResource("RectangleShape2D_3rn4e")
 
 [editable path="enemys/BatSpawner"]
 [editable path="enemys/ChaserSoldierSpawner"]

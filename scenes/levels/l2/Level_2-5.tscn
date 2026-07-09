@@ -340,15 +340,27 @@ position = Vector2(912.4263, 72.44302)
 shape = SubResource("RectangleShape2D_heif6")
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
-position = Vector2(0, 123)
+position = Vector2(2430, 258)
+
+[node name="entry_left" type="Marker2D" parent="." unique_id=1667498952]
+position = Vector2(55, 269)
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
 script = ExtResource("9_dtaqb")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
-spawn_point = "entry_right"
+target_scene = "res://scenes/levels/l2/Level_2-6.tscn"
+spawn_point = "entry_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
-position = Vector2(4386, -16)
+position = Vector2(2450.8638, 252.71292)
+shape = SubResource("RectangleShape2D_nd8jy")
+
+[node name="TransitionZoneL" type="Area2D" parent="." unique_id=529245664]
+script = ExtResource("9_dtaqb")
+target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
+spawn_point = "entry_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1759330780]
+position = Vector2(55, 309)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [editable path="enemys/MonsterSoldier"]

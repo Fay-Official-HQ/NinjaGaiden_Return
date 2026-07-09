@@ -745,10 +745,8 @@ position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"sword_uppercut"
+animation = &"wall_climb"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="BlockSparkPos" type="Marker2D" parent="Visual" unique_id=1902681224]
 position = Vector2(17, 2)

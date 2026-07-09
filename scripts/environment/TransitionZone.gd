@@ -2,6 +2,7 @@ extends Area2D
 
 class_name TransitionZone
 
+
 ## 目标场景路径（在 Inspector 中拖入 .tscn）
 @export var target_scene: String = ""
 

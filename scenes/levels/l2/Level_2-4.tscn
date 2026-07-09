@@ -519,15 +519,27 @@ position = Vector2(4107, 230)
 wind_direction = 1
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
-position = Vector2(0, 123)
+position = Vector2(4929.3022, 34.07511)
+
+[node name="entry_left" type="Marker2D" parent="." unique_id=880757590]
+position = Vector2(111, 36)
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
 script = ExtResource("8_rf5as")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
-spawn_point = "entry_right"
+target_scene = "res://scenes/levels/l2/Level_2-5.tscn"
+spawn_point = "entry_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
-position = Vector2(4386, -16)
+position = Vector2(4928, 1)
+shape = SubResource("RectangleShape2D_nd8jy")
+
+[node name="TransitionZoneL" type="Area2D" parent="." unique_id=1196707312]
+script = ExtResource("8_rf5as")
+target_scene = "res://scenes/levels/l2/Level_2-3.tscn"
+spawn_point = "entry_left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=4763002]
+position = Vector2(113.106445, 9.67865)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [editable path="Map/TileMapLayer/HangingPlat/HangingPlatform"]

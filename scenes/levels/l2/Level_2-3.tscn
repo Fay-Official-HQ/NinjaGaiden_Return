@@ -154,6 +154,7 @@ size = Vector2(8, 32)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_71imu")
+metadata/_edit_horizontal_guides_ = [600.0]
 
 [node name="Map" type="Node2D" parent="." unique_id=970251159]
 metadata/_edit_lock_ = true
@@ -293,15 +294,27 @@ position = Vector2(37.8125, -7.75)
 shape = SubResource("RectangleShape2D_f5un8")
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
-position = Vector2(0, 123)
+position = Vector2(2556, 40)
+
+[node name="entry_left" type="Marker2D" parent="." unique_id=1762577906]
+position = Vector2(2561, 577)
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
 script = ExtResource("8_f5un8")
-target_scene = "res://scenes/levels/l1/Level_1-2.tscn"
-spawn_point = "entry_right"
+target_scene = "res://scenes/levels/l2/Level_2-2.tscn"
+spawn_point = "entry_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
-position = Vector2(4386, -16)
+position = Vector2(2561, 15)
+shape = SubResource("RectangleShape2D_nd8jy")
+
+[node name="TransitionZoneL" type="Area2D" parent="." unique_id=734198046]
+script = ExtResource("8_f5un8")
+target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
+spawn_point = "entry_left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=843565387]
+position = Vector2(2561, 618)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [editable path="enemys/FlyingNinjaSpawner"]
