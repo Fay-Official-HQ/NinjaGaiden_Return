@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3dvw4hrlgii6"
-path="res://.godot/imported/guilai.png-0ec5bca1fa5ef8fe66107cbe2a844ace.ctex"
+uid="uid://dwlahymvre6rb"
+path="res://.godot/imported/good_end.png-abede4bf3ebcc2cb859bdb7057388c57.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/title/guilai.png"
-dest_files=["res://.godot/imported/guilai.png-0ec5bca1fa5ef8fe66107cbe2a844ace.ctex"]
+source_file="res://assets/img/good_end.png"
+dest_files=["res://.godot/imported/good_end.png-abede4bf3ebcc2cb859bdb7057388c57.ctex"]
 
 [params]
 

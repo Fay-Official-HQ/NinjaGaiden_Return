@@ -12,6 +12,7 @@
 # ============================================================
 
 extends Node2D
+class_name Cutscene
 
 
 # ============================================================
@@ -48,7 +49,7 @@ const SKIP_ACTION         = "pass"  # 玩家可以按这个键跳过整个演出
 
 const CHAPTER_SCENE_MAP: Dictionary = {
 	1: "res://scenes/levels/Level_1.tscn",
-	# 2: "res://scenes/levels/Level_2.tscn",   # 以后加新关卡在这里加
+	2: "res://scenes/levels/l2/Level_2-1.tscn",
 	# 3: "res://scenes/levels/Level_3.tscn",
 }
 
@@ -75,8 +76,8 @@ const TITLE_END_Y = 220.0   # 标题最终 Y
 @onready var bgm: AudioStreamPlayer = $BGM
 
 var _chapter_root: Node2D
-var _chapter_title: Sprite2D
-var _chapter_subtitle: Sprite2D
+var _chapter_title: CanvasItem
+var _chapter_subtitle: CanvasItem
 
 var _skip: bool = false
 var _transitioning: bool = false

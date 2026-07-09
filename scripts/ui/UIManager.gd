@@ -53,8 +53,10 @@ func _process(delta: float) -> void:
 	if not visible:
 		return
 
-	# 暂停输入检测（只在有 player 且玩家未死亡时生效）
+	# 暂停输入检测（玩家未死亡且Boss死亡演出未播放时才生效）
 	if Input.is_action_just_pressed("pass"):
+		if BossDeathDirector.is_death_playing:
+			return
 		var player_node = get_tree().get_first_node_in_group("player")
 		if player_node and not player_node._is_dead:
 			_toggle_pause()

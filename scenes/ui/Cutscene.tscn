@@ -4,8 +4,7 @@
 [ext_resource type="Script" uid="uid://n3q5awmh11p2" path="res://scripts/ui/Cutscene.gd" id="1_31qad"]
 [ext_resource type="AudioStream" uid="uid://l4hbgrjc5xgi" path="res://assets/audio/bgm/kaitouBGM.wav" id="1_wchr6"]
 [ext_resource type="Texture2D" uid="uid://yslbkwa6j416" path="res://assets/img/title/gametext.png" id="2_31qad"]
-[ext_resource type="Texture2D" uid="uid://dftwkk4cgr6hh" path="res://assets/img/title/diyizhang.png" id="3_6ip15"]
-[ext_resource type="Texture2D" uid="uid://d3dvw4hrlgii6" path="res://assets/img/title/guilai.png" id="4_iuf4u"]
+[ext_resource type="FontFile" uid="uid://hp2ir5i4ogcs" path="res://assets/fonts/ark-pixel-16px-proportional-zh_tr.ttf" id="6_6ip15"]
 
 [node name="Cutscene" type="Node2D" unique_id=825381784]
 script = ExtResource("1_31qad")
@@ -29,15 +28,50 @@ texture = ExtResource("2_31qad")
 [node name="ChapterText" type="Node2D" parent="." unique_id=1567210427]
 
 [node name="chapter_1" type="Node2D" parent="ChapterText" unique_id=351385010]
+visible = false
 position = Vector2(-1, 0)
 
-[node name="title" type="Sprite2D" parent="ChapterText/chapter_1" unique_id=213218103]
-position = Vector2(147, 110)
-texture = ExtResource("3_6ip15")
+[node name="title" type="Label" parent="ChapterText/chapter_1" unique_id=2053035923]
+texture_filter = 1
+offset_left = 116.0
+offset_top = 97.0
+offset_right = 178.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("6_6ip15")
+text = "第 一 章"
 
-[node name="subtitle" type="Sprite2D" parent="ChapterText/chapter_1/title" unique_id=700942321]
-position = Vector2(0, 30)
-texture = ExtResource("4_iuf4u")
+[node name="subtitle" type="Label" parent="ChapterText/chapter_1/title" unique_id=1124223324]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 29.0
+offset_right = 54.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("6_6ip15")
+text = "歸  來"
+
+[node name="chapter_2" type="Node2D" parent="ChapterText" unique_id=332743892]
+visible = false
+position = Vector2(-1, 0)
+
+[node name="title" type="Label" parent="ChapterText/chapter_2" unique_id=705531289]
+texture_filter = 1
+offset_left = 116.0
+offset_top = 97.0
+offset_right = 178.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("6_6ip15")
+text = "第 二 章"
+
+[node name="subtitle" type="Label" parent="ChapterText/chapter_2/title" unique_id=1167952905]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 29.0
+offset_right = 54.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("6_6ip15")
+text = "逐  魘"
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1659387622]
 stream = ExtResource("1_wchr6")

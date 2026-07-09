@@ -1,6 +1,8 @@
 extends CanvasLayer
 class_name BossDeathDirector
 
+static var is_death_playing: bool = false
+
 @onready var screen_fade_rect: ColorRect = $ScreenFadeRect
 
 var _slash_scene: PackedScene = preload("res://scenes/effects/HorizontalSlash.tscn")
@@ -105,6 +107,7 @@ func play_death_sequence(boss: Boss) -> void:
 	if _is_playing:
 		return
 	_is_playing = true
+	BossDeathDirector.is_death_playing = true
 	AudioManager.fade_out_bgm(3.0)
 	AudioManager.play_sound(&"dingling")
 	_boss = boss
@@ -178,6 +181,7 @@ func _phase_black_hold() -> void:
 
 func _end_level() -> void:
 	_is_playing = false
+	BossDeathDirector.is_death_playing = false
 
 	if _boss:
 		_boss.queue_free()
@@ -188,4 +192,5 @@ func _end_level() -> void:
 		PlayerStateManager.reset(player)
 	LevelManager.spawn_point = "default"
 
+	Cutscene.target_chapter = 2
 	get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bfnkkqdjw8bgk"
-path="res://.godot/imported/fusion-pixel-10px-proportional-zh_hant.otf-22cc572bee356a36af8de8acd9a02435.fontdata"
+uid="uid://hp2ir5i4ogcs"
+path="res://.godot/imported/ark-pixel-16px-proportional-zh_tr.ttf-bdc98254916e1a6b323ef5702a7100d6.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf"
-dest_files=["res://.godot/imported/fusion-pixel-10px-proportional-zh_hant.otf-22cc572bee356a36af8de8acd9a02435.fontdata"]
+source_file="res://assets/fonts/ark-pixel-16px-proportional-zh_tr.ttf"
+dest_files=["res://.godot/imported/ark-pixel-16px-proportional-zh_tr.ttf-bdc98254916e1a6b323ef5702a7100d6.fontdata"]
 
 [params]
 

@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://coxlj2hefmokg"]
+
+[ext_resource type="Script" uid="uid://cx8dutdrvvbeu" path="res://scripts/ui/test_end.gd" id="1_er2m2"]
+[ext_resource type="Texture2D" uid="uid://dwlahymvre6rb" path="res://assets/img/good_end.png" id="1_ubh2s"]
+[ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="3_2iti7"]
+
+[node name="TestEnd" type="Node2D" unique_id=44768328]
+script = ExtResource("1_er2m2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=90817898]
+position = Vector2(240, 135)
+texture = ExtResource("1_ubh2s")
+
+[node name="msg" type="Label" parent="." unique_id=1089765145]
+texture_filter = 1
+offset_left = 214.0
+offset_top = 58.0
+offset_right = 368.0
+offset_bottom = 133.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7411765)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("3_2iti7")
+theme_override_font_sizes/font_size = 10
+text = "遊戲還在製作中"
+
+[node name="dian" type="Label" parent="msg" unique_id=841920913]
+texture_filter = 1
+layout_mode = 0
+offset_left = 74.0
+offset_top = -2.0
+offset_right = 228.0
+offset_bottom = 73.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7411765)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("3_2iti7")
+theme_override_font_sizes/font_size = 10
+
+[node name="QQ" type="Label" parent="." unique_id=1685165116]
+texture_filter = 1
+offset_left = 380.0
+offset_top = 253.0
+offset_right = 534.0
+offset_bottom = 328.0
+theme_override_colors/font_color = Color(0.25490198, 0.0627451, 0.043137256, 1)
+theme_override_fonts/font = ExtResource("3_2iti7")
+theme_override_font_sizes/font_size = 10
+text = "QQ交流群：962386740"
+
+[node name="entry_left" type="Marker2D" parent="." unique_id=430749366]
