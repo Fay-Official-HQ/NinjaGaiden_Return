@@ -435,7 +435,6 @@ shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("6_gq83f")]
 position = Vector2(70, 177)
-metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -486,7 +485,6 @@ position = Vector2(-612, 132)
 
 [node name="BatSpawner" parent="enemys" unique_id=761399404 instance=ExtResource("8_5vjj6")]
 position = Vector2(-18, 30)
-spawn_count = 1
 spawn_direction = 1
 
 [node name="CollisionShape2D" parent="enemys/BatSpawner/TriggerArea" parent_id_path=PackedInt32Array(761399404, 1366595315) index="0" unique_id=47906498]
@@ -497,7 +495,6 @@ position = Vector2(-262, -43)
 
 [node name="BatSpawner2" parent="enemys" unique_id=1195723205 instance=ExtResource("8_5vjj6")]
 position = Vector2(-153, 54)
-spawn_count = 1
 spawn_direction = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner2" index="1" unique_id=1206789695]
@@ -505,7 +502,6 @@ position = Vector2(-283, -72)
 
 [node name="BatSpawner3" parent="enemys" unique_id=1717557671 instance=ExtResource("8_5vjj6")]
 position = Vector2(-288, 55)
-spawn_count = 1
 spawn_direction = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner3" index="1" unique_id=1206789695]
@@ -535,7 +531,6 @@ position = Vector2(-1105, 131)
 
 [node name="BatSpawner4" parent="enemys" unique_id=1748444292 instance=ExtResource("8_5vjj6")]
 position = Vector2(-1178, 112)
-spawn_count = 1
 spawn_direction = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner4" index="1" unique_id=1206789695]
@@ -561,7 +556,6 @@ position = Vector2(-1458, 53)
 
 [node name="BatSpawner5" parent="enemys" unique_id=1633572617 instance=ExtResource("8_5vjj6")]
 position = Vector2(-1547, 35)
-spawn_count = 1
 spawn_direction = 1
 
 [node name="CollisionShape2D" parent="enemys/BatSpawner5/TriggerArea" parent_id_path=PackedInt32Array(1633572617, 1366595315) index="0" unique_id=47906498]

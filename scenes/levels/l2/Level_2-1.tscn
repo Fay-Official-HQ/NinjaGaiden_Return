@@ -164,7 +164,7 @@ size = Vector2(8, 32)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_30yi0")
-metadata/_edit_horizontal_guides_ = [123.0, 303.0, 30.0]
+metadata/_edit_horizontal_guides_ = [303.0, 33.0]
 
 [node name="Map" type="Node2D" parent="." unique_id=970251159]
 metadata/_edit_lock_ = true

@@ -240,7 +240,7 @@ size = Vector2(445, 322.48267)
 
 [node name="Level_1-4" type="Node2D" unique_id=311310683]
 script = ExtResource("1_qevjy")
-metadata/_edit_horizontal_guides_ = [200.0]
+metadata/_edit_horizontal_guides_ = [200.0, 330.0]
 
 [node name="Map" type="Node2D" parent="." unique_id=970251159]
 metadata/_edit_lock_ = true
@@ -467,7 +467,7 @@ position = Vector2(2047, 419)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("5_xt0kh")]
-position = Vector2(-4, 307)
+position = Vector2(1800, 206)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -545,7 +545,6 @@ position = Vector2(-33, 159)
 
 [node name="BatSpawner" parent="enemys" unique_id=761399404 instance=ExtResource("12_xt0kh")]
 position = Vector2(767, 165)
-spawn_count = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner" index="1" unique_id=1206789695]
 position = Vector2(130, 30)
@@ -631,7 +630,6 @@ position = Vector2(-181, -73)
 
 [node name="BatSpawner3" parent="enemys" unique_id=466930012 instance=ExtResource("12_xt0kh")]
 position = Vector2(2004, 211)
-spawn_count = 1
 
 [node name="SpawnPosition" parent="enemys/BatSpawner3" index="1" unique_id=1206789695]
 position = Vector2(84, 2)

@@ -183,7 +183,7 @@ size = Vector2(8, 32)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_vxtfv")
-metadata/_edit_horizontal_guides_ = [123.0, 303.0, 30.0]
+metadata/_edit_horizontal_guides_ = [24.0, 294.0]
 
 [node name="Map" type="Node2D" parent="." unique_id=970251159]
 metadata/_edit_lock_ = true
@@ -276,7 +276,7 @@ position = Vector2(2461.75, 407.5)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("7_5hfjt")]
-position = Vector2(111, 47)
+position = Vector2(111, 36)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 

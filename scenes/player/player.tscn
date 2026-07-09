@@ -754,7 +754,6 @@ frame_progress = 1.0
 position = Vector2(17, 2)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1949881614]
-position = Vector2(0, 38)
 position_smoothing_speed = 0.0
 rotation_smoothing_speed = 0.0
 script = ExtResource("23_ro0t8")

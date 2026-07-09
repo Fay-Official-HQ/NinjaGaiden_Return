@@ -70,7 +70,7 @@ func _ready() -> void:
 	# step5（可选）：垂直偏移微调
 	#        正值=画面下移（玩家位置偏上），负值=画面上移（玩家位置偏下）
 	#        cam.offset.y = -50，你可以改成其他值
-	cam.offset.y = 50
+	cam.offset.y = 88
 
 	# 所有设置完成后，由 SceneTransition 全局遮罩执行淡入
 	SceneTransition.fade_in(fade_in_duration)

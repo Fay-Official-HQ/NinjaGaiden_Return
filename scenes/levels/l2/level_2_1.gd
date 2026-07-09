@@ -67,7 +67,7 @@ func _ready() -> void:
 	# step5（可选）：垂直偏移微调
 	#        正值=画面下移（玩家位置偏上），负值=画面上移（玩家位置偏下）
 	#        cam.offset.y = -50，你可以改成其他值
-	cam.offset.y = 130
+	cam.offset.y = 168
 
 
 
