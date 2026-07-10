@@ -18,6 +18,8 @@ class_name Player
 @onready var charge_mist: Node2D = $Visual/ChargeMist
 @onready var block_detector: Area2D = $BlockDetector
 @onready var block_spark_pos: Marker2D = $Visual/BlockSparkPos
+@onready var heal_particles: GPUParticles2D = $HealParticles
+var _heal_material: ParticleProcessMaterial
 
 # 状态节点引用
 @onready var idle_state: IdleState = $StateMachine/IdleState
@@ -40,6 +42,15 @@ var _is_dead: bool = false
 
 # 必杀技无敌状态（由 DragonFlashState 控制）
 var is_invincible: bool = false
+# ItemSpecial 赐福无敌（5秒）
+var special_invincible_timer: float = 0.0
+var _special_heal_accum: float = 0.0
+var _special_heal_count: int = 0
+var _special_flash_accum: float = 0.0
+var _special_flash_on: bool = true
+const SPECIAL_HEAL_INTERVAL: float = 1.5
+const SPECIAL_MAX_HEALS: int = 3
+const SPECIAL_HEAL_AMOUNT: int = 1
 # 必杀技重力禁用（由 DragonFlashState 控制）
 var is_gravity_disabled: bool = false
 # 当前所在的单面攀爬墙检测区（由 ClimbableWall 设置）
@@ -92,6 +103,27 @@ func _ready() -> void:
 	# 格挡检测器
 	block_detector.area_entered.connect(_on_block_detector_entered)
 
+	_setup_heal_particles()
+
+
+func _setup_heal_particles() -> void:
+	if not _heal_material:
+		_heal_material = ParticleProcessMaterial.new()
+		_heal_material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
+		_heal_material.emission_sphere_radius = 16.0
+		_heal_material.direction = Vector3(0, -1, 0)
+		_heal_material.spread = 0.0
+		_heal_material.initial_velocity_min = 40.0
+		_heal_material.initial_velocity_max = 90.0
+		_heal_material.gravity = Vector3.ZERO
+		_heal_material.scale_min = 0.8
+		_heal_material.scale_max = 1.0
+		_heal_material.angular_velocity_min = 0.0
+		_heal_material.angular_velocity_max = 0.0
+	heal_particles.process_material = _heal_material
+	heal_particles.amount = 12
+	heal_particles.lifetime = 0.8
+
 
 func _process(delta: float) -> void:
 	input.update_input()
@@ -105,10 +137,34 @@ func _process(delta: float) -> void:
 		_was_invincible = true
 		animated_sprite.modulate.a = 0.5 if fmod(invincible_timer * 10, 1.0) < 0.5 else 1.0
 	else:
-		if not is_gravity_disabled:
+		if not is_gravity_disabled and special_invincible_timer <= 0:
 			animated_sprite.modulate.a = 1.0
 		if _was_invincible:
 			_was_invincible = false
+			_check_overlapping_enemy_after_invincibility()
+
+	if special_invincible_timer > 0:
+		special_invincible_timer -= delta
+		if _special_heal_count < SPECIAL_MAX_HEALS:
+			_special_heal_accum += delta
+			if _special_heal_accum >= SPECIAL_HEAL_INTERVAL:
+				_special_heal_accum -= SPECIAL_HEAL_INTERVAL
+				_special_heal_count += 1
+				current_hp = min(current_hp + SPECIAL_HEAL_AMOUNT, data.max_hp)
+				AudioManager.play_sound(&"liaoyu")
+				heal_particles.restart()
+		_special_flash_accum += delta
+		if _special_flash_accum >= 0.1:
+			_special_flash_accum -= 0.1
+			_special_flash_on = not _special_flash_on
+		animated_sprite.modulate.a = 0.5 if _special_flash_on else 1.0
+	else:
+		if _special_flash_on == false:
+			_special_flash_on = true
+		if _special_flash_accum != 0.0 or _special_heal_accum != 0.0 or _special_heal_count != 0:
+			_special_flash_accum = 0.0
+			_special_heal_accum = 0.0
+			_special_heal_count = 0
 			_check_overlapping_enemy_after_invincibility()
 
 	# 控制格挡检测 — 地面站立且剑术姿势时才启用
@@ -130,7 +186,7 @@ func set_facing_direction(direction: float) -> void:
 	animation.flip_sprite(facing_direction)
 
 func _on_hurt_box_took_damage(damage: int, _is_heavy: bool = false) -> void:
-	if invincible_timer > 0 or is_invincible or _is_dead:
+	if invincible_timer > 0 or is_invincible or special_invincible_timer > 0 or _is_dead:
 		return
 
 	_cancel_charge()

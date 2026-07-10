@@ -98,6 +98,7 @@
 [ext_resource type="Texture2D" uid="uid://h1u6t056tqr0" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_006.png" id="78_46q5t"]
 [ext_resource type="Texture2D" uid="uid://dxja886d8v1kp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_007.png" id="79_5miun"]
 [ext_resource type="Texture2D" uid="uid://boebc2inlywh3" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_007.png" id="79_hf5gj"]
+[ext_resource type="Texture2D" uid="uid://uebp6fk3vck6" path="res://assets/shaders/liaoyu.png" id="103_lhgc7"]
 [ext_resource type="Script" uid="uid://cx404cfavlvyk" path="res://scripts/components/AttackHitBox.gd" id="attack_hitbox"]
 [ext_resource type="Script" uid="uid://bunm58w2ygaal" path="res://scripts/player/states/ExterminateChainState.gd" id="exterminate_chain"]
 [ext_resource type="Script" uid="uid://db3h7bsgsmthe" path="res://scripts/components/ExterminateHitBox.gd" id="exterminate_hitbox"]
@@ -537,6 +538,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhgc7"]
 size = Vector2(18, 33)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lhgc7"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
 [node name="Player" type="CharacterBody2D" unique_id=1811321606 groups=["player"]]
 z_index = 100
 collision_mask = 652
@@ -772,3 +777,10 @@ monitorable = false
 position = Vector2(9, 6.5)
 shape = SubResource("RectangleShape2D_lhgc7")
 debug_color = Color(0.51462346, 0.44296768, 0.9480166, 0.41960785)
+
+[node name="HealParticles" type="GPUParticles2D" parent="." unique_id=1658166605]
+z_index = -1
+emitting = false
+texture = ExtResource("103_lhgc7")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_lhgc7")

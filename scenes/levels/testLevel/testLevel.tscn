@@ -1,0 +1,165 @@
+[gd_scene format=4 uid="uid://y2kcsanhi06e"]
+
+[ext_resource type="Script" uid="uid://bxyr7w6104neb" path="res://scenes/levels/testLevel/testLevel.gd" id="1_rfoho"]
+[ext_resource type="Texture2D" uid="uid://bqea0ow8qxm7" path="res://assets/img/testBG.png" id="2_rfoho"]
+[ext_resource type="Script" uid="uid://c134gl40n45ul" path="res://scenes/levels/l2/cloud_layer.gd" id="3_k3ve1"]
+[ext_resource type="Texture2D" uid="uid://2604s6c2136w" path="res://assets/sprites/map/yuncai.png" id="4_mgnyg"]
+[ext_resource type="TileSet" uid="uid://bnek8qlnb7yu5" path="res://resources/tilesets/tileset2_1.tres" id="5_kvvug"]
+[ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_n352j"]
+[ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_3qxk2"]
+[ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="8_eb6c4"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_4d7sk"]
+[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="10_qfb4u"]
+[ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="11_82y4s"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
+load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5x2jh"]
+texture = SubResource("CompressedTexture2D_50olt")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSet" id="TileSet_cnmxh"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 67
+sources/0 = SubResource("TileSetAtlasSource_5x2jh")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y54f7"]
+size = Vector2(170, 794)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
+size = Vector2(5035, 142)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
+size = Vector2(8, 32)
+
+[node name="Node2D" type="Node2D" unique_id=311310683]
+script = ExtResource("1_rfoho")
+metadata/_edit_horizontal_guides_ = [303.0, 33.0]
+
+[node name="Map" type="Node2D" parent="." unique_id=970251159]
+metadata/_edit_lock_ = true
+
+[node name="NightCityBackground" type="ParallaxBackground" parent="Map" unique_id=2134945641]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Map/NightCityBackground" unique_id=2121242027]
+motion_mirroring = Vector2(900, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Map/NightCityBackground/ParallaxLayer" unique_id=792099002]
+position = Vector2(403, 168)
+texture = ExtResource("2_rfoho")
+
+[node name="CloudLayer" type="ParallaxLayer" parent="Map/NightCityBackground" unique_id=1388031556]
+position = Vector2(0, -21)
+motion_scale = Vector2(0.5, 0)
+motion_mirroring = Vector2(600, 0)
+script = ExtResource("3_k3ve1")
+
+[node name="yuncai1" type="Sprite2D" parent="Map/NightCityBackground/CloudLayer" unique_id=174966342]
+position = Vector2(150, 89)
+texture = ExtResource("4_mgnyg")
+
+[node name="yuncai2" type="Sprite2D" parent="Map/NightCityBackground/CloudLayer" unique_id=258660769]
+position = Vector2(515, 94)
+texture = ExtResource("4_mgnyg")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Map" unique_id=2104617745]
+position = Vector2(710, -10)
+tile_set = ExtResource("5_kvvug")
+metadata/_edit_lock_ = true
+
+[node name="TileMapbackGround" type="TileMapLayer" parent="Map/TileMapLayer" unique_id=931069730]
+z_index = -5
+tile_set = ExtResource("5_kvvug")
+
+[node name="collision" type="TileMapLayer" parent="Map/TileMapLayer" unique_id=930108176]
+visible = false
+light_mask = 0
+position = Vector2(-13, 9)
+tile_map_data = PackedByteArray("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")
+tile_set = SubResource("TileSet_cnmxh")
+
+[node name="HangingPlat" type="Node" parent="Map/TileMapLayer" unique_id=1874394162]
+
+[node name="StopMoving" type="StaticBody2D" parent="Map/TileMapLayer" unique_id=1068461566 groups=["wall_blocker"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=1851861204]
+position = Vector2(-838, 11)
+shape = SubResource("RectangleShape2D_y54f7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=123495770]
+position = Vector2(524, 98)
+shape = SubResource("RectangleShape2D_y54f7")
+
+[node name="DeathZone" type="Area2D" parent="Map" unique_id=1321774903]
+script = ExtResource("6_n352j")
+metadata/_custom_type_script = "uid://c04yqponxtme3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/DeathZone" unique_id=1844145851]
+position = Vector2(2001, 437)
+shape = SubResource("RectangleShape2D_vqsrt")
+
+[node name="Player" parent="." unique_id=1811321606 instance=ExtResource("7_3qxk2")]
+position = Vector2(26, 104)
+
+[node name="Items" type="Node" parent="." unique_id=111644370]
+
+[node name="ItemSpecial" parent="Items" unique_id=575307007 instance=ExtResource("8_eb6c4")]
+position = Vector2(40, 203.25397)
+
+[node name="ItemSpecial2" parent="Items" unique_id=1115514898 instance=ExtResource("8_eb6c4")]
+position = Vector2(147.5578, 203)
+
+[node name="Item" parent="Items" unique_id=2108852148 instance=ExtResource("9_4d7sk")]
+position = Vector2(240.5578, 203)
+consumable_type = 3
+
+[node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("10_qfb4u")]
+position = Vector2(707, 219)
+
+[node name="PatrolEnemy2" parent="enemys" unique_id=7581918 instance=ExtResource("10_qfb4u")]
+position = Vector2(289, 219)
+
+[node name="PatrolEnemy6" parent="enemys" unique_id=1354750545 instance=ExtResource("10_qfb4u")]
+position = Vector2(231, 219)
+
+[node name="PatrolEnemy7" parent="enemys" unique_id=796939687 instance=ExtResource("10_qfb4u")]
+position = Vector2(172, 219)
+
+[node name="PatrolEnemy3" parent="enemys" unique_id=173627828 instance=ExtResource("10_qfb4u")]
+position = Vector2(386, 218)
+
+[node name="PatrolEnemy4" parent="enemys" unique_id=411012938 instance=ExtResource("10_qfb4u")]
+position = Vector2(504, 215)
+
+[node name="PatrolEnemy5" parent="enemys" unique_id=633824220 instance=ExtResource("10_qfb4u")]
+position = Vector2(446, 216)
+
+[node name="PatrolEnemy8" parent="enemys" unique_id=749663051 instance=ExtResource("10_qfb4u")]
+position = Vector2(591, 220)
+
+[node name="PatrolEnemy9" parent="enemys" unique_id=2029753685 instance=ExtResource("10_qfb4u")]
+position = Vector2(647, 221)
+
+[node name="environment" type="Node" parent="." unique_id=1490444642]
+
+[node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
+position = Vector2(3986, 291)
+
+[node name="TransitionZoneR" type="Area2D" parent="." unique_id=1557528740]
+script = ExtResource("11_82y4s")
+target_scene = "res://scenes/levels/l2/Level_2-2.tscn"
+spawn_point = "entry_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=551660419]
+position = Vector2(3986, 331)
+shape = SubResource("RectangleShape2D_nd8jy")
+
+[node name="test" type="Node" parent="." unique_id=1581219589]

@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bljf6qa3xmajw"]
+
+[ext_resource type="Script" uid="uid://db5k443xjfu2r" path="res://scripts/item/item_special.gd" id="1_ymknw"]
+[ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="2_5h5qn"]
+[ext_resource type="Texture2D" uid="uid://dlphb7xqjjtb4" path="res://assets/sprites/Ryu/wuye/wuyezhufu1.png" id="2_31e5l"]
+[ext_resource type="Texture2D" uid="uid://b3p6m3jwxp7se" path="res://assets/sprites/Ryu/wuye/wuyezhufu2.png" id="3_i68yj"]
+[ext_resource type="Texture2D" uid="uid://cfi3ckre8fe2n" path="res://assets/sprites/item/zhufu.png" id="3_kj6ax"]
+[ext_resource type="Texture2D" uid="uid://bxmp50bjqtn0m" path="res://assets/sprites/Ryu/wuye/wuyezhufu3.png" id="4_kj6ax"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndiym"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hm1j3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5h5qn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kj6ax")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kj6ax")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("2_31e5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i68yj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kj6ax")
+}],
+"loop": false,
+"name": &"wuye",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ri8g"]
+radius = 8.0
+
+[node name="ItemSpecial" type="Area2D" unique_id=575307007]
+collision_layer = 64
+collision_mask = 16
+script = ExtResource("1_ymknw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=694484632]
+shape = SubResource("CircleShape2D_ndiym")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=576660047]
+sprite_frames = SubResource("SpriteFrames_hm1j3")
+animation = &"wuye"
+
+[node name="PickupArea" type="Area2D" parent="." unique_id=807519452]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1180596548]
+shape = SubResource("CircleShape2D_2ri8g")
+debug_color = Color(0.31466863, 0.61645865, 0.32269007, 0.41960785)
+
+[node name="GroundDetector" type="RayCast2D" parent="." unique_id=326990776]
+target_position = Vector2(0, 20)
+collision_mask = 12
