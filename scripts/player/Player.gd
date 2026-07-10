@@ -157,7 +157,8 @@ func _process(delta: float) -> void:
 		if _special_flash_accum >= 0.1:
 			_special_flash_accum -= 0.1
 			_special_flash_on = not _special_flash_on
-		animated_sprite.modulate.a = 0.5 if _special_flash_on else 1.0
+		if not is_invincible:
+			animated_sprite.modulate.a = 0.5 if _special_flash_on else 1.0
 	else:
 		if _special_flash_on == false:
 			_special_flash_on = true
