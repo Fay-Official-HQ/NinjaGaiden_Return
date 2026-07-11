@@ -39,6 +39,8 @@ func _ready() -> void:
 	# 根据入口点定位玩家
 	_place_player_at_entry()
 
+	
+
 	# ── 纵向关卡相机配置 ──
 	var cam = $Player/Camera2D
 
