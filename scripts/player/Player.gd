@@ -46,8 +46,6 @@ var is_invincible: bool = false
 var special_invincible_timer: float = 0.0
 var _special_heal_accum: float = 0.0
 var _special_heal_count: int = 0
-var _special_flash_accum: float = 0.0
-var _special_flash_on: bool = true
 const SPECIAL_HEAL_INTERVAL: float = 1.5
 const SPECIAL_MAX_HEALS: int = 3
 const SPECIAL_HEAL_AMOUNT: int = 1
@@ -153,17 +151,11 @@ func _process(delta: float) -> void:
 				current_hp = min(current_hp + SPECIAL_HEAL_AMOUNT, data.max_hp)
 				AudioManager.play_sound(&"liaoyu")
 				heal_particles.restart()
-		_special_flash_accum += delta
-		if _special_flash_accum >= 0.1:
-			_special_flash_accum -= 0.1
-			_special_flash_on = not _special_flash_on
 		if not is_invincible:
-			animated_sprite.modulate.a = 0.5 if _special_flash_on else 1.0
+			#此处设置无敌期间透明度
+			animated_sprite.modulate.a = 0.6
 	else:
-		if _special_flash_on == false:
-			_special_flash_on = true
-		if _special_flash_accum != 0.0 or _special_heal_accum != 0.0 or _special_heal_count != 0:
-			_special_flash_accum = 0.0
+		if _special_heal_accum != 0.0 or _special_heal_count != 0:
 			_special_heal_accum = 0.0
 			_special_heal_count = 0
 			_check_overlapping_enemy_after_invincibility()
