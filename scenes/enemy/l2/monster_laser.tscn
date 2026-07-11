@@ -51,7 +51,7 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_iqak5"]
 radius = 4.0
 
-[node name="MonsterSoldierLaser" type="Area2D" unique_id=1462592865]
+[node name="MonsterSoldierLaser" type="Area2D" unique_id=1462592865 groups=["blockable"]]
 collision_layer = 2
 script = ExtResource("1_iqak5")
 

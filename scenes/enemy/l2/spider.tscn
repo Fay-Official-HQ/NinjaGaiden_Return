@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://dkdpk5wdhv7by"]
+
+[ext_resource type="Script" uid="uid://ctcudijlvpr6y" path="res://scripts/enemy/l2/spider.gd" id="1_wiepn"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="4_shm6o"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="5_aijci"]
+[ext_resource type="Texture2D" uid="uid://big3cdfbn526" path="res://assets/sprites/enemy/l2/zhizhu1.png" id="6_wiepn"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="6_yxie2"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="7_rk6ey"]
+[ext_resource type="Texture2D" uid="uid://1fvqxkqexy1e" path="res://assets/sprites/enemy/l2/zhizhu2.png" id="7_wbqtt"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="8_lyry8"]
+[ext_resource type="Texture2D" uid="uid://db8f2bjgjxadm" path="res://assets/sprites/enemy/l2/zhizhu3.png" id="8_wbqtt"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_8wa5f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_deovq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_shm6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aijci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yxie2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rk6ey")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wiepn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_wbqtt")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_wiepn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wbqtt")
+}],
+"loop": true,
+"name": &"gongji",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a00q3"]
+size = Vector2(24, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4k6g"]
+size = Vector2(24, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gddfh"]
+size = Vector2(24, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbqtt"]
+size = Vector2(334.75, 251.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0cxo"]
+size = Vector2(76.1875, 439.0625)
+
+[node name="Spider" type="CharacterBody2D" unique_id=1695455234 groups=["enemy", "fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_wiepn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=520043887 groups=["enemy"]]
+sprite_frames = SubResource("SpriteFrames_deovq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=436106676]
+shape = SubResource("RectangleShape2D_a00q3")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1405910004]
+collision_layer = 32
+script = ExtResource("8_lyry8")
+metadata/_custom_type_script = "uid://cflbsmpgemw31"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=563745106]
+shape = SubResource("RectangleShape2D_d4k6g")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=182048173]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_8wa5f")
+metadata/_custom_type_script = "uid://cmn07aeey7mv4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1866314519]
+shape = SubResource("RectangleShape2D_gddfh")
+
+[node name="AttackRange" type="Area2D" parent="." unique_id=90298977]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=1966444538]
+shape = SubResource("RectangleShape2D_wbqtt")
+
+[node name="FallRange" type="Area2D" parent="." unique_id=211404331]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallRange" unique_id=1648894374]
+shape = SubResource("RectangleShape2D_p0cxo")
