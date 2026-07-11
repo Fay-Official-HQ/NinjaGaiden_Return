@@ -70,7 +70,7 @@ size = Vector2(24, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2twn6"]
 size = Vector2(377.0254, 421.31348)
 
-[node name="Elite_ArcBladeHopper" type="CharacterBody2D" unique_id=1868551743 groups=["enemy", "fall_vulnerable"]]
+[node name="Elite_ArcBladeHopper" type="CharacterBody2D" unique_id=1868551743 groups=["fall_vulnerable"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_u80ik")

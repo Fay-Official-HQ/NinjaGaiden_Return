@@ -51,9 +51,7 @@ func _ready() -> void:
 	var enemy_hitbox = hitbox as EnemyHitBox
 	if enemy_hitbox:
 		enemy_hitbox.damage = contact_damage
-
 	hitbox.collision_mask = 1
-
 	detect_range.body_entered.connect(_on_player_entered)
 	detect_range.body_exited.connect(_on_player_exited)
 

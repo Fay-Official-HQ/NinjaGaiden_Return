@@ -27,7 +27,6 @@ var _start_position: Vector2
 var _attack_timer: float = 0.0
 var _rage_charge_timer: float = 0.0
 var _is_raging: bool = false
-var _rage_done: bool = false
 var _move_dir: float = 1.0
 var _is_throwing: bool = false
 var _sickle_base_x: float = 0.0
@@ -45,14 +44,9 @@ func _ready() -> void:
 		enemy_hitbox.damage = contact_damage
 
 	hitbox.collision_mask = 1
-
-	detect_range.body_entered.connect(_on_player_entered)
 	detect_range.body_exited.connect(_on_player_exited)
-
 	anim.animation_finished.connect(_on_anim_finished)
-
 	_sickle_base_x = mySickle.position.x
-
 	anim.play("idle")
 
 
@@ -65,6 +59,9 @@ func _physics_process(delta: float) -> void:
 	match _elite_state:
 		EliteState.PATROL:
 			_update_patrol(delta)
+			if _check_player_in_range():
+				_elite_state = EliteState.ATTACK
+				_attack_timer = 0.0
 		EliteState.ATTACK:
 			_update_attack(delta)
 		EliteState.RAGE_CHARGE:
@@ -119,7 +116,7 @@ func _update_attack(delta: float) -> void:
 		mySickle.visible=false
 		anim.play("throw")
 	else:
-		_update_patrol(delta)
+		_update_patrol(0.0)
 
 
 func _throw_sickle() -> void:
@@ -184,7 +181,6 @@ func _on_anim_finished() -> void:
 		_is_throwing = false
 		mySickle.modulate = Color.WHITE
 		if _elite_state == EliteState.RAGE_THROW:
-			_rage_done = true
 			anim.modulate = Color.WHITE
 			_elite_state = EliteState.PATROL
 			_attack_timer = attack_cooldown
@@ -194,23 +190,12 @@ func _on_anim_finished() -> void:
 			_attack_timer = attack_cooldown
 
 
-func _on_player_entered(body: Node) -> void:
-	if not body.is_in_group("player"):
-		return
-	if _rage_done:
-		_elite_state = EliteState.ATTACK
-		_attack_timer = 0.0
-		return
-	if _elite_state == EliteState.PATROL:
-		_elite_state = EliteState.ATTACK
-		_attack_timer = 0.0
-
-
 func _on_player_exited(body: Node) -> void:
 	if not body.is_in_group("player"):
 		return
 	if _elite_state == EliteState.ATTACK:
 		_elite_state = EliteState.PATROL
+		_is_throwing = false
 
 
 func _on_took_damage(amount: int, _is_heavy: bool = false) -> void:
