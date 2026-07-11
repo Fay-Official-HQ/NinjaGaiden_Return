@@ -8,8 +8,9 @@
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="6_6snfe"]
 [ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="6_o40x0"]
 [ext_resource type="PackedScene" uid="uid://dyndypp655npf" path="res://scenes/environment/BossTransitionZone.tscn" id="7_75fmd"]
-[ext_resource type="PackedScene" uid="uid://3dpwytdgg5qh" path="res://scenes/enemy/l2/Elite_SpinningSickleThrower.tscn" id="8_0ibog"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_jn3my"]
+[ext_resource type="PackedScene" uid="uid://deajn0bhqcu0r" path="res://scenes/enemy/l2/Elite_ArcBladeHopper.tscn" id="9_p1h7w"]
+[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="9_squfr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -27,7 +28,7 @@ physics_layer_0/collision_mask = 67
 sources/0 = SubResource("TileSetAtlasSource_5x2jh")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tj86g"]
-size = Vector2(72.5, 342)
+size = Vector2(182, 333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
@@ -93,7 +94,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=628386589]
-position = Vector2(-20.25, 140)
+position = Vector2(-75, 135.5)
 shape = SubResource("RectangleShape2D_tj86g")
 
 [node name="DeathZone" type="Area2D" parent="Map" unique_id=1321774903]
@@ -123,8 +124,17 @@ consumable_type = 2
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="Elite_SpinningSickleThrower" parent="enemys" unique_id=1868551743 instance=ExtResource("8_0ibog")]
-position = Vector2(424, 147)
+[node name="Elite_ArcBladeHopper" parent="enemys" unique_id=736969628 instance=ExtResource("9_p1h7w")]
+position = Vector2(307, 229)
+
+[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("9_squfr")]
+position = Vector2(202.87335, 220.79404)
+
+[node name="PatrolEnemy2" parent="enemys" unique_id=805448982 instance=ExtResource("9_squfr")]
+position = Vector2(248, 243)
+
+[node name="PatrolEnemy3" parent="enemys" unique_id=1855377449 instance=ExtResource("9_squfr")]
+position = Vector2(123, 243)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 

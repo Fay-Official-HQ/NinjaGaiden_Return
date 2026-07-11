@@ -61,6 +61,7 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/se/liaoyu.tres",
 	"res://resources/audio/se/shitou.tres",
 	"res://resources/audio/se/dandan.tres",
+	"res://resources/audio/se/luoren.tres",
 ]
 
 var _pending_paths: Array[String] = []
