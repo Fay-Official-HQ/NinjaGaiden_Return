@@ -220,6 +220,7 @@ func _start_rage() -> void:
 	_attack_timer = 0.0
 	_is_throwing = false
 	velocity = Vector2.ZERO
+	mySickle.visible = true
 	mySickle.modulate = Color.RED
 	anim.play("xuli")
 	anim.modulate = Color.BLACK
