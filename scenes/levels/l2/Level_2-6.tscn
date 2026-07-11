@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="6_6snfe"]
 [ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="6_o40x0"]
 [ext_resource type="PackedScene" uid="uid://dyndypp655npf" path="res://scenes/environment/BossTransitionZone.tscn" id="7_75fmd"]
-[ext_resource type="PackedScene" uid="uid://dkdpk5wdhv7by" path="res://scenes/enemy/l2/spider.tscn" id="8_0ibog"]
+[ext_resource type="PackedScene" uid="uid://3dpwytdgg5qh" path="res://scenes/enemy/l2/Elite_SpinningSickleThrower.tscn" id="8_0ibog"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_jn3my"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -117,10 +117,14 @@ position = Vector2(185, 197)
 position = Vector2(304, 197)
 consumable_type = 3
 
+[node name="Item2" parent="Items" unique_id=196943231 instance=ExtResource("8_jn3my")]
+position = Vector2(66, 197)
+consumable_type = 2
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="Spider" parent="enemys" unique_id=1695455234 instance=ExtResource("8_0ibog")]
-position = Vector2(305.62726, 148.91975)
+[node name="Elite_SpinningSickleThrower" parent="enemys" unique_id=1868551743 instance=ExtResource("8_0ibog")]
+position = Vector2(424, 147)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 

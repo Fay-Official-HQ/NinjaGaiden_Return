@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://3dpwytdgg5qh"]
+
+[ext_resource type="Script" uid="uid://b6jg2ivj8ig35" path="res://scripts/enemy/l2/elite_spinning_sickle_thrower.gd" id="1_niu32"]
+[ext_resource type="Texture2D" uid="uid://dx4navjqpju2e" path="res://assets/sprites/enemy/l2/liandao1.png" id="2_hdl6y"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_mwwvh"]
+[ext_resource type="Texture2D" uid="uid://2rqrpl7hperg" path="res://assets/sprites/enemy/l2/liandao2.png" id="3_o8bxp"]
+[ext_resource type="Texture2D" uid="uid://bb1cdy16quy68" path="res://assets/sprites/enemy/l2/liandao3.png" id="4_j33bc"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_kg087"]
+[ext_resource type="Texture2D" uid="uid://crdy32gy1qomf" path="res://assets/sprites/enemy/l2/liandao4.png" id="5_01oas"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_y764h"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="6_3rom0"]
+[ext_resource type="Texture2D" uid="uid://d2h5kx4p5b8g2" path="res://assets/sprites/enemy/l2/liandaoguai1.png" id="6_6nvcg"]
+[ext_resource type="Texture2D" uid="uid://bi6qhswpe020m" path="res://assets/sprites/enemy/l2/liandaoguai2.png" id="7_qc5jc"]
+[ext_resource type="Texture2D" uid="uid://bv1ewd7mmvj6l" path="res://assets/sprites/enemy/l2/liandaoguai3.png" id="8_niu32"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="10_7xvml"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="11_w4glh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_niu32"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hdl6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o8bxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j33bc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_01oas")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sbmmi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mwwvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kg087")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y764h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3rom0")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_qc5jc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6nvcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qc5jc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("8_niu32")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_qc5jc")
+}],
+"loop": true,
+"name": &"xuli",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgk2y"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjdqa"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmu7j"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2twn6"]
+size = Vector2(262.20313, 258.5078)
+
+[node name="Elite_SpinningSickleThrower" type="CharacterBody2D" unique_id=1868551743 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_niu32")
+
+[node name="Sickle" type="AnimatedSprite2D" parent="." unique_id=56072294]
+position = Vector2(-7, -18)
+sprite_frames = SubResource("SpriteFrames_niu32")
+autoplay = "default"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=266546870]
+position = Vector2(1, -15)
+sprite_frames = SubResource("SpriteFrames_sbmmi")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954303483]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_jgk2y")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1367325495]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("10_7xvml")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=318563204]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_kjdqa")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1048201287]
+collision_layer = 32
+script = ExtResource("11_w4glh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=760062133]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_cmu7j")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=511880464]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=1649966460]
+shape = SubResource("RectangleShape2D_2twn6")
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=313765772]
+target_position = Vector2(-5, 20)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=161747179]
+target_position = Vector2(5, 20)
+collision_mask = 12

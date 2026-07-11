@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c54ayq4cg0jk"]
+
+[ext_resource type="Script" uid="uid://v7ghwj884qfm" path="res://scenes/enemy/l2/sickle.gd" id="1_44ny5"]
+[ext_resource type="Texture2D" uid="uid://dx4navjqpju2e" path="res://assets/sprites/enemy/l2/liandao1.png" id="2_44ny5"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="3_fu6cr"]
+[ext_resource type="Texture2D" uid="uid://2rqrpl7hperg" path="res://assets/sprites/enemy/l2/liandao2.png" id="3_mv8dh"]
+[ext_resource type="Texture2D" uid="uid://bb1cdy16quy68" path="res://assets/sprites/enemy/l2/liandao3.png" id="4_1021a"]
+[ext_resource type="Texture2D" uid="uid://crdy32gy1qomf" path="res://assets/sprites/enemy/l2/liandao4.png" id="5_0cd4m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qh6nk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_44ny5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mv8dh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1021a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0cd4m")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2tcq"]
+radius = 7.017834
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_npwh0"]
+radius = 7.0
+
+[node name="Sickle" type="Area2D" unique_id=812332263 groups=["blockable"]]
+collision_layer = 2
+script = ExtResource("1_44ny5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081409574]
+sprite_frames = SubResource("SpriteFrames_qh6nk")
+animation = &"fly"
+frame_progress = 0.9727189
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=450950446]
+position = Vector2(0, -0.5)
+shape = SubResource("CircleShape2D_e2tcq")
+
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable"]]
+collision_layer = 32
+script = ExtResource("3_fu6cr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1696578552]
+shape = SubResource("CircleShape2D_npwh0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=632450142]
