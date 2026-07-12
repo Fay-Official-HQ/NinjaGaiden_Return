@@ -8,9 +8,7 @@
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="6_6snfe"]
 [ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="6_o40x0"]
 [ext_resource type="PackedScene" uid="uid://dyndypp655npf" path="res://scenes/environment/BossTransitionZone.tscn" id="7_75fmd"]
-[ext_resource type="PackedScene" uid="uid://3dpwytdgg5qh" path="res://scenes/enemy/l2/Elite_SpinningSickleThrower.tscn" id="8_0ibog"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_jn3my"]
-[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="9_squfr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -123,18 +121,6 @@ position = Vector2(66, 197)
 consumable_type = 2
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
-
-[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("9_squfr")]
-position = Vector2(202.87335, 220.79404)
-
-[node name="PatrolEnemy2" parent="enemys" unique_id=310837637 instance=ExtResource("9_squfr")]
-position = Vector2(294, 246)
-
-[node name="PatrolEnemy3" parent="enemys" unique_id=162287219 instance=ExtResource("9_squfr")]
-position = Vector2(402, 151)
-
-[node name="Elite_SpinningSickleThrower" parent="enemys" unique_id=1868551743 instance=ExtResource("8_0ibog")]
-position = Vector2(365, 150)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 

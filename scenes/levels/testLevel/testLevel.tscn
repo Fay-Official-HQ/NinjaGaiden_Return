@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_3qxk2"]
 [ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="8_eb6c4"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_4d7sk"]
-[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="10_qfb4u"]
+[ext_resource type="PackedScene" uid="uid://dlp46175oqaa5" path="res://scenes/enemy/l2/Elite_Mars.tscn" id="10_rfoho"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="11_82y4s"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -112,41 +112,18 @@ position = Vector2(26, 104)
 [node name="ItemSpecial" parent="Items" unique_id=575307007 instance=ExtResource("8_eb6c4")]
 position = Vector2(40, 203.25397)
 
-[node name="ItemSpecial2" parent="Items" unique_id=1115514898 instance=ExtResource("8_eb6c4")]
-position = Vector2(147.5578, 203)
-
 [node name="Item" parent="Items" unique_id=2108852148 instance=ExtResource("9_4d7sk")]
 position = Vector2(240.5578, 203)
 consumable_type = 3
 
+[node name="Item2" parent="Items" unique_id=1368354808 instance=ExtResource("9_4d7sk")]
+position = Vector2(142, 203)
+consumable_type = 2
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("10_qfb4u")]
-position = Vector2(707, 219)
-
-[node name="PatrolEnemy2" parent="enemys" unique_id=7581918 instance=ExtResource("10_qfb4u")]
-position = Vector2(289, 219)
-
-[node name="PatrolEnemy6" parent="enemys" unique_id=1354750545 instance=ExtResource("10_qfb4u")]
-position = Vector2(231, 219)
-
-[node name="PatrolEnemy7" parent="enemys" unique_id=796939687 instance=ExtResource("10_qfb4u")]
-position = Vector2(172, 219)
-
-[node name="PatrolEnemy3" parent="enemys" unique_id=173627828 instance=ExtResource("10_qfb4u")]
-position = Vector2(386, 218)
-
-[node name="PatrolEnemy4" parent="enemys" unique_id=411012938 instance=ExtResource("10_qfb4u")]
-position = Vector2(504, 215)
-
-[node name="PatrolEnemy5" parent="enemys" unique_id=633824220 instance=ExtResource("10_qfb4u")]
-position = Vector2(446, 216)
-
-[node name="PatrolEnemy8" parent="enemys" unique_id=749663051 instance=ExtResource("10_qfb4u")]
-position = Vector2(591, 220)
-
-[node name="PatrolEnemy9" parent="enemys" unique_id=2029753685 instance=ExtResource("10_qfb4u")]
-position = Vector2(647, 221)
+[node name="Elite_Mars" parent="enemys" unique_id=1868551743 instance=ExtResource("10_rfoho")]
+position = Vector2(356.82562, 208.82573)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
