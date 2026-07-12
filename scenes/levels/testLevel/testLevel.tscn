@@ -123,7 +123,7 @@ consumable_type = 2
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="Elite_Mars" parent="enemys" unique_id=1868551743 instance=ExtResource("10_rfoho")]
-position = Vector2(356.82562, 208.82573)
+position = Vector2(366, 231)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
