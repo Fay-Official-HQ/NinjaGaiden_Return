@@ -38,6 +38,7 @@ var _move_dir: float = 1.0
 var _blade_timer: float = 0.0
 var _is_raging: bool = false
 var _rage_time_left: float = 0.0
+var _has_locked_on: bool = false
 
 
 const BLADE_SCENE = preload("res://scenes/enemy/l2/blade.tscn")
@@ -210,12 +211,16 @@ func _apply_gravity(delta: float) -> void:
 func _on_player_entered(body: Node) -> void:
 	if not body.is_in_group("player"):
 		return
+	_has_locked_on = true
 	if _state == HopperState.PATROL:
 		_state = HopperState.CHASE
 
 
 func _on_player_exited(body: Node) -> void:
 	if not body.is_in_group("player"):
+		return
+	# 已锁定过玩家 → 永久追击，永不回到巡逻
+	if _has_locked_on:
 		return
 	if _state == HopperState.CHASE or _state == HopperState.ARC_JUMP:
 		_state = HopperState.PATROL
