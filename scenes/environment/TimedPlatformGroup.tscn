@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://cfck2b8eftivm"]
+
+[ext_resource type="Script" uid="uid://dklotah70mjrc" path="res://scripts/environment/timed_platform_group.gd" id="1_iuh1v"]
+[ext_resource type="Texture2D" uid="uid://bkl8am6f1mgpl" path="res://assets/sprites/map/TimedPlatform.png" id="1_r83no"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wyxs"]
+size = Vector2(19, 141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r83no"]
+size = Vector2(16, 8.25)
+
+[node name="TimedPlatformGroup" type="Area2D" unique_id=590577594]
+script = ExtResource("1_iuh1v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=548677541]
+shape = SubResource("RectangleShape2D_3wyxs")
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=494666467]
+
+[node name="PlatformTemplate" type="Node2D" parent="SpawnPoints" unique_id=1554153290]
+position = Vector2(62, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpawnPoints/PlatformTemplate" unique_id=1508739285]
+texture = ExtResource("1_r83no")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpawnPoints/PlatformTemplate" unique_id=1347282213 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/PlatformTemplate/StaticBody2D" unique_id=707637813]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate2" type="Node2D" parent="SpawnPoints" unique_id=1089565019]
+position = Vector2(144, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpawnPoints/PlatformTemplate2" unique_id=1505953832]
+texture = ExtResource("1_r83no")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpawnPoints/PlatformTemplate2" unique_id=1796642608 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/PlatformTemplate2/StaticBody2D" unique_id=214736765]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate3" type="Node2D" parent="SpawnPoints" unique_id=1255355358]
+position = Vector2(103, 47)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpawnPoints/PlatformTemplate3" unique_id=545468123]
+texture = ExtResource("1_r83no")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpawnPoints/PlatformTemplate3" unique_id=795173889 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/PlatformTemplate3/StaticBody2D" unique_id=1861787270]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate5" type="Node2D" parent="SpawnPoints/PlatformTemplate3" unique_id=842353794 groups=["blockable"]]
+position = Vector2(76, -93)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpawnPoints/PlatformTemplate3/PlatformTemplate5" unique_id=335802845]
+texture = ExtResource("1_r83no")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpawnPoints/PlatformTemplate3/PlatformTemplate5" unique_id=351898952 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/PlatformTemplate3/PlatformTemplate5/StaticBody2D" unique_id=263452564]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate4" type="Node2D" parent="SpawnPoints" unique_id=1989097200]
+position = Vector2(104, -44)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpawnPoints/PlatformTemplate4" unique_id=2075501344]
+texture = ExtResource("1_r83no")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpawnPoints/PlatformTemplate4" unique_id=375870727 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnPoints/PlatformTemplate4/StaticBody2D" unique_id=406002904]
+shape = SubResource("RectangleShape2D_r83no")

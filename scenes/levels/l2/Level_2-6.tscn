@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dhl1niqlcxgh1" path="res://scenes/enemy/l2/stone_thrower.tscn" id="18_ylefg"]
 [ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="19_wnmxv"]
 [ext_resource type="PackedScene" uid="uid://cxo4iprmk5ckn" path="res://scenes/enemy/l1/flying_ninja_spawner.tscn" id="21_ylefg"]
+[ext_resource type="PackedScene" uid="uid://cfck2b8eftivm" path="res://scenes/environment/TimedPlatformGroup.tscn" id="22_wnmxv"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -242,6 +243,10 @@ position = Vector2(-94, 153)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
+[node name="TimedPlatformGroup" parent="environment" unique_id=590577594 instance=ExtResource("22_wnmxv")]
+position = Vector2(89, 193)
+appear_order = Array[int]([0, 1, 2, 3, 4])
+
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=1667498952]
@@ -289,4 +294,5 @@ max_distance = 350.0
 [editable path="enemys/EagleSpawner"]
 [editable path="enemys/FlyingNinjaSpawner"]
 [editable path="enemys/FlyingNinjaSpawner2"]
+[editable path="environment/TimedPlatformGroup"]
 [editable path="BossTransitionZone"]
