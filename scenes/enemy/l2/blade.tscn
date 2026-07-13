@@ -46,7 +46,7 @@ size = Vector2(4, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qq7fo"]
 size = Vector2(4, 16)
 
-[node name="Blade" type="Area2D" unique_id=1462592865 groups=["blockable"]]
+[node name="Blade" type="Area2D" unique_id=1462592865]
 collision_layer = 2
 script = ExtResource("1_fht2s")
 
@@ -57,7 +57,7 @@ animation = &"flying"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1624574917]
 shape = SubResource("RectangleShape2D_ap7i6")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340 groups=["blockable"]]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340]
 collision_layer = 32
 script = ExtResource("7_cg2rf")
 

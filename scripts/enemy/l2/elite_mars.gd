@@ -327,7 +327,7 @@ func _update_death_state(delta: float) -> void:
 		return
 
 	if anim.animation != "reviving":
-		anim.modulate = Color.BLACK
+		anim.modulate = Color(1.0, 0.3, 0.3)
 		anim.play("reviving")
 
 	_revive_timer -= delta
@@ -348,10 +348,10 @@ func _on_get_up_finished() -> void:
 	_death_anim_played = false
 
 	current_hp = elite_max_hp
-
-	_elite_state = EliteState.CHASE
+	_start_position = global_position
+	_move_dir = 1.0 if randf() > 0.5 else -1.0
+	_elite_state = EliteState.PATROL
 	hand_flame.visible = true
-	_face_player()
 
 	hitbox.set_deferred("monitoring", true)
 	hitbox.set_deferred("monitorable", true)

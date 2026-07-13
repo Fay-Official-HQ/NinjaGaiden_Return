@@ -223,7 +223,7 @@ func _start_rage() -> void:
 	mySickle.visible = true
 	mySickle.modulate = Color.RED
 	anim.play("xuli")
-	anim.modulate = Color.BLACK
+	anim.modulate = Color(1.0, 0.3, 0.3)
 
 
 func _die() -> void:

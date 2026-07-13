@@ -18,4 +18,4 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("fall_vulnerable"):
 		var hurt_box = body.get_node_or_null("HurtBox") as HurtBox
 		if hurt_box:
-			hurt_box.take_damage(1)
+			hurt_box.take_damage(99)
