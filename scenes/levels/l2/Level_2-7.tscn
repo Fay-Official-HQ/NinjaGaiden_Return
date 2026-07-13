@@ -64,6 +64,9 @@ size = Vector2(256, 160.2539)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r83no"]
 size = Vector2(16, 8.25)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ld0f8"]
+size = Vector2(16, 8.25)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
 size = Vector2(8, 32)
 
@@ -420,8 +423,18 @@ position = Vector2(152, 47)
 [node name="PlatformTemplate3" parent="environment/TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="2" unique_id=1255355358]
 position = Vector2(223, 47)
 
-[node name="PlatformTemplate5" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate3" index="2" unique_id=842353794]
-position = Vector2(-37, -47)
+[node name="PlatformTemplate8" type="Node2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate3" index="2" unique_id=875521879]
+position = Vector2(-33, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate3/PlatformTemplate8" unique_id=218034648]
+texture = ExtResource("9_v2f61")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate3/PlatformTemplate8" unique_id=1692030470 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate3/PlatformTemplate8/StaticBody2D" unique_id=344266053]
+shape = SubResource("RectangleShape2D_r83no")
 
 [node name="PlatformTemplate4" parent="environment/TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="3" unique_id=1989097200]
 position = Vector2(129, -20)
@@ -437,7 +450,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate5/StaticBody2D" unique_id=768007513]
-shape = SubResource("RectangleShape2D_r83no")
+shape = SubResource("RectangleShape2D_ld0f8")
 
 [node name="PlatformTemplate6" type="Node2D" parent="environment/TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="5" unique_id=762465128]
 position = Vector2(316, 47)
@@ -450,7 +463,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate6/StaticBody2D" unique_id=739119341]
-shape = SubResource("RectangleShape2D_r83no")
+shape = SubResource("RectangleShape2D_ld0f8")
 
 [node name="PlatformTemplate7" type="Node2D" parent="environment/TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="6" unique_id=1531220460]
 position = Vector2(385, 90)
@@ -463,7 +476,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate7/StaticBody2D" unique_id=2139585674]
-shape = SubResource("RectangleShape2D_r83no")
+shape = SubResource("RectangleShape2D_ld0f8")
 
 [node name="PlatformTemplate8" type="Node2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate7" unique_id=921811199]
 position = Vector2(40, -31)
@@ -476,7 +489,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="environment/TimedPlatformGroup/SpawnPoints/PlatformTemplate7/PlatformTemplate8/StaticBody2D" unique_id=1757921254]
-shape = SubResource("RectangleShape2D_r83no")
+shape = SubResource("RectangleShape2D_ld0f8")
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 
