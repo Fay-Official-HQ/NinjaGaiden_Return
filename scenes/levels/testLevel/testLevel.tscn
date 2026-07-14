@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_4d7sk"]
 [ext_resource type="PackedScene" uid="uid://dlp46175oqaa5" path="res://scenes/enemy/l2/Elite_Mars.tscn" id="10_rfoho"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="11_82y4s"]
+[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="11_k3ve1"]
+[ext_resource type="PackedScene" uid="uid://dtyjkkj8pukrm" path="res://scenes/enemy/l2/skeleton.tscn" id="12_mgnyg"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -124,6 +126,12 @@ consumable_type = 2
 
 [node name="Elite_Mars" parent="enemys" unique_id=1868551743 instance=ExtResource("10_rfoho")]
 position = Vector2(366, 231)
+
+[node name="PatrolEnemy" parent="enemys" unique_id=1227478862 instance=ExtResource("11_k3ve1")]
+position = Vector2(161, 228)
+
+[node name="Skeleton" parent="enemys" unique_id=1358438953 instance=ExtResource("12_mgnyg")]
+position = Vector2(418.26993, 221.39003)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 

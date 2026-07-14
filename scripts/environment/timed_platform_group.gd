@@ -85,10 +85,13 @@ func _start_cycle() -> void:
 func _show_platform(platform: Node2D) -> void:
 	platform.visible = true
 	platform.modulate.a = 0.0
-	_set_collision_recursive(platform, true)
 	AudioManager.play_sound(&"shibingxuli")
 	var tween = platform.create_tween()
 	tween.tween_property(platform, "modulate:a", 1.0, fade_duration)
+	tween.finished.connect(func():
+		if is_instance_valid(platform):
+			_set_collision_recursive(platform, true)
+	, CONNECT_ONE_SHOT)
 
 
 func _hide_platform(platform: Node2D) -> void:

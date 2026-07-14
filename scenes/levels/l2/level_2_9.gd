@@ -46,17 +46,17 @@ func _ready() -> void:
 
 	# step1: 锁定 X 轴，相机不再左右跟随玩家
 	#        玩家水平左右移动时，画面原地不动
-	cam.set_follow_x(false)
+	cam.set_follow_x(true)
 
 	# step2: 开启 Y 轴跟随，相机上下跟随玩家移动
 	#        玩家向上跳时画面上移，向下掉落时画面下移
-	cam.set_follow_y(true)
+	cam.set_follow_y(false)
 
 	# step3: 设置相机锁定的 X 坐标（单位：像素）
 	#        调到你关卡中玩家垂直通道的中间位置
 	#        测试方法：进游戏上下移动，看画面是否水平居中
 	#        偏左→增大数值，偏右→减小数值
-	cam.fixed_x = 0
+	#cam.fixed_x = 2450
 
 	# step4: 设置上下边界（单位：像素）
 	#        top：爬到关卡顶部时，相机停止上移的位置
@@ -64,12 +64,12 @@ func _ready() -> void:
 	#        调大 top（负更多）= 相机能跟到更高处
 	#        调小 bottom = 相机能跟到更低处
 	#        测试方法：爬到头/掉到底，看是否露出边界外的空白
-	cam.set_bounds(1, -1, -1500, 225)
+	cam.set_bounds(-3000, 0, -1, -1)
 
 	# step5（可选）：垂直偏移微调
 	#        正值=画面下移（玩家位置偏上），负值=画面上移（玩家位置偏下）
 	#        cam.offset.y = -50，你可以改成其他值 ，如果偏离为0，那么画面摄像机下方边界默认在135位置
-	#cam.offset.y = 135
+	cam.offset.y = 135
 
 
 

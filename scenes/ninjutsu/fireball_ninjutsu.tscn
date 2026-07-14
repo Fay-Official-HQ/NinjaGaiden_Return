@@ -43,3 +43,5 @@ texture = ExtResource("2_tg8wb")
 lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_sj4s4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1519689244]

@@ -44,3 +44,5 @@ texture = ExtResource("3_3e02b")
 lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_fdx56")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1256449604]
