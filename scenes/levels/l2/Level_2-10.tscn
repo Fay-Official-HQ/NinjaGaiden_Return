@@ -45,7 +45,7 @@ size = Vector2(1551, 311.64767)
 size = Vector2(8, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afwjg"]
-size = Vector2(130.99997, 343)
+size = Vector2(40.999985, 319)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_uvqua")
@@ -202,7 +202,7 @@ shape = SubResource("RectangleShape2D_nd8jy")
 target_scene = "res://scenes/ui/TestEnd.tscn"
 
 [node name="CollisionShape2D" parent="BossTransitionZone" index="0" unique_id=1505097084]
-position = Vector2(1840.5, 102.49999)
+position = Vector2(1795.5, 90.49999)
 shape = SubResource("RectangleShape2D_afwjg")
 
 [node name="Lights" type="Node2D" parent="." unique_id=164517067]
