@@ -45,7 +45,7 @@ size = Vector2(1551, 311.64767)
 size = Vector2(8, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afwjg"]
-size = Vector2(59.555054, 300.05035)
+size = Vector2(130.99997, 343)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_uvqua")
@@ -127,7 +127,7 @@ position = Vector2(2475, 408)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("8_a756w")]
-position = Vector2(62.5074, 243.44751)
+position = Vector2(63, 245)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -202,7 +202,7 @@ shape = SubResource("RectangleShape2D_nd8jy")
 target_scene = "res://scenes/ui/TestEnd.tscn"
 
 [node name="CollisionShape2D" parent="BossTransitionZone" index="0" unique_id=1505097084]
-position = Vector2(1820.2224, 81.02517)
+position = Vector2(1840.5, 102.49999)
 shape = SubResource("RectangleShape2D_afwjg")
 
 [node name="Lights" type="Node2D" parent="." unique_id=164517067]

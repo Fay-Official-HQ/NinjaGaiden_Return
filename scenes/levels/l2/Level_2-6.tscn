@@ -246,8 +246,6 @@ position = Vector2(41, 242)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=529245664]
 script = ExtResource("6_6snfe")
-target_scene = "res://scenes/levels/l2/Level_2-5.tscn"
-spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1759330780]
 position = Vector2(16.75, 240.75)
