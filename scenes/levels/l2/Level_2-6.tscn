@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="6_6snfe"]
 [ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="6_o40x0"]
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/environment/hanging_platform.tscn" id="6_w8afc"]
-[ext_resource type="PackedScene" uid="uid://dyndypp655npf" path="res://scenes/environment/BossTransitionZone.tscn" id="7_75fmd"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_jn3my"]
 [ext_resource type="PackedScene" uid="uid://deajn0bhqcu0r" path="res://scenes/enemy/l2/Elite_ArcBladeHopper.tscn" id="10_squfr"]
 [ext_resource type="PackedScene" uid="uid://dtyjkkj8pukrm" path="res://scenes/enemy/l2/skeleton.tscn" id="11_440pa"]
@@ -55,10 +54,7 @@ size = Vector2(175, 30.25)
 size = Vector2(195, 30.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
-size = Vector2(8, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_afwjg"]
-size = Vector2(12.220215, 46.201363)
+size = Vector2(14.5, 48.5)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_5t88o")
@@ -147,7 +143,7 @@ position = Vector2(2475, 408)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("5_h3nt1")]
-position = Vector2(27, 240)
+position = Vector2(41, 242)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -243,33 +239,28 @@ position = Vector2(-94, 153)
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
+position = Vector2(1612, 21)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=1667498952]
-position = Vector2(27, 240)
+position = Vector2(41, 242)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=529245664]
 script = ExtResource("6_6snfe")
-target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-5.tscn"
 spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1759330780]
+position = Vector2(16.75, 240.75)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1483181451]
 script = ExtResource("6_6snfe")
-target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
-spawn_point = "entry_right"
+target_scene = "res://scenes/levels/l2/Level_2-7.tscn"
+spawn_point = "entry_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=549222586]
+position = Vector2(1612.5, -17.5)
 shape = SubResource("RectangleShape2D_nd8jy")
-
-[node name="BossTransitionZone" parent="." unique_id=1775603525 instance=ExtResource("7_75fmd")]
-position = Vector2(2430.7522, 240.29611)
-target_scene = "res://scenes/ui/TestEnd.tscn"
-
-[node name="CollisionShape2D" parent="BossTransitionZone" index="0" unique_id=1505097084]
-position = Vector2(-2446.7522, 315.7039)
-shape = SubResource("RectangleShape2D_afwjg")
 
 [node name="Lights" type="Node2D" parent="." unique_id=164517067]
 
@@ -289,4 +280,3 @@ max_distance = 350.0
 [editable path="enemys/EagleSpawner"]
 [editable path="enemys/FlyingNinjaSpawner"]
 [editable path="enemys/FlyingNinjaSpawner2"]
-[editable path="BossTransitionZone"]

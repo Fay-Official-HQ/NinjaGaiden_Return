@@ -31,6 +31,9 @@ var _heal_material: ParticleProcessMaterial
 # 当前 HP
 var current_hp: int
 
+## 初始面朝方向（在场景 Inspector 中设置）
+@export var initial_facing_right: bool = true
+
 # 面向方向
 var facing_direction: float = 1.0
 
@@ -82,6 +85,10 @@ func _ready() -> void:
 	current_hp = data.initial_hp
 	movement.initialize(self)
 	animation.initialize(animated_sprite)
+
+	# 应用初始面向方向
+	if not initial_facing_right:
+		set_facing_direction(-1.0)
 
 	# 保存 HurtBox 碰撞体原始参数
 	_normal_hurtbox_size = hurtbox_collision.shape.size

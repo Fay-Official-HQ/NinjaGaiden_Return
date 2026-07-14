@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://6p404iw2tco6" path="res://scenes/enemy/l2/chaser_monster_spawner.tscn" id="19_02lsw"]
 [ext_resource type="PackedScene" uid="uid://cfck2b8eftivm" path="res://scenes/environment/TimedPlatformGroup.tscn" id="24_dv2in"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="26_dkcc6"]
-[ext_resource type="PackedScene" uid="uid://dyndypp655npf" path="res://scenes/environment/BossTransitionZone.tscn" id="27_wqjho"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -81,10 +80,7 @@ size = Vector2(189.5, 146.5)
 size = Vector2(16, 8.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
-size = Vector2(8, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_afwjg"]
-size = Vector2(12.220215, 46.201363)
+size = Vector2(17, 125)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_v8cwv")
@@ -182,7 +178,7 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=628386589]
-position = Vector2(-75, 135.5)
+position = Vector2(-91, 135.5)
 shape = SubResource("RectangleShape2D_tj86g")
 
 [node name="DeathZone" type="Area2D" parent="Map" unique_id=1321774903]
@@ -195,7 +191,7 @@ position = Vector2(2475, 408)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("7_2g8s6")]
-position = Vector2(11, 89)
+position = Vector2(26, 86)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -582,32 +578,29 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="environment/TimedPlatformGroup2/SpawnPoints/PlatformTemplate8/PlatformTemplate8/StaticBody2D" unique_id=223526463]
 shape = SubResource("RectangleShape2D_r83no")
 
-[node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
+[node name="entry_top" type="Marker2D" parent="." unique_id=1199975289]
+position = Vector2(35, -1382)
 
-[node name="entry_left" type="Marker2D" parent="." unique_id=1667498952]
-position = Vector2(63, 245)
+[node name="entry_bottom" type="Marker2D" parent="." unique_id=1667498952]
+position = Vector2(26, 86)
 
-[node name="TransitionZoneL" type="Area2D" parent="." unique_id=529245664]
+[node name="TransitionZoneB" type="Area2D" parent="." unique_id=529245664]
 script = ExtResource("26_dkcc6")
-target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-7.tscn"
 spawn_point = "entry_right"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1759330780]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneB" unique_id=1759330780]
+position = Vector2(-5.5, 89.5)
 shape = SubResource("RectangleShape2D_nd8jy")
 
-[node name="TransitionZoneR" type="Area2D" parent="." unique_id=1483181451]
+[node name="TransitionZoneT" type="Area2D" parent="." unique_id=1483181451]
 script = ExtResource("26_dkcc6")
-target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-9.tscn"
 spawn_point = "entry_right"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=549222586]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneT" unique_id=549222586]
+position = Vector2(17.5, -1385.5)
 shape = SubResource("RectangleShape2D_nd8jy")
-
-[node name="BossTransitionZone" parent="." unique_id=1775603525 instance=ExtResource("27_wqjho")]
-target_scene = "res://scenes/ui/TestEnd.tscn"
-
-[node name="CollisionShape2D" parent="BossTransitionZone" index="0" unique_id=1505097084]
-shape = SubResource("RectangleShape2D_afwjg")
 
 [node name="Lights" type="Node2D" parent="." unique_id=164517067]
 
@@ -640,4 +633,3 @@ max_distance = 350.0
 [editable path="enemys/EagleSpawner3"]
 [editable path="environment/TimedPlatformGroup"]
 [editable path="environment/TimedPlatformGroup2"]
-[editable path="BossTransitionZone"]

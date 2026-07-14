@@ -360,7 +360,7 @@ shape = SubResource("RectangleShape2D_nd8jy")
 
 [node name="BossTransitionZone" parent="." unique_id=1775603525 instance=ExtResource("18_ecqt6")]
 position = Vector2(2430.7522, 240.29611)
-target_scene = "res://scenes/ui/TestEnd.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-6.tscn"
 
 [node name="CollisionShape2D" parent="BossTransitionZone" index="0" unique_id=1505097084]
 position = Vector2(22.247803, 13.703888)

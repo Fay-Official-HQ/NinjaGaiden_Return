@@ -68,7 +68,7 @@ size = Vector2(16, 8.25)
 size = Vector2(16, 8.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
-size = Vector2(8, 32)
+size = Vector2(26, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afwjg"]
 size = Vector2(12.220215, 46.201363)
@@ -76,6 +76,7 @@ size = Vector2(12.220215, 46.201363)
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_atfhw")
 metadata/_edit_horizontal_guides_ = [272.0]
+metadata/_edit_vertical_guides_ = [4055.0]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=67242023]
 color = Color(0.627451, 0.627451, 0.627451, 1)
@@ -357,7 +358,7 @@ move_speed = 40.0
 initial_facing_right = false
 
 [node name="Elite_SpinningSickleThrower2" parent="enemys" unique_id=900326851 instance=ExtResource("20_jrjdt")]
-position = Vector2(3951, 67)
+position = Vector2(3850, 65)
 
 [node name="CollisionShape2D" parent="enemys/Elite_SpinningSickleThrower2/DetectRange" parent_id_path=PackedInt32Array(900326851, 511880464) index="0" unique_id=1649966460]
 position = Vector2(0, -59)
@@ -492,24 +493,27 @@ collision_mask = 3
 shape = SubResource("RectangleShape2D_ld0f8")
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
+position = Vector2(4018, 53)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=1667498952]
-position = Vector2(63, 245)
+position = Vector2(63, 244)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=529245664]
 script = ExtResource("22_nnr25")
-target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-6.tscn"
 spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1759330780]
+position = Vector2(76, 336)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1483181451]
 script = ExtResource("22_nnr25")
-target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
-spawn_point = "entry_right"
+target_scene = "res://scenes/levels/l2/Level_2-8.tscn"
+spawn_point = "entry_bottom"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=549222586]
+position = Vector2(4062, 29)
 shape = SubResource("RectangleShape2D_nd8jy")
 
 [node name="BossTransitionZone" parent="." unique_id=1775603525 instance=ExtResource("23_xmli6")]
