@@ -169,7 +169,6 @@ initial_facing_right = false
 
 [node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("9_tqtyv")]
 position = Vector2(-80, 211)
-consumable_type = 2
 
 [node name="Item2" parent="Items" unique_id=944495416 instance=ExtResource("9_tqtyv")]
 position = Vector2(-303, 78)

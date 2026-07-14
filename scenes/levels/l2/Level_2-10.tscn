@@ -198,14 +198,6 @@ spawn_point = "entry_left"
 position = Vector2(65, 288)
 shape = SubResource("RectangleShape2D_nd8jy")
 
-[node name="TransitionZoneR" type="Area2D" parent="." unique_id=1483181451]
-script = ExtResource("23_5trhl")
-target_scene = "res://scenes/levels/l2/Level_2-4.tscn"
-spawn_point = "entry_right"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=549222586]
-shape = SubResource("RectangleShape2D_nd8jy")
-
 [node name="BossTransitionZone" parent="." unique_id=1775603525 instance=ExtResource("24_vexmm")]
 target_scene = "res://scenes/ui/TestEnd.tscn"
 
