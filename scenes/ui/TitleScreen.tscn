@@ -6,10 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://eg83mkc7bovg" path="res://assets/img/title/mianzeshengming.png" id="3_tbfit"]
 [ext_resource type="AudioStream" uid="uid://dfu14fcju6ubs" path="res://assets/audio/player/huixue.wav" id="3_xnmwc"]
 [ext_resource type="Texture2D" uid="uid://cjo7a8euvc6c4" path="res://assets/img/title/fayofficial2026.png" id="4_j4pmt"]
-[ext_resource type="Texture2D" uid="uid://5t6l81drnt5v" path="res://assets/img/title/gamestart.png" id="5_6j5qt"]
 [ext_resource type="Texture2D" uid="uid://r888jmc2pvln" path="res://assets/img/title/cursor.png" id="5_bj1w8"]
-[ext_resource type="Texture2D" uid="uid://du1aaf470ts8n" path="res://assets/img/title/Instructions.png" id="6_p52wy"]
 [ext_resource type="Script" uid="uid://dumplln0mtsxv" path="res://scripts/ui/TitleScreen.gd" id="9_cle6h"]
+[ext_resource type="FontFile" uid="uid://weya03b7ubu5" path="res://assets/fonts/imgfont.png" id="9_pf4x2"]
 
 [node name="TitleScreen" type="Node2D" unique_id=329057504]
 script = ExtResource("9_cle6h")
@@ -30,7 +29,7 @@ texture = ExtResource("1_ny3vc")
 [node name="MenuBackground" type="Node2D" parent="Menu" unique_id=780735610]
 
 [node name="Title" type="Sprite2D" parent="Menu/MenuBackground" unique_id=812250661]
-position = Vector2(240, 80)
+position = Vector2(240, 75)
 texture = ExtResource("2_j2lur")
 
 [node name="EDUCATIONALUSEONLY" type="Sprite2D" parent="Menu/MenuBackground" unique_id=972738879]
@@ -45,13 +44,59 @@ texture = ExtResource("4_j4pmt")
 position = Vector2(186, 152)
 texture = ExtResource("5_bj1w8")
 
-[node name="GameStart" type="Sprite2D" parent="Menu" unique_id=1159414177]
-position = Vector2(240, 151)
-texture = ExtResource("5_6j5qt")
+[node name="GAMESTART" type="Node2D" parent="Menu" unique_id=767832967]
+position = Vector2(200, 148)
 
-[node name="Instructions" type="Sprite2D" parent="Menu" unique_id=990828463]
-position = Vector2(250, 167)
-texture = ExtResource("6_p52wy")
+[node name="Label" type="Label" parent="Menu/GAMESTART" unique_id=1852012168]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_pf4x2")
+theme_override_font_sizes/font_size = 7
+text = "GAME"
+
+[node name="Label2" type="Label" parent="Menu/GAMESTART" unique_id=1999424828]
+offset_left = 38.0
+offset_right = 78.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_pf4x2")
+theme_override_font_sizes/font_size = 7
+text = "START"
+
+[node name="STAGESELECT" type="Node2D" parent="Menu" unique_id=843924899]
+position = Vector2(200, 164)
+
+[node name="Label" type="Label" parent="Menu/STAGESELECT" unique_id=836576098]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_pf4x2")
+theme_override_font_sizes/font_size = 7
+text = "STAGE"
+
+[node name="Label2" type="Label" parent="Menu/STAGESELECT" unique_id=1215274270]
+offset_left = 44.0
+offset_right = 92.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_pf4x2")
+theme_override_font_sizes/font_size = 7
+text = "SELECT"
+
+[node name="KEYCONFIG" type="Node2D" parent="Menu" unique_id=1015132235]
+position = Vector2(200, 180)
+
+[node name="Label" type="Label" parent="Menu/KEYCONFIG" unique_id=1551578673]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_pf4x2")
+theme_override_font_sizes/font_size = 7
+text = "KEY"
+
+[node name="Label2" type="Label" parent="Menu/KEYCONFIG" unique_id=1183289144]
+offset_left = 30.0
+offset_right = 78.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("9_pf4x2")
+theme_override_font_sizes/font_size = 7
+text = "CONFIG"
 
 [node name="LogoClick" type="AudioStreamPlayer" parent="." unique_id=442050061]
 stream = ExtResource("2_bt6bf")

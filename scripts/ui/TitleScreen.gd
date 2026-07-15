@@ -21,10 +21,11 @@ var _transitioning := false
 # ============================================================
 
 ## 菜单选项列表：每个选项记录了它的 Y 坐标和对应的动作名称
-## 以后要加新选项（如 "设置"、"退出"），往这里加一项即可
+## 以后要加新选项，往这里加一项即可
 var _menu_items := [
 	{ "y": 151, "action": "start_game" },
-	{ "y": 167, "action": "show_instructions" },
+	{ "y": 167, "action": "stage_select" },
+	{ "y": 183, "action": "key_config" },
 ]
 
 ## Cursor 光标指向第一个选项（GameStart）时的 Y 位置
@@ -193,10 +194,15 @@ func _confirm_selection():
 			const CutsceneScript = preload("res://scripts/ui/Cutscene.gd")
 			CutsceneScript.target_chapter = 1
 			get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")
-		"show_instructions":
-			# 操作说明功能待实现，先恢复输入
+		"stage_select":
+			var tween = create_tween()
+			tween.tween_property(menu, "modulate:a", 0.0, MENU_FADE_DURATION)
+			await tween.finished
+			get_tree().change_scene_to_file("res://scenes/ui/StageSelect.tscn")
+
+		"key_config":
 			_transitioning = false
-			print("操作说明功能待实现")
+			print("改建功能待实现")
 
 
 # 光标弹入（带弹性缩放）

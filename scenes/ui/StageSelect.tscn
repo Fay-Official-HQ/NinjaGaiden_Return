@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://i8snatgymhvm"]
+
+[ext_resource type="Script" uid="uid://bftxhymai55vt" path="res://scripts/ui/StageSelect.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="2_wivvb"]
+[ext_resource type="Texture2D" uid="uid://r888jmc2pvln" path="res://assets/img/title/cursor.png" id="6_qglys"]
+[ext_resource type="AudioStream" uid="uid://16xhjtbilv8l" path="res://assets/audio/player/bishaji.wav" id="8_ip40n"]
+[ext_resource type="AudioStream" uid="uid://dfu14fcju6ubs" path="res://assets/audio/player/huixue.wav" id="9_ql5gd"]
+
+[node name="StageSelect" type="Node2D" unique_id=329057504]
+script = ExtResource("1")
+
+[node name="BlackOverlay" type="ColorRect" parent="." unique_id=1824288829]
+offset_left = -30.0
+offset_top = -20.0
+offset_right = 515.0
+offset_bottom = 298.0
+color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Node2D" parent="." unique_id=998258200]
+
+[node name="MenuBackground" type="Node2D" parent="Menu" unique_id=780735610]
+
+[node name="Label" type="Label" parent="Menu/MenuBackground" unique_id=1225942601]
+offset_left = 206.0
+offset_top = 34.0
+offset_right = 266.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "請選擇關卡："
+
+[node name="Label2" type="Label" parent="Menu/MenuBackground" unique_id=225249157]
+offset_left = 87.0
+offset_top = 243.0
+offset_right = 384.0
+offset_bottom = 262.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "Ｗ/Ｓ：上下移動          SPACE：確認          ESC：返回主選單"
+
+[node name="Cursor" type="Sprite2D" parent="Menu" unique_id=1826412558]
+position = Vector2(202, 75)
+texture = ExtResource("6_qglys")
+
+[node name="chapter_1" type="Node2D" parent="Menu" unique_id=767832967]
+position = Vector2(222, 127)
+
+[node name="Label" type="Label" parent="Menu/chapter_1" unique_id=1951312433]
+offset_left = -5.0
+offset_top = -60.0
+offset_right = 35.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第一章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_2" type="Node2D" parent="Menu" unique_id=160014848]
+position = Vector2(222, 127)
+
+[node name="Label" type="Label" parent="Menu/chapter_2" unique_id=986731156]
+offset_left = -5.0
+offset_top = -42.0
+offset_right = 35.0
+offset_bottom = -19.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第二章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_3" type="Node2D" parent="Menu" unique_id=2139174724]
+position = Vector2(222, 145)
+
+[node name="Label" type="Label" parent="Menu/chapter_3" unique_id=1041484300]
+offset_left = -5.0
+offset_top = -42.0
+offset_right = 35.0
+offset_bottom = -19.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第三章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_4" type="Node2D" parent="Menu" unique_id=386314622]
+position = Vector2(222, 145)
+
+[node name="Label" type="Label" parent="Menu/chapter_4" unique_id=890871147]
+offset_left = -5.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第四章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_5" type="Node2D" parent="Menu" unique_id=1783315310]
+position = Vector2(222, 163)
+
+[node name="Label" type="Label" parent="Menu/chapter_5" unique_id=16851954]
+offset_left = -5.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第五章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_6" type="Node2D" parent="Menu" unique_id=540695602]
+position = Vector2(222, 181)
+
+[node name="Label" type="Label" parent="Menu/chapter_6" unique_id=943788058]
+offset_left = -5.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第六章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_7" type="Node2D" parent="Menu" unique_id=972888586]
+position = Vector2(222, 199)
+
+[node name="Label" type="Label" parent="Menu/chapter_7" unique_id=668424079]
+offset_left = -5.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第七章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_8" type="Node2D" parent="Menu" unique_id=871526762]
+position = Vector2(222, 217)
+
+[node name="Label" type="Label" parent="Menu/chapter_8" unique_id=1902347506]
+offset_left = -5.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第八章"
+metadata/_edit_use_anchors_ = true
+
+[node name="chapter_9" type="Node2D" parent="Menu" unique_id=732520257]
+position = Vector2(222, 235)
+
+[node name="Label" type="Label" parent="Menu/chapter_9" unique_id=1802879076]
+offset_left = -5.0
+offset_top = -24.0
+offset_right = 35.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "第九章"
+
+[node name="LogoClick" type="AudioStreamPlayer" parent="." unique_id=442050061]
+stream = ExtResource("8_ip40n")
+
+[node name="MenuClick" type="AudioStreamPlayer" parent="." unique_id=720618694]
+stream = ExtResource("9_ql5gd")
