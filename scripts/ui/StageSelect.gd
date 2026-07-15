@@ -20,6 +20,8 @@ const CHAPTERS := [
 @onready var menu: Node2D = $Menu
 @onready var cursor: Sprite2D = $Menu/Cursor
 @onready var menu_click_sfx: AudioStreamPlayer = $MenuClick
+@onready var _msg1: Label = $Menu/MenuBackground/msg1
+@onready var _msg2: Label = $Menu/MenuBackground/msg2
 
 @onready var chapter_nodes: Array[Node2D] = [
 	$Menu/chapter_1,
@@ -37,6 +39,7 @@ const CHAPTERS := [
 func _ready() -> void:
 	UIManager.visible = false
 	_gray_unlocked()
+	_update_hint_text()
 
 
 func _gray_unlocked() -> void:
@@ -55,11 +58,12 @@ func _input(event: InputEvent) -> void:
 		_move_cursor(-1)
 	elif event.is_action_pressed("nav_down"):
 		_move_cursor(1)
-	elif event.is_action_pressed("pass"):
-		_confirm_selection()
 	elif event is InputEventKey and event.pressed and not event.echo \
 			and event.keycode == KEY_ESCAPE:
 		_go_back()
+	elif event is InputEventKey and event.pressed and not event.echo \
+			and event.keycode == KEY_SPACE:
+		_confirm_selection()
 
 
 func _move_cursor(dir: int) -> void:
@@ -82,6 +86,19 @@ func _confirm_selection() -> void:
 
 	Cutscene.target_chapter = chapter.chapter
 	get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")
+
+
+func _update_hint_text() -> void:
+	_msg1.text = "%s/%s：上下移動" % [_get_key_display_text("nav_up"), _get_key_display_text("nav_down")]
+	_msg2.text = "SPACE：確認"
+
+
+func _get_key_display_text(action: String) -> String:
+	var events = InputMap.action_get_events(action)
+	for e in events:
+		if e is InputEventKey:
+			return OS.get_keycode_string(e.physical_keycode)
+	return ""
 
 
 func _go_back() -> void:

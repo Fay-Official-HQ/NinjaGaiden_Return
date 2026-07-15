@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://occgqmh5lwr3"]
 
-[ext_resource type="Texture2D" uid="uid://b8lip1p523xsi" path="res://assets/img/title/continue.png" id="1_lhij4"]
-[ext_resource type="Texture2D" uid="uid://bcuntuebgjy18" path="res://assets/img/title/quit.png" id="2_wdbrb"]
+[ext_resource type="FontFile" uid="uid://weya03b7ubu5" path="res://assets/fonts/imgfont.png" id="3_lhij4"]
 [ext_resource type="Texture2D" uid="uid://r888jmc2pvln" path="res://assets/img/title/cursor.png" id="3_xfpdw"]
 [ext_resource type="AudioStream" uid="uid://dfu14fcju6ubs" path="res://assets/audio/player/huixue.wav" id="4_ln0yf"]
 [ext_resource type="AudioStream" uid="uid://d375hx6uk27yo" path="res://assets/audio/se/gameover.wav" id="5_ns8sj"]
@@ -21,17 +20,29 @@ color = Color(0, 0, 0, 1)
 
 [node name="Panel" type="Node2D" parent="." unique_id=1990708257]
 
-[node name="Option_Continue" type="Sprite2D" parent="Panel" unique_id=387420904]
-position = Vector2(246, 131)
-texture = ExtResource("1_lhij4")
-
-[node name="Option_Quit" type="Sprite2D" parent="Panel" unique_id=34450763]
-position = Vector2(232, 145)
-texture = ExtResource("2_wdbrb")
-
 [node name="Cursor" type="Sprite2D" parent="Panel" unique_id=58533139]
 position = Vector2(202, 132)
 texture = ExtResource("3_xfpdw")
+
+[node name="Option_Continue" type="Node2D" parent="Panel" unique_id=1237828048]
+position = Vector2(216, 128)
+
+[node name="CONTINUE" type="Label" parent="Panel/Option_Continue" unique_id=1111528569]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_lhij4")
+theme_override_font_sizes/font_size = 7
+text = "CONTINUE"
+
+[node name="Option_Gameover" type="Node2D" parent="Panel" unique_id=308682770]
+position = Vector2(216, 142)
+
+[node name="GAMEOVER" type="Label" parent="Panel/Option_Gameover" unique_id=445983238]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("3_lhij4")
+theme_override_font_sizes/font_size = 7
+text = "GAMEOVER"
 
 [node name="ConfirmSFX" type="AudioStreamPlayer" parent="." unique_id=944499588]
 stream = ExtResource("4_ln0yf")

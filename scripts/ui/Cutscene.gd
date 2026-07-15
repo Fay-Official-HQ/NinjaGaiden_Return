@@ -39,7 +39,7 @@ const SUBTITLE_FADE_DUR   = 1.8   # 副标题淡入用时（秒）
 
 const IDLE_HOLD_TIME      = 2.0   # 所有文字显示完后，画面定格的时长（秒）
 const FADE_OUT_TIME       = 1.5   # 结尾屏幕渐黑用的时间（秒）
-const SKIP_ACTION         = "pass"  # 玩家可以按这个键跳过整个演出
+const SKIP_KEYCODE        = KEY_SPACE
 
 
 # ============================================================
@@ -156,7 +156,8 @@ func _input(event):
 	if _transitioning:
 		return
 
-	if event.is_action_pressed(SKIP_ACTION):
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.keycode == SKIP_KEYCODE:
 		_skip = true
 		# 先快速变黑再切关卡，视觉上更平滑
 		_fade_overlay.modulate.a = 0.0

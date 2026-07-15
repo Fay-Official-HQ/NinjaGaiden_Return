@@ -105,7 +105,8 @@ func _input(event):
 	if _transitioning:
 		return
 
-	if event.is_action_pressed("pass"):
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.keycode == KEY_SPACE:
 		# 阶段1：Logo 淡入中或已完全显示 → 切换到菜单
 		if (logo_fading or logo_visible) and not menu_active:
 			if logo_fading:
@@ -201,8 +202,10 @@ func _confirm_selection():
 			get_tree().change_scene_to_file("res://scenes/ui/StageSelect.tscn")
 
 		"key_config":
-			_transitioning = false
-			print("改建功能待实现")
+			var tween = create_tween()
+			tween.tween_property(menu, "modulate:a", 0.0, MENU_FADE_DURATION)
+			await tween.finished
+			get_tree().change_scene_to_file("res://scenes/ui/KeyConfig.tscn")
 
 
 # 光标弹入（带弹性缩放）

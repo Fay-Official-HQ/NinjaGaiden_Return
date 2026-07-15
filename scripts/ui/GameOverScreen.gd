@@ -82,9 +82,11 @@ func _input(event):
 	if not _active or _transitioning:
 		return
 
-	if event.is_action_pressed("pass"):
+	if event is InputEventKey and event.pressed and not event.echo \
+			and event.keycode == KEY_SPACE:
 		_confirm_selection()
-	elif event.is_action_pressed("nav_up"):
+
+	if event.is_action_pressed("nav_up"):
 		_move_cursor(-1)
 	elif event.is_action_pressed("nav_down"):
 		_move_cursor(1)

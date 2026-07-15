@@ -21,29 +21,47 @@ color = Color(0, 0, 0, 1)
 [node name="MenuBackground" type="Node2D" parent="Menu" unique_id=780735610]
 
 [node name="Label" type="Label" parent="Menu/MenuBackground" unique_id=1225942601]
-offset_left = 206.0
+offset_left = 210.0
 offset_top = 34.0
-offset_right = 266.0
+offset_right = 270.0
 offset_bottom = 57.0
 theme_override_fonts/font = ExtResource("2_wivvb")
 theme_override_font_sizes/font_size = 10
-text = "請選擇關卡："
+text = "請選擇關卡"
 
-[node name="Label2" type="Label" parent="Menu/MenuBackground" unique_id=225249157]
-offset_left = 87.0
-offset_top = 243.0
-offset_right = 384.0
-offset_bottom = 262.0
+[node name="msg1" type="Label" parent="Menu/MenuBackground" unique_id=1166953057]
+offset_left = 39.0
+offset_top = 246.0
+offset_right = 147.0
+offset_bottom = 264.0
 theme_override_fonts/font = ExtResource("2_wivvb")
 theme_override_font_sizes/font_size = 10
-text = "Ｗ/Ｓ：上下移動          SPACE：確認          ESC：返回主選單"
+text = "Ｗ/Ｓ：上下移動"
+
+[node name="msg2" type="Label" parent="Menu/MenuBackground" unique_id=1113873318]
+offset_left = 206.0
+offset_top = 246.0
+offset_right = 314.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "SPACE：確認"
+
+[node name="msg3" type="Label" parent="Menu/MenuBackground" unique_id=1988116249]
+offset_left = 351.0
+offset_top = 246.0
+offset_right = 459.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("2_wivvb")
+theme_override_font_sizes/font_size = 10
+text = "ESC：返回主選單"
 
 [node name="Cursor" type="Sprite2D" parent="Menu" unique_id=1826412558]
-position = Vector2(202, 75)
+position = Vector2(204, 73)
 texture = ExtResource("6_qglys")
 
 [node name="chapter_1" type="Node2D" parent="Menu" unique_id=767832967]
-position = Vector2(222, 127)
+position = Vector2(224, 125)
 
 [node name="Label" type="Label" parent="Menu/chapter_1" unique_id=1951312433]
 offset_left = -5.0
@@ -56,7 +74,7 @@ text = "第一章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_2" type="Node2D" parent="Menu" unique_id=160014848]
-position = Vector2(222, 127)
+position = Vector2(224, 125)
 
 [node name="Label" type="Label" parent="Menu/chapter_2" unique_id=986731156]
 offset_left = -5.0
@@ -69,7 +87,7 @@ text = "第二章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_3" type="Node2D" parent="Menu" unique_id=2139174724]
-position = Vector2(222, 145)
+position = Vector2(224, 143)
 
 [node name="Label" type="Label" parent="Menu/chapter_3" unique_id=1041484300]
 offset_left = -5.0
@@ -82,7 +100,7 @@ text = "第三章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_4" type="Node2D" parent="Menu" unique_id=386314622]
-position = Vector2(222, 145)
+position = Vector2(224, 143)
 
 [node name="Label" type="Label" parent="Menu/chapter_4" unique_id=890871147]
 offset_left = -5.0
@@ -95,7 +113,7 @@ text = "第四章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_5" type="Node2D" parent="Menu" unique_id=1783315310]
-position = Vector2(222, 163)
+position = Vector2(224, 161)
 
 [node name="Label" type="Label" parent="Menu/chapter_5" unique_id=16851954]
 offset_left = -5.0
@@ -108,7 +126,7 @@ text = "第五章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_6" type="Node2D" parent="Menu" unique_id=540695602]
-position = Vector2(222, 181)
+position = Vector2(224, 179)
 
 [node name="Label" type="Label" parent="Menu/chapter_6" unique_id=943788058]
 offset_left = -5.0
@@ -121,7 +139,7 @@ text = "第六章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_7" type="Node2D" parent="Menu" unique_id=972888586]
-position = Vector2(222, 199)
+position = Vector2(224, 197)
 
 [node name="Label" type="Label" parent="Menu/chapter_7" unique_id=668424079]
 offset_left = -5.0
@@ -134,7 +152,7 @@ text = "第七章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_8" type="Node2D" parent="Menu" unique_id=871526762]
-position = Vector2(222, 217)
+position = Vector2(224, 215)
 
 [node name="Label" type="Label" parent="Menu/chapter_8" unique_id=1902347506]
 offset_left = -5.0
@@ -147,7 +165,7 @@ text = "第八章"
 metadata/_edit_use_anchors_ = true
 
 [node name="chapter_9" type="Node2D" parent="Menu" unique_id=732520257]
-position = Vector2(222, 235)
+position = Vector2(224, 233)
 
 [node name="Label" type="Label" parent="Menu/chapter_9" unique_id=1802879076]
 offset_left = -5.0
@@ -157,6 +175,7 @@ offset_bottom = -1.0
 theme_override_fonts/font = ExtResource("2_wivvb")
 theme_override_font_sizes/font_size = 10
 text = "第九章"
+metadata/_edit_use_anchors_ = true
 
 [node name="LogoClick" type="AudioStreamPlayer" parent="." unique_id=442050061]
 stream = ExtResource("8_ip40n")

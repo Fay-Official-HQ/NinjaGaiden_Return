@@ -41,9 +41,13 @@ func _process(delta: float) -> void:
 		cooldowns[key] = max(cooldowns[key] - delta, 0.0)
 
 func can_use(amount: int = SWORD_TP_COST) -> bool:
+	if CheatManager.god_mode:
+		return true
 	return current_tp >= amount
 
 func consume_tp(amount: int = SWORD_TP_COST) -> bool:
+	if CheatManager.god_mode:
+		return true
 	if current_tp >= amount:
 		current_tp -= amount
 		tp_changed.emit(current_tp)
@@ -58,9 +62,13 @@ func add_tp(amount: int) -> void:
 	tp_changed.emit(current_tp)
 
 func is_on_cooldown(skill_name: String) -> bool:
+	if CheatManager.god_mode:
+		return false
 	return cooldowns.get(skill_name, 0.0) > 0.0
 
 func start_cooldown(skill_name: String) -> void:
+	if CheatManager.god_mode:
+		return
 	var cd_time = FINISH_COOLDOWN_TIME if skill_name == "finish" else COOLDOWN_TIME
 	cooldowns[skill_name] = cd_time
 

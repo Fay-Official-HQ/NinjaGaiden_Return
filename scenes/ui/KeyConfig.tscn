@@ -1,0 +1,339 @@
+[gd_scene format=3 uid="uid://dyhc5xpbcwejh"]
+
+[ext_resource type="Script" uid="uid://derhmshtkxoom" path="res://scripts/ui/KeyConfig.gd" id="1_4e5rb"]
+[ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="2_pukgg"]
+[ext_resource type="Texture2D" uid="uid://r888jmc2pvln" path="res://assets/img/title/cursor.png" id="3_kbwrq"]
+[ext_resource type="AudioStream" uid="uid://dfu14fcju6ubs" path="res://assets/audio/player/huixue.wav" id="5_i6djo"]
+
+[node name="KeyConfig" type="Node2D" unique_id=329057504]
+script = ExtResource("1_4e5rb")
+
+[node name="BlackOverlay" type="ColorRect" parent="." unique_id=1824288829]
+offset_left = -30.0
+offset_top = -20.0
+offset_right = 515.0
+offset_bottom = 298.0
+color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Node2D" parent="." unique_id=998258200]
+position = Vector2(1, 0)
+
+[node name="MenuBackground" type="Node2D" parent="Menu" unique_id=780735610]
+
+[node name="title" type="Label" parent="Menu/MenuBackground" unique_id=1225942601]
+offset_left = 213.0
+offset_top = 28.0
+offset_right = 283.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "操作設定"
+
+[node name="msg1" type="Label" parent="Menu/MenuBackground" unique_id=131352892]
+offset_left = 39.0
+offset_top = 246.0
+offset_right = 147.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "Ｗ/Ｓ：上下移動"
+
+[node name="msg2" type="Label" parent="Menu/MenuBackground" unique_id=332590577]
+offset_left = 211.0
+offset_top = 246.0
+offset_right = 319.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "SPACE：確認"
+
+[node name="msg3" type="Label" parent="Menu/MenuBackground" unique_id=356680531]
+offset_left = 351.0
+offset_top = 246.0
+offset_right = 459.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "ESC：返回主選單"
+
+[node name="Cursor" type="Sprite2D" parent="Menu" unique_id=1826412558]
+position = Vector2(183, 64)
+texture = ExtResource("3_kbwrq")
+
+[node name="Key1" type="Node2D" parent="Menu" unique_id=767832967]
+position = Vector2(213, 116)
+
+[node name="Label" type="Label" parent="Menu/Key1" unique_id=1951312433]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "上"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key1" unique_id=1436955246]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "W"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key2" type="Node2D" parent="Menu" unique_id=1199174203]
+position = Vector2(213, 131)
+
+[node name="Label" type="Label" parent="Menu/Key2" unique_id=1776089373]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "下"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key2" unique_id=19453894]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "S"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key3" type="Node2D" parent="Menu" unique_id=2077314692]
+position = Vector2(213, 146)
+
+[node name="Label" type="Label" parent="Menu/Key3" unique_id=1664045910]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "左"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key3" unique_id=424178721]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "A"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key4" type="Node2D" parent="Menu" unique_id=1522555667]
+position = Vector2(213, 161)
+
+[node name="Label" type="Label" parent="Menu/Key4" unique_id=552326438]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "右"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key4" unique_id=224705528]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "D"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key5" type="Node2D" parent="Menu" unique_id=52912450]
+position = Vector2(213, 176)
+
+[node name="Label" type="Label" parent="Menu/Key5" unique_id=351562866]
+offset_left = -14.0
+offset_top = -59.0
+offset_right = 26.0
+offset_bottom = -36.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "攻擊"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key5" unique_id=1845002934]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "J"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key6" type="Node2D" parent="Menu" unique_id=184649433]
+position = Vector2(213, 191)
+
+[node name="Label" type="Label" parent="Menu/Key6" unique_id=1584283794]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "跳躍"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key6" unique_id=696159035]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "K"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key7" type="Node2D" parent="Menu" unique_id=489361411]
+position = Vector2(213, 206)
+
+[node name="Label" type="Label" parent="Menu/Key7" unique_id=943948718]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "架刀"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key7" unique_id=345398993]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "L"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key8" type="Node2D" parent="Menu" unique_id=446198420]
+position = Vector2(213, 221)
+
+[node name="Label" type="Label" parent="Menu/Key8" unique_id=1064674720]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "施放忍術"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key8" unique_id=1250271449]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "U"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key9" type="Node2D" parent="Menu" unique_id=2005496523]
+position = Vector2(213, 236)
+
+[node name="Label" type="Label" parent="Menu/Key9" unique_id=1072383665]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "切換忍術"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key9" unique_id=891408985]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "I"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key10" type="Node2D" parent="Menu" unique_id=1927670496]
+position = Vector2(213, 251)
+
+[node name="Label" type="Label" parent="Menu/Key10" unique_id=376049842]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "滅殺"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key10" unique_id=561652624]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "H"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key11" type="Node2D" parent="Menu" unique_id=2124176351]
+position = Vector2(213, 266)
+
+[node name="Label" type="Label" parent="Menu/Key11" unique_id=997935692]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 26.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "真龍閃華"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key11" unique_id=1773274133]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "O"
+metadata/_edit_use_anchors_ = true
+
+[node name="Key12" type="Node2D" parent="Menu" unique_id=1197633311]
+position = Vector2(213, 281)
+
+[node name="Label" type="Label" parent="Menu/Key12" unique_id=481603914]
+offset_left = -14.0
+offset_top = -60.0
+offset_right = 31.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "暫停"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Menu/Key12" unique_id=1532456802]
+offset_left = 47.0
+offset_top = -60.0
+offset_right = 87.0
+offset_bottom = -37.0
+theme_override_fonts/font = ExtResource("2_pukgg")
+theme_override_font_sizes/font_size = 10
+text = "SPACE"
+
+[node name="MenuClick" type="AudioStreamPlayer" parent="." unique_id=720618694]
+stream = ExtResource("5_i6djo")

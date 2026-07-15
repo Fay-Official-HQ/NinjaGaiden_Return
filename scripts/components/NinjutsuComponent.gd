@@ -60,13 +60,14 @@ func _set_ninjutsu(index: int) -> void:
 	ninjutsu_switched.emit(current_ninjutsu_index, ninjutsu_name)
 
 func cast_ninjutsu(facing_override: float = 0.0) -> void:
-	if current_mp < mp_cost:
-		print("MP不足，无法释放")
-		UIManager.show_message("忍術不足！")
-		return
+	if not CheatManager.god_mode:
+		if current_mp < mp_cost:
+			print("MP不足，无法释放")
+			UIManager.show_message("忍術不足！")
+			return
 
-	current_mp -= mp_cost
-	mp_changed.emit(current_mp)
+		current_mp -= mp_cost
+		mp_changed.emit(current_mp)
 	ninjutsu_used.emit()
 
 	match current_ninjutsu_index:
