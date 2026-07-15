@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://weya03b7ubu5"
+path="res://.godot/imported/imgfont.png-f7146bf4fb538e42609b89b59003ae53.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/imgfont.png"
+dest_files=["res://.godot/imported/imgfont.png-f7146bf4fb538e42609b89b59003ae53.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("\'0\'", "\'1\'", "\'2\'", "\'3\'", "\'4\'", "\'5\'", "\'6\'", "\'7\'", "\'8\'", "\'9\'", "\'A\'", "\'B\'", "\'C\'", "\'D\'", "\'E\'", "\'F\'", "\'G\'", "\'H\'", "\'I\'", "\'J\'", "\'K\'", "\'L\'", "\'M\'", "\'N\'", "\'O\'", "\'P\'", "\'Q\'", "\'R\'", "\'S\'", "\'T\'", "\'U\'", "\'V\'", "\'W\'", "\'X\'", "\'Y\'", "\'Z\'")
+kerning_pairs=PackedStringArray()
+columns=36
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=1
