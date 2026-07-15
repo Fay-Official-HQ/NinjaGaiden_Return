@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://cvcbl6pipg1wo" path="res://scenes/environment/WindZone.tscn" id="8_hytie"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_47yxb"]
 [ext_resource type="PackedScene" uid="uid://dlp46175oqaa5" path="res://scenes/enemy/l2/Elite_Mars.tscn" id="12_k0kit"]
+[ext_resource type="Script" uid="uid://cduihly0ss1id" path="res://scripts/environment/BossTransitionZone.gd" id="13_clwiy"]
 [ext_resource type="PackedScene" uid="uid://dtyjkkj8pukrm" path="res://scenes/enemy/l2/skeleton.tscn" id="15_q8u7o"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="23_5trhl"]
-[ext_resource type="PackedScene" uid="uid://dyndypp655npf" path="res://scenes/environment/BossTransitionZone.tscn" id="24_vexmm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -44,8 +44,8 @@ size = Vector2(1551, 311.64767)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nd8jy"]
 size = Vector2(8, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_afwjg"]
-size = Vector2(40.999985, 319)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8pop"]
+size = Vector2(44, 100)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_uvqua")
@@ -117,6 +117,10 @@ collision_mask = 3
 position = Vector2(-75, 135.5)
 shape = SubResource("RectangleShape2D_tj86g")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/TileMapLayer/StopMoving" unique_id=2034064829]
+position = Vector2(1886, -44)
+shape = SubResource("RectangleShape2D_tj86g")
+
 [node name="DeathZone" type="Area2D" parent="Map" unique_id=1321774903]
 script = ExtResource("7_rq8xj")
 metadata/_custom_type_script = "uid://c04yqponxtme3"
@@ -174,7 +178,6 @@ shape = SubResource("RectangleShape2D_clwiy")
 [node name="environment" type="Node" parent="." unique_id=503055053]
 
 [node name="WindZone" parent="environment" unique_id=1483867348 instance=ExtResource("8_hytie")]
-visible = false
 position = Vector2(81.57375, 83.9093)
 wind_duration = 3.0
 wind_direction = 2
@@ -183,6 +186,9 @@ one_shot = false
 [node name="CollisionShape2D" parent="environment/WindZone" index="0" unique_id=1854189898]
 position = Vector2(670.4263, 55.0907)
 shape = SubResource("RectangleShape2D_nqosh")
+
+[node name="WindLabel" parent="environment/WindZone/CanvasLayer" parent_id_path=PackedInt32Array(1483867348, 100000001) index="0" unique_id=2133230735]
+visible = true
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 
@@ -198,13 +204,6 @@ spawn_point = "entry_left"
 position = Vector2(65, 288)
 shape = SubResource("RectangleShape2D_nd8jy")
 
-[node name="BossTransitionZone" parent="." unique_id=1775603525 instance=ExtResource("24_vexmm")]
-target_scene = "res://scenes/ui/TestEnd.tscn"
-
-[node name="CollisionShape2D" parent="BossTransitionZone" index="0" unique_id=1505097084]
-position = Vector2(1795.5, 90.49999)
-shape = SubResource("RectangleShape2D_afwjg")
-
 [node name="Lights" type="Node2D" parent="." unique_id=164517067]
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights" unique_id=1917624511]
@@ -214,6 +213,14 @@ shadow_enabled = true
 shadow_color = Color(0.8784314, 0.50980395, 0.2901961, 0.18431373)
 max_distance = 350.0
 
+[node name="BossTransitionZone" type="Area2D" parent="." unique_id=2015197734]
+script = ExtResource("13_clwiy")
+target_scene = "res://scenes/ui/TestEnd.tscn"
+metadata/_custom_type_script = "uid://cduihly0ss1id"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=232967768]
+position = Vector2(1818, 172)
+shape = SubResource("RectangleShape2D_t8pop")
+
 [editable path="enemys/Elite_Mars"]
 [editable path="environment/WindZone"]
-[editable path="BossTransitionZone"]

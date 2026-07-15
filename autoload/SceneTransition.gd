@@ -63,6 +63,7 @@ func set_overlay_alpha(alpha: float) -> void:
 
 ## 安全清除遮罩：先保持全黑，等一帧新场景渲染完后才清除，防止场景切换瞬间闪白/闪瓦片
 func clear_overlay_safe() -> void:
+	_transitioning = false
 	_overlay.color.a = 1.0
 	await get_tree().process_frame
 	_overlay.color.a = 0.0
