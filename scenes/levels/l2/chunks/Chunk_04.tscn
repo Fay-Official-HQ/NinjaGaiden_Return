@@ -1,0 +1,154 @@
+[gd_scene format=4 uid="uid://brmkx8tjihbts"]
+
+[ext_resource type="TileSet" uid="uid://ca52hsegykq3q" path="res://resources/tilesets/tileset2_6.tres" id="1_7g5g1"]
+[ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="2_m7l5e"]
+[ext_resource type="PackedScene" uid="uid://cfck2b8eftivm" path="res://scenes/environment/TimedPlatformGroup.tscn" id="3_m7l5e"]
+[ext_resource type="Texture2D" uid="uid://bkl8am6f1mgpl" path="res://assets/sprites/map/TimedPlatform.png" id="4_xxyeu"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="5_7b4uq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
+load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5x2jh"]
+texture = SubResource("CompressedTexture2D_50olt")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSet" id="TileSet_cnmxh"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 67
+sources/0 = SubResource("TileSetAtlasSource_5x2jh")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
+size = Vector2(549, 109.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7l5e"]
+size = Vector2(59, 199)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r83no"]
+size = Vector2(16, 8.25)
+
+[node name="TileMapLayer" type="TileMapLayer" unique_id=1509353591]
+tile_map_data = PackedByteArray("AAAAABgAAAArACIAABAAABkAAAArACIAABAAABoAAAAXACQAABAAABsAAAAXACUAABAAABwAAAAtABoAAAAAAB0AAAAtABsAAAAAAB4AAAAtABwAAAAAAB8AAAAtAB0AAAAAACAAAAAtABoAAAAAACEAAAAtABsAAAABABgAAAAWACIAABABABkAAAAWACMAABABABoAAAAWACQAABABABsAAAAWACUAABABABwAAAAuABoAAAABAB0AAAAuABsAAAABAB4AAAAuABwAAAABAB8AAAAuAB0AAAABACAAAAAuABoAAAABACEAAAAuABsAAAACABgAAAATACIAABACABkAAAATACMAABACABoAAAATACQAABACABsAAAATACUAABACABwAAAARAAwAAAACAB0AAAARAAsAAAACAB4AAAARAAwAAAACAB8AAAARAAsAAAACACAAAAARAAwAAAACACEAAAARAAsAAAADABgAAAASACIAABADABkAAAASACMAABADABoAAAASACQAABADABsAAAASACUAABADABwAAAAOAAwAAAADAB0AAAAOAAsAAAADAB4AAAAOAAwAAAADAB8AAAAOAAsAAAADACAAAAAOAAwAAAADACEAAAAOAAsAAAAAABUAAAAOAB8AAAAAABYAAAAUAA8AABAAABcAAAArACIAABABABUAAAAPAB8AAAABABYAAAATAA8AABABABcAAAAWACEAABACABUAAAAQAB8AAAACABYAAAATACAAABACABcAAAATACEAABADABUAAAARAB8AAAADABYAAAASACAAABADABcAAAASACEAABAEABUAAAASAB8AAAAEABYAAAATACAAAAAEABcAAAATACEAAAAEABgAAAATACIAAAAEABkAAAATACMAAAAEABoAAAATACQAAAAEABsAAAATACUAAAAEABwAAAAPAAwAAAAEAB0AAAAPAAsAAAAEAB4AAAAPAAwAAAAEAB8AAAAPAAsAAAAEACAAAAAPAAwAAAAEACEAAAAPAAsAAAAFABUAAAATAB8AAAAFABYAAAAUACAAAAAFABcAAAAUACEAAAAFABgAAAAUACIAAAAFABkAAAAUACMAAAAFABoAAAAUACQAAAAFABsAAAAUACUAAAAFABwAAAAOAAwAAAAFAB0AAAAOAAsAAAAFAB4AAAAOAAwAAAAFAB8AAAAOAAsAAAAFACAAAAAOAAwAAAAFACEAAAAOAAsAAAAGABUAAAAUAB8AAAAGABYAAAAVACAAAAAGABcAAAAVACEAAAAGABgAAAAVACIAAAAGABkAAAAVACMAAAAGABoAAAAVACQAAAAGABsAAAAVACUAAAAGABwAAAAOAAsAAAAGAB0AAAAOAAwAAAAGAB4AAAAOAAsAAAAGAB8AAAAOAAwAAAAGACAAAAAOAAsAAAAGACEAAAAOAAwAAAAHABUAAAAVAB8AAAAHABYAAAATAA8AAAAHABcAAAAWACEAAAAHABgAAAAWACIAAAAHABkAAAAWACMAAAAHABoAAAAWACQAAAAHABsAAAAWACUAAAAHABwAAAATABMAAAAHAB0AAAATABQAAAAHAB4AAAATABMAAAAHAB8AAAATABQAAAAHACAAAAATABMAAAAHACEAAAATABQAAAAIABYAAAAUAA8AAAAIABcAAAArACIAAAAIABgAAAArACIAAAAIABkAAAArACIAAAAIABoAAAAXACQAAAAIABsAAAAXACUAAAAIABwAAAATABMAAAAIAB0AAAATABQAAAAIAB4AAAATABMAAAAIAB8AAAATABQAAAAIACAAAAATABMAAAAIACEAAAATABQAAAA=")
+tile_set = ExtResource("1_7g5g1")
+
+[node name="collision" type="TileMapLayer" parent="." unique_id=1286610087]
+light_mask = 0
+tile_map_data = PackedByteArray("AAAAABkAAAAAAAAAAAAAABoAAAAAAAAAAAAAABsAAAAAAAAAAAAAABwAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAB4AAAAAAAAAAAAAAB8AAAAAAAAAAAAAACAAAAAAAAAAAAAAACEAAAAAAAAAAAABABkAAAAAAAAAAAACABkAAAAAAAAAAAADABkAAAAAAAAAAAAEABkAAAAAAAAAAAAFABkAAAAAAAAAAAAGABkAAAAAAAAAAAAHABkAAAAAAAAAAAAIABkAAAAAAAAAAAAIABoAAAAAAAAAAAAIABsAAAAAAAAAAAAIABwAAAAAAAAAAAAIAB0AAAAAAAAAAAAIAB4AAAAAAAAAAAAIAB8AAAAAAAAAAAAIACAAAAAAAAAAAAAIACEAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_cnmxh")
+
+[node name="DeathZone" type="Area2D" parent="." unique_id=293517158]
+script = ExtResource("2_m7l5e")
+metadata/_custom_type_script = "uid://c04yqponxtme3"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=948652660]
+position = Vector2(225.5, 392.25)
+shape = SubResource("RectangleShape2D_vqsrt")
+
+[node name="TimedPlatformGroup" parent="." unique_id=590577594 instance=ExtResource("3_m7l5e")]
+appear_order = Array[int]([0, 1, 2, 3, 4])
+appear_interval = 1.5
+platform_lifetime = 4.0
+
+[node name="CollisionShape2D" parent="TimedPlatformGroup" index="0" unique_id=548677541]
+position = Vector2(36.5, 99.5)
+shape = SubResource("RectangleShape2D_m7l5e")
+
+[node name="PlatformTemplate" parent="TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="0" unique_id=1554153290]
+position = Vector2(126, 200)
+
+[node name="PlatformTemplate2" parent="TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="1" unique_id=1089565019]
+position = Vector2(198, 239)
+
+[node name="PlatformTemplate5" type="Node2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate2" index="2" unique_id=425721821]
+position = Vector2(0, -79)
+
+[node name="Sprite2D" type="Sprite2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate2/PlatformTemplate5" unique_id=1389803215]
+texture = ExtResource("4_xxyeu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate2/PlatformTemplate5" unique_id=483731721 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate2/PlatformTemplate5/StaticBody2D" unique_id=478311427]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate3" parent="TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="2" unique_id=1255355358]
+position = Vector2(265, 128)
+
+[node name="PlatformTemplate5" type="Node2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate3" index="2" unique_id=2136088301]
+position = Vector2(0, 111)
+
+[node name="Sprite2D" type="Sprite2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate3/PlatformTemplate5" unique_id=1626884770]
+texture = ExtResource("4_xxyeu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate3/PlatformTemplate5" unique_id=235153988 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate3/PlatformTemplate5/StaticBody2D" unique_id=1487061743]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate4" parent="TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="3" unique_id=1989097200]
+position = Vector2(356, 128)
+
+[node name="PlatformTemplate5" type="Node2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate4" index="2" unique_id=1814384813]
+position = Vector2(-42, 60)
+
+[node name="Sprite2D" type="Sprite2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate4/PlatformTemplate5" unique_id=529220826]
+texture = ExtResource("4_xxyeu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate4/PlatformTemplate5" unique_id=1221949191 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate4/PlatformTemplate5/StaticBody2D" unique_id=1021045030]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate5" type="Node2D" parent="TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="4" unique_id=1029335226]
+position = Vector2(403, 187)
+
+[node name="Sprite2D" type="Sprite2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5" unique_id=1366144552]
+texture = ExtResource("4_xxyeu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5" unique_id=1177219013 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5/StaticBody2D" unique_id=1054100312]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate5" type="Node2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5" unique_id=685652446]
+position = Vector2(-42, 52)
+
+[node name="Sprite2D" type="Sprite2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5/PlatformTemplate5" unique_id=891518974]
+texture = ExtResource("4_xxyeu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5/PlatformTemplate5" unique_id=605610951 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5/PlatformTemplate5/StaticBody2D" unique_id=753916808]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="PlatformTemplate6" type="Node2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5" unique_id=748163554]
+position = Vector2(0, -107)
+
+[node name="Sprite2D" type="Sprite2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5/PlatformTemplate6" unique_id=1726551709]
+texture = ExtResource("4_xxyeu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5/PlatformTemplate6" unique_id=718629426 groups=["blockable"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TimedPlatformGroup/SpawnPoints/PlatformTemplate5/PlatformTemplate6/StaticBody2D" unique_id=1119095947]
+shape = SubResource("RectangleShape2D_r83no")
+
+[node name="Item" parent="." unique_id=575307007 instance=ExtResource("5_7b4uq")]
+position = Vector2(403, 31)
+consumable_type = 3
+
+[editable path="TimedPlatformGroup"]
