@@ -54,7 +54,7 @@ func _on_statue_hit(_damage: int, _is_heavy: bool) -> void:
 	await animated_sprite.animation_finished
 
 	animated_sprite.play("isdead")
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 
 	var tween = create_tween()
 	tween.tween_property(animated_sprite, "modulate", Color.TRANSPARENT, 1.0)

@@ -7,6 +7,7 @@ var _chunk_scenes: Array[PackedScene] = []
 var _active_chunks: Array[Node] = []
 var _is_boss_phase := false
 var _is_transitioning := false
+var _boss_ref: Node2D
 
 
 func _ready() -> void:
@@ -68,12 +69,12 @@ func _spawn_chunk(x: float, idx: int = -1) -> void:
 	_active_chunks.append(chunk)
 
 
-func _on_statue_destroyed(_spawn_pos: Vector2) -> void:
+func _on_statue_destroyed(spawn_pos: Vector2) -> void:
 	if _is_transitioning:
 		return
 	_is_transitioning = true
 
-	_spawn_boss()
+	_spawn_boss(spawn_pos)
 	_spawn_fire_wall()
 
 	for i in range(1, 4):
@@ -84,11 +85,21 @@ func _on_statue_destroyed(_spawn_pos: Vector2) -> void:
 	connect_fire_wall()
 
 
-func _spawn_boss() -> void:
+func _spawn_boss(hint_pos: Vector2 = Vector2.INF) -> void:
 	var pos = get_node_or_null("BossSpawnPosition") as Marker2D
-	if not pos:
+	var spawn_at: Vector2
+	if pos:
+		spawn_at = pos.global_position
+	elif hint_pos != Vector2.INF:
+		spawn_at = hint_pos
+	else:
 		return
-	print("Boss 将在后续版本中实现")
+
+	var scene = preload("res://scenes/enemy/boss/l2/Boss_2.tscn")
+	var boss = scene.instantiate()
+	boss._spawn_point = spawn_at
+	get_tree().current_scene.add_child(boss)
+	_boss_ref = boss
 
 
 func _start_auto_scroll() -> void:
@@ -132,5 +143,8 @@ func _start_boss_battle() -> void:
 	var cam = get_node("Player/Camera2D")
 	cam.limit_left = 0
 	cam.limit_right = 100000
+
+	if _boss_ref and _boss_ref.has_method("start_boss_battle"):
+		_boss_ref.start_boss_battle()
 
 	_is_boss_phase = true

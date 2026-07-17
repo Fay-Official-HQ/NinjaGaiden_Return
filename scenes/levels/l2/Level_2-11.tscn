@@ -133,3 +133,4 @@ max_distance = 350.0
 position = Vector2(-10, 135)
 
 [node name="BossSpawnPosition" type="Marker2D" parent="." unique_id=3933281]
+position = Vector2(306, 120)

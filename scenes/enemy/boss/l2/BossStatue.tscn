@@ -10,10 +10,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
 animations = [{
 "frames": [{
-"duration": 3.0,
-"texture": ExtResource("2_028sm")
-}, {
-"duration": 3.0,
+"duration": 2.0,
 "texture": ExtResource("3_dthsh")
 }, {
 "duration": 3.0,
@@ -50,6 +47,7 @@ script = ExtResource("1_028sm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
 sprite_frames = SubResource("SpriteFrames_4qnji")
+animation = &"death"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]

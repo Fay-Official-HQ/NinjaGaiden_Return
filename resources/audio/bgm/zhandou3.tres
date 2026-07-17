@@ -17,5 +17,5 @@ script = ExtResource("1_d55wy")
 event_id = &"zhandou3"
 stream = SubResource("AudioStreamOggVorbis_d55wy")
 bus = "BGM"
-volume_db = -5.0
+volume_db = -3.0
 metadata/_custom_type_script = "uid://cfwtaajtfa38p"

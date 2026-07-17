@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BossData_2" format=3 uid="uid://cc4j8uwodb6wd"]
+
+[ext_resource type="Script" uid="uid://y6wnuqhxa6xl" path="res://resources/enemy/boss/BossData_2.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+boss_name = "暗影飞龙"
+hurt_duration = 0.5
+knockback_distance = 30.0
+defeat_next_scene = "res://scenes/ui/TestEnd.tscn"

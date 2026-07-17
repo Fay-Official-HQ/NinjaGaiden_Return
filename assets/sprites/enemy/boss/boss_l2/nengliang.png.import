@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8c208rjf8e7o"
-path="res://.godot/imported/boss_l17.png-05d7bd449a544b2d0a87bd2cac4c48b9.ctex"
+uid="uid://crhriyt8mifg"
+path="res://.godot/imported/nengliang.png-a61f3d356320b868d3608d9a7558619e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/boss/boss_l2/boss_l17.png"
-dest_files=["res://.godot/imported/boss_l17.png-05d7bd449a544b2d0a87bd2cac4c48b9.ctex"]
+source_file="res://assets/sprites/enemy/boss/boss_l2/nengliang.png"
+dest_files=["res://.godot/imported/nengliang.png-a61f3d356320b868d3608d9a7558619e.ctex"]
 
 [params]
 

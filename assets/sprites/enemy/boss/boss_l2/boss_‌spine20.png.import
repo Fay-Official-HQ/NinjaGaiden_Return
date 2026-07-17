@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1h2uwl4u1ii4"
-path="res://.godot/imported/boss_l22.png-b813f4b08460f70194e8e3850b34b91c.ctex"
+uid="uid://du4rqo1kl8uss"
+path="res://.godot/imported/boss_‌spine20.png-6aa706fe2775ea31bcc9cea50ecc79ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/boss/boss_l2/boss_l22.png"
-dest_files=["res://.godot/imported/boss_l22.png-b813f4b08460f70194e8e3850b34b91c.ctex"]
+source_file="res://assets/sprites/enemy/boss/boss_l2/boss_‌spine20.png"
+dest_files=["res://.godot/imported/boss_‌spine20.png-6aa706fe2775ea31bcc9cea50ecc79ee.ctex"]
 
 [params]
 
