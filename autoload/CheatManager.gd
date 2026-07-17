@@ -11,6 +11,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			print("【作弊模式】", "开启" if god_mode else "关闭")
 			get_viewport().set_input_as_handled()
 			if god_mode:
-				UIManager.show_message("忍犬模式 ON", 3.0)
+				UIManager.show_message("超忍模式 ON", 3.0)
 			else:
-				UIManager.show_message("忍犬模式 OFF", 3.0)
+				UIManager.show_message("超忍模式 OFF", 3.0)

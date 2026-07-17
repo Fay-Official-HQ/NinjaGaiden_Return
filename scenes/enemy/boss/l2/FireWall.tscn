@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://8eonxk4ntxh2"]
+
+[ext_resource type="Texture2D" uid="uid://dhaho7jbe5bhj" path="res://assets/sprites/enemy/l2/huoqiang (1).png" id="2_ytbtf"]
+[ext_resource type="Texture2D" uid="uid://cefma4s7ol8ky" path="res://assets/sprites/enemy/l2/huoqiang (2).png" id="3_iid7o"]
+[ext_resource type="Texture2D" uid="uid://62171rkpsvb" path="res://assets/sprites/enemy/l2/huoqiang (3).png" id="4_mcs6v"]
+[ext_resource type="Texture2D" uid="uid://dfw7qvuda5r85" path="res://assets/sprites/enemy/l2/huoqiang (4).png" id="5_vy22i"]
+[ext_resource type="Texture2D" uid="uid://conifgedqrbxi" path="res://assets/sprites/enemy/l2/huoqiang (5).png" id="6_4ff35"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="7_iid7o"]
+[ext_resource type="Script" uid="uid://b3rgkhaygst3j" path="res://scripts/enemy/boss/l2/FireWall.gd" id="8_h3k7s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vtbiv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ytbtf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iid7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mcs6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vy22i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4ff35")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcs6v"]
+size = Vector2(25, 480)
+
+[node name="FireWall" type="Area2D" unique_id=588262904]
+collision_layer = 0
+script = ExtResource("8_h3k7s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2024636465]
+sprite_frames = SubResource("SpriteFrames_vtbiv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1918093539]
+position = Vector2(-7.5, 0)
+shape = SubResource("RectangleShape2D_mcs6v")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=2137898496]
+collision_layer = 32
+script = ExtResource("7_iid7o")
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1128959700]
+position = Vector2(-7.5, 0)
+shape = SubResource("RectangleShape2D_mcs6v")
+
+[node name="StopMoving" type="StaticBody2D" parent="." unique_id=1037246890 groups=["wall_blocker"]]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopMoving" unique_id=1943107877]
+position = Vector2(-7.5, 0)
+shape = SubResource("RectangleShape2D_mcs6v")

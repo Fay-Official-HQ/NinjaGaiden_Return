@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://du44llrjq48mx"]
+
+[ext_resource type="Script" uid="uid://buqa3ltmf2xky" path="res://scripts/enemy/boss/l2/BossStatue.gd" id="1_028sm"]
+[ext_resource type="Texture2D" uid="uid://dl6h5f36mqkvm" path="res://assets/sprites/enemy/boss/boss_l2/diaoxiang.png" id="2_028sm"]
+[ext_resource type="Texture2D" uid="uid://bm1hlog56r82r" path="res://assets/sprites/enemy/boss/boss_l2/diaoxiang2.png" id="3_dthsh"]
+[ext_resource type="Texture2D" uid="uid://mpb3y3evogcl" path="res://assets/sprites/enemy/boss/boss_l2/diaoxiang3.png" id="4_0ix8o"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_18xmh"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_3vruj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("2_028sm")
+}, {
+"duration": 3.0,
+"texture": ExtResource("3_dthsh")
+}, {
+"duration": 3.0,
+"texture": ExtResource("4_0ix8o")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_028sm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0ix8o")
+}],
+"loop": true,
+"name": &"isdead",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68jqe"]
+size = Vector2(46, 57)
+
+[node name="BossStatue" type="CharacterBody2D" unique_id=1227478862 groups=["enemy", "fall_vulnerable"]]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_028sm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
+sprite_frames = SubResource("SpriteFrames_4qnji")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=447011981]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_18xmh")
+is_boss = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1040171712]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1255400235]
+collision_layer = 32
+script = ExtResource("10_3vruj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1160887489]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_68jqe")

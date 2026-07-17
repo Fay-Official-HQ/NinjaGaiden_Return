@@ -50,7 +50,7 @@ appear_interval = 1.5
 platform_lifetime = 4.0
 
 [node name="CollisionShape2D" parent="TimedPlatformGroup" index="0" unique_id=548677541]
-position = Vector2(17.25, 101.75)
+position = Vector2(33.25, 101.75)
 shape = SubResource("RectangleShape2D_xxyeu")
 
 [node name="PlatformTemplate" parent="TimedPlatformGroup/SpawnPoints" parent_id_path=PackedInt32Array(590577594, 494666467) index="0" unique_id=1554153290]

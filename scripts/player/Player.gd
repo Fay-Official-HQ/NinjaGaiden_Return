@@ -225,6 +225,8 @@ func _check_overlapping_enemy_after_invincibility() -> void:
 			return
 
 func die() -> void:
+	if _is_dead:
+		return
 	print("玩家死亡！")
 	_is_dead = true
 

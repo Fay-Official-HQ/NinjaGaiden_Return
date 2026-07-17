@@ -1,0 +1,88 @@
+
+## Boss 战开发交接文档
+
+### 一、关卡整体流程（Level_2-11）
+
+```
+进入关卡 → 房间中央有 BossStatue（雕像，3HP）
+   ↓ 玩家攻击雕像 3 次
+雕像死亡 → 播放 death → isdead → 渐隐消失
+   ↓ 发射 statue_destroyed 信号
+level_2_11.gd 响应：
+   ├─ _spawn_fire_wall() → 火墙从 x=-10 滑入到 x=20
+   │                       停顿 1 秒 → 跟随摄像机
+   │                       发射 enter_completed 信号
+   └─ _start_boss_battle() ← 等待 enter_completed
+        ├─ BGM → zhandou3
+        ├─ 摄像机 → 强制右滚 40px/s（无限）
+        ├─ 火墙 → 固定在屏幕最左侧追玩家
+        └─ 需要你写：Boss 生成 + Boss AI
+```
+
+### 二、继承的锚点方案（重点）
+
+```
+每帧更新:
+  摄像机位置 = cam.global_position（匀速右移）
+
+火墙位置:
+  记录 _follow_offset = 火墙.x - 摄像机.x（进入完成瞬间）
+  之后每帧: 火墙.x = cam.x + _follow_offset
+
+Boss 位置（后续你做）:
+  同理: Boss 有一个自己的偏移量
+  例如: Boss.x = cam.x + 300（固定在画面右侧区域）
+  这样 Boss 永远在玩家右侧追着打，
+  玩家被火墙在左边逼着不能回头。
+```
+
+### 三、你需要在 `_spawn_boss()` 中写的代码
+
+```gdscript
+func _spawn_boss() -> void:
+    var pos = get_node_or_null("BossSpawnPosition") as Marker2D
+    if not pos:
+        return
+
+    var scene = preload("res://scenes/enemy/boss/l2/Boss_2.tscn")  # 你的 Boss 场景
+    var boss = scene.instantiate()
+    boss._spawn_point = pos.global_position
+    boss.appear_target_pos = pos.global_position
+    # Boss 会用 BossAppearState 出现（渐隐→隐藏→渐显）
+    get_tree().current_scene.add_child(boss)
+```
+
+**Boss 需要继承自现有的 `Boss` 类**（`res://scripts/enemy/boss/l1/Boss.gd`），它已有：
+- 状态机系统（`BossStateMachine`）+ `BossAppearState` 登场动画
+- 受伤闪白 `_flash_white()`
+- `HurtBox` + `BossAIComponent` AI 决策
+- `BossUI` 血条显示
+
+### 四、现有文件清单
+
+| 文件 | 作用 |
+|------|------|
+| `scenes/levels/l2/Level_2-11.tscn` | Boss 房间场景 |
+| `scenes/levels/l2/level_2_11.gd` | 关卡逻辑（雕像→火墙→Boss战） |
+| `scenes/enemy/boss/l2/BossStatue.tscn` | 雕像（3HP，击碎触发流程） |
+| `scripts/enemy/boss/l2/BossStatue.gd` | 雕像脚本 |
+| `scenes/enemy/boss/l2/FireWall.tscn` | 火墙（动画+HitBox+StopMoving） |
+| `scripts/enemy/boss/l2/FireWall.gd` | 火墙脚本（滑入→停顿→跟随） |
+
+### 五、场景中需要你摆放的
+
+| 节点 | 路径 | 说明 |
+|------|------|------|
+| BossStatue | `enemys/BossStatue` | 已摆放 |
+| BossSpawnPosition | 根节点下 | 已摆放（Marker2D） |
+| FireWall | 根节点下 | 已摆放，初始 x=-10 |
+| **Boss** | **你需要创建并摆放** | `res://scenes/enemy/boss/l2/Boss_2.tscn` |
+
+### 六、可参考的现有 Boss 第一章
+
+文件都在 `scripts/enemy/boss/l1/` 下：
+- [Boss.gd](file:///e:/Godot/GodotPro/NinjaGaiden_Return/scripts/enemy/boss/l1/Boss.gd) — 基类
+- [BossSpawner.gd](file:///e:/Godot/GodotPro/NinjaGaiden_Return/scripts/enemy/boss/l1/BossSpawner.gd) — 生成器
+- [BossState.gd](file:///e:/Godot/GodotPro/NinjaGaiden_Return/scripts/enemy/boss/l1/BossState.gd) — 状态基类
+- [BossAppearState.gd](file:///e:/Godot/GodotPro/NinjaGaiden_Return/scripts/enemy/boss/l1/states/BossAppearState.gd) — 登场动画
+- [BossAIComponent.gd](file:///e:/Godot/GodotPro/NinjaGaiden_Return/scripts/components/BossAIComponent.gd) — AI 决策组件
