@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://conifgedqrbxi" path="res://assets/sprites/enemy/l2/huoqiang (5).png" id="6_4ff35"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="7_iid7o"]
 [ext_resource type="Script" uid="uid://b3rgkhaygst3j" path="res://scripts/enemy/boss/l2/FireWall.gd" id="8_h3k7s"]
+[ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="8_mcs6v"]
+[ext_resource type="Texture2D" uid="uid://chfpj4ja270ba" path="res://assets/sprites/enemy/l2/huoxian1.png" id="9_vy22i"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vtbiv"]
 animations = [{
@@ -33,6 +35,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcs6v"]
 size = Vector2(25, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vy22i"]
+size = Vector2(73.5, 477.75)
 
 [node name="FireWall" type="Area2D" unique_id=588262904]
 collision_layer = 0
@@ -61,3 +66,40 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StopMoving" unique_id=1943107877]
 position = Vector2(-7.5, 0)
 shape = SubResource("RectangleShape2D_mcs6v")
+
+[node name="DeathZone" type="Area2D" parent="." unique_id=654068788]
+script = ExtResource("8_mcs6v")
+metadata/_custom_type_script = "uid://c04yqponxtme3"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=1850813068]
+position = Vector2(-56.25, 1.125)
+shape = SubResource("RectangleShape2D_vy22i")
+
+[node name="HuoxianPath" type="Node2D" parent="." unique_id=1503030082]
+
+[node name="Point_B" type="Marker2D" parent="HuoxianPath" unique_id=1457389959]
+position = Vector2(-9, 87)
+
+[node name="Point_M" type="Marker2D" parent="HuoxianPath" unique_id=1718400412]
+position = Vector2(-8, 0)
+
+[node name="Point_T" type="Marker2D" parent="HuoxianPath" unique_id=1386558967]
+position = Vector2(-9, -88)
+
+[node name="Huoxianyujin" type="Node2D" parent="." unique_id=1199815698]
+
+[node name="Point_T" type="Sprite2D" parent="Huoxianyujin" unique_id=1179319003]
+visible = false
+position = Vector2(220, -88)
+texture = ExtResource("9_vy22i")
+
+[node name="Point_M" type="Sprite2D" parent="Huoxianyujin" unique_id=547631075]
+visible = false
+position = Vector2(219, 0)
+texture = ExtResource("9_vy22i")
+
+[node name="Point_B" type="Sprite2D" parent="Huoxianyujin" unique_id=1311799985]
+visible = false
+position = Vector2(220, 86)
+texture = ExtResource("9_vy22i")

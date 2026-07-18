@@ -23,6 +23,7 @@ func _ready() -> void:
 	animated_sprite.stop()
 	hit_box.monitoring = false
 	stop_wall.collision_layer = 0
+	add_to_group("fire_wall")
 
 
 func activate() -> void:
@@ -62,3 +63,20 @@ func _process(_delta: float) -> void:
 		return
 	global_position.x = cam.global_position.x + _follow_offset
 	global_position.y = 135.0
+
+
+## BOSS 死亡时火墙退场（向左移出屏幕）
+func death_exit() -> void:
+	if not _is_active:
+		return
+	_can_follow = false
+	hit_box.monitoring = false
+	stop_wall.collision_layer = 0
+
+	var exit_tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	exit_tween.tween_property(self, "position:x", position.x - 600.0, 1.5)
+	await exit_tween.finished
+
+	animated_sprite.hide()
+	animated_sprite.stop()
+	_is_active = false

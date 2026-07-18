@@ -1,8 +1,9 @@
-[gd_scene format=4 uid="uid://xb54wo05xvb8"]
+[gd_scene format=4 uid="uid://bi22485d0e0ri"]
 
 [ext_resource type="TileSet" uid="uid://ca52hsegykq3q" path="res://resources/tilesets/tileset2_6.tres" id="1_qc4ej"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="3_dgf5c"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="3_qc4ej"]
+[ext_resource type="PackedScene" uid="uid://bwb2otpnil38v" path="res://scenes/environment/BossWindZone.tscn" id="4_mqr1y"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -43,3 +44,6 @@ shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Item" parent="." unique_id=575307007 instance=ExtResource("3_qc4ej")]
 position = Vector2(244, 145)
+
+[node name="BossWindZone" parent="." unique_id=1483867348 instance=ExtResource("4_mqr1y")]
+wind_direction = 2

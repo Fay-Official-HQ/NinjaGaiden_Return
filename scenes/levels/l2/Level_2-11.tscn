@@ -37,6 +37,7 @@ metadata/_edit_horizontal_guides_ = [272.0]
 metadata/_edit_vertical_guides_ = [2000.0]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=67242023]
+visible = false
 color = Color(0.627451, 0.627451, 0.627451, 1)
 
 [node name="Map" type="Node2D" parent="." unique_id=970251159]
@@ -121,6 +122,7 @@ collision_layer = 2
 [node name="environment" type="Node" parent="." unique_id=503055053]
 
 [node name="Lights" type="Node2D" parent="." unique_id=954524479]
+visible = false
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights" unique_id=440479618]
 rotation = 0.7853982

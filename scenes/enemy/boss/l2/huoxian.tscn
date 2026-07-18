@@ -1,25 +1,23 @@
-[gd_scene format=3 uid="uid://db0k30i3acatn"]
+[gd_scene format=3 uid="uid://cjdyiavyk368s"]
 
-[ext_resource type="Script" uid="uid://bnaj56a34yd4b" path="res://scripts/enemy/boss/l2/boss_fireball.gd" id="1_r6cba"]
-[ext_resource type="Texture2D" uid="uid://b5qiaub36tm6d" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_001.png" id="2_mkh6t"]
-[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="3_hn554"]
+[ext_resource type="Texture2D" uid="uid://d3o0resi0bxu3" path="res://assets/sprites/enemy/l2/huoxian2.png" id="2_4pna2"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="3_wp53l"]
+[ext_resource type="Texture2D" uid="uid://b5qiaub36tm6d" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_001.png" id="4_yjgg0"]
+[ext_resource type="Script" uid="uid://byjpyghjf3uv4" path="res://scripts/enemy/boss/l2/huoxian.gd" id="5_huoxian"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qh6nk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_mkh6t")
+"texture": ExtResource("2_4pna2")
 }],
 "loop": true,
 "name": &"fly",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e2tcq"]
-radius = 10.111875
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_npwh0"]
-radius = 10.198039
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_doq4h"]
+size = Vector2(240, 22)
 
 [sub_resource type="Gradient" id="Gradient_fireball"]
 offsets = PackedFloat32Array(0, 0.4, 0.7, 1)
@@ -39,31 +37,31 @@ scale_min = 0.099999994
 scale_max = 0.39999998
 color_ramp = SubResource("GradientTexture1D_fireball")
 
-[node name="boss_fireball" type="Area2D" unique_id=812332263 groups=["blockable"]]
+[node name="huoxian" type="Area2D" unique_id=812332263]
 collision_layer = 2
-script = ExtResource("1_r6cba")
+script = ExtResource("5_huoxian")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081409574]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_qh6nk")
 animation = &"fly"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=450950446]
-position = Vector2(0, -0.5)
-shape = SubResource("CircleShape2D_e2tcq")
+shape = SubResource("RectangleShape2D_doq4h")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable"]]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820]
 collision_layer = 32
-script = ExtResource("3_hn554")
+script = ExtResource("3_wp53l")
 damage = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1696578552]
-shape = SubResource("CircleShape2D_npwh0")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1458874951]
+shape = SubResource("RectangleShape2D_doq4h")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=632450142]
 
 [node name="FireballParticles" type="GPUParticles2D" parent="." unique_id=402801042]
 emitting = false
-texture = ExtResource("2_mkh6t")
+texture = ExtResource("4_yjgg0")
 lifetime = 0.5
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_fireball")

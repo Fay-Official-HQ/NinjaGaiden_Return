@@ -1,5 +1,5 @@
 extends BossState
-class_name BossFireballState
+class_name BossFlameState
 
 ## 飞行阶段参数
 const MOVE_SPEED: float = 120.0
@@ -8,11 +8,10 @@ const SINE_FREQUENCY: float = 3.0
 const REACH_THRESHOLD: float = 10.0
 ## 蓄力时间
 const CHARGE_DURATION: float = 0.7
-## 火球参数
-const FIREBALL_SPEED: float = 450.0
-const FIREBALL_SPREAD_ANGLE: float = 0.5
+## 火焰弹速度
+const FLAME_SPEED: float = 700.0
 
-const POINT_NAMES: Array[String] = ["Point_L", "Point_R", "Point_M"]
+const POINT_NAMES: Array[String] = ["Point_L", "Point_R"]
 
 var _offsets: Array[Vector2] = []
 var _current_target_idx: int = 0
@@ -26,16 +25,14 @@ func enter(_msg: Dictionary = {}) -> void:
 	boss.velocity = Vector2.ZERO
 	_sine_time = 0.0
 	_phase = 0
-	_charge_timer = 0.0
 
 	if not _load_offsets():
 		state_machine.change_state_by_name("BossFlyState")
 		return
 
-	# 先播放飞行动画，等到目标点再切换成 ball + EnergyAnimated
 	boss.animated_sprite.play("fly")
-	if boss.energy_animated:
-		boss.energy_animated.visible = false
+	if boss.fire_animated:
+		boss.fire_animated.visible = false
 
 	_current_target_idx = randi() % _offsets.size()
 
@@ -49,22 +46,25 @@ func physics_update(delta: float) -> void:
 	elif _phase == 1:
 		_charge(delta)
 	elif _phase == 2:
-		_fire_fireballs()
+		_fire_flame()
 
 
 func _move_to_target(delta: float) -> void:
 	var center = boss._camera_ref.get_screen_center_position()
 	var target = center + _offsets[_current_target_idx]
+	# Y轴使用玩家坐标，X轴使用点的偏移
+	if boss.player_ref:
+		target.y = boss.player_ref.global_position.y
 
 	var diff = target - boss.global_position
 	if diff.length() < REACH_THRESHOLD:
-		# 到达目标点 → 切蓄力阶段
+		# 到达目标点 → 蓄力准备发射
+		boss.animated_sprite.play("fire")
+		if boss.fire_animated:
+			boss.fire_animated.visible = true
+			boss.fire_animated.play("default")
 		_phase = 1
 		_charge_timer = CHARGE_DURATION
-		boss.animated_sprite.play("ball")
-		if boss.energy_animated:
-			boss.energy_animated.visible = true
-			boss.energy_animated.play("default")
 		return
 
 	# 正弦波飞行（与 FlyState 一致）
@@ -86,47 +86,52 @@ func _charge(delta: float) -> void:
 		_phase = 2
 		return
 
+	# 闪烁效果
+	if boss.fire_animated:
+		boss.fire_animated.visible = int(_charge_timer * 10) % 2 == 0
 	if boss.energy_animated:
-		boss.energy_animated.flip_h = boss.animated_sprite.flip_h
-		# 闪烁效果：每 0.1 秒切换一次可见性
-		boss.energy_animated.visible = int(_charge_timer * 10) % 2 == 0
+		boss.energy_animated.visible = false
 
 
-func _fire_fireballs() -> void:
-	var fireball_scene = preload("res://scenes/enemy/boss/l2/boss_fireball.tscn")
-	var center_angle = PI / 2.0
+func _fire_flame() -> void:
+	# 水平发射火焰弹（朝向玩家方向）
+	var dir = Vector2.LEFT if boss.animated_sprite.flip_h else Vector2.RIGHT
 
-	for i in range(-1, 2):
-		var angle = center_angle + i * FIREBALL_SPREAD_ANGLE
-		var direction = Vector2(cos(angle), sin(angle))
-
-		var fireball = fireball_scene.instantiate()
-		fireball.global_position = boss.global_position + Vector2(0, 30)
-		fireball.initialize(direction, FIREBALL_SPEED)
-		get_tree().current_scene.add_child(fireball)
+	var flame_scene = preload("res://scenes/enemy/boss/l2/boss_fire.tscn")
+	var flame = flame_scene.instantiate()
+	# 从 FireAnimated 手部位置发射
+	if boss.fire_animated:
+		flame.global_position = boss.fire_animated.global_position
+	else:
+		flame.global_position = boss.global_position + Vector2(0, -10)
+	flame.initialize(dir, FLAME_SPEED)
+	get_tree().current_scene.add_child(flame)
 
 	AudioManager.play_sound(&"shibingfashe")
 
-	if boss.energy_animated:
-		boss.energy_animated.visible = false
+	# 隐藏火焰动画
+	if boss.fire_animated:
+		boss.fire_animated.visible = false
 
 	# 按顺序决策下一步
 	state_machine.change_state_by_name(boss.ai_component.request_decision())
 
 
 func exit() -> void:
+	if boss.fire_animated:
+		boss.fire_animated.visible = false
 	if boss.energy_animated:
 		boss.energy_animated.visible = false
 
 
 func _load_offsets() -> bool:
-	var fireball_path = boss.get_node_or_null("FireballPath") as Node2D
-	if not fireball_path:
+	var fire_path = boss.get_node_or_null("FirePath") as Node2D
+	if not fire_path:
 		return false
 
 	_offsets.clear()
 	for point_name in POINT_NAMES:
-		var marker = fireball_path.get_node_or_null(point_name) as Marker2D
+		var marker = fire_path.get_node_or_null(point_name) as Marker2D
 		if not marker:
 			return false
 		_offsets.append(marker.position)

@@ -38,7 +38,12 @@
 [ext_resource type="Script" uid="uid://bq0q5rokjquc0" path="res://scripts/enemy/boss/l2/BossDeathDirector_2.gd" id="48_director2"]
 [ext_resource type="Resource" uid="uid://cc4j8uwodb6wd" path="res://resources/enemy/boss/BossData_2.tres" id="49_data2"]
 [ext_resource type="Script" uid="uid://b6hb6w6dgsdu" path="res://scripts/enemy/boss/l2/BossAIComponent_2.gd" id="52_ai2"]
-[ext_resource type="Script" path="res://scripts/enemy/boss/l2/states/BossFireballState.gd" id="53_fireball"]
+[ext_resource type="Script" uid="uid://c0nij0h71wosv" path="res://scripts/enemy/boss/l2/states/BossFireballState.gd" id="53_fireball"]
+[ext_resource type="Script" uid="uid://cl2wsdkti35jk" path="res://scripts/enemy/boss/l2/states/BossFlameState.gd" id="54_flame"]
+[ext_resource type="Script" uid="uid://dcsspbtsv7tja" path="res://scripts/enemy/boss/l2/states/BossRushState_2.gd" id="55_rush2"]
+[ext_resource type="Script" uid="uid://b2507x651k7pw" path="res://scripts/enemy/boss/l2/states/BossDownRushState.gd" id="56_downrush"]
+[ext_resource type="Script" uid="uid://b2vce63rka00a" path="res://scripts/enemy/boss/l2/states/BossUpRushState.gd" id="57_uprush"]
+[ext_resource type="Script" uid="uid://b0yh5n4qo1cfc" path="res://scripts/enemy/boss/l2/states/BossSpineState.gd" id="58_spine"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(44, 56)
@@ -83,10 +88,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("33_jll4u")
+}],
+"loop": true,
+"name": &"bisha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("23_2c7pp")
 }],
 "loop": true,
-"name": &"charge‌",
+"name": &"charge",
 "speed": 5.0
 }, {
 "frames": [{
@@ -164,14 +177,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("29_538c7")
-}],
-"loop": true,
-"name": &"up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("33_jll4u")
 }, {
 "duration": 1.0,
@@ -193,8 +198,16 @@ animations = [{
 "texture": ExtResource("39_od7h2")
 }],
 "loop": false,
-"name": &"‌spine",
-"speed": 2.5
+"name": &"spine",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_538c7")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s5ron"]
@@ -240,6 +253,21 @@ script = ExtResource("47_death2")
 [node name="BossFireballState" type="Node" parent="BossStateMachine" unique_id=2000000001]
 script = ExtResource("53_fireball")
 
+[node name="BossFlameState" type="Node" parent="BossStateMachine" unique_id=2000000002]
+script = ExtResource("54_flame")
+
+[node name="BossRushState" type="Node" parent="BossStateMachine" unique_id=2000000003]
+script = ExtResource("55_rush2")
+
+[node name="BossDownRushState" type="Node" parent="BossStateMachine" unique_id=2000000004]
+script = ExtResource("56_downrush")
+
+[node name="BossUpRushState" type="Node" parent="BossStateMachine" unique_id=2000000005]
+script = ExtResource("57_uprush")
+
+[node name="BossSpineState" type="Node" parent="BossStateMachine" unique_id=2000000006]
+script = ExtResource("58_spine")
+
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
 [node name="EnemyHitBox" type="Area2D" parent="AttackRoot" unique_id=173550206]
@@ -275,10 +303,16 @@ frame_progress = 0.54722023
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
-animation = &"ball"
+animation = &"spine"
 
 [node name="EnergyAnimated" type="AnimatedSprite2D" parent="Visual" unique_id=891794753]
+visible = false
 position = Vector2(16, 8)
+sprite_frames = SubResource("SpriteFrames_s5ron")
+
+[node name="FireAnimated" type="AnimatedSprite2D" parent="Visual" unique_id=2004719493]
+visible = false
+position = Vector2(25, 2)
 sprite_frames = SubResource("SpriteFrames_s5ron")
 
 [node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
@@ -306,10 +340,10 @@ position = Vector2(-177, -85)
 [node name="Point_TR" type="Marker2D" parent="FlyPath" unique_id=22607369]
 position = Vector2(174, -85)
 
-[node name="Point_BR" type="Marker2D" parent="FlyPath" unique_id=495271961]
+[node name="Point_BL" type="Marker2D" parent="FlyPath" unique_id=495271961]
 position = Vector2(-177, 84)
 
-[node name="Point_BL" type="Marker2D" parent="FlyPath" unique_id=1699938823]
+[node name="Point_BR" type="Marker2D" parent="FlyPath" unique_id=1699938823]
 position = Vector2(174, 84)
 
 [node name="Point_MD" type="Marker2D" parent="FlyPath" unique_id=1310228101]
@@ -317,10 +351,28 @@ position = Vector2(174, 84)
 [node name="FireballPath" type="Node2D" parent="." unique_id=806101428]
 
 [node name="Point_L" type="Marker2D" parent="FireballPath" unique_id=1673942956]
-position = Vector2(-177, -85)
+position = Vector2(-84, -85)
 
 [node name="Point_R" type="Marker2D" parent="FireballPath" unique_id=117329352]
 position = Vector2(174, -85)
 
 [node name="Point_M" type="Marker2D" parent="FireballPath" unique_id=76093423]
-position = Vector2(0, -85)
+position = Vector2(47, -85)
+
+[node name="FirePath" type="Node2D" parent="." unique_id=1546988951]
+
+[node name="Point_L" type="Marker2D" parent="FirePath" unique_id=1339100586]
+position = Vector2(-208, -1)
+
+[node name="Point_R" type="Marker2D" parent="FirePath" unique_id=997450124]
+position = Vector2(203, 0)
+
+[node name="SpinePath" type="Node2D" parent="." unique_id=204846506]
+
+[node name="Point_L" type="Marker2D" parent="SpinePath" unique_id=1393414089]
+position = Vector2(-110, -1)
+
+[node name="Point_M" type="Marker2D" parent="SpinePath" unique_id=1342505930]
+
+[node name="Point_R" type="Marker2D" parent="SpinePath" unique_id=1519909562]
+position = Vector2(112, -1)

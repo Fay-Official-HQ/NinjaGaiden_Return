@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="2_64ue5"]
 [ext_resource type="PackedScene" uid="uid://cfck2b8eftivm" path="res://scenes/environment/TimedPlatformGroup.tscn" id="3_sfc0c"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="4_64ue5"]
+[ext_resource type="PackedScene" uid="uid://bwb2otpnil38v" path="res://scenes/environment/BossWindZone.tscn" id="5_sfc0c"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -67,5 +68,8 @@ position = Vector2(265, 172)
 
 [node name="Item" parent="." unique_id=575307007 instance=ExtResource("4_64ue5")]
 position = Vector2(180, 88)
+
+[node name="BossWindZone" parent="." unique_id=1483867348 instance=ExtResource("5_sfc0c")]
+wind_direction = 2
 
 [editable path="TimedPlatformGroup"]

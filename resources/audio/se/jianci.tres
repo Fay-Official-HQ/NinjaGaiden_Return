@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://bp6y0mlu3picy"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_yeti4"]
+[ext_resource type="AudioStream" uid="uid://mmxkwi56n3pl" path="res://assets/audio/se/se6.wav" id="2_8qhg8"]
+
+[resource]
+script = ExtResource("1_yeti4")
+event_id = &"jianci"
+stream = ExtResource("2_8qhg8")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"
