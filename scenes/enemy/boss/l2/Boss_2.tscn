@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cuji2o4kurns1" path="res://assets/sprites/enemy/boss/boss_l2/boss_l9.png" id="27_pxxth"]
 [ext_resource type="Texture2D" uid="uid://cosb07kqgtirf" path="res://assets/sprites/enemy/boss/boss_l2/boss_l13.png" id="28_f8rni"]
 [ext_resource type="Texture2D" uid="uid://d2mjdrtthj8s6" path="res://assets/sprites/enemy/boss/boss_l2/boss_l14.png" id="29_538c7"]
+[ext_resource type="Texture2D" uid="uid://crhriyt8mifg" path="res://assets/sprites/enemy/boss/boss_l2/nengliang.png" id="33_fu3v6"]
 [ext_resource type="Texture2D" uid="uid://dryk8r0rho5u3" path="res://assets/sprites/enemy/boss/boss_l2/boss_‌spine16.png" id="33_jll4u"]
 [ext_resource type="Texture2D" uid="uid://bkbsga4rnm4et" path="res://assets/sprites/enemy/boss/boss_l2/boss_‌spine17.png" id="34_pxxth"]
 [ext_resource type="Texture2D" uid="uid://e8y10fdgwo8v" path="res://assets/sprites/enemy/boss/boss_l2/boss_‌spine18.png" id="35_14owe"]
@@ -37,6 +38,7 @@
 [ext_resource type="Script" uid="uid://bq0q5rokjquc0" path="res://scripts/enemy/boss/l2/BossDeathDirector_2.gd" id="48_director2"]
 [ext_resource type="Resource" uid="uid://cc4j8uwodb6wd" path="res://resources/enemy/boss/BossData_2.tres" id="49_data2"]
 [ext_resource type="Script" uid="uid://b6hb6w6dgsdu" path="res://scripts/enemy/boss/l2/BossAIComponent_2.gd" id="52_ai2"]
+[ext_resource type="Script" path="res://scripts/enemy/boss/l2/states/BossFireballState.gd" id="53_fireball"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(44, 56)
@@ -195,6 +197,17 @@ animations = [{
 "speed": 2.5
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_s5ron"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_fu3v6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Boss2" type="CharacterBody2D" unique_id=389371954]
 collision_layer = 2
 collision_mask = 540
@@ -223,6 +236,9 @@ script = ExtResource("46_hurt2")
 
 [node name="BossDeathState" type="Node" parent="BossStateMachine" unique_id=1417288001]
 script = ExtResource("47_death2")
+
+[node name="BossFireballState" type="Node" parent="BossStateMachine" unique_id=2000000001]
+script = ExtResource("53_fireball")
 
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
@@ -259,7 +275,11 @@ frame_progress = 0.54722023
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1151815594]
 sprite_frames = SubResource("SpriteFrames_sb8oc")
-animation = &"idle"
+animation = &"ball"
+
+[node name="EnergyAnimated" type="AnimatedSprite2D" parent="Visual" unique_id=891794753]
+position = Vector2(16, 8)
+sprite_frames = SubResource("SpriteFrames_s5ron")
 
 [node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
 script = ExtResource("41_n5q8i")
@@ -293,3 +313,14 @@ position = Vector2(-177, 84)
 position = Vector2(174, 84)
 
 [node name="Point_MD" type="Marker2D" parent="FlyPath" unique_id=1310228101]
+
+[node name="FireballPath" type="Node2D" parent="." unique_id=806101428]
+
+[node name="Point_L" type="Marker2D" parent="FireballPath" unique_id=1673942956]
+position = Vector2(-177, -85)
+
+[node name="Point_R" type="Marker2D" parent="FireballPath" unique_id=117329352]
+position = Vector2(174, -85)
+
+[node name="Point_M" type="Marker2D" parent="FireballPath" unique_id=76093423]
+position = Vector2(0, -85)

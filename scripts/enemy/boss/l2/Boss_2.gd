@@ -1,9 +1,10 @@
 extends Boss
 class_name Boss_2
 
+@onready var energy_animated: AnimatedSprite2D = $Visual/EnergyAnimated
+
 var _camera_ref: Camera2D
 var _camera_offset: Vector2
-## 是否启用摄像机锚点校正（HurtState 时临时禁用）
 var _anchor_enabled: bool = true
 
 func _ready() -> void:
@@ -83,6 +84,15 @@ func _on_took_damage(damage: int, is_heavy: bool) -> void:
 
 func _get_block_chance() -> float:
 	return 0.0
+
+func set_facing_direction(direction: float) -> void:
+	if direction == 0:
+		return
+	facing_direction = 1.0 if direction > 0 else -1.0
+	animated_sprite.flip_h = facing_direction < 0
+	if energy_animated:
+		energy_animated.flip_h = facing_direction < 0
+		energy_animated.position.x = 16 * facing_direction
 
 func is_ground_ahead() -> bool:
 	return true
