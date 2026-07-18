@@ -1,9 +1,21 @@
 extends Node
 
+## 发布开关：正式版改为 false 即可完全禁用作弊
+const ENABLED := true
+
 var god_mode: bool = false
 signal god_mode_changed(enabled: bool)
 
+
+func _ready() -> void:
+	if not ENABLED:
+		god_mode = false
+		set_process_unhandled_input(false)
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if not ENABLED:
+		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_F1:
 			god_mode = not god_mode

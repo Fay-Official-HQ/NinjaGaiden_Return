@@ -215,7 +215,7 @@ max_distance = 350.0
 
 [node name="BossTransitionZone" type="Area2D" parent="." unique_id=2015197734]
 script = ExtResource("13_clwiy")
-target_scene = "res://scenes/ui/TestEnd.tscn"
+target_scene = "res://scenes/levels/l2/Level_2-11.tscn"
 metadata/_custom_type_script = "uid://cduihly0ss1id"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=232967768]
