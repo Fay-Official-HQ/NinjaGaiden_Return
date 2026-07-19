@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b0ppwh7cp1p4n"]
+
+[ext_resource type="Texture2D" uid="uid://by1vn7i8skxg7" path="res://assets/tilesets/MapComponent/muxiang.png" id="1_6m4lp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyh84"]
+size = Vector2(16, 24)
+
+[node name="muxiang" type="StaticBody2D" unique_id=251592666 groups=["wall_blocker"]]
+collision_layer = 4
+collision_mask = 67
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1554618860]
+texture = ExtResource("1_6m4lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2133132958]
+shape = SubResource("RectangleShape2D_uyh84")

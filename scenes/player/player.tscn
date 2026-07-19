@@ -763,7 +763,7 @@ script = ExtResource("23_ro0t8")
 
 [node name="HeadSensor" type="RayCast2D" parent="." unique_id=967590739]
 target_position = Vector2(0, -20)
-collision_mask = 12
+collision_mask = 268
 
 [node name="ShadowContainer" type="Node2D" parent="." unique_id=1228282928]
 

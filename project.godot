@@ -41,6 +41,7 @@ window/stretch/mode="viewport"
 enemy=""
 fall_vulnerable=""
 blockable=""
+wall_blocker=""
 
 [input]
 
@@ -121,6 +122,7 @@ block={
 2d_physics/layer_6="EnemyAttack"
 2d_physics/layer_7="Item"
 2d_physics/layer_8="stop"
+2d_physics/layer_9="Hangable"
 2d_physics/layer_10="ClimbableWall"
 
 [physics]

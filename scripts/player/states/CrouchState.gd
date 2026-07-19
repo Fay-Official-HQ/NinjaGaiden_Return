@@ -34,7 +34,7 @@ func physics_update(_delta: float) -> void:
 		if test_collision:
 			var collider = test_collision.get_collider()
 			# 如果脚踩的是单向吊台，果断切入专属的“下蹲穿透状态”
-			if collider and collider.is_in_group("hanging_platform"):
+			if collider and (collider.is_in_group("hanging_platform") or collider.is_in_group("one_way_platform")):
 				state_machine.change_state(state_machine.get_node("PlatformDropState"))
 				player.input.consume_jump()
 				return

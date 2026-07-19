@@ -35,7 +35,7 @@ func physics_update(_delta: float) -> void:
 			var collision = player.get_slide_collision(i)
 			if collision:
 				var collider = collision.get_collider()
-				if collider and collider.is_in_group("hanging_platform"):
+				if collider and (collider.is_in_group("hanging_platform") or collider.is_in_group("one_way_platform")):
 					can_drop = true
 					break
 
