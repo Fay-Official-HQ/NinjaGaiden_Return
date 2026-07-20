@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://l05tygj3pc5" path="res://scenes/enemy/l2/slime_enemy.tscn" id="19_2awm3"]
 [ext_resource type="PackedScene" uid="uid://d3afh7ynnnfs6" path="res://scenes/enemy/l2/monster_soldier.tscn" id="20_a5mkk"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="22_ojxwu"]
+[ext_resource type="PackedScene" uid="uid://dkdpk5wdhv7by" path="res://scenes/enemy/l2/spider.tscn" id="23_gfefr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -353,6 +354,17 @@ position = Vector2(-2570, 109)
 
 [node name="SlimeEnemy5" parent="enemys" unique_id=1980840337 instance=ExtResource("19_2awm3")]
 position = Vector2(-2849, 188)
+
+[node name="Spider" parent="enemys" unique_id=533168722 instance=ExtResource("23_gfefr")]
+position = Vector2(-552, 53)
+is_red = true
+
+[node name="Spider2" parent="enemys" unique_id=1138342603 instance=ExtResource("23_gfefr")]
+position = Vector2(-1744, 66)
+
+[node name="Spider3" parent="enemys" unique_id=1712895195 instance=ExtResource("23_gfefr")]
+position = Vector2(-1892, 66)
+is_red = true
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 

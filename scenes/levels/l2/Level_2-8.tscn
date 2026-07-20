@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://d3afh7ynnnfs6" path="res://scenes/enemy/l2/monster_soldier.tscn" id="17_02lsw"]
 [ext_resource type="PackedScene" uid="uid://cxo4iprmk5ckn" path="res://scenes/enemy/l1/flying_ninja_spawner.tscn" id="18_6jt28"]
 [ext_resource type="PackedScene" uid="uid://6p404iw2tco6" path="res://scenes/enemy/l2/chaser_monster_spawner.tscn" id="19_02lsw"]
+[ext_resource type="PackedScene" uid="uid://dkdpk5wdhv7by" path="res://scenes/enemy/l2/spider.tscn" id="22_1v1f5"]
 [ext_resource type="PackedScene" uid="uid://cfck2b8eftivm" path="res://scenes/environment/TimedPlatformGroup.tscn" id="24_dv2in"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="26_dkcc6"]
 
@@ -69,6 +70,9 @@ size = Vector2(446, 241.2539)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8cwv"]
 size = Vector2(241, 27.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58pcx"]
+size = Vector2(68.046875, 238.76563)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_07ip3"]
 size = Vector2(190, 89)
@@ -388,6 +392,12 @@ position = Vector2(139, -1188)
 [node name="SlimeEnemy6" parent="enemys" unique_id=2052083671 instance=ExtResource("12_1pshs")]
 position = Vector2(22, -1299)
 
+[node name="Spider" parent="enemys" unique_id=681709363 instance=ExtResource("22_1v1f5")]
+position = Vector2(221, -481)
+
+[node name="CollisionShape2D" parent="enemys/Spider/FallRange" parent_id_path=PackedInt32Array(681709363, 211404331) index="0" unique_id=1648894374]
+shape = SubResource("RectangleShape2D_58pcx")
+
 [node name="environment" type="Node" parent="." unique_id=250044806]
 
 [node name="TimedPlatformGroup" parent="environment" unique_id=590577594 instance=ExtResource("24_dv2in")]
@@ -631,5 +641,6 @@ max_distance = 350.0
 [editable path="enemys/BatSpawner5"]
 [editable path="enemys/EagleSpawner2"]
 [editable path="enemys/EagleSpawner3"]
+[editable path="enemys/Spider"]
 [editable path="environment/TimedPlatformGroup"]
 [editable path="environment/TimedPlatformGroup2"]
