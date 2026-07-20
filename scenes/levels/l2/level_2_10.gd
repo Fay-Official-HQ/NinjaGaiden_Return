@@ -32,6 +32,8 @@ extends Node2D
 #      top/bottom 默认为 -1（不限制），完全兼容以前关卡
 # ════════════════════════════════════════════════════════════
 
+#第三关：1-1（简单地图电线墙壁） 1-2（开始有房屋河水） 1-3（两侧墙壁短暂过度） 1-4（屋顶） 1-5（室内） 
+
 func _ready() -> void:
 	SceneTransition.clear_overlay_safe()
 	AudioManager.play_sound(&"bgm3_1")
