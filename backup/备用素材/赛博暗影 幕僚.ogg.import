@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://1ud5m2w3f7ed"
+path="res://.godot/imported/赛博暗影 幕僚.ogg-9ccf55eb22e875c570cf7f612563832d.oggvorbisstr"
+
+[deps]
+
+source_file="res://backup/备用素材/赛博暗影 幕僚.ogg"
+dest_files=["res://.godot/imported/赛博暗影 幕僚.ogg-9ccf55eb22e875c570cf7f612563832d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
