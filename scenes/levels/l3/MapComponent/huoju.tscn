@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://nsgd504nlwnf"]
+
+[ext_resource type="Texture2D" uid="uid://dex7rm64gcvwu" path="res://assets/sprites/map/huoju1.png" id="1_wk3ls"]
+[ext_resource type="Texture2D" uid="uid://cwnrx8yga0y21" path="res://assets/sprites/map/huoju2.png" id="2_c461v"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="3_c461v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bddgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wk3ls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_c461v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyh84"]
+size = Vector2(16, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bddgy"]
+size = Vector2(16, 16)
+
+[node name="muxiang" type="StaticBody2D" unique_id=251592666 groups=["wall_blocker"]]
+collision_layer = 4
+collision_mask = 67
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1543912499]
+sprite_frames = SubResource("SpriteFrames_bddgy")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2133132958]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_uyh84")
+
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1008720162]
+script = ExtResource("3_c461v")
+metadata/_custom_type_script = "uid://cflbsmpgemw31"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1999586339]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_bddgy")
