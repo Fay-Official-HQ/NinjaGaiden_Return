@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b0ppwh7cp1p4n" path="res://scenes/levels/l3/MapComponent/muxiang.tscn" id="5_5ubqo"]
 [ext_resource type="TileSet" uid="uid://nspn1feh5xcw" path="res://resources/tilesets/tileset3_1.tres" id="5_kuix0"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_arann"]
-[ext_resource type="PackedScene" uid="uid://wire" path="res://scenes/environment/wire.tscn" id="6_i6l4l"]
+[ext_resource type="PackedScene" uid="uid://dg1iidmkauxis" path="res://scenes/environment/wire.tscn" id="6_i6l4l"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_e8nw2"]
 [ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="7_kuix0"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="12_c6jrw"]
@@ -123,7 +123,7 @@ position = Vector2(0, -19)
 [node name="Wire" parent="Map/TileMapLayer/terrain" unique_id=908022048 instance=ExtResource("6_i6l4l")]
 position = Vector2(457, 88)
 
-[node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/Wire" index="0"]
+[node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/Wire" index="0" unique_id=464106358]
 position = Vector2(111, -1.5)
 shape = SubResource("RectangleShape2D_i6l4l")
 

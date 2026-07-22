@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://i6bk3b20533a" path="res://scenes/levels/l2/cloud_layer2.gd" id="3_rvj8i"]
 [ext_resource type="PackedScene" uid="uid://d3rslmquv5aaw" path="res://scenes/environment/one_way_platform.tscn" id="4_llpli"]
 [ext_resource type="PackedScene" uid="uid://b0ppwh7cp1p4n" path="res://scenes/levels/l3/MapComponent/muxiang.tscn" id="5_xroa8"]
-[ext_resource type="PackedScene" uid="uid://wire" path="res://scenes/environment/wire.tscn" id="6_4114d"]
+[ext_resource type="PackedScene" uid="uid://dg1iidmkauxis" path="res://scenes/environment/wire.tscn" id="6_4114d"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="7_omrlg"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="8_dl3by"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="10_je8go"]
@@ -150,7 +150,7 @@ one_way_collision = true
 [node name="Wire" parent="Map/TileMapLayer/terrain" unique_id=908022048 instance=ExtResource("6_4114d")]
 position = Vector2(457, 88)
 
-[node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/Wire" index="0"]
+[node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/Wire" index="0" unique_id=464106358]
 position = Vector2(111, -1.5)
 shape = SubResource("RectangleShape2D_i6l4l")
 

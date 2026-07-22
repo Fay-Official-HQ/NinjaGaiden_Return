@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dscip636767h3" path="res://scenes/levels/l3/level_3_3.gd" id="1_liv2a"]
 [ext_resource type="TileSet" uid="uid://nspn1feh5xcw" path="res://resources/tilesets/tileset3_1.tres" id="2_0iyhf"]
 [ext_resource type="Script" uid="uid://i6bk3b20533a" path="res://scenes/levels/l2/cloud_layer2.gd" id="3_hah0v"]
-[ext_resource type="PackedScene" uid="uid://wire" path="res://scenes/environment/wire.tscn" id="5_hah0v"]
+[ext_resource type="PackedScene" uid="uid://dg1iidmkauxis" path="res://scenes/environment/wire.tscn" id="5_hah0v"]
 [ext_resource type="PackedScene" uid="uid://d3rslmquv5aaw" path="res://scenes/environment/one_way_platform.tscn" id="5_s7krg"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_5kqdv"]
 [ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="6_glasq"]
@@ -112,7 +112,7 @@ shape = SubResource("RectangleShape2D_0iyhf")
 [node name="Wire" parent="Map/TileMapLayer/terrain" unique_id=1352858041 instance=ExtResource("5_hah0v")]
 position = Vector2(3656, 145)
 
-[node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/Wire" index="0"]
+[node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/Wire" index="0" unique_id=464106358]
 position = Vector2(136.5, -2.5)
 shape = SubResource("RectangleShape2D_jp8f5")
 
@@ -138,7 +138,7 @@ position = Vector2(2475, 408)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("7_l7gt5")]
-position = Vector2(2975.0999, 81.69118)
+position = Vector2(4973, 244)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
@@ -175,7 +175,8 @@ shape = SubResource("RectangleShape2D_nd8jy")
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=228357229]
 script = ExtResource("8_ryem0")
-target_scene = "res://scenes/levels/l3/Level_3-1.tscn"
+target_scene = "res://scenes/levels/l3/Level_3-4.tscn"
+spawn_point = "entry_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=392788332]
 position = Vector2(2066.5, 304.5)
