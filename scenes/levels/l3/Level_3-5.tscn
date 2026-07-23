@@ -32,7 +32,7 @@ size = Vector2(98, 6)
 size = Vector2(63, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75jbq"]
-size = Vector2(390.5, 6)
+size = Vector2(394, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jtcq2"]
 size = Vector2(126, 41)
@@ -164,7 +164,7 @@ one_way_collision = true
 debug_color = Color(0, 0.88235295, 0, 0.77254903)
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=602576943]
-position = Vector2(3522.9014, 52.06375)
+position = Vector2(3523.1514, 52.06375)
 shape = SubResource("RectangleShape2D_75jbq")
 one_way_collision = true
 debug_color = Color(0, 0.88235295, 0, 0.77254903)
