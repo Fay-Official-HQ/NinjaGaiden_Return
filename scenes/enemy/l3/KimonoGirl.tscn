@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://b7vbx6k88q02s"]
+
+[ext_resource type="Script" uid="uid://ba5fv113flh2h" path="res://scripts/enemy/l3/kimono_girl.gd" id="1_gd2kq"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_aa7cq"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_abwbo"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_m6dmx"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="6_484xl"]
+[ext_resource type="Texture2D" uid="uid://560lneahcjyf" path="res://assets/sprites/enemy/l3/enemy_l3_nvren7.png" id="6_gd2kq"]
+[ext_resource type="Texture2D" uid="uid://bqmbj2aitvtb2" path="res://assets/sprites/enemy/l3/enemy_l3_nvren8.png" id="7_lmwic"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_nahof"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_optpl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_aa7cq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_abwbo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_m6dmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_484xl")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gd2kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lmwic")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gd2kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lmwic")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gd2kq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lmwic")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68jqe"]
+size = Vector2(13, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgy43"]
+size = Vector2(13, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yu1m"]
+size = Vector2(13, 32)
+
+[node name="KimonoGirl" type="CharacterBody2D" unique_id=1227478862 groups=["enemy", "fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_gd2kq")
+initial_facing_right = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_4qnji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=447011981]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_nahof")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=323167591]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_dgy43")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
+collision_layer = 32
+script = ExtResource("10_optpl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1795934105]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_8yu1m")
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=2095730047]
+target_position = Vector2(-20, 30)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=1345637205]
+target_position = Vector2(20, 30)
+collision_mask = 12
+
+[node name="WallDetect" type="RayCast2D" parent="." unique_id=67567202]
+target_position = Vector2(25, 0)
+collision_mask = 12
