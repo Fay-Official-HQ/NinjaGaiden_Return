@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://gocdpyybq1e" path="res://assets/sprites/enemy/l3/enemy_l3_nvren20.png" id="12_4tmla"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="12_dqh8f"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="13_8pe8e"]
-[ext_resource type="Script" uid="uid://cx404cfavlvyk" path="res://scripts/components/AttackHitBox.gd" id="15_bduli"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
 animations = [{
@@ -136,9 +135,10 @@ script = ExtResource("13_8pe8e")
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_68jqe")
 
-[node name="SlashHitBox" type="Area2D" parent="." unique_id=755896324]
+[node name="SlashHitBox" type="Area2D" parent="." unique_id=1857006853]
 collision_layer = 32
-script = ExtResource("15_bduli")
+script = ExtResource("13_8pe8e")
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlashHitBox" unique_id=2028900633]
 position = Vector2(15, 0)

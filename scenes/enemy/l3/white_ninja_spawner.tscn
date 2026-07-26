@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bfc5fsn0dvi2r"]
+
+[ext_resource type="Script" uid="uid://b6nhjwewfcyrx" path="res://scripts/enemy/l3/WhiteNinjaSpawner.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(20, 167)
+
+[node name="WhiteNinjaSpawner" type="Node2D" unique_id=1022552023]
+script = ExtResource("1")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=828030689]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=1855092836]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_trigger")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=552779338]
+position = Vector2(0, -80)
+
+[node name="TargetPosition" type="Marker2D" parent="." unique_id=1234567890]

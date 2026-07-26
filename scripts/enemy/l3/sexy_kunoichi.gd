@@ -54,7 +54,8 @@ class_name SexyKunoichi
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurtbox: Area2D = $HurtBox
 @onready var hitbox: Area2D = $HitBox
-@onready var slash_hitbox: AttackHitBox = $SlashHitBox
+@onready var slash_hitbox: Area2D = $SlashHitBox
+@onready var slash_collision: CollisionShape2D = $SlashHitBox/CollisionShape2D
 
 # ==================== 状态枚举 ====================
 
@@ -96,7 +97,7 @@ func _ready() -> void:
 	if enemy_hitbox:
 		enemy_hitbox.damage = contact_damage
 
-	# SlashHitBox 默认关闭，kick_up/kick_forward 时临时开启
+	# SlashHitBox 默认关闭，kick_up/kick_forward 时临时开启（已设置为 EnemyHitBox，damage=2）
 	slash_hitbox.set_deferred("monitoring", false)
 
 	# 信号连接
@@ -398,6 +399,8 @@ func _face_player() -> void:
 	if should_face_right != facing_right:
 		facing_right = should_face_right
 		anim.flip_h = not should_face_right
+		# SlashHitBox 同步翻转：碰撞体位置镜像
+		slash_collision.position.x = -slash_collision.position.x
 
 
 # ==================== 通用 ====================

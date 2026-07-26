@@ -1,9 +1,9 @@
-# 追捕怪物：生成后朝玩家方向奔跑 → 接近时跳跃撞向玩家 → 出屏消失
+# 追逐绿忍者：生成后朝玩家方向奔跑 → 接近100px内跳跃撞向玩家 → 出屏消失
 # 所有数据硬编码在代码中，不需要绑定 data 资源
 extends BaseEnemy
-class_name ChaserMonster
+class_name ChaserGreenNinja
 
-const CHASE_SPEED: float = 120.0
+const CHASE_SPEED: float = 150.0
 const JUMP_FORCE: float = -250.0
 const JUMP_DISTANCE: float = 100.0
 const JUMP_STUN: float = 0.3
