@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://ct8jchqod6uok"]
+
+[ext_resource type="Script" uid="uid://c6m5k4ht62yy4" path="res://scripts/enemy/l3/sexy_kunoichi.gd" id="1_pyr3w"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_bduli"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_swd3r"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_2rqrl"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="6_32ndv"]
+[ext_resource type="Texture2D" uid="uid://bha3gkgpbo5no" path="res://assets/sprites/enemy/l3/enemy_l3_nvren14.png" id="6_ylg0b"]
+[ext_resource type="Texture2D" uid="uid://dd7oene7n252r" path="res://assets/sprites/enemy/l3/enemy_l3_nvren18.png" id="7_bduli"]
+[ext_resource type="Texture2D" uid="uid://c8qeqdnjesbsk" path="res://assets/sprites/enemy/l3/enemy_l3_nvren15.png" id="8_swd3r"]
+[ext_resource type="Texture2D" uid="uid://bgtlv3b2tmwrd" path="res://assets/sprites/enemy/l3/enemy_l3_nvren17.png" id="9_2rqrl"]
+[ext_resource type="Texture2D" uid="uid://cur7wb35gbta2" path="res://assets/sprites/enemy/l3/enemy_l3_nvren16.png" id="10_32ndv"]
+[ext_resource type="Texture2D" uid="uid://cgxb0185fsp26" path="res://assets/sprites/enemy/l3/enemy_l3_nvren19.png" id="11_f7ueu"]
+[ext_resource type="Texture2D" uid="uid://bdtvgf32120uq" path="res://assets/sprites/enemy/l3/enemy_l3_nvren16-1.png" id="11_swd3r"]
+[ext_resource type="Texture2D" uid="uid://gocdpyybq1e" path="res://assets/sprites/enemy/l3/enemy_l3_nvren20.png" id="12_4tmla"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="12_dqh8f"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="13_8pe8e"]
+[ext_resource type="Script" uid="uid://cx404cfavlvyk" path="res://scripts/components/AttackHitBox.gd" id="15_bduli"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bduli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_swd3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2rqrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_32ndv")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ylg0b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_bduli")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ylg0b")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_swd3r")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_2rqrl")
+}],
+"loop": true,
+"name": &"kick_forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_swd3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_32ndv")
+}],
+"loop": true,
+"name": &"kick_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_f7ueu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4tmla")
+}],
+"loop": false,
+"name": &"throw_down",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68jqe"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bduli"]
+size = Vector2(8, 34)
+
+[node name="SexyKunoichi" type="CharacterBody2D" unique_id=1227478862 groups=["fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_pyr3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_4qnji")
+animation = &"kick_up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=447011981]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("12_dqh8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=373876701]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
+collision_layer = 32
+script = ExtResource("13_8pe8e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=477732339]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="SlashHitBox" type="Area2D" parent="." unique_id=755896324]
+collision_layer = 32
+script = ExtResource("15_bduli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlashHitBox" unique_id=2028900633]
+position = Vector2(15, 0)
+shape = SubResource("RectangleShape2D_bduli")
+debug_color = Color(0.99215686, 0, 0.24705882, 0.23529412)
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=2095730047]
+target_position = Vector2(-20, 30)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=1345637205]
+target_position = Vector2(20, 30)
+collision_mask = 12
+
+[node name="WallDetect" type="RayCast2D" parent="." unique_id=67567202]
+target_position = Vector2(25, 0)
+collision_mask = 12

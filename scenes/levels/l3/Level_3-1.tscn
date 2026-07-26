@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="8_dl3by"]
 [ext_resource type="PackedScene" uid="uid://b7vbx6k88q02s" path="res://scenes/enemy/l3/KimonoGirl.tscn" id="9_i6l4l"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="10_je8go"]
+[ext_resource type="PackedScene" uid="uid://c1xb1lxy7htnr" path="res://scenes/enemy/l3/ArcherMiko.tscn" id="11_3qrma"]
+[ext_resource type="PackedScene" uid="uid://sdmscf4tl485" path="res://scenes/enemy/l3/Kunoichi.tscn" id="11_rvj8i"]
+[ext_resource type="PackedScene" uid="uid://brddgu8cas1j5" path="res://scenes/enemy/l3/sexy_kunoichi_spawner.tscn" id="12_llpli"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -243,6 +246,18 @@ position = Vector2(49, 39)
 [node name="KimonoGirl" parent="enemys" unique_id=1227478862 instance=ExtResource("9_i6l4l")]
 position = Vector2(405, 236)
 
+[node name="ArcherMiko" parent="enemys" unique_id=1656441098 instance=ExtResource("11_3qrma")]
+position = Vector2(591, 226)
+
+[node name="Kunoichi" parent="enemys" unique_id=1886769595 instance=ExtResource("11_rvj8i")]
+position = Vector2(529.875, 133.8672)
+
+[node name="SexyKunoichiSpawner" parent="enemys" unique_id=1365673449 instance=ExtResource("12_llpli")]
+position = Vector2(343, 101)
+
+[node name="SpawnPosition" parent="enemys/SexyKunoichiSpawner" index="1" unique_id=1097475069]
+position = Vector2(-174, -70)
+
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 position = Vector2(2966, 80)
 
@@ -257,3 +272,4 @@ shape = SubResource("RectangleShape2D_nd8jy")
 
 [editable path="Map/TileMapLayer/terrain/OneWayPlatform"]
 [editable path="Map/TileMapLayer/terrain/Wire"]
+[editable path="enemys/SexyKunoichiSpawner"]

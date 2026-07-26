@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://c1xb1lxy7htnr"]
+
+[ext_resource type="Script" uid="uid://bba1cgolunxg4" path="res://scripts/enemy/l3/archer_miko.gd" id="1_6wyss"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_kfaqx"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_6v4bg"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_q3en6"]
+[ext_resource type="Texture2D" uid="uid://ced0w46slvo1i" path="res://assets/sprites/enemy/l3/enemy_l3_nvren9.png" id="6_6wyss"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="6_c8eav"]
+[ext_resource type="Texture2D" uid="uid://bjpco816q8doj" path="res://assets/sprites/enemy/l3/enemy_l3_nvren10.png" id="7_c33cl"]
+[ext_resource type="Texture2D" uid="uid://bdf81oxfmtxsh" path="res://assets/sprites/enemy/l3/enemy_l3_nvren11.png" id="8_diyft"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="10_dhvf7"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="11_1ql01"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crouch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kfaqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6v4bg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_q3en6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_c8eav")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6wyss")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_c33cl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_diyft")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(17, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(17, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(17, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
+size = Vector2(353.5, 39.25)
+
+[node name="ArcherMiko" type="CharacterBody2D" unique_id=1656441098 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 524
+script = ExtResource("1_6wyss")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
+sprite_frames = SubResource("SpriteFrames_crouch")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
+position = Vector2(-0.5, 8.5)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=451901895]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("10_dhvf7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1636328222]
+position = Vector2(-0.5, 8.5)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=862567462]
+collision_layer = 32
+script = ExtResource("11_1ql01")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1906925241]
+position = Vector2(-0.5, 9)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=89548439]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=823214000]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_detect")
