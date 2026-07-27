@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dg1iidmkauxis" path="res://scenes/environment/wire.tscn" id="6_4114d"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="7_omrlg"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="8_dl3by"]
-[ext_resource type="PackedScene" uid="uid://c5br0f11ylt7g" path="res://scenes/enemy/l3/RisingNinja.tscn" id="9_i6l4l"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="10_je8go"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -239,9 +238,6 @@ position = Vector2(49, 39)
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
-
-[node name="RisingNinja" parent="enemys" unique_id=1227478862 instance=ExtResource("9_i6l4l")]
-position = Vector2(324, 136)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 position = Vector2(2966, 80)

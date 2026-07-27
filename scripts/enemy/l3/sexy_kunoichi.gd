@@ -243,7 +243,6 @@ func _start_charge(target: int, dist: float = 0.0) -> void:
 	_charge_dist = dist
 	velocity.x = 0.0
 	anim.play("idle")
-	modulate = Color(0.5, 0.5, 0.5)  # 蓄力时变黑
 
 
 func _update_charge(delta: float) -> void:

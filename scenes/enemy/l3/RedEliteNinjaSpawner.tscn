@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cdb07advscff7"]
+
+[ext_resource type="Script" uid="uid://ci36hshpt4fw3" path="res://scripts/enemy/l3/RedEliteNinjaSpawner.gd" id="1_vnckt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vnckt"]
+size = Vector2(30.5, 321.5)
+
+[node name="RedEliteNinjaSpawner" type="Node2D" unique_id=1195331389]
+script = ExtResource("1_vnckt")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=197483304]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=2002596675]
+shape = SubResource("RectangleShape2D_vnckt")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=2013612999]

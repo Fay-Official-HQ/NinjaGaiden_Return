@@ -4,7 +4,7 @@ class_name RisingNinja
 # ==================== 导出调试参数 ====================
 
 ## 最大血量
-@export var max_hp: int = 2
+@export var max_hp: int = 1
 ## 巡逻速度（像素/秒）
 @export var patrol_speed: float = 30.0
 ## 追击速度（像素/秒）

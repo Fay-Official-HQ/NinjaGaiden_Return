@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_s02wu"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_lqrj1"]
 [ext_resource type="PackedScene" uid="uid://dltnde0yqiwim" path="res://scenes/environment/CameraZone.tscn" id="9_2jflf"]
+[ext_resource type="PackedScene" uid="uid://cdb07advscff7" path="res://scenes/enemy/l3/RedEliteNinjaSpawner.tscn" id="9_mjld6"]
 [ext_resource type="Script" uid="uid://ckwvxaqlg05oj" path="res://scripts/environment/BossGateTrigger.gd" id="10_io0wj"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -161,6 +162,20 @@ metadata/_edit_lock_ = true
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
+[node name="RedEliteNinjaSpawner" parent="enemys" unique_id=1195331389 instance=ExtResource("9_mjld6")]
+position = Vector2(777.954, 154.02185)
+max_hp = 20
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner" index="1" unique_id=2013612999]
+position = Vector2(178.04602, -25.02185)
+
+[node name="RedEliteNinjaSpawner2" parent="enemys" unique_id=2031860963 instance=ExtResource("9_mjld6")]
+position = Vector2(777.954, 154.02185)
+max_hp = 20
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner2" index="1" unique_id=2013612999]
+position = Vector2(-189.95398, -25.02185)
+
 [node name="CameraZone" parent="." unique_id=851938473 instance=ExtResource("9_2jflf")]
 position = Vector2(361.70743, 23.675964)
 lock_x = true
@@ -186,4 +201,6 @@ position = Vector2(508, 123)
 shape = SubResource("RectangleShape2D_wg677")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="enemys/RedEliteNinjaSpawner"]
+[editable path="enemys/RedEliteNinjaSpawner2"]
 [editable path="CameraZone"]
