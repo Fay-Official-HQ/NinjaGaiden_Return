@@ -120,7 +120,7 @@ script = ExtResource("8_ja4mm")
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_dgy43")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011 groups=["blockable"]]
 collision_layer = 32
 script = ExtResource("9_gekt7")
 

@@ -127,7 +127,7 @@ script = ExtResource("12_dqh8f")
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_68jqe")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011 groups=["blockable"]]
 collision_layer = 32
 script = ExtResource("13_8pe8e")
 
@@ -135,7 +135,7 @@ script = ExtResource("13_8pe8e")
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_68jqe")
 
-[node name="SlashHitBox" type="Area2D" parent="." unique_id=1857006853]
+[node name="SlashHitBox" type="Area2D" parent="." unique_id=1857006853 groups=["blockable"]]
 collision_layer = 32
 script = ExtResource("13_8pe8e")
 damage = 2

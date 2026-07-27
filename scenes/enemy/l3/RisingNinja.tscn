@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://c5br0f11ylt7g"]
+
+[ext_resource type="Script" uid="uid://cy4dwrvu7fjm6" path="res://scripts/enemy/l3/rising_ninja.gd" id="1_7fyb0"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_fdtrl"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_m8nyi"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_sa5i6"]
+[ext_resource type="Texture2D" uid="uid://dhbrmugoiw8r5" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe12.png" id="6_7fyb0"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="6_ejkid"]
+[ext_resource type="Texture2D" uid="uid://bjcw5no3riacg" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe17.png" id="7_dqf0m"]
+[ext_resource type="Texture2D" uid="uid://dlh1a2i8df7o6" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe14.png" id="8_fdtrl"]
+[ext_resource type="Texture2D" uid="uid://cn2nho0i37ksy" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe15.png" id="9_m8nyi"]
+[ext_resource type="Texture2D" uid="uid://dc2uvuuvgv5dm" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe16.png" id="10_sa5i6"]
+[ext_resource type="Texture2D" uid="uid://deo8ch2hv51gt" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe13.png" id="11_ejkid"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="12_jfhgc"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="13_6okks"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_fdtrl")
+}],
+"loop": true,
+"name": &"charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_fdtrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m8nyi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sa5i6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ejkid")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7fyb0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_dqf0m")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7fyb0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_dqf0m")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_m8nyi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_sa5i6")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7fyb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ejkid")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68jqe"]
+size = Vector2(20, 32)
+
+[node name="RisingNinja" type="CharacterBody2D" unique_id=1227478862 groups=["fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_7fyb0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_4qnji")
+animation = &"charge"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=447011981]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("12_jfhgc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2012289932]
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011 groups=["blockable"]]
+collision_layer = 32
+script = ExtResource("13_6okks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=2130279468]
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=2095730047]
+target_position = Vector2(-20, 30)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=1345637205]
+target_position = Vector2(20, 30)
+collision_mask = 12
+
+[node name="WallDetect" type="RayCast2D" parent="." unique_id=67567202]
+target_position = Vector2(25, 0)
+collision_mask = 12

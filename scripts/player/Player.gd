@@ -189,6 +189,10 @@ func _on_hurt_box_took_damage(damage: int, _is_heavy: bool = false) -> void:
 	if invincible_timer > 0 or is_invincible or special_invincible_timer > 0 or _is_dead:
 		return
 
+	# 格挡检测：剑术姿势中且攻击来自前方 block_detector 覆盖区域
+	if _try_block_attack():
+		return
+
 	_cancel_charge()
 
 	current_hp -= damage
@@ -448,6 +452,20 @@ func _is_node_dead(node: Node2D) -> bool:
 	return false
 
 
+func _try_block_attack() -> bool:
+	if not (state_machine.current_state is SwordReadyState and is_on_floor()):
+		return false
+	# 检查 block_detector 当前是否与任何标记了 blockable 的攻击框重叠
+	for area in block_detector.get_overlapping_areas():
+		if area.is_in_group("blockable"):
+			var attack_dir = sign(area.global_position.x - global_position.x)
+			if attack_dir != 0 and attack_dir == facing_direction:
+				AudioManager.play_sound(&"fangyu")
+				_spawn_block_spark()
+				return true
+	return false
+
+
 func _on_block_detector_entered(area: Area2D) -> void:
 	if not area.is_in_group("blockable"):
 		return
@@ -457,11 +475,9 @@ func _on_block_detector_entered(area: Area2D) -> void:
 	var attack_dir = sign(area.global_position.x - global_position.x)
 	if attack_dir != 0 and attack_dir != facing_direction:
 		return
-	AudioManager.play_sound(&"fangyu")
-	_spawn_block_spark()
-	var projectile = area.get_parent()
-	if is_instance_valid(projectile):
-		projectile.queue_free()
+	# 仅处理投射物销毁，格挡音效/特效由 _try_block_attack 统一处理
+	if area.get_parent() != null and area.get_parent().is_in_group("projectile"):
+		area.get_parent().queue_free()
 
 
 func _spawn_block_spark() -> void:
