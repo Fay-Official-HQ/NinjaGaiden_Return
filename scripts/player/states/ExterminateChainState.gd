@@ -78,6 +78,12 @@ func _do_attack(target: Node2D) -> void:
 		_finish_chain()
 		return
 
+	if player.sword.current_tp <= 0:
+		_finish_chain()
+		return
+	player.sword.current_tp -= 1
+	player.sword.tp_changed.emit(player.sword.current_tp)
+
 	player.set_facing_direction(1.0 if target.global_position.x > player.global_position.x else -1.0)
 
 	AudioManager.play_sound(&"cuoa")

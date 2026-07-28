@@ -18,7 +18,7 @@ class_name RisingNinja
 ## 障碍物跳跃力
 @export var jump_force: float = -450.0
 ## 追击范围（像素）
-@export var chase_range: float = 200.0
+@export var chase_range: float = 150.0
 ## 前冲范围（像素，≤此值进入 charge 动画前冲）
 @export var charge_range: float = 50.0
 ## 升龙范围（像素，≤此值释放 up 升龙击）
@@ -260,7 +260,10 @@ func _on_landed() -> void:
 # ==================== 方向 ====================
 
 func _face_player() -> void:
-	if _state == State.RISE or _state == State.FALL:
+	# PATROL：保持自身巡逻方向，不追向玩家
+	# OBSTACLE_JUMP：跳跃中保持不变，防止空中变向
+	# RISE/FALL：升龙/坠落中不转向
+	if _state != State.CHASE and _state != State.CHARGE:
 		return
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:

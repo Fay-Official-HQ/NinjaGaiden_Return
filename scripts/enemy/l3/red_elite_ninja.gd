@@ -12,7 +12,7 @@ class_name RedEliteNinja
 # ==================== 导出调试参数 ====================
 
 ## 最大血量
-@export var max_hp: int = 3
+@export var max_hp: int = 2
 ## 追击跳跃力（控制跳跃高度）
 @export var chase_jump_force: float = 320.0
 ## 跳跃轰炸·跳跃力（比追击更高，-450左右）
@@ -24,11 +24,11 @@ class_name RedEliteNinja
 ## 探测距离（像素）
 @export var detect_range: float = 200.0
 ## 攻击距离（像素）
-@export var attack_range: float = 100.0
+@export var attack_range: float = 200.0
 ## 攻击间隔（秒）
-@export var attack_cooldown: float = 0.3
+@export var attack_cooldown: float = 1.2
 ## 蓄力时长（秒）
-@export var charge_duration: float = 0.3
+@export var charge_duration: float = 0.35
 ## 前冲距离（像素）
 @export var dash_distance: float = 100.0
 ## 前冲速度（像素/秒）
@@ -97,10 +97,16 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
+	# 记录落地前是否在地面（用于检测刚落地）
+	var was_on_floor = is_on_floor()
+
 	# 显现状态：只受重力，不做任何 AI 逻辑和玩家探测
 	if _state == State.APPEARING:
 		_apply_gravity(delta)
 		move_and_slide()
+		# 【修复】显现状态落地也停止滑动
+		if not was_on_floor and is_on_floor():
+			velocity.x = 0.0
 		return
 
 	_apply_gravity(delta)
@@ -124,6 +130,10 @@ func _physics_process(delta: float) -> void:
 			_update_bomb_jump_fall()
 
 	move_and_slide()
+
+	# 【修复】刚落地时立即停止水平滑动
+	if not was_on_floor and is_on_floor():
+		velocity.x = 0.0
 
 
 # ==================== 玩家探测 ====================
@@ -355,7 +365,7 @@ func _drop_bombs() -> void:
 		var dir = Vector2(sin(angle_offset), 1.0).normalized()
 		var dart = preload("res://scenes/enemy/l3/FireDart.tscn").instantiate() as BombDart
 		dart.initialize(dir, bomb_speed)
-		dart.global_position = global_position + Vector2(angle_offset * 10, -8)
+		dart.global_position = global_position + Vector2(angle_offset * 45, -8)
 		get_tree().current_scene.add_child(dart)
 
 	AudioManager.play_sound(&"shibingfashe")

@@ -45,7 +45,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6g8a"]
 size = Vector2(20, 3)
 
-[node name="arrow" type="Area2D" unique_id=1462592865 groups=["blockable", "enemy"]]
+[node name="arrow" type="Area2D" unique_id=1462592865 groups=["blockable", "enemy", "projectile"]]
 collision_layer = 2
 script = ExtResource("1_35bhl")
 

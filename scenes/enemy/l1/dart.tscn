@@ -51,7 +51,7 @@ size = Vector2(16, 5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81yjr"]
 size = Vector2(16, 5)
 
-[node name="Dart" type="Area2D" unique_id=658235894]
+[node name="Dart" type="Area2D" unique_id=658235894 groups=["blockable", "projectile"]]
 collision_layer = 2
 script = ExtResource("1_k7qkt")
 
@@ -63,7 +63,7 @@ animation = &"flying"
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_05kig")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=107738264 groups=["blockable"]]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=107738264 groups=["blockable", "projectile"]]
 collision_layer = 32
 script = ExtResource("3_we8gu")
 

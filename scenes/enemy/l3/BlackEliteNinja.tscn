@@ -124,7 +124,7 @@ size = Vector2(21, 31)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0qiba"]
 
-[node name="BlackEliteNinja" type="CharacterBody2D" unique_id=1227478862 groups=["fall_vulnerable"]]
+[node name="BlackEliteNinja" type="CharacterBody2D" unique_id=1227478862 groups=["enemy", "fall_vulnerable"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_8y6as")
@@ -147,7 +147,7 @@ script = ExtResource("12_trc5f")
 position = Vector2(3.5, -0.5)
 shape = SubResource("RectangleShape2D_68jqe")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1843786011 groups=["blockable"]]
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
 collision_layer = 32
 script = ExtResource("13_u1nrt")
 
@@ -155,7 +155,7 @@ script = ExtResource("13_u1nrt")
 position = Vector2(3.5, -0.5)
 shape = SubResource("RectangleShape2D_68jqe")
 
-[node name="SwordHitBox" type="Area2D" parent="." unique_id=1118514455 groups=["blockable"]]
+[node name="SwordHitBox" type="Area2D" parent="." unique_id=1118514455]
 collision_layer = 32
 script = ExtResource("13_u1nrt")
 damage = 2

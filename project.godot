@@ -42,6 +42,7 @@ enemy=""
 fall_vulnerable=""
 blockable=""
 wall_blocker=""
+projectile=""
 
 [input]
 

@@ -198,13 +198,15 @@ func _update_fleeing(_delta: float) -> void:
 # ==================== 动画回调 ====================
 
 func _on_anim_finished() -> void:
+	# 死亡动画优先处理（防止死在 THROW 等状态时被状态分支拦截）
+	if _is_dead:
+		queue_free()
+		return
+
 	if _state == State.THROW:
 		# throw 播完 → 保持投掷姿势 0.5s
 		_state = State.HOLD
 		_hold_timer = 0.5
-
-	elif anim.animation == "death":
-		queue_free()
 
 
 # ==================== 面对玩家 ====================

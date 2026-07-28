@@ -78,7 +78,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("8_4swvi")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -115,7 +115,7 @@ script = ExtResource("1_2sp71")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
 sprite_frames = SubResource("SpriteFrames_4qnji")
-animation = &"xuli"
+animation = &"jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
 position = Vector2(-0.25, 8.25)
@@ -130,7 +130,7 @@ script = ExtResource("16_1sqvd")
 position = Vector2(-0.25, 8.25)
 shape = SubResource("RectangleShape2D_68jqe")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1843786011 groups=["blockable"]]
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
 collision_layer = 32
 script = ExtResource("17_lvekc")
 
@@ -138,7 +138,7 @@ script = ExtResource("17_lvekc")
 position = Vector2(-0.25, 8.25)
 shape = SubResource("RectangleShape2D_68jqe")
 
-[node name="SwordHitBox" type="Area2D" parent="." unique_id=1118514455 groups=["blockable"]]
+[node name="SwordHitBox" type="Area2D" parent="." unique_id=1118514455]
 collision_layer = 32
 script = ExtResource("17_lvekc")
 damage = 2

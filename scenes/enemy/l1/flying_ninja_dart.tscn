@@ -21,7 +21,7 @@ radius = 5.0249376
 [sub_resource type="CircleShape2D" id="CircleShape2D_npwh0"]
 radius = 5.0990195
 
-[node name="FlyingNinjaDart" type="Area2D" unique_id=812332263]
+[node name="FlyingNinjaDart" type="Area2D" unique_id=812332263 groups=["projectile"]]
 collision_layer = 2
 script = ExtResource("1")
 
@@ -33,7 +33,7 @@ animation = &"fly"
 position = Vector2(0, -0.5)
 shape = SubResource("CircleShape2D_e2tcq")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable"]]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable", "projectile"]]
 collision_layer = 32
 script = ExtResource("3")
 

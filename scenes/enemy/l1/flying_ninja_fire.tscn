@@ -26,14 +26,14 @@ scale_min = 0.099999994
 scale_max = 0.35
 color_ramp = SubResource("GradientTexture1D_fire")
 
-[node name="FlyingNinjaFire" type="Area2D" unique_id=796017411 groups=["blockable"]]
+[node name="FlyingNinjaFire" type="Area2D" unique_id=796017411 groups=["blockable", "projectile"]]
 collision_layer = 2
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1084842112]
 shape = SubResource("CircleShape2D_body")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=2052784261]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=2052784261 groups=["blockable", "projectile"]]
 collision_layer = 32
 script = ExtResource("4")
 

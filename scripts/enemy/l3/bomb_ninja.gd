@@ -34,7 +34,7 @@ const BOMB_DART_SCENE = preload("res://scenes/enemy/l3/BombDart.tscn")
 ## 【调试】投掷冷却时间（秒），检测到玩家后每隔 attack_cooldown 秒扔一次炸弹
 @export var attack_cooldown: float = 2.0
 ## 【调试】炸弹飞镖飞行速度（像素/秒）
-@export var dart_speed: float = 300.0
+@export var dart_speed: float = 250.0
 ## 【调试】死亡动画名称（在 SpriteFrames 中定义的动画名）
 @export var death_anim: String = "death"
 ## 【调试】死亡音效 ID（在 AudioManager 中注册的键名）

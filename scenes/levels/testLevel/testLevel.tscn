@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_3qxk2"]
 [ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="8_eb6c4"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_4d7sk"]
+[ext_resource type="PackedScene" uid="uid://b7vbx6k88q02s" path="res://scenes/enemy/l3/KimonoGirl.tscn" id="10_rfoho"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="11_82y4s"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -120,6 +121,39 @@ position = Vector2(142, 203)
 consumable_type = 2
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="KimonoGirl" parent="enemys" unique_id=1227478862 instance=ExtResource("10_rfoho")]
+position = Vector2(383.27362, 216.2453)
+
+[node name="KimonoGirl2" parent="enemys" unique_id=957980042 instance=ExtResource("10_rfoho")]
+position = Vector2(458, 226)
+
+[node name="KimonoGirl3" parent="enemys" unique_id=1971342556 instance=ExtResource("10_rfoho")]
+position = Vector2(297, 233)
+
+[node name="KimonoGirl4" parent="enemys" unique_id=1941165744 instance=ExtResource("10_rfoho")]
+position = Vector2(416, 235)
+
+[node name="KimonoGirl5" parent="enemys" unique_id=1499704120 instance=ExtResource("10_rfoho")]
+position = Vector2(515, 222)
+
+[node name="KimonoGirl6" parent="enemys" unique_id=376957248 instance=ExtResource("10_rfoho")]
+position = Vector2(361, 242)
+
+[node name="KimonoGirl7" parent="enemys" unique_id=1049630153 instance=ExtResource("10_rfoho")]
+position = Vector2(340, 216)
+
+[node name="KimonoGirl8" parent="enemys" unique_id=489933854 instance=ExtResource("10_rfoho")]
+position = Vector2(392, 227)
+
+[node name="KimonoGirl9" parent="enemys" unique_id=2098853281 instance=ExtResource("10_rfoho")]
+position = Vector2(579, 229)
+
+[node name="KimonoGirl10" parent="enemys" unique_id=685769113 instance=ExtResource("10_rfoho")]
+position = Vector2(692, 234)
+
+[node name="KimonoGirl11" parent="enemys" unique_id=1181436460 instance=ExtResource("10_rfoho")]
+position = Vector2(636, 236)
 
 [node name="environment" type="Node" parent="." unique_id=1490444642]
 

@@ -33,8 +33,11 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("6_6l0fd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_q6rex")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -82,7 +85,7 @@ script = ExtResource("8_f5g1r")
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_hurt")
 
-[node name="HitBox" type="Area2D" parent="." unique_id=1919418762 groups=["blockable"]]
+[node name="HitBox" type="Area2D" parent="." unique_id=1919418762]
 collision_layer = 32
 script = ExtResource("9_akp08")
 

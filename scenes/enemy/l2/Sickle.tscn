@@ -33,7 +33,7 @@ radius = 7.017834
 [sub_resource type="CircleShape2D" id="CircleShape2D_npwh0"]
 radius = 7.0
 
-[node name="Sickle" type="Area2D" unique_id=812332263 groups=["blockable"]]
+[node name="Sickle" type="Area2D" unique_id=812332263 groups=["blockable", "projectile"]]
 collision_layer = 2
 script = ExtResource("1_44ny5")
 
@@ -46,7 +46,7 @@ frame_progress = 0.9727189
 position = Vector2(0, -0.5)
 shape = SubResource("CircleShape2D_e2tcq")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable"]]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable", "projectile"]]
 collision_layer = 32
 script = ExtResource("3_fu6cr")
 

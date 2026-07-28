@@ -37,7 +37,7 @@ scale_min = 0.099999994
 scale_max = 0.39999998
 color_ramp = SubResource("GradientTexture1D_fireball")
 
-[node name="boss_spine" type="Area2D" unique_id=812332263 groups=["blockable"]]
+[node name="boss_spine" type="Area2D" unique_id=812332263 groups=["blockable", "projectile"]]
 collision_layer = 2
 script = ExtResource("1_2okea")
 
@@ -49,7 +49,7 @@ animation = &"fly"
 position = Vector2(2.5, -0.5)
 shape = SubResource("RectangleShape2D_1ot4f")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable"]]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1551895820 groups=["blockable", "projectile"]]
 collision_layer = 32
 script = ExtResource("3_bcwk5")
 damage = 2

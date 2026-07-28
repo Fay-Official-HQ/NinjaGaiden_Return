@@ -60,7 +60,7 @@ func update(delta: float) -> void:
 	if _release_timer >= _execution_duration:
 		_cleanup()
 		if _killed_any and _energy > 0:
-			player.exterminate_remaining_chains = _energy
+			player.exterminate_remaining_chains = 99
 			player.exterminate_chain_timer = 0.5
 			player.exterminate_chain_active = true
 			

@@ -4,7 +4,7 @@ class_name SexyKunoichi
 # ==================== 导出调试参数 ====================
 
 ## 最大血量
-@export var max_hp: int = 2
+@export var max_hp: int = 1
 
 ## 升龙击·垂直起跳力（负值越高跳越高）
 @export var kick_up_vertical_force: float = -300.0
@@ -78,6 +78,7 @@ var _charge_dist: float = 0.0  # 蓄力时记录玩家距离，用于 KICK_UP
 
 # JUMP 接近
 var _jump_target_x: float = 0.0
+var _jump_wall_count: int = 0  # 翻墙跳跃计数（类似 hopper 壁跳机制，上限5次）
 
 # KICK_FORWARD
 var _kick_forward_start_x: float = 0.0
@@ -140,6 +141,7 @@ func _physics_process(delta: float) -> void:
 	# 通用落地检测
 	if is_on_floor():
 		if _state == State.JUMP:
+			_jump_wall_count = 0
 			_jump_cd = jump_cooldown
 			_enter_idle()
 		elif _state == State.KICK_UP:
@@ -230,8 +232,22 @@ func _start_jump_toward_player(player: Node2D, _dist: float) -> void:
 
 
 func _update_jump(_delta: float) -> void:
-	# 水平速度由初始值维持，垂直受重力处理
-	pass
+	# 空中保持朝向玩家的水平速度（类似 hopper 持续追击）
+	if not is_on_floor():
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			var dir = 1.0 if player.global_position.x > global_position.x else -1.0
+			velocity.x = move_toward(velocity.x, dir * 150.0, 50.0)
+
+	# 撞墙翻越：下落或滞空碰到墙壁且未到上限，则二次跳跃（类似 hopper）
+	if is_on_wall() and velocity.y >= 0 and not is_on_floor() and _jump_wall_count < 5:
+		_jump_wall_count += 1
+		velocity.y = jump_force
+		# 水平推向玩家方向，防止被墙壁抵消
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			var dir = 1.0 if player.global_position.x > global_position.x else -1.0
+			velocity.x = dir * 150.0
 
 
 # ==================== CHARGE（攻击前蓄力0.5s） ====================

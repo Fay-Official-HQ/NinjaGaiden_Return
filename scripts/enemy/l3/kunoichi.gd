@@ -4,9 +4,11 @@ class_name Kunoichi
 # ==================== 导出调试参数 ====================
 
 ## 最大血量
-@export var max_hp: int = 2
+@export var max_hp: int = 1
 ## 巡逻速度（像素/秒）
 @export var patrol_speed: float = 30.0
+## 巡逻范围（像素，0=无限制）
+@export var patrol_range: float = 80.0
 ## 前冲刺·接近阶段速度（像素/秒）
 @export var approach_speed: float = 150.0
 ## 冲刺速度（像素/秒）
@@ -20,7 +22,7 @@ class_name Kunoichi
 ## 攻击间隔（秒）
 @export var attack_cooldown: float = 0.5
 ## 玩家探测距离（像素）
-@export var detect_range: float = 200.0
+@export var detect_range: float = 175.0
 ## 接触伤害值
 @export var contact_damage: int = 1
 ## 重力加速度
@@ -178,9 +180,17 @@ func _update_idle(delta: float) -> void:
 
 
 func _update_patrol(_delta: float) -> void:
-	# 巡逻：遇到断崖或墙壁转弯
+	# 巡逻：遇到断崖、墙壁或超出巡逻范围时转弯
 	var edge_ray = floor_detect_right if facing_right else floor_detect_left
-	if not edge_ray.is_colliding() or is_on_wall():
+	var at_edge = not edge_ray.is_colliding()
+	var at_wall = is_on_wall()
+
+	# 巡逻范围限制（非零时生效）
+	var out_of_range = false
+	if patrol_range > 0.0:
+		out_of_range = abs(global_position.x - _start_position.x) >= patrol_range
+
+	if at_edge or at_wall or out_of_range:
 		_set_facing(not facing_right)
 
 	velocity.x = patrol_speed * (1.0 if facing_right else -1.0)

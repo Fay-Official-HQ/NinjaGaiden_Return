@@ -13,9 +13,11 @@ class_name BlackEliteNinja
 # ==================== 导出调试参数 ====================
 
 ## 最大血量
-@export var max_hp: int = 3
+@export var max_hp: int = 2
 ## 巡逻速度（像素/秒）
 @export var patrol_speed: float = 30.0
+## 巡逻范围（像素，0=无限制）
+@export var patrol_range: float = 80.0
 ## 追击速度（像素/秒）
 @export var chase_speed: float = 130.0
 ## 探测距离（像素）
@@ -25,7 +27,7 @@ class_name BlackEliteNinja
 ## 攻击间隔（秒）
 @export var attack_cooldown: float = 0.2
 ## 蓄力时长（秒）
-@export var charge_duration: float = 0.3
+@export var charge_duration: float = 0.5
 ## 前冲距离（像素）
 @export var dash_distance: float = 100.0
 ## 前冲速度（像素/秒）
@@ -67,6 +69,8 @@ var facing_right: bool = true
 var is_dead: bool = false
 var current_hp: int = 1
 
+var _start_x: float = 0.0  # 初始生成 X 坐标（用于巡逻范围约束）
+
 var _state: int = State.PATROL
 var _attack_cd: float = 0.0
 var _player_in_range: bool = false
@@ -92,6 +96,7 @@ var _flash_tween: Tween
 
 func _ready() -> void:
 	current_hp = max_hp
+	_start_x = global_position.x
 
 	var enemy_hitbox = hitbox as EnemyHitBox
 	if enemy_hitbox:
@@ -200,7 +205,16 @@ func _try_pick_attack() -> void:
 
 func _update_patrol(_delta: float) -> void:
 	var edge_ray = floor_detect_right if facing_right else floor_detect_left
-	if not edge_ray.is_colliding() or is_on_wall():
+	var at_edge = not edge_ray.is_colliding()
+	var at_wall = is_on_wall()
+
+	# 巡逻范围限制（非零时生效）
+	var out_of_range = false
+	if patrol_range > 0.0:
+		out_of_range = abs(global_position.x - _start_x) >= patrol_range
+
+	# 碰到边缘、墙壁或超出巡逻范围 → 折返
+	if at_edge or at_wall or out_of_range:
 		_set_facing(not facing_right)
 
 	velocity.x = patrol_speed * (1.0 if facing_right else -1.0)
