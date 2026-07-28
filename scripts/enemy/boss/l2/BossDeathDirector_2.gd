@@ -14,4 +14,6 @@ func _end_level() -> void:
 		PlayerStateManager.reset(player)
 	LevelManager.spawn_point = "default"
 
-	get_tree().change_scene_to_file("res://scenes/ui/TestEnd.tscn")
+	# 前往第三章过场动画
+	Cutscene.target_chapter = 3
+	get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")

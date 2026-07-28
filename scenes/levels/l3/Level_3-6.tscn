@@ -6,8 +6,10 @@
 [ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="6_rc7pa"]
 [ext_resource type="Script" uid="uid://x750a3o8m463" path="res://scenes/levels/l3/MapComponent/tishi.gd" id="7_4mwka"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="7_tjplj"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_ahl2h"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="8_nw0i4"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="9_by6x2"]
+[ext_resource type="PackedScene" uid="uid://c1xb1lxy7htnr" path="res://scenes/enemy/l3/ArcherMiko.tscn" id="10_ahl2h"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -137,6 +139,9 @@ theme_override_font_sizes/font_size = 10
 text = "向上攀爬"
 script = ExtResource("7_4mwka")
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_ahl2h")]
+position = Vector2(49, 125)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
@@ -163,3 +168,6 @@ spawn_point = "entry_bottom"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=392788332]
 position = Vector2(-6, -23)
 shape = SubResource("RectangleShape2D_vlynt")
+
+[node name="ArcherMiko" parent="." unique_id=1656441098 instance=ExtResource("10_ahl2h")]
+position = Vector2(243, 169)

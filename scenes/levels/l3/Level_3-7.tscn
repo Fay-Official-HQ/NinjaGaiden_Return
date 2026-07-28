@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="5_n8u4a"]
 [ext_resource type="PackedScene" uid="uid://nsgd504nlwnf" path="res://scenes/levels/l3/MapComponent/huoju.tscn" id="5_xe3y4"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="6_oi8hc"]
+[ext_resource type="PackedScene" uid="uid://frisomtbyqfh" path="res://scenes/enemy/l3/BombNinja.tscn" id="8_n8u4a"]
+[ext_resource type="PackedScene" uid="uid://c1xb1lxy7htnr" path="res://scenes/enemy/l3/ArcherMiko.tscn" id="9_n8u4a"]
+[ext_resource type="PackedScene" uid="uid://b7vbx6k88q02s" path="res://scenes/enemy/l3/KimonoGirl.tscn" id="10_oi8hc"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -145,6 +148,15 @@ position = Vector2(16, 246)
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="BombNinja" parent="enemys" unique_id=1656441098 instance=ExtResource("8_n8u4a")]
+position = Vector2(271, 184)
+
+[node name="ArcherMiko" parent="enemys" unique_id=778734851 instance=ExtResource("9_n8u4a")]
+position = Vector2(159, 99)
+
+[node name="KimonoGirl" parent="enemys" unique_id=1227478862 instance=ExtResource("10_oi8hc")]
+position = Vector2(330, 107)
 
 [node name="entry_bottom" type="Marker2D" parent="." unique_id=1199975289]
 position = Vector2(16, 246)

@@ -6,15 +6,15 @@ var _transitioning := false
 const ENTRY_GAP := 18
 
 const CHAPTERS := [
-	{ chapter = 1, path = "res://scenes/levels/Level_1.tscn",      name = "第一章 甦る忍者" },
-	{ chapter = 2, path = "res://scenes/levels/l2/Level_2-1.tscn",  name = "第二章 闇の始まり" },
-	{ chapter = 3, path = "", name = "第三章 ???（未開放）" },
-	{ chapter = 4, path = "", name = "第四章 ???（未開放）" },
-	{ chapter = 5, path = "", name = "第五章 ???（未開放）" },
-	{ chapter = 6, path = "", name = "第六章 ???（未開放）" },
-	{ chapter = 7, path = "", name = "第七章 ???（未開放）" },
-	{ chapter = 8, path = "", name = "第八章 ???（未開放）" },
-	{ chapter = 9, path = "", name = "第九章 ???（未開放）" },
+	{ chapter = 1, path = "res://scenes/levels/Level_1.tscn", name = ""},
+	{ chapter = 2, path = "res://scenes/levels/l2/Level_2-1.tscn", name = ""},
+	{ chapter = 3, path = "res://scenes/levels/l3/Level_3-1.tscn", name = ""},
+	{ chapter = 4, path = "", name = ""},
+	{ chapter = 5, path = "", name = ""},
+	{ chapter = 6, path = "", name = ""},
+	{ chapter = 7, path = "", name = ""},
+	{ chapter = 8, path = "", name = ""},
+	{ chapter = 9, path = "", name = ""},
 ]
 
 @onready var menu: Node2D = $Menu

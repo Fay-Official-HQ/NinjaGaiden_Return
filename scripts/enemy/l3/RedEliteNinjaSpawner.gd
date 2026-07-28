@@ -9,7 +9,7 @@ extends Node2D
 
 @export var one_shot: bool = true
 @export var cooldown_time: float = 5.0
-## 敌人最大生命值（默认 3，-1 表示使用敌人自身的默认值）
+## 敌人最大生命值（默认 2，-1 表示使用敌人自身的默认值）
 @export var max_hp: int = -1
 
 var _can_spawn: bool = true

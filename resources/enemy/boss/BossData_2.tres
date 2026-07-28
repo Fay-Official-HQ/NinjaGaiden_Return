@@ -7,4 +7,4 @@ script = ExtResource("1")
 boss_name = "暗影飞龙"
 hurt_duration = 0.5
 knockback_distance = 30.0
-defeat_next_scene = "res://scenes/ui/TestEnd.tscn"
+defeat_next_scene = "res://scenes/ui/Cutscene.tscn"

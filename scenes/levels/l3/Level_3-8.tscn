@@ -6,7 +6,10 @@
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="5_6jxin"]
 [ext_resource type="PackedScene" uid="uid://nsgd504nlwnf" path="res://scenes/levels/l3/MapComponent/huoju.tscn" id="6_a360p"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="7_xgwbt"]
+[ext_resource type="PackedScene" uid="uid://cdb07advscff7" path="res://scenes/enemy/l3/RedEliteNinjaSpawner.tscn" id="8_8dsqm"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="8_d7qdc"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_yhkpj"]
+[ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="9_6jxin"]
 [ext_resource type="Script" uid="uid://cduihly0ss1id" path="res://scripts/environment/BossTransitionZone.gd" id="9_atvl2"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="9_mmudo"]
 
@@ -145,7 +148,91 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_yhkpj")]
+position = Vector2(452, 182)
+
+[node name="Item2" parent="Items" unique_id=1799097287 instance=ExtResource("8_yhkpj")]
+position = Vector2(833, 183)
+
+[node name="ItemSpecial" parent="Items" unique_id=1788982306 instance=ExtResource("9_6jxin")]
+position = Vector2(1347, 177)
+
+[node name="Item3" parent="Items" unique_id=1539636065 instance=ExtResource("8_yhkpj")]
+position = Vector2(1657, 177)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="RedEliteNinjaSpawner" parent="enemys" unique_id=1195331389 instance=ExtResource("8_8dsqm")]
+position = Vector2(669, 189)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner" index="1" unique_id=2013612999]
+position = Vector2(164, 22)
+
+[node name="RedEliteNinjaSpawner4" parent="enemys" unique_id=2139098592 instance=ExtResource("8_8dsqm")]
+position = Vector2(1075, 188)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner4" index="1" unique_id=2013612999]
+position = Vector2(169, 15)
+
+[node name="RedEliteNinjaSpawner2" parent="enemys" unique_id=674278145 instance=ExtResource("8_8dsqm")]
+position = Vector2(669, 189)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner2" index="1" unique_id=2013612999]
+position = Vector2(253, 22)
+
+[node name="RedEliteNinjaSpawner3" parent="enemys" unique_id=1027750057 instance=ExtResource("8_8dsqm")]
+position = Vector2(960, 183)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner3" index="1" unique_id=2013612999]
+position = Vector2(192, 33)
+
+[node name="RedEliteNinjaSpawner6" parent="enemys" unique_id=1667158669 instance=ExtResource("8_8dsqm")]
+position = Vector2(1339, 196)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner6" index="1" unique_id=2013612999]
+position = Vector2(126, 19)
+
+[node name="RedEliteNinjaSpawner7" parent="enemys" unique_id=831972962 instance=ExtResource("8_8dsqm")]
+position = Vector2(1529, 194)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner7" index="1" unique_id=2013612999]
+position = Vector2(226, 18)
+
+[node name="RedEliteNinjaSpawner8" parent="enemys" unique_id=1031961609 instance=ExtResource("8_8dsqm")]
+position = Vector2(1949, 181)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner8" index="1" unique_id=2013612999]
+position = Vector2(186, 28)
+
+[node name="RedEliteNinjaSpawner13" parent="enemys" unique_id=235035217 instance=ExtResource("8_8dsqm")]
+position = Vector2(2362, 195)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner13" index="1" unique_id=2013612999]
+position = Vector2(-135, 12)
+
+[node name="RedEliteNinjaSpawner9" parent="enemys" unique_id=1963607549 instance=ExtResource("8_8dsqm")]
+position = Vector2(1949, 181)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner9" index="1" unique_id=2013612999]
+position = Vector2(283, 28)
+
+[node name="RedEliteNinjaSpawner10" parent="enemys" unique_id=332461879 instance=ExtResource("8_8dsqm")]
+position = Vector2(2307, 194)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner10" index="1" unique_id=2013612999]
+position = Vector2(269, 9)
+
+[node name="RedEliteNinjaSpawner11" parent="enemys" unique_id=540809221 instance=ExtResource("8_8dsqm")]
+position = Vector2(2492, 196)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner11" index="1" unique_id=2013612999]
+position = Vector2(-185, 16)
+
+[node name="RedEliteNinjaSpawner12" parent="enemys" unique_id=517508606 instance=ExtResource("8_8dsqm")]
+position = Vector2(2640, 196)
+
+[node name="SpawnPosition" parent="enemys/RedEliteNinjaSpawner12" index="1" unique_id=2013612999]
+position = Vector2(228, 20)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=417704354]
 position = Vector2(18, 245)
@@ -161,9 +248,22 @@ shape = SubResource("RectangleShape2D_d4oo4")
 
 [node name="BossTransitionZone" type="Area2D" parent="." unique_id=461121186]
 script = ExtResource("9_atvl2")
-target_scene = "res://scenes/levels/l3/Level_3-9.tscn"
+target_scene = "res://scenes/ui/TestEnd.tscn"
 metadata/_custom_type_script = "uid://cduihly0ss1id"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=1306342593]
 position = Vector2(3354.5, 132.5)
 shape = SubResource("RectangleShape2D_8dsqm")
+
+[editable path="enemys/RedEliteNinjaSpawner"]
+[editable path="enemys/RedEliteNinjaSpawner4"]
+[editable path="enemys/RedEliteNinjaSpawner2"]
+[editable path="enemys/RedEliteNinjaSpawner3"]
+[editable path="enemys/RedEliteNinjaSpawner6"]
+[editable path="enemys/RedEliteNinjaSpawner7"]
+[editable path="enemys/RedEliteNinjaSpawner8"]
+[editable path="enemys/RedEliteNinjaSpawner13"]
+[editable path="enemys/RedEliteNinjaSpawner9"]
+[editable path="enemys/RedEliteNinjaSpawner10"]
+[editable path="enemys/RedEliteNinjaSpawner11"]
+[editable path="enemys/RedEliteNinjaSpawner12"]

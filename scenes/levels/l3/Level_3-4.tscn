@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://nsgd504nlwnf" path="res://scenes/levels/l3/MapComponent/huoju.tscn" id="6_pd6ur"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_dfxf8"]
 [ext_resource type="PackedScene" uid="uid://b7vbx6k88q02s" path="res://scenes/enemy/l3/KimonoGirl.tscn" id="8_5ud3c"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_hfxma"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="8_nmhfp"]
 [ext_resource type="PackedScene" uid="uid://c1xb1lxy7htnr" path="res://scenes/enemy/l3/ArcherMiko.tscn" id="9_1poup"]
+[ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="9_5h2gv"]
 [ext_resource type="PackedScene" uid="uid://frisomtbyqfh" path="res://scenes/enemy/l3/BombNinja.tscn" id="10_r20hs"]
 [ext_resource type="PackedScene" uid="uid://c5br0f11ylt7g" path="res://scenes/enemy/l3/RisingNinja.tscn" id="11_ey2qb"]
 [ext_resource type="PackedScene" uid="uid://brddgu8cas1j5" path="res://scenes/enemy/l3/sexy_kunoichi_spawner.tscn" id="12_dfxf8"]
@@ -194,6 +196,27 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_hfxma")]
+position = Vector2(406, 195)
+
+[node name="Item2" parent="Items" unique_id=1622920026 instance=ExtResource("8_hfxma")]
+position = Vector2(824, 181)
+
+[node name="Item3" parent="Items" unique_id=945178321 instance=ExtResource("8_hfxma")]
+position = Vector2(1268, 169)
+
+[node name="Item4" parent="Items" unique_id=1406062027 instance=ExtResource("8_hfxma")]
+position = Vector2(2321, 154)
+
+[node name="Item5" parent="Items" unique_id=483065308 instance=ExtResource("8_hfxma")]
+position = Vector2(2891, 49)
+
+[node name="ItemSpecial" parent="Items" unique_id=735206952 instance=ExtResource("9_5h2gv")]
+position = Vector2(1679, 162)
+
+[node name="ItemSpecial2" parent="Items" unique_id=164221599 instance=ExtResource("9_5h2gv")]
+position = Vector2(3517, 153)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="KimonoGirl" parent="enemys" unique_id=1227478862 instance=ExtResource("8_5ud3c")]
@@ -258,6 +281,18 @@ position = Vector2(1911, 142)
 
 [node name="SpawnPosition" parent="enemys/ChaserGreenNinjaSpawner3" index="1"]
 position = Vector2(-169, 24)
+
+[node name="ChaserGreenNinjaSpawner10" parent="enemys" unique_id=805450257 instance=ExtResource("13_dfxf8")]
+position = Vector2(3490, 147)
+
+[node name="SpawnPosition" parent="enemys/ChaserGreenNinjaSpawner10" index="1"]
+position = Vector2(-169, 24)
+
+[node name="ChaserGreenNinjaSpawner11" parent="enemys" unique_id=1935675750 instance=ExtResource("13_dfxf8")]
+position = Vector2(3718, 157)
+
+[node name="SpawnPosition" parent="enemys/ChaserGreenNinjaSpawner11" index="1"]
+position = Vector2(189, -7)
 
 [node name="Kunoichi" parent="enemys" unique_id=1367045787 instance=ExtResource("14_6xgu3")]
 position = Vector2(1877, 202)
@@ -383,6 +418,8 @@ shape = SubResource("RectangleShape2D_w7jgh")
 [editable path="enemys/ChaserGreenNinjaSpawner4"]
 [editable path="enemys/ChaserGreenNinjaSpawner5"]
 [editable path="enemys/ChaserGreenNinjaSpawner3"]
+[editable path="enemys/ChaserGreenNinjaSpawner10"]
+[editable path="enemys/ChaserGreenNinjaSpawner11"]
 [editable path="enemys/WhiteNinjaSpawner"]
 [editable path="enemys/WhiteNinjaSpawner2"]
 [editable path="enemys/WhiteNinjaSpawner3"]

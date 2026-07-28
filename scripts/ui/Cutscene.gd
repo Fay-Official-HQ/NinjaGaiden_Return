@@ -50,7 +50,7 @@ const SKIP_KEYCODE        = KEY_SPACE
 const CHAPTER_SCENE_MAP: Dictionary = {
 	1: "res://scenes/levels/Level_1.tscn",
 	2: "res://scenes/levels/l2/Level_2-1.tscn",
-	# 3: "res://scenes/levels/Level_3.tscn",
+	3: "res://scenes/levels/l3/Level_3-1.tscn",
 }
 
 

@@ -9,6 +9,16 @@
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="5_n7x1i"]
 [ext_resource type="PackedScene" uid="uid://nsgd504nlwnf" path="res://scenes/levels/l3/MapComponent/huoju.tscn" id="6_mogaf"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="7_xfqq5"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_rrjxi"]
+[ext_resource type="PackedScene" uid="uid://c1xb1lxy7htnr" path="res://scenes/enemy/l3/ArcherMiko.tscn" id="9_xfqq5"]
+[ext_resource type="PackedScene" uid="uid://b7vbx6k88q02s" path="res://scenes/enemy/l3/KimonoGirl.tscn" id="10_vdj8d"]
+[ext_resource type="PackedScene" uid="uid://brddgu8cas1j5" path="res://scenes/enemy/l3/sexy_kunoichi_spawner.tscn" id="11_sguf3"]
+[ext_resource type="PackedScene" uid="uid://sdmscf4tl485" path="res://scenes/enemy/l3/Kunoichi.tscn" id="12_clhe7"]
+[ext_resource type="PackedScene" uid="uid://c5br0f11ylt7g" path="res://scenes/enemy/l3/RisingNinja.tscn" id="14_oaa78"]
+[ext_resource type="PackedScene" uid="uid://bocqkyy1eodts" path="res://scenes/enemy/l3/chaser_green_ninja_spawner.tscn" id="14_vdj8d"]
+[ext_resource type="PackedScene" uid="uid://bfc5fsn0dvi2r" path="res://scenes/enemy/l3/white_ninja_spawner.tscn" id="15_75jbq"]
+[ext_resource type="PackedScene" uid="uid://bwf13juxhcqlk" path="res://scenes/enemy/l3/sky_shinobi_spawner.tscn" id="16_rrjxi"]
+[ext_resource type="PackedScene" uid="uid://0apmi4vqkb4m" path="res://scenes/enemy/l3/BlackEliteNinja.tscn" id="17_75jbq"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -263,7 +273,140 @@ position = Vector2(19, 234)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("9_rrjxi")]
+position = Vector2(401, 173)
+
+[node name="Item2" parent="Items" unique_id=635382842 instance=ExtResource("9_rrjxi")]
+position = Vector2(625, 105)
+consumable_type = 0
+
+[node name="Item3" parent="Items" unique_id=1394694794 instance=ExtResource("9_rrjxi")]
+position = Vector2(1027, 114)
+
+[node name="Item7" parent="Items" unique_id=722480423 instance=ExtResource("9_rrjxi")]
+position = Vector2(4642, 196)
+
+[node name="Item4" parent="Items" unique_id=1295534605 instance=ExtResource("9_rrjxi")]
+position = Vector2(1362, 116)
+
+[node name="Item5" parent="Items" unique_id=722524141 instance=ExtResource("9_rrjxi")]
+position = Vector2(2676, 156)
+
+[node name="Item6" parent="Items" unique_id=1713936949 instance=ExtResource("9_rrjxi")]
+position = Vector2(3683, 129)
+consumable_type = 3
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="ArcherMiko" parent="enemys" unique_id=1656441098 instance=ExtResource("9_xfqq5")]
+position = Vector2(511, 182)
+
+[node name="KimonoGirl" parent="enemys" unique_id=1227478862 instance=ExtResource("10_vdj8d")]
+position = Vector2(226, 236)
+
+[node name="SexyKunoichiSpawner" parent="enemys" unique_id=85159603 instance=ExtResource("11_sguf3")]
+position = Vector2(734, 169)
+
+[node name="SpawnPosition" parent="enemys/SexyKunoichiSpawner" index="1" unique_id=1097475069]
+position = Vector2(279, -33)
+
+[node name="Kunoichi" parent="enemys" unique_id=2023810692 instance=ExtResource("12_clhe7")]
+position = Vector2(1205, 182)
+
+[node name="ArcherMiko2" parent="enemys" unique_id=1406595333 instance=ExtResource("9_xfqq5")]
+position = Vector2(930, 198)
+
+[node name="KimonoGirl2" parent="enemys" unique_id=2146756137 instance=ExtResource("10_vdj8d")]
+position = Vector2(1513, 226)
+
+[node name="SexyKunoichiSpawner2" parent="enemys" unique_id=446394377 instance=ExtResource("11_sguf3")]
+position = Vector2(1773, 164)
+
+[node name="SpawnPosition" parent="enemys/SexyKunoichiSpawner2" index="1" unique_id=1097475069]
+position = Vector2(300, 36)
+
+[node name="SexyKunoichiSpawner3" parent="enemys" unique_id=1618689267 instance=ExtResource("11_sguf3")]
+position = Vector2(1872, 163)
+
+[node name="SpawnPosition" parent="enemys/SexyKunoichiSpawner3" index="1" unique_id=1097475069]
+position = Vector2(-223, 41)
+
+[node name="ChaserGreenNinjaSpawner" parent="enemys" unique_id=1786498861 instance=ExtResource("14_vdj8d")]
+position = Vector2(1706, 167)
+
+[node name="SpawnPosition" parent="enemys/ChaserGreenNinjaSpawner" index="1"]
+position = Vector2(315, -29)
+
+[node name="ChaserGreenNinjaSpawner2" parent="enemys" unique_id=2111541390 instance=ExtResource("14_vdj8d")]
+position = Vector2(1828, 163)
+
+[node name="SpawnPosition" parent="enemys/ChaserGreenNinjaSpawner2" index="1"]
+position = Vector2(315, -29)
+
+[node name="Kunoichi2" parent="enemys" unique_id=1710354084 instance=ExtResource("12_clhe7")]
+position = Vector2(1964, 222)
+
+[node name="ArcherMiko3" parent="enemys" unique_id=1858146997 instance=ExtResource("9_xfqq5")]
+position = Vector2(2626, 206)
+
+[node name="RisingNinja" parent="enemys" unique_id=639774776 instance=ExtResource("14_oaa78")]
+position = Vector2(2263, 227)
+
+[node name="WhiteNinjaSpawner" parent="enemys" unique_id=1022552023 instance=ExtResource("15_75jbq")]
+position = Vector2(2891, 147)
+
+[node name="SpawnPosition" parent="enemys/WhiteNinjaSpawner" index="1" unique_id=552779338]
+position = Vector2(231, -55)
+
+[node name="TargetPosition" parent="enemys/WhiteNinjaSpawner" index="2" unique_id=1234567890]
+position = Vector2(199, 12)
+
+[node name="WhiteNinjaSpawner2" parent="enemys" unique_id=1670952400 instance=ExtResource("15_75jbq")]
+position = Vector2(2931, 149)
+
+[node name="SpawnPosition" parent="enemys/WhiteNinjaSpawner2" index="1" unique_id=552779338]
+position = Vector2(-242, -44)
+
+[node name="TargetPosition" parent="enemys/WhiteNinjaSpawner2" index="2" unique_id=1234567890]
+position = Vector2(-208, 16)
+
+[node name="ArcherMiko4" parent="enemys" unique_id=1025802991 instance=ExtResource("9_xfqq5")]
+position = Vector2(3267, 152)
+
+[node name="SkyShinobiSpawner" parent="enemys" unique_id=1093572058 instance=ExtResource("16_rrjxi")]
+position = Vector2(3216, 129)
+
+[node name="SpawnPosition" parent="enemys/SkyShinobiSpawner" index="1"]
+position = Vector2(101, 143)
+
+[node name="SkyShinobiSpawner2" parent="enemys" unique_id=1838570720 instance=ExtResource("16_rrjxi")]
+position = Vector2(3320, 130)
+gender = 1
+
+[node name="SpawnPosition" parent="enemys/SkyShinobiSpawner2" index="1"]
+position = Vector2(101, 143)
+
+[node name="Kunoichi3" parent="enemys" unique_id=452705074 instance=ExtResource("12_clhe7")]
+position = Vector2(3540, 225)
+
+[node name="BlackEliteNinja" parent="enemys" unique_id=2088502740 instance=ExtResource("17_75jbq")]
+position = Vector2(4099, 156)
+
+[node name="ArcherMiko5" parent="enemys" unique_id=567301986 instance=ExtResource("9_xfqq5")]
+position = Vector2(4316, 150)
+
+[node name="KimonoGirl3" parent="enemys" unique_id=463758459 instance=ExtResource("10_vdj8d")]
+position = Vector2(4546, 224)
+
+[node name="KimonoGirl4" parent="enemys" unique_id=1026631586 instance=ExtResource("10_vdj8d")]
+position = Vector2(4755, 221)
+initial_facing_right = true
+
+[node name="SexyKunoichiSpawner4" parent="enemys" unique_id=2041464618 instance=ExtResource("11_sguf3")]
+position = Vector2(4288, 139)
+
+[node name="SpawnPosition" parent="enemys/SexyKunoichiSpawner4" index="1" unique_id=1097475069]
+position = Vector2(427, 31)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1199975289]
 position = Vector2(4984, 20)
@@ -290,3 +433,13 @@ position = Vector2(-6.25, 134.875)
 shape = SubResource("RectangleShape2D_w7jgh")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="enemys/SexyKunoichiSpawner"]
+[editable path="enemys/SexyKunoichiSpawner2"]
+[editable path="enemys/SexyKunoichiSpawner3"]
+[editable path="enemys/ChaserGreenNinjaSpawner"]
+[editable path="enemys/ChaserGreenNinjaSpawner2"]
+[editable path="enemys/WhiteNinjaSpawner"]
+[editable path="enemys/WhiteNinjaSpawner2"]
+[editable path="enemys/SkyShinobiSpawner"]
+[editable path="enemys/SkyShinobiSpawner2"]
+[editable path="enemys/SexyKunoichiSpawner4"]
