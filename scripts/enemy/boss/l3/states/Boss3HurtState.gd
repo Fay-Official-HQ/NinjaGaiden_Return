@@ -1,0 +1,67 @@
+# res://scripts/enemy/boss/l3/states/Boss3HurtState.gd
+extends Boss3State
+class_name Boss3HurtState
+
+var _hurt_timer: float = 0.0
+var _flash_tween: Tween
+var _disabled_hitboxes: Array[Area2D] = []
+
+func enter(_msg: Dictionary = {}) -> void:
+	super()
+	boss.animated_sprite.play("hurt")
+	boss.velocity = Vector2.ZERO
+	_hurt_timer = boss.data.hurt_duration
+	_apply_knockback()
+	_disable_all_hitboxes()
+	_start_flash()
+
+func update(delta: float) -> void:
+	_hurt_timer -= delta
+	if _hurt_timer <= 0.0:
+		_restore_all_hitboxes()
+		_cleanup_flash()
+		state_machine.change_state_by_name("Boss3IdleState")
+
+func physics_update(delta: float) -> void:
+	_apply_gravity(delta)
+	boss.move_and_slide()
+
+func exit() -> void:
+	_restore_all_hitboxes()
+	_cleanup_flash()
+
+func _apply_knockback() -> void:
+	var knock_dir = -1.0 if boss.facing_direction > 0 else 1.0
+	boss.global_position.x += knock_dir * boss.data.knockback_distance
+
+func _start_flash() -> void:
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	boss.animated_sprite.modulate = Color(3.0, 3.0, 3.0, 1.0)
+	_flash_tween = create_tween()
+	_flash_tween.tween_property(boss.animated_sprite, "modulate", Color.WHITE, boss.data.hurt_duration)
+
+func _cleanup_flash() -> void:
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	boss.animated_sprite.modulate = Color.WHITE
+
+func _disable_all_hitboxes() -> void:
+	_disabled_hitboxes.clear()
+	var attack_root = boss.get_node_or_null("AttackRoot") as Node2D
+	if not attack_root:
+		return
+	for child in attack_root.get_children():
+		if child is Area2D and child.monitoring:
+			_disabled_hitboxes.append(child)
+			child.set_deferred("monitoring", false)
+
+func _restore_all_hitboxes() -> void:
+	for hitbox in _disabled_hitboxes:
+		if is_instance_valid(hitbox):
+			hitbox.set_deferred("monitoring", true)
+	_disabled_hitboxes.clear()
+
+func _apply_gravity(delta: float) -> void:
+	if not boss.is_on_floor():
+		boss.velocity.y += boss.data.gravity * delta

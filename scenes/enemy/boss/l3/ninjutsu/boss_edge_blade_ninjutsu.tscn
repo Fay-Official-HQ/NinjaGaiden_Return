@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://hh02pkkv8xry"]
+
+[ext_resource type="Script" path="res://scripts/enemy/boss/l3/ninjutsu/boss_edge_blade.gd" id="1_boss_edge"]
+[ext_resource type="Texture2D" uid="uid://c5dudheeflub" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_003.png" id="2_06s8n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oypsf"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="Gradient" id="Gradient_bw1f2"]
+offsets = PackedFloat32Array(0, 0.4, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.667, 0.8, 1, 1, 0.4, 0.533, 0.8, 0.588, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bw1f2"]
+gradient = SubResource("Gradient_bw1f2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bw1f2"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 50.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.79999995
+color_ramp = SubResource("GradientTexture1D_bw1f2")
+
+[node name="Area2D" type="Area2D" unique_id=1550002304]
+z_index = 10
+collision_layer = 32
+collision_mask = 1
+script = ExtResource("1_boss_edge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1522365087]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_oypsf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2004485950]
+texture = ExtResource("2_06s8n")
+
+[node name="BladeParticles" type="GPUParticles2D" parent="." unique_id=1707983145]
+emitting = false
+amount = 4
+texture = ExtResource("2_06s8n")
+lifetime = 0.4
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_bw1f2")

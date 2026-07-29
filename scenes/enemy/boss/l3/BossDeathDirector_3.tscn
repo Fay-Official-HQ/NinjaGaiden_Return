@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://ne64rq7tw4v2"]
+
+[ext_resource type="Script" uid="uid://7hoqvwc3v02l" path="res://scripts/enemy/boss/l3/BossDeathDirector_3.gd" id="1_boss3dd"]
+
+[node name="BossDeathDirector" type="CanvasLayer" unique_id=335877241]
+layer = 100
+script = ExtResource("1_boss3dd")
+
+[node name="ScreenFadeRect" type="ColorRect" parent="." unique_id=327653627]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)

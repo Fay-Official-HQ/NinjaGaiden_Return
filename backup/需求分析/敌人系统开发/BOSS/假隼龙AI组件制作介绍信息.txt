@@ -1,0 +1,192 @@
+## Boss3（假隼龙）场景概览
+
+### 场景路径
+- **场景**: `scenes/enemy/boss/l3/Boss_3.tscn`
+- **主脚本**: `scripts/enemy/boss/l3/boss_3.gd` (Boss3)
+- **数据资源**: `resources/enemy/boss/BossData_3.tres` (BossData_3)
+- **状态机**: `Boss3StateMachine` (Node)
+- **AI组件**: `Components/BossAIComponent3` (BossAIComponent3)
+
+---
+
+### 节点结构
+```
+Boss3 (CharacterBody2D)
+├── CollisionShape2D          # 物理碰撞体
+├── BossStateMachine (Node)
+│   ├── Boss3IdleState        # 待机
+│   ├── Boss3RunState         # 走向玩家
+│   ├── Boss3AttackState      # 站立攻击
+│   ├── Boss3CrouchState      # 下蹲
+│   ├── Boss3CrouchAttackState # 下蹲攻击
+│   ├── Boss3JumpState        # 跳跃（可接空中攻击）
+│   ├── Boss3AirAttackState   # 空中攻击
+│   ├── Boss3FallState        # 自由下坠
+│   ├── Boss3FallAirState     # 失衡直线飞行到标记点
+│   ├── Boss3FlightToTopState # 飞到顶部标记点（接下劈）
+│   ├── Boss3SwordReadyState  # 剑术备战（自动格挡）
+│   ├── Boss3SwordDashState   # 剑术前冲
+│   ├── Boss3SwordSpinState   # 剑术旋转
+│   ├── Boss3SwordUppercutState # 剑术上挑
+│   ├── Boss3SwordDownslashState # 剑术下劈
+│   ├── Boss3GroundNinjutsuState # 地面忍术
+│   ├── Boss3AirNinjutsuState    # 空中忍术
+│   ├── Boss3BlockState       # 格挡
+│   ├── Boss3HurtState        # 受重击
+│   └── Boss3DeathState       # 死亡
+├── Components
+│   └── BossAIComponent3      # AI决策组件
+├── AttackRoot (Node2D)       # 攻击框根节点
+│   ├── EnemyHitBox           # 身体碰撞框（常开，1伤害）
+│   ├── SwordHitBox           # 剑术攻击框（默认关，2伤害）
+│   └── CrouchHitBox          # 下蹲攻击框（默认关，2伤害）
+├── HurtRoot/HurtBox          # 受伤框
+├── Visual/AnimatedSprite2D   # 动画精灵
+└── BossUI/BossDeathDirector  # BOSS UI和死亡管理器
+```
+
+---
+
+### 全部20个状态详解
+
+#### 1. Boss3IdleState — 待机
+- 动画: `idle`
+- 作用: 站桩，等待AI决策
+- 关键: AI组件只在 **IdleState** 中决策，`_decision_timer` 结束后从循环列表取下一个动作
+
+#### 2. Boss3RunState — 走向玩家
+- 动画: `run`
+- 逻辑: 朝向玩家行走，到达 `ai_close_distance`（30px）停止
+- 边界: 从平台坠落边缘自动切 `Boss3FallState`
+
+#### 3. Boss3AttackState — 站立攻击
+- 动画: `attack`
+- 攻击框: 开启 `SwordHitBox`（2伤害），播完关闭
+- 结束: 动画播完 → IdleState
+
+#### 4. Boss3CrouchState — 下蹲
+- 动画: `crouch`
+- 持续时间: `crouch_duration`（0.5秒）
+- 特性: 受伤框缩小，玩家站立攻击无法命中
+- 结束: 计时到 → CrouchAttackState
+
+#### 5. Boss3CrouchAttackState — 下蹲攻击
+- 动画: `crouch_attack`
+- 攻击框: 开启 `CrouchHitBox`（2伤害），播完关闭
+- 结束: 动画播完 → IdleState
+
+#### 6. Boss3JumpState — 跳跃
+- 动画: `jump`
+- 速度: `jump_velocity`（-260）
+- 特性: 最高点 `velocity.y > 0` 时自动切 AirAttackState（通过 `_follow_with_air_attack` 控制）
+
+#### 7. Boss3AirAttackState — 空中攻击
+- 动画: `air_attack`
+- 攻击框: 开启 `SwordHitBox`（2伤害）
+- 结束: 动画播完 → FallState
+
+#### 8. Boss3FallState — 自由下坠
+- 动画: `fall`
+- 特性: 仅受重力下落，无水平速度
+- 结束: 落地 → IdleState
+
+#### 9. Boss3FallAirState — 失衡直线飞行
+- 动画: `fall_imbalance`
+- 速度: `fall_air_fly_speed`（300）
+- 目标: 随机飞往关卡中 `BossMarker2D/Marker2DRight2` 或 `Marker2DLeft2`
+- 特性: 无视重力/地形，直线插值到目标点
+- 结束: 到达 → FallState（自由下坠）
+
+#### 10. Boss3FlightToTopState — 飞到顶部（接下劈）
+- 动画: `fall_imbalance`
+- 速度: `flight_to_top_speed`（400）
+- 目标: 随机飞往 `Marker2DTop/Top2/Top3`
+- 结束: 到达 → SwordDownslashState
+
+#### 11. Boss3SwordReadyState — 剑术备战
+- 动画: `sword_ready`
+- 持续时间: `sword_ready_duration`（1.5秒）
+- 特性: 身体变暗，被攻击时自动格挡（音效+火花，不掉血）
+- 结束: 计时到 → 随机释放剑术（Dash/Spin/Uppercut/FlightToTop）
+
+#### 12. Boss3SwordDashState — 剑术前冲
+- 动画: `sword_dash`
+- 速度: `sword_dash_speed`（250），距离: `sword_dash_distance`（100）
+- 攻击框: 开启 `SwordHitBox`
+- 恢复: 冲刺结束后硬直 `sword_dash_recover_duration`（0.2秒）
+- 结束: 恢复结束 → IdleState
+
+#### 13. Boss3SwordSpinState — 剑术旋转
+- 动画: `sword_spin`
+- 速度: `run_speed * sword_spin_speed_multiplier`（120 * 1.5 = 180）
+- 距离: `sword_spin_distance`（80）
+- 攻击框: 开启 `SwordHitBox`
+- 结束: 距离耗尽 → IdleState
+
+#### 14. Boss3SwordUppercutState — 剑术上挑
+- 动画: `sword_uppercut`
+- 速度: `jump_velocity * uppercut_jump_multiplier`（-260 * 1.2 = -312），水平突进 `uppercut_dash_distance`（50）
+- 攻击框: 开启 `SwordHitBox`
+- 结束: 最高点 `velocity.y > 0` → FallState
+
+#### 15. Boss3SwordDownslashState — 剑术下劈
+- 动画: `sword_downslash`
+- 攻击框: 开启 `SwordHitBox`
+- 特性: 受重力加速下坠
+- 结束: 落地 → IdleState
+
+#### 16. Boss3GroundNinjutsuState — 地面忍术
+- 动画: `ground_ninjutsu`
+- 逻辑: 第2帧随机释放一种忍术（火焰/火球/回旋镖/棱刃）
+- 忍术散射: 3方向（-15°, 0°, +15°）
+- 结束: 动画播完 → IdleState
+
+#### 17. Boss3AirNinjutsuState — 空中忍术
+- 动画: jump → 最高点 → `air_ninjutsu`
+- 逻辑: 同地面忍术，随机释放
+- 结束: 动画播完 → FallState
+
+#### 18. Boss3BlockState — 格挡
+- 动画: `sword_ready`
+- 持续时间: `block_duration`（0.5秒）
+- 特性: 自身受伤框不可检测，播放火花音效
+- 结束: 计时到 → IdleState
+
+#### 19. Boss3HurtState — 受重击
+- 动画: `hurt`
+- 特性: 关闭所有攻击框，白色闪烁，击退 `knockback_distance`
+- 结束: `hurt_duration` 后 → IdleState
+
+#### 20. Boss3DeathState — 死亡
+- 动画: `death`
+- 特性: 无敌，禁用碰撞，播放死亡特效
+- 流程: 音效 → 等待 → 隐藏 → 重置玩家 → 场景过渡
+
+---
+
+### AI决策流程
+
+```
+IdleState
+  └─ AIComponent._process() 每 `ai_decision_interval` 秒
+       └─ request_next_action() → 从循环列表取下一个状态名
+       └─ get_next_action() 消费 → change_state_by_name()
+```
+
+当前循环列表（两阶段共享）:
+```
+Run → Attack → SwordReady → Crouch → Jump → GroundNinjutsu → AirNinjutsu → FallAir
+```
+
+---
+
+### 攻击框说明
+
+| 攻击框 | 类型 | 默认状态 | 伤害 | 使用场景 |
+|--------|------|---------|------|----------|
+| `EnemyHitBox` | Area2D | **常开** | 1 | 身体碰撞 |
+| `SwordHitBox` | Boss3HitBox | 关闭 | 2 | 站立攻击、剑术、空中攻击 |
+| `CrouchHitBox` | Boss3HitBox | 关闭 | 2 | 下蹲攻击 |
+
+- `AttackRoot` 的 `scale.x` 随朝向翻转，所有攻击框自动镜像
+- `HurtBox` 标记了 `is_boss = true`，可在玩家受伤代码中特殊处理

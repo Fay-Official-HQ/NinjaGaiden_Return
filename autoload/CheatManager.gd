@@ -1,7 +1,7 @@
 extends Node
 
 ## 发布开关：正式版改为 false 即可完全禁用作弊
-const ENABLED := false
+const ENABLED := true
 
 var god_mode: bool = false
 signal god_mode_changed(enabled: bool)

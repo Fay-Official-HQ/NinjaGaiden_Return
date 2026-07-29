@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bnc1c4rrpksoj"]
+
+[ext_resource type="Script" path="res://scripts/enemy/boss/l3/ninjutsu/boss_boomerang.gd" id="1_boss_boomerang"]
+[ext_resource type="Texture2D" uid="uid://b4oasiwyxdqjj" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_000.png" id="2_sgun1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tn7nq"]
+size = Vector2(14, 14)
+
+[sub_resource type="Gradient" id="Gradient_1vlwd"]
+offsets = PackedFloat32Array(0, 0.4, 0.7, 1)
+colors = PackedColorArray(0.667, 0.933, 1, 1, 1, 1, 1, 0.588, 0.4, 0.667, 0.8, 0.314, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1vlwd"]
+gradient = SubResource("Gradient_1vlwd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1vlwd"]
+particle_flag_disable_z = true
+spread = 12.0
+initial_velocity_min = 60.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color_ramp = SubResource("GradientTexture1D_1vlwd")
+
+[node name="Area2D" type="Area2D" unique_id=1550002304]
+z_index = 10
+collision_layer = 32
+collision_mask = 1
+script = ExtResource("1_boss_boomerang")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1522365087]
+shape = SubResource("RectangleShape2D_tn7nq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1008655423]
+texture = ExtResource("2_sgun1")
+
+[node name="BoomerangParticles" type="GPUParticles2D" parent="." unique_id=1539956318]
+emitting = false
+texture = ExtResource("2_sgun1")
+lifetime = 0.3
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_1vlwd")

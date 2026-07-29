@@ -2,19 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bbchtsu6k6sps" path="res://scripts/enemy/boss/l3/boss_3.gd" id="1_3eqdm"]
 [ext_resource type="Script" uid="uid://tiwypemk2cbn" path="res://scripts/enemy/boss/l3/BossAiComponent_3.gd" id="2_3eqdm"]
-[ext_resource type="Script" uid="uid://c4hd146o47sd" path="res://scripts/enemy/boss/l1/BossStateMachine.gd" id="4_dpxsn"]
-[ext_resource type="Script" uid="uid://b2hj7505uu5lp" path="res://scripts/enemy/boss/l1/states/BossIdleState.gd" id="5_c70tl"]
-[ext_resource type="Script" uid="uid://cmb4bykpg8o1h" path="res://scripts/enemy/boss/l1/states/BossSlashState.gd" id="6_mcn5s"]
-[ext_resource type="Script" uid="uid://ddr5tg3t2y5xp" path="res://scripts/enemy/boss/l1/states/BossDeathState.gd" id="7_iq2sf"]
-[ext_resource type="Script" uid="uid://ce0epb6f57ru4" path="res://scripts/enemy/boss/l1/states/BossHurtState.gd" id="8_2u2yg"]
-[ext_resource type="Script" uid="uid://cxp7wtfpt13j6" path="res://scripts/enemy/boss/l1/states/BossBlockState.gd" id="9_m22kq"]
-[ext_resource type="Script" uid="uid://bs4vomf0ercwl" path="res://scripts/enemy/boss/l1/states/BossJumpState.gd" id="10_7ylfi"]
-[ext_resource type="Script" uid="uid://cdwvnlqnk4lgr" path="res://scripts/enemy/boss/l1/states/BossAppearState.gd" id="11_bie3j"]
-[ext_resource type="Script" uid="uid://cc3cl28niiot8" path="res://scripts/enemy/boss/l1/states/BossRushState.gd" id="12_jqt12"]
-[ext_resource type="Script" uid="uid://i52itaev4c8c" path="res://scripts/enemy/boss/l1/states/BossLaserState.gd" id="13_xrh4p"]
-[ext_resource type="Script" uid="uid://o27hc1acmfd" path="res://scripts/enemy/boss/l1/states/BossWalkState.gd" id="14_yh8r7"]
+[ext_resource type="Resource" uid="uid://bwrqb3vnf6f1o" path="res://resources/enemy/boss/BossData_3.tres" id="2_data"]
+[ext_resource type="Script" uid="uid://ctih8tt6fie6l" path="res://scripts/enemy/boss/l3/states/Boss3BlockState.gd" id="16_block"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="17_hhdwg"]
-[ext_resource type="Script" uid="uid://cx404cfavlvyk" path="res://scripts/components/AttackHitBox.gd" id="18_jggng"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="19_ojq67"]
 [ext_resource type="Texture2D" uid="uid://dxbx5m6w6r43g" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang01.png" id="20_vr8hy"]
 [ext_resource type="Texture2D" uid="uid://dcqhb08e8l8w0" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang02.png" id="21_afcnk"]
@@ -39,7 +29,9 @@
 [ext_resource type="Texture2D" uid="uid://d3ga1don2gyxg" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu10.png" id="37_cbj8u"]
 [ext_resource type="Texture2D" uid="uid://nwtrvugiucwf" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu11.png" id="38_oeh5u"]
 [ext_resource type="Texture2D" uid="uid://bkttrj3nabpmh" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu12.png" id="39_5oenq"]
+[ext_resource type="Script" uid="uid://xhb7ju7ahcay" path="res://scripts/enemy/boss/l3/Boss3StateMachine.gd" id="40_b3sm"]
 [ext_resource type="Texture2D" uid="uid://dotcxngrukql6" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu2.png" id="40_qr5hs"]
+[ext_resource type="Script" uid="uid://c7gi74but412f" path="res://scripts/enemy/boss/l3/states/Boss3IdleState.gd" id="41_idle"]
 [ext_resource type="Script" uid="uid://c0xb2g70druks" path="res://scripts/enemy/boss/l1/BossUI.gd" id="41_mgb5w"]
 [ext_resource type="Texture2D" uid="uid://bnq3cadxi2ww" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu3.png" id="41_x3b61"]
 [ext_resource type="Texture2D" uid="uid://q0ixs2u1t2rq" path="res://assets/sprites/enemy/boss/boss_l1/BossHPkong.png" id="42_82tjk"]
@@ -47,7 +39,6 @@
 [ext_resource type="Texture2D" uid="uid://c5clak2fmn0vx" path="res://assets/sprites/enemy/boss/boss_l1/BossHPman.png" id="43_7wnmj"]
 [ext_resource type="Texture2D" uid="uid://dyap5dyrm2udb" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu24.png" id="43_i8yao"]
 [ext_resource type="Texture2D" uid="uid://fxpfdomj4kha" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu25.png" id="44_6laef"]
-[ext_resource type="PackedScene" uid="uid://d4nn2sespo5vb" path="res://scenes/enemy/boss/BossDeathDirector.tscn" id="44_gnarr"]
 [ext_resource type="Texture2D" uid="uid://cg1e3n7wukkb0" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu26.png" id="45_4g4ck"]
 [ext_resource type="Texture2D" uid="uid://bsy52vd2a2cfe" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu27.png" id="46_utwet"]
 [ext_resource type="Texture2D" uid="uid://bjfhwipc5uwgi" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu28.png" id="47_cbj8u"]
@@ -64,11 +55,31 @@
 [ext_resource type="Texture2D" uid="uid://b8dkfekvdgguy" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu41.png" id="57_6laef"]
 [ext_resource type="Texture2D" uid="uid://bwfdqf538l1p3" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu42.png" id="58_4g4ck"]
 [ext_resource type="Texture2D" uid="uid://ctaob5kk6iyh1" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu43.png" id="59_utwet"]
+[ext_resource type="PackedScene" uid="uid://ne64rq7tw4v2" path="res://scenes/enemy/boss/l3/BossDeathDirector_3.tscn" id="60_h1ewd"]
 [ext_resource type="Texture2D" uid="uid://2our6pxhtuyq" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu33.png" id="60_i8yao"]
 [ext_resource type="Texture2D" uid="uid://c8vc7oait5khu" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu34.png" id="61_6laef"]
 [ext_resource type="Texture2D" uid="uid://c2nf8qx2ce7tn" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu44.png" id="62_02t1g"]
 [ext_resource type="Texture2D" uid="uid://e62c8cq05r2q" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu35.png" id="62_4g4ck"]
 [ext_resource type="Texture2D" uid="uid://fhpofd8dwwae" path="res://assets/sprites/enemy/boss/boss_l3/fakeRyu36.png" id="63_utwet"]
+[ext_resource type="Script" uid="uid://bod32lblnicrb" path="res://scripts/enemy/boss/l3/states/Boss3HurtState.gd" id="64_hurt"]
+[ext_resource type="Script" uid="uid://csphitkosmwjf" path="res://scripts/enemy/boss/l3/states/Boss3DeathState.gd" id="65_death"]
+[ext_resource type="Script" uid="uid://dkbbftpug4b24" path="res://scripts/enemy/boss/l3/states/Boss3RunState.gd" id="68_run"]
+[ext_resource type="Script" uid="uid://kn2s6wb2g2xk" path="res://scripts/enemy/boss/l3/states/Boss3AttackState.gd" id="69_attack"]
+[ext_resource type="Script" uid="uid://cr75y8kucldyl" path="res://scripts/enemy/boss/l3/states/Boss3CrouchState.gd" id="71_crouch"]
+[ext_resource type="Script" uid="uid://di3krruu4kqpb" path="res://scripts/enemy/boss/l3/states/Boss3CrouchAttackState.gd" id="72_crouch_atk"]
+[ext_resource type="Script" uid="uid://c46v2wqbp8rkl" path="res://scripts/components/Boss3HitBox.gd" id="73_boss_hit"]
+[ext_resource type="Script" uid="uid://bprle6hxucrdj" path="res://scripts/enemy/boss/l3/states/Boss3JumpState.gd" id="74_jump"]
+[ext_resource type="Script" uid="uid://d2pw8fjhnf81c" path="res://scripts/enemy/boss/l3/states/Boss3AirAttackState.gd" id="75_air_atk"]
+[ext_resource type="Script" uid="uid://dkdjgrb5yw30l" path="res://scripts/enemy/boss/l3/states/Boss3FallState.gd" id="76_fall"]
+[ext_resource type="Script" uid="uid://cbnvrk5oxn3t8" path="res://scripts/enemy/boss/l3/states/Boss3FallAirState.gd" id="77_fall_air"]
+[ext_resource type="Script" uid="uid://4rxsi1accov" path="res://scripts/enemy/boss/l3/states/Boss3SwordDashState.gd" id="78_sword_dash"]
+[ext_resource type="Script" uid="uid://cha3tddmi3toe" path="res://scripts/enemy/boss/l3/states/Boss3FlightToTopState.gd" id="79_flight_top"]
+[ext_resource type="Script" uid="uid://b3hvvcckmfgsm" path="res://scripts/enemy/boss/l3/states/Boss3SwordDownslashState.gd" id="80_downslash"]
+[ext_resource type="Script" uid="uid://b34f3805x3mli" path="res://scripts/enemy/boss/l3/states/Boss3SwordSpinState.gd" id="81_spin"]
+[ext_resource type="Script" uid="uid://dt1hk31u4jvaq" path="res://scripts/enemy/boss/l3/states/Boss3SwordUppercutState.gd" id="82_uppercut"]
+[ext_resource type="Script" uid="uid://b6p1y0nwj5ur8" path="res://scripts/enemy/boss/l3/states/Boss3SwordReadyState.gd" id="83_ready"]
+[ext_resource type="Script" uid="uid://dp2jnvmyqlp2j" path="res://scripts/enemy/boss/l3/states/Boss3GroundNinjutsuState.gd" id="84_ground_ninja"]
+[ext_resource type="Script" uid="uid://dl4ghy2jhhb8r" path="res://scripts/enemy/boss/l3/states/Boss3AirNinjutsuState.gd" id="85_air_ninja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(17, 34)
@@ -505,16 +516,14 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pde0i"]
-size = Vector2(18, 33)
-
 [node name="Boss3" type="CharacterBody2D" unique_id=389371954]
 collision_layer = 2
 collision_mask = 668
 script = ExtResource("1_3eqdm")
+data = ExtResource("2_data")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1852855498]
-position = Vector2(-0.5, 7)
+position = Vector2(-0.5, 6)
 shape = SubResource("RectangleShape2D_sb8oc")
 
 [node name="Components" type="Node" parent="." unique_id=1196929013]
@@ -523,39 +532,67 @@ shape = SubResource("RectangleShape2D_sb8oc")
 script = ExtResource("2_3eqdm")
 
 [node name="BossStateMachine" type="Node" parent="." unique_id=537885054]
-script = ExtResource("4_dpxsn")
+script = ExtResource("40_b3sm")
 
-[node name="BossIdleState" type="Node" parent="BossStateMachine" unique_id=1133246777]
-script = ExtResource("5_c70tl")
+[node name="Boss3IdleState" type="Node" parent="BossStateMachine" unique_id=537885055]
+script = ExtResource("41_idle")
 
-[node name="BossSlashState" type="Node" parent="BossStateMachine" unique_id=891804828]
-script = ExtResource("6_mcn5s")
+[node name="Boss3HurtState" type="Node" parent="BossStateMachine" unique_id=537885056]
+script = ExtResource("64_hurt")
 
-[node name="BossDeathState" type="Node" parent="BossStateMachine" unique_id=1417288001]
-script = ExtResource("7_iq2sf")
+[node name="Boss3BlockState" type="Node" parent="BossStateMachine" unique_id=537885058]
+script = ExtResource("16_block")
 
-[node name="BossHurtState" type="Node" parent="BossStateMachine" unique_id=429618402]
-script = ExtResource("8_2u2yg")
+[node name="Boss3RunState" type="Node" parent="BossStateMachine" unique_id=537885059]
+script = ExtResource("68_run")
 
-[node name="BossBlockState" type="Node" parent="BossStateMachine" unique_id=37884245]
-script = ExtResource("9_m22kq")
-metadata/_custom_type_script = "uid://cxp7wtfpt13j6"
+[node name="Boss3AttackState" type="Node" parent="BossStateMachine" unique_id=537885060]
+script = ExtResource("69_attack")
 
-[node name="BossJumpState" type="Node" parent="BossStateMachine" unique_id=39787657]
-script = ExtResource("10_7ylfi")
+[node name="Boss3CrouchState" type="Node" parent="BossStateMachine" unique_id=1306026186]
+script = ExtResource("71_crouch")
 
-[node name="BossAppearState" type="Node" parent="BossStateMachine" unique_id=840976043]
-script = ExtResource("11_bie3j")
+[node name="Boss3CrouchAttackState" type="Node" parent="BossStateMachine" unique_id=994592488]
+script = ExtResource("72_crouch_atk")
 
-[node name="BossRushState" type="Node" parent="BossStateMachine" unique_id=1508599563]
-script = ExtResource("12_jqt12")
+[node name="Boss3JumpState" type="Node" parent="BossStateMachine" unique_id=2016751775]
+script = ExtResource("74_jump")
 
-[node name="BossLaserState" type="Node" parent="BossStateMachine" unique_id=903648566]
-script = ExtResource("13_xrh4p")
-metadata/_custom_type_script = "uid://i52itaev4c8c"
+[node name="Boss3AirAttackState" type="Node" parent="BossStateMachine" unique_id=996997024]
+script = ExtResource("75_air_atk")
 
-[node name="BossWalkState" type="Node" parent="BossStateMachine" unique_id=1163623643]
-script = ExtResource("14_yh8r7")
+[node name="Boss3FallState" type="Node" parent="BossStateMachine" unique_id=1759173854]
+script = ExtResource("76_fall")
+
+[node name="Boss3FallAirState" type="Node" parent="BossStateMachine" unique_id=691623069]
+script = ExtResource("77_fall_air")
+
+[node name="Boss3SwordDashState" type="Node" parent="BossStateMachine" unique_id=1343514164]
+script = ExtResource("78_sword_dash")
+
+[node name="Boss3FlightToTopState" type="Node" parent="BossStateMachine" unique_id=1145390435]
+script = ExtResource("79_flight_top")
+
+[node name="Boss3SwordDownslashState" type="Node" parent="BossStateMachine" unique_id=1958533292]
+script = ExtResource("80_downslash")
+
+[node name="Boss3SwordSpinState" type="Node" parent="BossStateMachine" unique_id=1430163053]
+script = ExtResource("81_spin")
+
+[node name="Boss3SwordUppercutState" type="Node" parent="BossStateMachine" unique_id=1819434432]
+script = ExtResource("82_uppercut")
+
+[node name="Boss3SwordReadyState" type="Node" parent="BossStateMachine" unique_id=840609206]
+script = ExtResource("83_ready")
+
+[node name="Boss3GroundNinjutsuState" type="Node" parent="BossStateMachine" unique_id=363418705]
+script = ExtResource("84_ground_ninja")
+
+[node name="Boss3AirNinjutsuState" type="Node" parent="BossStateMachine" unique_id=1264529341]
+script = ExtResource("85_air_ninja")
+
+[node name="Boss3DeathState" type="Node" parent="BossStateMachine" unique_id=537885057]
+script = ExtResource("65_death")
 
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
@@ -565,30 +602,31 @@ script = ExtResource("17_hhdwg")
 metadata/_custom_type_script = "uid://cflbsmpgemw31"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=1616386093]
-position = Vector2(-0.5, 7)
+position = Vector2(-0.5, 6)
 shape = SubResource("RectangleShape2D_vxnxg")
 debug_color = Color(0.83137256, 0.38039216, 0.24705882, 0.76862746)
 
 [node name="SwordHitBox" type="Area2D" parent="AttackRoot" unique_id=1859546480]
 collision_layer = 32
-script = ExtResource("18_jggng")
+script = ExtResource("73_boss_hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordHitBox" unique_id=131863702]
-position = Vector2(15.875, -2)
+position = Vector2(15.875, -3)
 shape = SubResource("RectangleShape2D_p4gow")
 debug_color = Color(0.99215686, 0, 0.24705882, 0.92941177)
 
 [node name="CrouchHitBox" type="Area2D" parent="AttackRoot" unique_id=1330417975]
 collision_layer = 32
-script = ExtResource("18_jggng")
+script = ExtResource("73_boss_hit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/CrouchHitBox" unique_id=1613095908]
-position = Vector2(16.8125, 13.75)
+position = Vector2(16.8125, 12.75)
 shape = SubResource("RectangleShape2D_02t1g")
 
 [node name="HurtRoot" type="Node2D" parent="." unique_id=193466748]
 
 [node name="HurtBox" type="Area2D" parent="HurtRoot" unique_id=323499813]
+position = Vector2(0, -1)
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("19_ojq67")
@@ -609,7 +647,7 @@ frame_progress = 0.63516915
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=565619224]
 sprite_frames = SubResource("SpriteFrames_tuikd")
-animation = &"sp7"
+animation = &"ground_ninjutsu"
 autoplay = "idle"
 
 [node name="ChargeMist" type="Node2D" parent="Visual" unique_id=1180245529]
@@ -631,16 +669,4 @@ position = Vector2(460, 50)
 texture = ExtResource("43_7wnmj")
 centered = false
 
-[node name="BossDeathDirector" parent="BossUI" unique_id=1882217270 instance=ExtResource("44_gnarr")]
-layer = 1
-
-[node name="BlockDetector" type="Area2D" parent="." unique_id=390617241]
-collision_layer = 0
-collision_mask = 32
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockDetector" unique_id=1391858272]
-position = Vector2(9, 6.5)
-shape = SubResource("RectangleShape2D_pde0i")
-debug_color = Color(0.51462346, 0.44296768, 0.9480166, 0.41960785)
+[node name="BossDeathDirector" parent="BossUI" unique_id=1882217270 instance=ExtResource("60_h1ewd")]
