@@ -46,6 +46,7 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/player/siwang.tres",
 	"res://resources/audio/player/tiaoyue.tres",
 	"res://resources/audio/player/yinshen.tres",
+	"res://resources/audio/bgm/thehero.tres",
 	# 音效
 	"res://resources/audio/se/disiwang.tres",
 	"res://resources/audio/se/disiwang2.tres",

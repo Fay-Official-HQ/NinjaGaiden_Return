@@ -750,7 +750,7 @@ position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"wall_climb"
+animation = &"Exec_Air"
 autoplay = "idle"
 
 [node name="BlockSparkPos" type="Marker2D" parent="Visual" unique_id=1902681224]

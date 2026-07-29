@@ -35,6 +35,7 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	AudioManager.play_sound(&"thehero")
 	if not body is Player:
 		return
 	_camera = body.get_node_or_null("Camera2D") as PlayerCamera
