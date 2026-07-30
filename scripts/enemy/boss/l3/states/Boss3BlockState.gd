@@ -14,25 +14,21 @@ func enter(_msg: Dictionary = {}) -> void:
 	_face_player()
 	boss.animated_sprite.play("sword_ready")
 	_block_timer = boss.data.block_duration
-	# 格挡期间禁用自身受伤框，避免受到伤害
-	boss.hurt_box.set_deferred("monitorable", false)
-	# 播放格挡火花
-	if _msg.get("spark", true):
+	# 受伤框保持启用，由 _on_took_damage 拦截伤害并触发效果
+	# 如果是被动格挡触发（被攻击时），生成火花效果
+	if _msg.get("trigger_effects", false):
 		spawn_block_spark()
 
 func update(delta: float) -> void:
 	_block_timer -= delta
 	if _block_timer <= 0.0:
-		boss.hurt_box.set_deferred("monitorable", true)
 		state_machine.change_state_by_name("Boss3IdleState")
 
-func physics_update(delta: float) -> void:
-	if not boss.is_on_floor():
-		boss.velocity.y += boss.data.gravity * delta
-	boss.move_and_slide()
+func physics_update(_delta: float) -> void:
+	pass
 
 func exit() -> void:
-	boss.hurt_box.set_deferred("monitorable", true)
+	pass
 
 ## 生成与玩家完全一致的格挡火花效果
 func spawn_block_spark() -> void:

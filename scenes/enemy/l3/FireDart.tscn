@@ -47,7 +47,7 @@ radius = 5.0249376
 [sub_resource type="CircleShape2D" id="CircleShape2D_m42rf"]
 radius = 20.396078
 
-[node name="FireDart" type="Area2D" unique_id=1462592865]
+[node name="FireDart" type="Area2D" unique_id=1462592865 groups=["blockable", "projectile"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_m42rf")
@@ -61,7 +61,7 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1624574917]
 shape = SubResource("CircleShape2D_xdh4s")
 
-[node name="ExplosionHitBox" type="Area2D" parent="." unique_id=1707217050 groups=["blockable"]]
+[node name="ExplosionHitBox" type="Area2D" parent="." unique_id=1707217050 groups=["blockable", "projectile"]]
 collision_layer = 32
 script = ExtResource("6_y8clf")
 damage = 3

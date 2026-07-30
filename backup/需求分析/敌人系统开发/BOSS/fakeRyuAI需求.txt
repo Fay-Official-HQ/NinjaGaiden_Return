@@ -1,0 +1,336 @@
+好的，今天是开发日。我帮你把昨天所有的讨论整理成一份**可执行的需求文档**，直接作为你今天开发的蓝图。
+
+---
+
+# 📋 Boss3（假隼龙）AI重构需求文档
+
+## 一、核心理念
+
+**让Boss像“真人玩家”一样战斗，而不是像“脚本怪物”一样按固定顺序出招。**
+
+### 核心原则
+| 原则 | 说明 |
+|------|------|
+| **感知→决策→行动** | Boss每帧都像人一样“看→想→做” |
+| **按键驱动** | Boss的行为由“按键信号”驱动，而不是由“状态机”驱动 |
+| **策略模式** | Boss的决策分为进攻/防御/远程/立回四种策略，根据局势动态切换 |
+| **移动动态化** | 移动不再走固定距离，而是根据玩家位置实时追踪 |
+| **跳跃有目标** | 跳跃不再走固定抛物线，而是根据玩家位置计算落点 |
+| **随时可打断** | 移动和攻击可以被更高优先级的动作随时打断 |
+
+
+## 二、架构设计
+
+### 三层组件架构（眼睛 → 大脑 → 双手）
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    每帧循环执行                            │
+├─────────────────────────────────────────────────────────────┤
+│                                                           │
+│  ┌─────────────┐                                         │
+│  │  1. 眼睛组件  │  → 扫描战场信息                         │
+│  │  (Eye)      │     距离、玩家状态、Boss血量、平台信息     │
+│  └──────┬──────┘                                         │
+│         ↓                                                 │
+│  ┌─────────────┐                                         │
+│  │  2. 大脑组件  │  → 根据信息更新策略 → 生成按键信号       │
+│  │  (Brain)    │     输出：InputPackage（左/右/跳/攻击等） │
+│  └──────┬──────┘                                         │
+│         ↓                                                 │
+│  ┌─────────────┐                                         │
+│  │  3. 双手组件  │  → 执行按键信号                        │
+│  │  (Hands)    │     移动/跳跃/攻击/忍术/剑术/格挡        │
+│  └─────────────┘                                         │
+│                                                           │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 状态机的新角色
+
+状态机从“大脑”降级为 **“动画控制器”** ：
+
+| 原来 | 现在 |
+|------|------|
+| 状态机决定“做什么” | 状态机只负责“怎么展示” |
+| 状态里写移动逻辑 | 状态里只播放动画+管理攻击框 |
+| 状态互相跳转 | 由双手组件调用 `change_state_by_name()` |
+
+
+## 三、组件详细设计
+
+### 1. 眼睛组件（EyeComponent）
+
+| 项目 | 说明 |
+|------|------|
+| **职责** | 每帧收集战场信息，打包成字典 |
+| **输出** | `InfoPackage`（距离、玩家Y轴、玩家是否攻击、Boss血量等） |
+| **频率** | 每帧执行 |
+| **关键参数** | 无（纯读取） |
+
+```gdscript
+# 输出数据结构
+var info = {
+    "distance": float,           # Boss与玩家的水平距离
+    "player_y": float,           # 玩家Y轴位置
+    "player_hp": float,          # 玩家当前血量
+    "boss_hp": float,            # Boss当前血量
+    "player_is_attacking": bool, # 玩家是否在攻击中
+    "player_is_on_floor": bool,  # 玩家是否在地面
+    "boss_is_on_floor": bool,    # Boss是否在地面
+    "boss_facing": int,          # Boss朝向（1右/-1左）
+}
+```
+
+
+### 2. 大脑组件（BrainComponent）
+
+| 项目 | 说明 |
+|------|------|
+| **职责** | 根据信息更新策略 → 生成按键信号 |
+| **输出** | `InputPackage`（所有按键信号） |
+| **频率** | `decision_interval`（0.2~0.5秒）更新策略，按键生成每帧执行 |
+| **关键参数** | `decision_interval`、`reaction_delay`、`miss_rate` |
+
+```gdscript
+# 策略枚举
+enum Strategy { OFFENSIVE, DEFENSIVE, RANGED, NEUTRAL }
+
+# 策略切换规则
+OFFENSIVE  ← 距离 < 150 且 Boss血量 > 30% 且 玩家未攻击
+DEFENSIVE  ← 距离 < 80  且 玩家正在攻击
+RANGED     ← 距离 > 200 或 Boss血量 < 30%
+NEUTRAL    ← 其他情况
+
+# 按键生成规则（每个策略的输入倾向）
+OFFENSIVE  → 靠近玩家、攻击键概率高、跳跃追击
+DEFENSIVE  → 后退、格挡、偶尔反击
+RANGED     → 保持150~250px距离、忍术键概率高
+NEUTRAL    → 匀速走位、试探性动作
+```
+
+
+### 3. 双手组件（HandsComponent）
+
+| 项目 | 说明 |
+|------|------|
+| **职责** | 执行按键信号，驱动物理和状态机 |
+| **输入** | `InputPackage` |
+| **频率** | 每帧执行 |
+| **关键参数** | 无（只执行） |
+
+```gdscript
+# 执行流程（按优先级从高到低）
+1. 飞行到指定点（独占，打断一切）
+2. 剑术（高优先级，执行期间不可打断）
+3. 忍术（中优先级）
+4. 攻击/防御/跳跃（低优先级）
+5. 移动（最低优先级，随时可被任何动作打断）
+```
+
+
+## 四、移动状态重构
+
+### 当前问题
+
+| 问题 | 表现 |
+|------|------|
+| 走固定距离 | Boss走到玩家面前就停，不会提前变向 |
+| 速度恒定 | 全程120px/s，没有加速/减速/停顿 |
+| 无节奏感 | 一直走，不会走走停停 |
+| 无策略适配 | 进攻和防御时走法一样 |
+
+### 目标效果
+
+| 场景 | 行为 |
+|------|------|
+| 远距离（>200px） | 快速跑向玩家（冲刺感） |
+| 中距离（60~200px） | 正常行走，偶尔停顿观察 |
+| 近距离（<60px） | 减速/后退/小碎步微调 |
+| 进攻策略 | 走得更快更积极 |
+| 防御策略 | 走得更慢更谨慎 |
+| 远程策略 | 保持距离，不近身 |
+| 边缘检测 | 到达平台边缘时自动转向 |
+
+### 重构方案
+
+移动逻辑从 `Boss3RunState` 移到 `Boss3.gd` 的 `_physics_process` 中统一处理。
+
+```gdscript
+# 移动逻辑伪代码（放在双手组件或Boss根节点）
+func _handle_movement(input: InputPackage, delta: float):
+    var dist = get_distance_to_player()
+    var dir = get_direction_to_player()
+    var speed = data.run_speed
+    
+    # 1. 策略修正速度
+    match current_strategy:
+        Strategy.OFFENSIVE: speed *= 1.2
+        Strategy.DEFENSIVE: speed *= 0.7
+        Strategy.RANGED: speed *= 0.9
+    
+    # 2. 距离决定速度档位
+    if dist > 200:
+        velocity.x = dir * speed * 1.3  # 冲刺
+    elif dist > 60:
+        velocity.x = dir * speed        # 正常走
+    elif dist < 30:
+        velocity.x = -dir * speed * 0.5 # 后退
+    else:
+        velocity.x = dir * speed * 0.3  # 小碎步
+    
+    # 3. 走走停停节奏（AI生成move_x=0时）
+    if input.move_x == 0:
+        velocity.x = 0.0
+    
+    # 4. 边缘检测
+    if _is_at_edge():
+        velocity.x *= -0.3  # 掉头
+```
+
+
+## 五、跳跃状态重构
+
+### 当前问题
+
+| 问题 | 表现 |
+|------|------|
+| 固定抛物线 | 每次跳跃轨迹都一样 |
+| 无目标 | 不知道为什么要跳 |
+| 无策略适配 | 进攻和防御时跳法一样 |
+| 无法实时调整 | 起跳后水平速度固定 |
+
+### 目标效果
+
+| 场景 | 行为 |
+|------|------|
+| 进攻策略 | 跳向玩家头顶或身后（踩头/绕后） |
+| 防御策略 | 向后跳（拉开距离） |
+| 远程策略 | 跳向高处（获得空中优势） |
+| 追击玩家 | 计算落点，精确跳到玩家附近 |
+| 躲避攻击 | 横向跳跃闪避 |
+
+### 重构方案
+
+跳跃逻辑从 `Boss3JumpState` 移到 `Boss3.gd` 的 `_physics_process` 中统一处理。
+
+```gdscript
+# 跳跃逻辑伪代码
+func _handle_jump(input: InputPackage, delta: float):
+    if not input.jump or not is_on_floor():
+        return
+    
+    var player = get_player()
+    var target_x = _decide_jump_target(player)
+    
+    # 计算水平速度（让Boss落到目标点）
+    var dx = target_x - global_position.x
+    var jump_time = 2.0 * abs(data.jump_velocity) / data.gravity
+    velocity.x = dx / jump_time if jump_time > 0 else 0.0
+    velocity.y = data.jump_velocity
+
+func _decide_jump_target(player):
+    match current_strategy:
+        Strategy.OFFENSIVE:
+            # 跳到玩家头顶或身后
+            return player.global_position.x + randf_range(-30, 30)
+        Strategy.DEFENSIVE:
+            # 向后跳拉开距离
+            return global_position.x - sign(dist) * 80
+        Strategy.RANGED:
+            # 跳向高处
+            return player.global_position.x + randf_range(-20, 20)
+        _:
+            return player.global_position.x - sign(dist) * 20
+```
+
+
+## 六、InputPackage 数据结构
+
+```gdscript
+# InputPackage.gd
+class_name InputPackage
+
+# 移动方向
+var move_x: int = 0  # -1: 左, 0: 停, 1: 右
+var move_y: int = 0  # -1: 下蹲, 0: 不动
+
+# 基础动作（脉冲式，一帧即释放）
+var jump: bool = false
+var attack: bool = false
+var block: bool = false
+
+# 忍术（每个忍术独立按键）
+var ninjutsu_fire: bool = false      # 火焰弹
+var ninjutsu_shuriken: bool = false  # 回旋镖
+var ninjutsu_blade: bool = false     # 棱刃
+
+# 剑术（每个剑术独立按键）
+var sword_dash: bool = false         # 前冲
+var sword_spin: bool = false         # 旋转
+var sword_uppercut: bool = false     # 上挑
+var sword_downslash: bool = false    # 下劈
+
+# 特殊移动（独占，执行时忽略其他按键）
+var fly_to_top: bool = false
+var fly_to_left: bool = false
+var fly_to_right: bool = false
+
+func clear():
+    move_x = 0
+    move_y = 0
+    jump = false
+    attack = false
+    block = false
+    ninjutsu_fire = false
+    ninjutsu_shuriken = false
+    ninjutsu_blade = false
+    sword_dash = false
+    sword_spin = false
+    sword_uppercut = false
+    sword_downslash = false
+    fly_to_top = false
+    fly_to_left = false
+    fly_to_right = false
+```
+
+
+## 七、开发顺序（你今天做）
+
+| 顺序 | 任务 | 预计时间 |
+|------|------|----------|
+| 1 | 新建 `InputPackage.gd` | 5分钟 |
+| 2 | 新建 `EyeComponent.gd`（感知） | 15分钟 |
+| 3 | 新建 `BrainComponent.gd`（决策+按键生成） | 45分钟 |
+| 4 | 新建 `HandsComponent.gd`（执行） | 30分钟 |
+| 5 | 修改 `Boss3.gd`，集成三个组件 | 30分钟 |
+| 6 | 修改 `Boss3RunState.gd`，移除移动逻辑，只留动画 | 10分钟 |
+| 7 | 修改 `Boss3JumpState.gd`，移除移动逻辑，只留动画 | 10分钟 |
+| 8 | 删除其他状态里的 `velocity.x` 赋值代码 | 20分钟 |
+| 9 | 测试跑通 | 30分钟 |
+
+**总计：约3小时**
+
+
+## 八、验收标准
+
+| 测试项 | 通过标准 |
+|--------|----------|
+| Boss移动 | 不再走固定距离，会动态追踪玩家位置 |
+| Boss走走停停 | 移动过程中会自然停顿，然后继续走 |
+| Boss跳跃 | 跳跃轨迹不固定，落点会根据玩家位置变化 |
+| Boss策略切换 | Boss在近处积极进攻，远处放忍术，残血时防御后退 |
+| Boss响应玩家动作 | 玩家攻击时Boss会格挡或后退，玩家跳起时Boss会升龙 |
+| Boss手感 | 看起来像“真人玩家”在操作，而不是机器人走程序 |
+
+
+## 九、关键注意事项
+
+1. **速度120不变**：你固定是120，不改变数值，只改变“怎么走”和“什么时候走”
+2. **状态机保留**：但只做动画控制器，不做决策
+3. **每帧执行顺序**：眼睛→大脑→双手，固定顺序不变
+4. **按键脉冲式**：攻击/跳跃/忍术等按键，一帧触发即可，不需要持续按住
+5. **优先级规则**：飞行 > 剑术 > 忍术 > 攻击/防御/跳跃 > 移动
+
+
+这份需求文档可以作为你今天开发的蓝图。按照顺序一步步来，每完成一步测试一下，确保没有破坏原有功能。有问题随时问我。😄

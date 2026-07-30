@@ -7,6 +7,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	boss.velocity = Vector2.ZERO
 	_face_player()
 	boss.animated_sprite.play("crouch_attack")
+	AudioManager.play_sound(&"gongji")
 	boss.set_hurtbox_crouch(true)
 	# 开启下蹲攻击框（TempHitBox 默认关闭，此处手动开启）
 	boss.crouch_hit_box.set_deferred("monitoring", true)
@@ -17,11 +18,8 @@ func update(_delta: float) -> void:
 		boss.crouch_hit_box.set_deferred("monitoring", false)
 		state_machine.change_state_by_name("Boss3IdleState")
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	boss.velocity.x = 0.0
-	if not boss.is_on_floor():
-		boss.velocity.y += boss.data.gravity * delta
-	boss.move_and_slide()
 
 func exit() -> void:
 	boss.crouch_hit_box.set_deferred("monitoring", false)

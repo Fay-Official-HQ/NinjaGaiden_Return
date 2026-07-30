@@ -9,8 +9,9 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_s02wu"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_lqrj1"]
 [ext_resource type="PackedScene" uid="uid://dltnde0yqiwim" path="res://scenes/environment/CameraZone.tscn" id="9_2jflf"]
+[ext_resource type="PackedScene" uid="uid://dswp63cqcisrq" path="res://scenes/enemy/boss/l3/BossSpawner3.tscn" id="9_mjld6"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_wg677"]
 [ext_resource type="Script" uid="uid://ckwvxaqlg05oj" path="res://scripts/environment/BossGateTrigger.gd" id="10_io0wj"]
-[ext_resource type="PackedScene" uid="uid://cdmdfqlcr7al3" path="res://scenes/enemy/boss/l3/Boss_3.tscn" id="11_mjld6"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -150,7 +151,7 @@ position = Vector2(2475, 408)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("7_lqrj1")]
-position = Vector2(507, 217)
+position = Vector2(45, 218)
 
 [node name="BlockView" type="TileMapLayer" parent="." unique_id=682713919]
 z_index = 120
@@ -160,10 +161,23 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("9_wg677")]
+position = Vector2(219, 178)
+consumable_type = 3
+
+[node name="Item2" parent="Items" unique_id=1525976278 instance=ExtResource("9_wg677")]
+position = Vector2(392, 178)
+consumable_type = 2
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="Boss3" parent="enemys" unique_id=389371954 instance=ExtResource("11_mjld6")]
-position = Vector2(933, 212)
+[node name="BossSpawner3" parent="enemys" unique_id=769527771 instance=ExtResource("9_mjld6")]
+
+[node name="CollisionShape2D" parent="enemys/BossSpawner3/TriggerArea" parent_id_path=PackedInt32Array(769527771, 1470984488) index="0" unique_id=14058458]
+position = Vector2(541, 132)
+
+[node name="SpawnPosition" parent="enemys/BossSpawner3" index="1" unique_id=1337469552]
+position = Vector2(956, 138)
 
 [node name="CameraZone" parent="." unique_id=851938473 instance=ExtResource("9_2jflf")]
 position = Vector2(361.70743, 23.675964)
@@ -192,13 +206,13 @@ shape = SubResource("RectangleShape2D_wg677")
 [node name="BossMarker2D" type="Node" parent="." unique_id=1042269262]
 
 [node name="Marker2DLeft" type="Marker2D" parent="BossMarker2D" unique_id=1183502034]
-position = Vector2(588, 209)
+position = Vector2(582, 223)
 
 [node name="Marker2DLeft2" type="Marker2D" parent="BossMarker2D" unique_id=766309078]
 position = Vector2(588, 92)
 
 [node name="Marker2DRight" type="Marker2D" parent="BossMarker2D" unique_id=568705205]
-position = Vector2(956, 209)
+position = Vector2(963, 223)
 
 [node name="Marker2DRight2" type="Marker2D" parent="BossMarker2D" unique_id=1071112763]
 position = Vector2(956, 92)
@@ -213,4 +227,5 @@ position = Vector2(686, 92)
 position = Vector2(869, 92)
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="enemys/BossSpawner3"]
 [editable path="CameraZone"]

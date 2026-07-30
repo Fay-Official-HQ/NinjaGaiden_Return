@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://hh02pkkv8xry"]
 
-[ext_resource type="Script" path="res://scripts/enemy/boss/l3/ninjutsu/boss_edge_blade.gd" id="1_boss_edge"]
+[ext_resource type="Script" uid="uid://b60h3ii6kp1mi" path="res://scripts/enemy/boss/l3/ninjutsu/boss_edge_blade.gd" id="1_boss_edge"]
 [ext_resource type="Texture2D" uid="uid://c5dudheeflub" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_003.png" id="2_06s8n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oypsf"]
@@ -25,10 +25,9 @@ scale_min = 0.5
 scale_max = 0.79999995
 color_ramp = SubResource("GradientTexture1D_bw1f2")
 
-[node name="Area2D" type="Area2D" unique_id=1550002304]
+[node name="Area2D" type="Area2D" unique_id=1550002304 groups=["blockable", "projectile"]]
 z_index = 10
 collision_layer = 32
-collision_mask = 1
 script = ExtResource("1_boss_edge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1522365087]

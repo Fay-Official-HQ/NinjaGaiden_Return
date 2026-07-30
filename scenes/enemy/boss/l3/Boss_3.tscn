@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cdmdfqlcr7al3"]
 
 [ext_resource type="Script" uid="uid://bbchtsu6k6sps" path="res://scripts/enemy/boss/l3/boss_3.gd" id="1_3eqdm"]
-[ext_resource type="Script" uid="uid://tiwypemk2cbn" path="res://scripts/enemy/boss/l3/BossAiComponent_3.gd" id="2_3eqdm"]
 [ext_resource type="Resource" uid="uid://bwrqb3vnf6f1o" path="res://resources/enemy/boss/BossData_3.tres" id="2_data"]
 [ext_resource type="Script" uid="uid://ctih8tt6fie6l" path="res://scripts/enemy/boss/l3/states/Boss3BlockState.gd" id="16_block"]
 [ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="17_hhdwg"]
@@ -80,6 +79,8 @@
 [ext_resource type="Script" uid="uid://b6p1y0nwj5ur8" path="res://scripts/enemy/boss/l3/states/Boss3SwordReadyState.gd" id="83_ready"]
 [ext_resource type="Script" uid="uid://dp2jnvmyqlp2j" path="res://scripts/enemy/boss/l3/states/Boss3GroundNinjutsuState.gd" id="84_ground_ninja"]
 [ext_resource type="Script" uid="uid://dl4ghy2jhhb8r" path="res://scripts/enemy/boss/l3/states/Boss3AirNinjutsuState.gd" id="85_air_ninja"]
+[ext_resource type="Script" uid="uid://c3siqjclxn7rk" path="res://scripts/enemy/boss/l3/states/Boss3ThrowState.gd" id="86_throw"]
+[ext_resource type="Script" uid="uid://dmwqhy02p0qs8" path="res://scripts/enemy/boss/l3/states/Boss3SpecialMoveState.gd" id="87_special"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
 size = Vector2(17, 34)
@@ -528,9 +529,6 @@ shape = SubResource("RectangleShape2D_sb8oc")
 
 [node name="Components" type="Node" parent="." unique_id=1196929013]
 
-[node name="BossAIComponent" type="Node" parent="Components" unique_id=1103191187]
-script = ExtResource("2_3eqdm")
-
 [node name="BossStateMachine" type="Node" parent="." unique_id=537885054]
 script = ExtResource("40_b3sm")
 
@@ -591,8 +589,14 @@ script = ExtResource("84_ground_ninja")
 [node name="Boss3AirNinjutsuState" type="Node" parent="BossStateMachine" unique_id=1264529341]
 script = ExtResource("85_air_ninja")
 
+[node name="Boss3ThrowState" type="Node" parent="BossStateMachine" unique_id=1458992585]
+script = ExtResource("86_throw")
+
 [node name="Boss3DeathState" type="Node" parent="BossStateMachine" unique_id=537885057]
 script = ExtResource("65_death")
+
+[node name="Boss3SpecialMoveState" type="Node" parent="BossStateMachine" unique_id=156741106]
+script = ExtResource("87_special")
 
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
 
@@ -647,7 +651,7 @@ frame_progress = 0.63516915
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=565619224]
 sprite_frames = SubResource("SpriteFrames_tuikd")
-animation = &"ground_ninjutsu"
+animation = &"sp2"
 autoplay = "idle"
 
 [node name="ChargeMist" type="Node2D" parent="Visual" unique_id=1180245529]
@@ -670,3 +674,19 @@ texture = ExtResource("43_7wnmj")
 centered = false
 
 [node name="BossDeathDirector" parent="BossUI" unique_id=1882217270 instance=ExtResource("60_h1ewd")]
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=693856364]
+target_position = Vector2(-20, 30)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=576561610]
+target_position = Vector2(20, 30)
+collision_mask = 12
+
+[node name="WallDetectLeft" type="RayCast2D" parent="." unique_id=1869071194]
+target_position = Vector2(-25, 0)
+collision_mask = 12
+
+[node name="WallDetectRight" type="RayCast2D" parent="." unique_id=1868860081]
+target_position = Vector2(25, 0)
+collision_mask = 12

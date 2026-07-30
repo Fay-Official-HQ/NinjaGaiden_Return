@@ -34,7 +34,7 @@ class_name RedEliteNinja
 ## 前冲速度（像素/秒）
 @export var dash_speed: float = 300.0
 ## 炸弹飞行速度（像素/秒）
-@export var bomb_speed: float = 500.0
+@export var bomb_speed: float = 400.0
 ## 重力加速度
 @export var gravity: float = 980.0
 ## 死亡动画名称

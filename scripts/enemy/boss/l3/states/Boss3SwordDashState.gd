@@ -11,6 +11,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	super()
 	_face_player()
 	boss.animated_sprite.play("sword_dash")
+	AudioManager.play_sound(&"jianqianchong")
 	boss.velocity.x = boss.facing_direction * boss.data.sword_dash_speed
 	var dash_time = boss.data.sword_dash_distance / max(boss.data.sword_dash_speed, 1.0)
 	_dash_timer = dash_time
@@ -20,6 +21,13 @@ func enter(_msg: Dictionary = {}) -> void:
 
 func update(delta: float) -> void:
 	if _in_dash:
+		# 撞墙提前结束冲刺
+		if boss.is_on_wall():
+			_in_dash = false
+			boss.velocity.x = 0.0
+			boss.sword_hit_box.set_deferred("monitoring", false)
+			_recover_timer = boss.data.sword_dash_recover_duration
+			return
 		_dash_timer -= delta
 		if _dash_timer <= 0.0:
 			_in_dash = false
@@ -31,10 +39,8 @@ func update(delta: float) -> void:
 		if _recover_timer <= 0.0:
 			state_machine.change_state_by_name("Boss3IdleState")
 
-func physics_update(delta: float) -> void:
-	if not boss.is_on_floor():
-		boss.velocity.y += boss.data.gravity * delta
-	boss.move_and_slide()
+func physics_update(_delta: float) -> void:
+	pass
 
 func exit() -> void:
 	boss.sword_hit_box.set_deferred("monitoring", false)

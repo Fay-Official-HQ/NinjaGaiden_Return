@@ -44,6 +44,24 @@ class_name BossData_3
 @export var fall_air_fly_speed: float = 400.0
 ## 飞行到顶部标记点速度（像素/秒，FlightToTopState）
 @export var flight_to_top_speed: float = 400.0
+## 下劈速度（像素/秒，SwordDownslashState 朝玩家方向直线下劈）
+@export var sword_downslash_speed: float = 500.0
+## 飞行到顶后悬浮时间（秒，FlightToTopState 到达目标后停顿再下劈）
+@export var flight_hover_duration: float = 0.1
+
+# ==================== 投掷参数 ====================
+## 普通飞镖飞行速度（像素/秒）
+@export var throw_dart_speed: float = 350.0
+## 爆炸飞镖飞行速度（像素/秒）
+@export var throw_fire_dart_speed: float = 350.0
+## 投掷触发最小距离（像素）
+@export var throw_min_range: float = 80.0
+## 投掷触发最大距离（像素）
+@export var throw_max_range: float = 350.0
+## 普通飞镖音效
+@export var throw_dart_sound: StringName = &"rengbiao"
+## 爆炸飞镖音效
+@export var throw_fire_dart_sound: StringName = &"shibingfashe"
 
 # ==================== 受伤 / 击退参数 ====================
 ## 受重击硬直时间（秒，继承自 BossData，默认 0.8）
@@ -79,36 +97,16 @@ class_name BossData_3
 # ==================== AI 决策参数 ====================
 ## AI 决策间隔（秒），在 IdleState 中每此间隔选一次动作
 @export var ai_decision_interval: float = 0.5
-## 与玩家距离判定：近战距离（像素），小于此值停止移动
-@export var ai_close_distance: float = 30.0
-## 与玩家距离判定：中距离（像素），预留备用
-@export var ai_medium_distance: float = 120.0
-## 循环状态列表（按顺序轮流执行）
-@export var ai_state_cycle: Array[String] = [
-	"Boss3RunState",
-	"Boss3AttackState",
-	"Boss3SwordReadyState",
-	"Boss3CrouchState",
-	"Boss3JumpState",
-	"Boss3GroundNinjutsuState",
-	"Boss3AirNinjutsuState",
-	"Boss3FallAirState",
-]
-
-# ==================== 阶段参数 ====================
-## 二阶段血量阈值（HP低于此值切换循环列表）
-@export var phase2_hp_threshold: int = 20
-## 二阶段循环状态列表（加强版，更多剑术和忍术）
-@export var ai_state_cycle_phase2: Array[String] = [
-	"Boss3RunState",
-	"Boss3AttackState",
-	"Boss3SwordReadyState",
-	"Boss3CrouchState",
-	"Boss3JumpState",
-	"Boss3GroundNinjutsuState",
-	"Boss3AirNinjutsuState",
-	"Boss3FallAirState",
-]
+## AI 反应延迟（秒），模拟真人延迟响应
+@export var ai_reaction_delay: float = 0.08
+## 进攻策略触发距离（像素），小于此值且玩家未攻击时进入进攻
+@export var ai_offensive_range: float = 150.0
+## 防御策略触发距离（像素），小于此值且玩家攻击时进入防御
+@export var ai_defensive_range: float = 120.0
+## 远程策略触发距离（像素），大于此值或残血时进入远程
+@export var ai_ranged_range: float = 250.0
+## 逃避策略触发血量比例（0~1），HP低于此比例时优先逃避
+@export var ai_evasive_hp_ratio: float = 0.3
 
 # ==================== 下蹲参数 ====================
 ## 下蹲持续时间（秒），结束后自动接下蹲攻击
@@ -127,3 +125,53 @@ class_name BossData_3
 @export var block_chance_enhanced: float = 0.75
 ## 强化状态触发血量阈值
 @export var enhanced_hp_threshold: int = 10
+## 二阶段血量阈值
+@export var phase2_hp_threshold: int = 20
+
+# ==================== 必杀技参数（数据驱动） ====================
+## 消失淡出时间（秒）
+@export var special_fade_out_time: float = 0.3
+## 隐身停留时间（秒）
+@export var special_hidden_time: float = 1.0
+## 显现充能时间（秒）
+@export var special_appear_time: float = 0.3
+## 充能完成后等待时间（秒）
+@export var special_charge_wait: float = 0.5
+## sp1 前冲速度（像素/秒）
+@export var sp1_dash_speed: float = 400.0
+## sp1 最后一帧维持时间（秒）
+@export var sp1_hold_time: float = 0.1
+## sp2 显现时间（秒）
+@export var sp2_appear_time: float = 0.1
+## sp2 下劈速度（像素/秒）
+@export var sp2_dive_speed: float = 500.0
+## sp3 落地等待时间（秒）
+@export var sp3_land_wait: float = 0.2
+## sp3 旋转距离（像素）
+@export var sp3_spin_distance: float = 60.0
+## sp3 最后一帧维持时间（秒）
+@export var sp3_hold_time: float = 0.1
+## sp4 显现距离（像素，相对玩家）
+@export var sp4_appear_distance: float = 80.0
+## sp4 显现时间（秒）
+@export var sp4_appear_time: float = 0.2
+## sp4 挥刀突进距离（像素）
+@export var sp4_slash_distance: float = 60.0
+## sp4 挥刀速度（像素/秒）
+@export var sp4_slash_speed: float = 250.0
+## sp4 最后一帧维持时间（秒）
+@export var sp4_hold_time: float = 0.1
+## sp5 显现距离（像素，相对玩家）
+@export var sp5_appear_distance: float = 100.0
+## sp5 显现时间（秒）
+@export var sp5_appear_time: float = 0.1
+## sp5 旋转距离（像素）
+@export var sp5_spin_distance: float = 80.0
+## sp6 升龙突进距离（像素）
+@export var sp6_uppercut_distance: float = 50.0
+## sp7 空中悬浮时间（秒）
+@export var sp7_float_time: float = 0.3
+## sp7 下劈速度（像素/秒）
+@export var sp7_dive_speed: float = 500.0
+## sp7 落地后维持时间（秒）
+@export var sp7_land_hold: float = 0.1

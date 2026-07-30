@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bnc1c4rrpksoj"]
 
-[ext_resource type="Script" path="res://scripts/enemy/boss/l3/ninjutsu/boss_boomerang.gd" id="1_boss_boomerang"]
+[ext_resource type="Script" uid="uid://dkrtboqqf6uqw" path="res://scripts/enemy/boss/l3/ninjutsu/boss_boomerang.gd" id="1_boss_boomerang"]
 [ext_resource type="Texture2D" uid="uid://b4oasiwyxdqjj" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_000.png" id="2_sgun1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tn7nq"]
@@ -22,10 +22,9 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.5
 color_ramp = SubResource("GradientTexture1D_1vlwd")
 
-[node name="Area2D" type="Area2D" unique_id=1550002304]
+[node name="Area2D" type="Area2D" unique_id=1550002304 groups=["blockable", "projectile"]]
 z_index = 10
 collision_layer = 32
-collision_mask = 1
 script = ExtResource("1_boss_boomerang")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1522365087]

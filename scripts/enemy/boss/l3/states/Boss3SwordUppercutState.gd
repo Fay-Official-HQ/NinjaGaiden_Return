@@ -10,6 +10,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	super()
 	_face_player()
 	boss.animated_sprite.play("sword_uppercut")
+	AudioManager.play_sound(&"jianshangtiao")
 	boss.sword_hit_box.set_deferred("monitoring", true)
 	boss.velocity.y = boss.data.jump_velocity * boss.data.uppercut_jump_multiplier
 	boss.velocity.x = boss.facing_direction * boss.data.run_speed * boss.data.uppercut_speed_multiplier
@@ -17,8 +18,10 @@ func enter(_msg: Dictionary = {}) -> void:
 	_in_attack = true
 
 func physics_update(delta: float) -> void:
-	boss.velocity.y += boss.data.gravity * delta
-	boss.move_and_slide()
+	# 撞墙提前结束前突
+	if _in_attack and boss.is_on_wall():
+		boss.velocity.x = 0.0
+		_dash_distance_left = 0.0
 
 	# 前突进距离耗尽 → 清空水平速度
 	if _in_attack and _dash_distance_left > 0.0:

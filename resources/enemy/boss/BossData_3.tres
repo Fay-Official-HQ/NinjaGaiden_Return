@@ -4,8 +4,5 @@
 
 [resource]
 script = ExtResource("1_boss3")
-ai_close_distance = 30.0
-ai_state_cycle = Array[String](["Boss3RunState", "Boss3AttackState", "Boss3SwordReadyState", "Boss3CrouchState", "Boss3JumpState", "Boss3GroundNinjutsuState", "Boss3AirNinjutsuState", "Boss3FallAirState"])
-ai_state_cycle_phase2 = Array[String](["Boss3RunState", "Boss3AttackState", "Boss3SwordReadyState", "Boss3CrouchState", "Boss3JumpState", "Boss3GroundNinjutsuState", "Boss3AirNinjutsuState", "Boss3FallAirState"])
 boss_name = "假隼龙"
 defeat_next_scene = "res://scenes/ui/Cutscene.tscn"

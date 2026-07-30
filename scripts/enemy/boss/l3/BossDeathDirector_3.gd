@@ -143,8 +143,7 @@ func _phase_recover() -> void:
 	_remove_silhouettes()
 
 	_boss.die()
-	if "ignore_gravity" in _boss:
-		_boss.ignore_gravity = true
+	_boss.ignore_gravity = true
 
 	_boss.visible = true
 	if _boss.player_ref:
@@ -188,5 +187,5 @@ func _end_level() -> void:
 	LevelManager.spawn_point = "default"
 
 	# 前往第三章过场动画
-	Cutscene.target_chapter = 3
-	get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")
+	Cutscene.target_chapter = 4
+	get_tree().change_scene_to_file("res://scenes/ui/TestEnd.tscn")

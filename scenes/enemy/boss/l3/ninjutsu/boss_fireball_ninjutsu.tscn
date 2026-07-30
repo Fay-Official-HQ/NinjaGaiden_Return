@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://g37x0stgntaa"]
 
-[ext_resource type="Script" path="res://scripts/enemy/boss/l3/ninjutsu/boss_fireball_projectile.gd" id="1_boss_fireball"]
+[ext_resource type="Script" uid="uid://d0pa52gl7g7py" path="res://scripts/enemy/boss/l3/ninjutsu/boss_fireball_projectile.gd" id="1_boss_fireball"]
 [ext_resource type="Texture2D" uid="uid://b5qiaub36tm6d" path="res://assets/sprites/Ryu/lizitexiao/lizitexiao_001.png" id="2_tg8wb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tg8wb"]
@@ -24,10 +24,9 @@ scale_min = 0.099999994
 scale_max = 0.39999998
 color_ramp = SubResource("GradientTexture1D_sj4s4")
 
-[node name="Area2D" type="Area2D" unique_id=1550002304]
+[node name="Area2D" type="Area2D" unique_id=1550002304 groups=["blockable", "projectile"]]
 z_index = 10
 collision_layer = 32
-collision_mask = 1
 script = ExtResource("1_boss_fireball")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1522365087]

@@ -159,6 +159,7 @@ position = Vector2(1347, 177)
 
 [node name="Item3" parent="Items" unique_id=1539636065 instance=ExtResource("8_yhkpj")]
 position = Vector2(1657, 177)
+consumable_type = 3
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
@@ -248,7 +249,7 @@ shape = SubResource("RectangleShape2D_d4oo4")
 
 [node name="BossTransitionZone" type="Area2D" parent="." unique_id=461121186]
 script = ExtResource("9_atvl2")
-target_scene = "res://scenes/ui/TestEnd.tscn"
+target_scene = "res://scenes/levels/l3/Level_3-9.tscn"
 metadata/_custom_type_script = "uid://cduihly0ss1id"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=1306342593]

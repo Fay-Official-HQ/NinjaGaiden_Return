@@ -29,10 +29,9 @@ func update(delta: float) -> void:
 		var chosen = _sword_skills[randi() % _sword_skills.size()]
 		state_machine.change_state_by_name(chosen)
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if not boss.is_on_floor():
-		boss.velocity.y += boss.data.gravity * delta
-	boss.move_and_slide()
+		pass  # 由 HandsComponent 统一处理重力
 
 func spawn_block_spark() -> void:
 	if not _spark_pos:
