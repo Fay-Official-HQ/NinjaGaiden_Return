@@ -25,6 +25,8 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/bgm/end_good.tres",
 	"res://resources/audio/bgm/end_bad.tres",
 	"res://resources/audio/bgm/bgm1_2.tres",
+	"res://resources/audio/bgm/nuzhijiban.tres",
+	
 	# 玩家音效
 	"res://resources/audio/player/bishaji.tres",
 	"res://resources/audio/player/cuoa.tres",
