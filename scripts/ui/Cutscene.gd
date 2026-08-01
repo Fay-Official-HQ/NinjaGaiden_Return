@@ -51,6 +51,7 @@ const CHAPTER_SCENE_MAP: Dictionary = {
 	1: "res://scenes/levels/Level_1.tscn",
 	2: "res://scenes/levels/l2/Level_2-1.tscn",
 	3: "res://scenes/levels/l3/Level_3-1.tscn",
+	4: "res://scenes/levels/l4/Level_4-1.tscn",
 }
 
 

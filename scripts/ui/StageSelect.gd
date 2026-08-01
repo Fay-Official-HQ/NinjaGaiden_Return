@@ -9,7 +9,7 @@ const CHAPTERS := [
 	{ chapter = 1, path = "res://scenes/levels/Level_1.tscn", name = ""},
 	{ chapter = 2, path = "res://scenes/levels/l2/Level_2-1.tscn", name = ""},
 	{ chapter = 3, path = "res://scenes/levels/l3/Level_3-1.tscn", name = ""},
-	{ chapter = 4, path = "", name = ""},
+	{ chapter = 4, path = "res://scenes/levels/l4/Level_4-1.tscn", name = ""},
 	{ chapter = 5, path = "", name = ""},
 	{ chapter = 6, path = "", name = ""},
 	{ chapter = 7, path = "", name = ""},

@@ -188,4 +188,4 @@ func _end_level() -> void:
 
 	# 前往第三章过场动画
 	Cutscene.target_chapter = 4
-	get_tree().change_scene_to_file("res://scenes/ui/TestEnd.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")
