@@ -26,6 +26,7 @@ LevelManager="*res://autoload/LevelManager.gd"
 PlayerStateManager="*res://autoload/PlayerStateManager.gd"
 SceneTransition="*res://autoload/SceneTransition.gd"
 CheatManager="*res://autoload/CheatManager.gd"
+MCPRuntimeProbe="*uid://bsg12huaf1u5i"
 
 [display]
 
@@ -35,6 +36,10 @@ window/size/extend_to_title=true
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_mcp/plugin.cfg")
 
 [global_group]
 

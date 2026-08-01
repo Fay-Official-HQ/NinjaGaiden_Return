@@ -1,0 +1,44 @@
+# 项目上下文：《忍者龙剑传：归来》(Ninja Gaiden Return)
+
+## 项目简介
+Godot 4.x + GDScript 2D 动作游戏，类 FC 忍龙3玩法。
+核心玩法：玩家（隼龙）在多个关卡中战斗，含剑术/忍术/BOSS战。
+
+## 架构规范（企业级）
+1. **高内聚低耦合**：模块内部职责单一，模块间通过信号（signal）或
+   单例解耦，避免跨节点直接引用链。
+2. **状态机模式**：复杂的敌人行为用继承基类的状态类实现（如 Boss3State），
+   每个状态只负责自己的 enter/update/physics_update/exit。
+3. **组件化**：AI决策、移动、动画等拆分为独立组件（如 BossAIComponent3），
+   主节点只做协调，不堆逻辑。
+4. **数据与逻辑分离**：BOSS 数值属性走 resources/ 下 .tres 数据资源类
+   （参数加中文注释，方便 Inspector 调试）。非 BOSS 敌人/功能默认不强制
+   数据驱动，除非开发者明确要求。
+5. **遵守现有模式**：新增功能先参考同目录已有实现（攻击框开关、状态切换、
+   音效播放、弹体生成等），保持风格一致，不重复造轮子。
+
+## 开发规范（必须遵守）
+1. **MCP 优先**：项目启用 Godot MCP Native（addons/godot_mcp）。
+   操作场景/节点/脚本优先用 MCP 工具（create_node / update_node_property /
+   attach_script / open_scene / save_scene / run_project / get_editor_logs /
+   read_script / execute_script 等），不要直接手改 .tscn / .tres 文本。
+   运行测试用 run_project，获取报错用 get_editor_logs。
+2. **文件位置**：脚本 scripts/、场景 scenes/、数据资源 resources/、素材 assets/。
+   敌人/BOSS 按关卡分目录（如 scripts/enemy/boss/l3/、scenes/enemy/boss/l3/）。
+3. **谨慎改动稳定代码**：玩家代码（scripts/player/）及已验证稳定不变的功能，
+   除非明确要求否则不改；确需改动时先说明影响范围。
+4. **注释一律中文**，命名保持现有风格（拼音/英文皆可，保持一致）。
+5. **改动前先读**：修改任何文件前先完整阅读该文件及相关调用方，理解后再动手。
+
+## 全局单例（autoload/）
+- AudioManager：play_sound(&"音效名") 播放音效，BGM 控制
+- SoundRegistry / LevelManager / SceneTransition（fade_to_scene）/
+  PlayerStateManager（reset）/ CheatManager / PALMode
+
+## 碰撞层（关键）
+1=玩家，2=敌人/敌方受伤框，16=玩家攻击弹体，32=敌方攻击框（EnemyAttack）
+
+## 战斗通用约定
+- 攻击框默认关闭（set_deferred("monitoring", ...) 控制），身体碰撞框常开
+- 攻击框随面朝方向镜像翻转
+- 弹体用独立场景实例化，挂到当前场景
