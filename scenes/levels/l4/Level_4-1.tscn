@@ -302,7 +302,7 @@ metadata/_edit_lock_ = true
 position = Vector2(110, 213)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1743809945]
-position = Vector2(3835, -59)
+position = Vector2(3835, -66)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=228357229]
 script = ExtResource("11_jp543")
@@ -313,7 +313,7 @@ shape = SubResource("RectangleShape2D_d4oo4")
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1884199012]
 script = ExtResource("11_jp543")
-target_scene = "res://scenes/levels/l4/Level_4-1.tscn"
+target_scene = "res://scenes/levels/l4/Level_4-2.tscn"
 spawn_point = "entry_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=286541896]
