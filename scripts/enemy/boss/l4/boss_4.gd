@@ -103,7 +103,7 @@ func _on_took_damage(damage: int, _is_heavy: bool) -> void:
 ## 死亡入口：交给 BossDeathDirector（红黑剪影 + 定格 + 横斩），没有则直接进入死亡状态
 func _die() -> void:
 	_stop_minion_spawn_loop()
-	var director = get_node_or_null("BossUI/BossDeathDirector") as BossDeathDirector
+	var director = get_node_or_null("BossUI/BossDeathDirector") as BossDeathDirector_4
 	if director:
 		director.play_death_sequence(self)
 	else:

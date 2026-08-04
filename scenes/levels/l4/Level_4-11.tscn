@@ -4,8 +4,10 @@
 [ext_resource type="TileSet" uid="uid://boy5fit5xes1v" path="res://resources/tilesets/tileset4.tres" id="2_l66tp"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="4_0btsf"]
 [ext_resource type="PackedScene" uid="uid://c7qr26iok046c" path="res://scenes/environment/TimedPlatformGroup2.tscn" id="5_83nvo"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="5_buh6m"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="5_rmlsd"]
 [ext_resource type="Script" uid="uid://ckwvxaqlg05oj" path="res://scripts/environment/BossGateTrigger.gd" id="6_l66tp"]
+[ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="6_ocnmj"]
 [ext_resource type="PackedScene" path="res://scenes/enemy/boss/l4/BossSpawner4.tscn" id="6_rmlsd"]
 [ext_resource type="PackedScene" uid="uid://dltnde0yqiwim" path="res://scenes/environment/CameraZone.tscn" id="7_wt82k"]
 
@@ -96,6 +98,12 @@ slide_on_ceiling = false
 initial_facing_right = false
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
+
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("5_buh6m")]
+position = Vector2(682, 163)
+
+[node name="ItemSpecial" parent="Items" unique_id=1023939938 instance=ExtResource("6_ocnmj")]
+position = Vector2(479, 163)
 
 [node name="environment" type="Node" parent="." unique_id=1061301762]
 
