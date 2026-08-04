@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bbchtsu6k6sps" path="res://scripts/enemy/boss/l3/boss_3.gd" id="1_3eqdm"]
 [ext_resource type="Resource" uid="uid://bwrqb3vnf6f1o" path="res://resources/enemy/boss/BossData_3.tres" id="2_data"]
 [ext_resource type="Script" uid="uid://ctih8tt6fie6l" path="res://scripts/enemy/boss/l3/states/Boss3BlockState.gd" id="16_block"]
-[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="17_hhdwg"]
 [ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="19_ojq67"]
 [ext_resource type="Texture2D" uid="uid://dxbx5m6w6r43g" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang01.png" id="20_vr8hy"]
 [ext_resource type="Texture2D" uid="uid://dcqhb08e8l8w0" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang02.png" id="21_afcnk"]
@@ -83,9 +82,6 @@
 [ext_resource type="Script" uid="uid://dmwqhy02p0qs8" path="res://scripts/enemy/boss/l3/states/Boss3SpecialMoveState.gd" id="87_special"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sb8oc"]
-size = Vector2(17, 34)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxnxg"]
 size = Vector2(17, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4gow"]
@@ -599,16 +595,6 @@ script = ExtResource("65_death")
 script = ExtResource("87_special")
 
 [node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
-
-[node name="EnemyHitBox" type="Area2D" parent="AttackRoot" unique_id=173550206]
-collision_layer = 32
-script = ExtResource("17_hhdwg")
-metadata/_custom_type_script = "uid://cflbsmpgemw31"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=1616386093]
-position = Vector2(-0.5, 6)
-shape = SubResource("RectangleShape2D_vxnxg")
-debug_color = Color(0.83137256, 0.38039216, 0.24705882, 0.76862746)
 
 [node name="SwordHitBox" type="Area2D" parent="AttackRoot" unique_id=1859546480]
 collision_layer = 32

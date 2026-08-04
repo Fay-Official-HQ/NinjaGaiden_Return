@@ -1,0 +1,277 @@
+[gd_scene format=3 uid="uid://8dqxt7dmqm07"]
+
+[ext_resource type="Script" uid="uid://dsrsh85cqqt7e" path="res://scripts/enemy/boss/l4/boss_4.gd" id="1_6gdms"]
+[ext_resource type="Script" uid="uid://wix6ml81idsy" path="res://scripts/enemy/boss/l4/boss_ai_component4.gd" id="3_0wec6"]
+[ext_resource type="Script" uid="uid://c4hd146o47sd" path="res://scripts/enemy/boss/l1/BossStateMachine.gd" id="4_y41qj"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="14_07lwn"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="15_uxuwh"]
+[ext_resource type="Texture2D" uid="uid://dxbx5m6w6r43g" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang01.png" id="16_vmexn"]
+[ext_resource type="Texture2D" uid="uid://dcqhb08e8l8w0" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang02.png" id="17_5hwdm"]
+[ext_resource type="Texture2D" uid="uid://d0vwu7qhypr3g" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang03.png" id="18_t1043"]
+[ext_resource type="Script" uid="uid://dqnasj0v8bv0t" path="res://scripts/enemy/boss/l4/BossDeathDirector_4.gd" id="19_bspie"]
+[ext_resource type="Texture2D" uid="uid://b6km7cvxbvu6o" path="res://assets/sprites/enemy/boss/boss_l4/special/Shub_Niggurath1.png" id="19_syvx2"]
+[ext_resource type="Texture2D" uid="uid://ba6veoul7131f" path="res://assets/sprites/enemy/boss/boss_l1/bosssiwang04.png" id="19_u2h7g"]
+[ext_resource type="Texture2D" uid="uid://c5xwv76fk4hqu" path="res://assets/sprites/enemy/boss/boss_l4/special/Shub_Niggurath2.png" id="20_2kp1c"]
+[ext_resource type="Texture2D" uid="uid://dbxn1c56tnnvp" path="res://assets/sprites/enemy/boss/boss_l4/special/xieshen (2).png" id="21_6gqnx"]
+[ext_resource type="Texture2D" uid="uid://b54al7eytogmi" path="res://assets/sprites/enemy/boss/boss_l4/special/xieshen (1).png" id="22_6tdpr"]
+[ext_resource type="Texture2D" uid="uid://crhriyt8mifg" path="res://assets/sprites/enemy/boss/boss_l2/nengliang.png" id="39_520eh"]
+[ext_resource type="Script" uid="uid://c0xb2g70druks" path="res://scripts/enemy/boss/l1/BossUI.gd" id="40_y5wrm"]
+[ext_resource type="Texture2D" uid="uid://q0ixs2u1t2rq" path="res://assets/sprites/enemy/boss/boss_l1/BossHPkong.png" id="41_kkubt"]
+[ext_resource type="Texture2D" uid="uid://c5clak2fmn0vx" path="res://assets/sprites/enemy/boss/boss_l1/BossHPman.png" id="42_3q128"]
+[ext_resource type="PackedScene" uid="uid://d4nn2sespo5vb" path="res://scenes/enemy/boss/BossDeathDirector.tscn" id="43_gwhw1"]
+[ext_resource type="Resource" uid="uid://boss4datam4x4" path="res://resources/enemy/boss/BossData_4.tres" id="44_data4"]
+[ext_resource type="Script" uid="uid://cuel8p310vn7k" path="res://scripts/enemy/boss/l4/states/Boss4IdleState.gd" id="45_idle4"]
+[ext_resource type="Script" uid="uid://fcceguvjdpe5" path="res://scripts/enemy/boss/l4/states/Boss4AttackState.gd" id="46_attack4"]
+[ext_resource type="Script" uid="uid://dapwfc0laugrr" path="res://scripts/enemy/boss/l4/states/Boss4DeathState.gd" id="47_death4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8g3p"]
+size = Vector2(151, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6gqnx"]
+size = Vector2(26, 112)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6tdpr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tdpr"]
+radius = 29.068884
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6gqnx"]
+radius = 17.464249
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tdpr"]
+size = Vector2(89, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w8g3p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_2kp1c")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_syvx2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_2kp1c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6s7n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_vmexn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5hwdm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_t1043")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_u2h7g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bu04j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_6gqnx")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_6gqnx")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_6tdpr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s5ron"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_520eh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Boss4" type="CharacterBody2D" unique_id=389371954]
+collision_layer = 2
+collision_mask = 540
+script = ExtResource("1_6gdms")
+data = ExtResource("44_data4")
+metadata/_edit_horizontal_guides_ = [-135.0, 67.0]
+metadata/_edit_vertical_guides_ = [-240.0, 350.0]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1852855498]
+position = Vector2(-0.5, 60)
+shape = SubResource("RectangleShape2D_w8g3p")
+
+[node name="Components" type="Node" parent="." unique_id=1196929013]
+
+[node name="BossAIComponent" type="Node" parent="Components" unique_id=1103191187]
+script = ExtResource("3_0wec6")
+
+[node name="BossStateMachine" type="Node" parent="." unique_id=537885054]
+script = ExtResource("4_y41qj")
+
+[node name="BossIdleState" type="Node" parent="BossStateMachine" unique_id=1045349195]
+script = ExtResource("45_idle4")
+
+[node name="BossAttackState" type="Node" parent="BossStateMachine" unique_id=2070991949]
+script = ExtResource("46_attack4")
+
+[node name="BossDeathState" type="Node" parent="BossStateMachine" unique_id=1417288001]
+script = ExtResource("47_death4")
+
+[node name="AttackRoot" type="Node2D" parent="." unique_id=1111364522]
+
+[node name="EnemyHitBox" type="Area2D" parent="AttackRoot" unique_id=173550206]
+collision_layer = 32
+script = ExtResource("14_07lwn")
+metadata/_custom_type_script = "uid://cflbsmpgemw31"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=398120816]
+position = Vector2(21, 8)
+shape = SubResource("RectangleShape2D_6gqnx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=975841296]
+position = Vector2(39, -11)
+shape = SubResource("CapsuleShape2D_6tdpr")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=726716281]
+position = Vector2(34, 1)
+shape = SubResource("CapsuleShape2D_6tdpr")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=1741767994]
+position = Vector2(31, 30)
+shape = SubResource("CapsuleShape2D_6tdpr")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=1732845189]
+position = Vector2(25, -52)
+shape = SubResource("CapsuleShape2D_6tdpr")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=988468826]
+position = Vector2(-21, -49)
+shape = SubResource("CapsuleShape2D_6tdpr")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=33544546]
+position = Vector2(43, 49)
+shape = SubResource("CapsuleShape2D_6tdpr")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=1464061357]
+position = Vector2(4, 43)
+shape = SubResource("CircleShape2D_6tdpr")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=46656135]
+position = Vector2(-34, -16)
+shape = SubResource("CircleShape2D_6tdpr")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=316438477]
+position = Vector2(39, -28)
+shape = SubResource("CircleShape2D_6gqnx")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="AttackRoot/EnemyHitBox" unique_id=749551681]
+position = Vector2(-26.5, 26.5)
+shape = SubResource("RectangleShape2D_6tdpr")
+
+[node name="HurtRoot" type="Node2D" parent="." unique_id=193466748]
+
+[node name="HurtBox" type="Area2D" parent="HurtRoot" unique_id=323499813]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("15_uxuwh")
+is_boss = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtRoot/HurtBox" unique_id=195555580]
+position = Vector2(39, -28)
+shape = SubResource("CircleShape2D_6gqnx")
+
+[node name="Visual" type="Node2D" parent="." unique_id=636072712]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=333514813]
+sprite_frames = SubResource("SpriteFrames_w8g3p")
+animation = &"dead"
+autoplay = "default"
+
+[node name="DeathEffectAnim" type="AnimatedSprite2D" parent="Visual" unique_id=1597553453]
+visible = false
+modulate = Color(1, 1, 1, 0.5882353)
+position = Vector2(51, -33)
+sprite_frames = SubResource("SpriteFrames_d6s7n")
+frame = 1
+frame_progress = 0.54722023
+
+[node name="HeadAnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=247164586]
+position = Vector2(44, -29)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_bu04j")
+animation = &"dead"
+
+[node name="EnergyAnimated" type="AnimatedSprite2D" parent="Visual" unique_id=891794753]
+visible = false
+position = Vector2(49, -18)
+sprite_frames = SubResource("SpriteFrames_s5ron")
+
+[node name="BossUI" type="CanvasLayer" parent="." unique_id=466291140]
+script = ExtResource("40_y5wrm")
+
+[node name="HpBarBg" type="Sprite2D" parent="BossUI" unique_id=1536127205]
+position = Vector2(460, 50)
+texture = ExtResource("41_kkubt")
+centered = false
+
+[node name="HpBarFill" type="Sprite2D" parent="BossUI" unique_id=1538961326]
+position = Vector2(460, 50)
+texture = ExtResource("42_3q128")
+centered = false
+
+[node name="BossDeathDirector" parent="BossUI" unique_id=1882217270 instance=ExtResource("43_gwhw1")]
+layer = 1
+script = ExtResource("19_bspie")
+
+[node name="BossMark" type="Node2D" parent="." unique_id=1908210087]
+
+[node name="Marker2D" type="Marker2D" parent="BossMark" unique_id=1657280335]
+position = Vector2(130, 67)
+
+[node name="Marker2D2" type="Marker2D" parent="BossMark" unique_id=865531088]
+position = Vector2(200, 67)
+
+[node name="Marker2D3" type="Marker2D" parent="BossMark" unique_id=648757939]
+position = Vector2(264, 67)
+
+[node name="Marker2D4" type="Marker2D" parent="BossMark" unique_id=40318837]
+position = Vector2(327, 67)
+
+[node name="Marker2D5" type="Marker2D" parent="BossMark" unique_id=1166720459]
+position = Vector2(49, -18)
+
+[node name="Marker2D6" type="Marker2D" parent="BossMark" unique_id=1774797954]
+position = Vector2(11, 35)

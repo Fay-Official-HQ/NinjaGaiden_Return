@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bc01dhxuu2rlh"]
+
+[ext_resource type="Script" uid="uid://73xamhmkdcps" path="res://scripts/enemy/l4/PatrolEnemy4.gd" id="1_qekx4"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_ekgko"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_tc0c1"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_n2ywx"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_hwgaw"]
+[ext_resource type="Texture2D" uid="uid://r6h5585do183" path="res://assets/sprites/enemy/l4/enemy_l4_ (6).png" id="6_kd7br"]
+[ext_resource type="Texture2D" uid="uid://doi1x4kxge5h" path="res://assets/sprites/enemy/l4/enemy_l4_ (7).png" id="7_iagu5"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="8_omogn"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="9_1r4c1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ekgko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tc0c1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n2ywx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hwgaw")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_kd7br")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iagu5")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68jqe"]
+size = Vector2(17, 32)
+
+[node name="PatrolEnemy4" type="CharacterBody2D" unique_id=1227478862 groups=["enemy", "fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_qekx4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
+sprite_frames = SubResource("SpriteFrames_4qnji")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=447011981]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("8_omogn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=149801557]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
+collision_layer = 32
+script = ExtResource("9_1r4c1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=57524723]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_68jqe")
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=2095730047]
+target_position = Vector2(-20, 30)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=1345637205]
+target_position = Vector2(20, 30)
+collision_mask = 12
+
+[node name="WallDetect" type="RayCast2D" parent="." unique_id=67567202]
+target_position = Vector2(25, 0)
+collision_mask = 12

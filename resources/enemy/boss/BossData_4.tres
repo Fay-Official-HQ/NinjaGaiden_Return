@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BossData_4" format=3 uid="uid://boss4datam4x4"]
+
+[ext_resource type="Script" uid="uid://dl7dbdfd3q6vg" path="res://resources/enemy/boss/BossData_4.gd" id="1_boss4"]
+
+[resource]
+script = ExtResource("1_boss4")
+boss_name = "黑暗母神"

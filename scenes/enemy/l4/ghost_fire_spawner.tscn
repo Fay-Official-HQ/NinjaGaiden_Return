@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bh5fru4d8ax0x"]
+
+[ext_resource type="Script" uid="uid://dvtxswjgftb7k" path="res://scripts/enemy/l4/ghost_fire_spawner.gd" id="1_spawner"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(50, 376.25)
+
+[node name="GhostFireSpawner" type="Node2D" unique_id=1105180595]
+script = ExtResource("1_spawner")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=1223572896]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=1605690024]
+shape = SubResource("RectangleShape2D_trigger")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=1208541808]
+position = Vector2(0, -54)

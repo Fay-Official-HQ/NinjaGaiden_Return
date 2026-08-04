@@ -61,9 +61,6 @@ func enter(_msg: Dictionary = {}) -> void:
 	# 关闭所有攻击框，防止 FADE_OUT 阶段玩家碰触受伤
 	boss.sword_hit_box.set_deferred("monitoring", false)
 	boss.crouch_hit_box.set_deferred("monitoring", false)
-	var enemy_hb = boss.get_node_or_null("AttackRoot/EnemyHitBox") as Area2D
-	if enemy_hb:
-		enemy_hb.set_deferred("monitoring", false)
 
 	_phase = Phase.FADE_OUT
 	_phase_timer = boss.data.special_fade_out_time
@@ -105,11 +102,19 @@ func physics_update(_delta: float) -> void:
 		boss.ignore_gravity = true
 		if boss.is_on_floor():
 			_enter_sp3_wait()
+		elif boss.velocity.y <= 0.0:
+			# 下劈方向水平或朝上（玩家不在下方）→ 改为直接向下劈，
+			# 避免下劈穿透地形时穿顶卡在墙壁/空中
+			_dive_dir = Vector2(0, 1)
 	elif _phase == Phase.SP7_DIVE:
 		boss.velocity = _dive_dir * boss.data.sp7_dive_speed
 		boss.ignore_gravity = true
 		if boss.is_on_floor():
 			_enter_sp7_land()
+		elif boss.velocity.y <= 0.0:
+			# 最后一击水平飞行或飞向天空 → 改为直接向下落，
+			# 避免穿透地形穿顶后一直浮空卡在墙壁
+			_dive_dir = Vector2(0, 1)
 
 
 # ═══════════════════════════════════════════════
@@ -602,9 +607,6 @@ func _finish_special_move() -> void:
 	boss.hurt_box.set_deferred("monitorable", true)
 	boss.sword_hit_box.set_deferred("monitoring", true)
 	boss.crouch_hit_box.set_deferred("monitoring", true)
-	var enemy_hb = boss.get_node_or_null("AttackRoot/EnemyHitBox") as Area2D
-	if enemy_hb:
-		enemy_hb.set_deferred("monitoring", true)
 	state_machine.change_state_by_name("Boss3IdleState")
 
 
@@ -622,9 +624,6 @@ func exit() -> void:
 	# 恢复所有攻击框
 	boss.sword_hit_box.set_deferred("monitoring", true)
 	boss.crouch_hit_box.set_deferred("monitoring", true)
-	var enemy_hb = boss.get_node_or_null("AttackRoot/EnemyHitBox") as Area2D
-	if enemy_hb:
-		enemy_hb.set_deferred("monitoring", true)
 
 func _cleanup_tween() -> void:
 	if _fade_tween and _fade_tween.is_valid():

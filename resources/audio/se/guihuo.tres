@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://br8sqsbtnb1kc"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_s2tc6"]
+[ext_resource type="AudioStream" uid="uid://r5o31f647o87" path="res://assets/audio/se/guihuo.wav" id="2_s13ck"]
+
+[resource]
+script = ExtResource("1_s2tc6")
+event_id = &"guihuo"
+stream = ExtResource("2_s13ck")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

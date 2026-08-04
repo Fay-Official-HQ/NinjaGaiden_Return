@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bsvglakgwlvum"]
+
+[ext_resource type="Script" path="res://scripts/enemy/l4/hopper_monster_spawner.gd" id="1_spawner"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ko8vx"]
+size = Vector2(314, 222.5)
+
+[node name="HopperMonsterSpawner" type="Node2D" unique_id=1847870735]
+script = ExtResource("1_spawner")
+
+[node name="TriggerArea" type="Area2D" parent="." unique_id=311826351]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea" unique_id=1930460275]
+shape = SubResource("RectangleShape2D_ko8vx")
+
+[node name="SpawnPosition" type="Marker2D" parent="." unique_id=538062068]
+position = Vector2(0, -54)

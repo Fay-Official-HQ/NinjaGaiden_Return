@@ -37,7 +37,6 @@ extends Node2D
 
 func _ready() -> void:
 	SceneTransition.clear_overlay_safe()
-	AudioManager.play_sound(&"zhandou3")
 
 	# 根据入口点定位玩家
 	_place_player_at_entry()
@@ -67,7 +66,7 @@ func _ready() -> void:
 	#        调大 top（负更多）= 相机能跟到更高处
 	#        调小 bottom = 相机能跟到更低处
 	#        测试方法：爬到头/掉到底，看是否露出边界外的空白
-	cam.set_bounds(0, 480, -1, -1)
+	cam.set_bounds(0, 800, -1, -1)
 
 	# step5（可选）：垂直偏移微调
 	#        正值=画面下移（玩家位置偏上），负值=画面上移（玩家位置偏下）

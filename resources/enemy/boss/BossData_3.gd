@@ -118,11 +118,11 @@ class_name BossData_3
 ## 剑术备战持续时间（秒），结束后随机释放剑术
 @export var sword_ready_duration: float = 1.5
 ## 基础格挡概率（满血时，0~1）
-@export var block_chance_base: float = 0.3
+@export var block_chance_base: float = 0.15
 ## 二阶段格挡概率（HP≤阶段2阈值时，0~1）
-@export var block_chance_phase2: float = 0.5
+@export var block_chance_phase2: float = 0.25
 ## 强化阶段格挡概率（HP≤强化阈值时，0~1）
-@export var block_chance_enhanced: float = 0.75
+@export var block_chance_enhanced: float = 0.35
 ## 强化状态触发血量阈值
 @export var enhanced_hp_threshold: int = 10
 ## 二阶段血量阈值

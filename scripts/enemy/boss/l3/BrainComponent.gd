@@ -294,7 +294,7 @@ func _generate_action() -> void:
 	# 通用忍术：远程策略不放忍术，其他策略可放
 	if current_strategy != Strategy.RANGED and _ninjutsu_cooldown <= 0.0 and randf() < 0.08:
 		_choose_ninjutsu_by_position()
-		_ninjutsu_cooldown = 1.5
+		_ninjutsu_cooldown = 3.0
 
 
 func _generate_action_offensive(info: Dictionary, dist: float, player_attacking: bool) -> void:
@@ -302,7 +302,7 @@ func _generate_action_offensive(info: Dictionary, dist: float, player_attacking:
 	# ── 近战忍术：棱刃（近身对拼专属，去除头顶位置限制） ──
 	if dist < 80.0 and _ninjutsu_cooldown <= 0.0 and randf() < 0.25:
 		input_pkg.ninjutsu_edge_blade = true
-		_ninjutsu_cooldown = 1.5
+		_ninjutsu_cooldown = 3.0
 
 	# ── 近战攻击组合（站立/下蹲/跳跃攻击） ──
 	if dist < 40.0 and _attack_cooldown <= 0.0 and not player_attacking:
@@ -331,7 +331,7 @@ func _generate_action_offensive(info: Dictionary, dist: float, player_attacking:
 	if abs(dist_y) > 25.0 and _ninjutsu_cooldown <= 0.0:
 		if randf() < 0.35:
 			_choose_ninjutsu_by_position()
-			_ninjutsu_cooldown = 1.2
+			_ninjutsu_cooldown = 3.0
 
 	# 剑术：根据距离选择
 	if _sword_cooldown <= 0.0:
@@ -367,7 +367,7 @@ func _generate_action_offensive(info: Dictionary, dist: float, player_attacking:
 	if dist > 150.0 and _ninjutsu_cooldown <= 0.0:
 		if randf() < 0.1:
 			_choose_ninjutsu_by_position()
-			_ninjutsu_cooldown = 1.5
+			_ninjutsu_cooldown = 3.0
 
 
 func _generate_action_defensive(info: Dictionary, dist: float, player_attacking: bool) -> void:
@@ -394,7 +394,7 @@ func _generate_action_defensive(info: Dictionary, dist: float, player_attacking:
 		var dist_y = info.get("distance_y", 0.0)
 		if abs(dist_y) > 25.0 and _ninjutsu_cooldown <= 0.0 and randf() < 0.4:
 			_choose_ninjutsu_by_position()
-			_ninjutsu_cooldown = 1.5
+			_ninjutsu_cooldown = 3.0
 		elif _sword_cooldown <= 0.0 and randf() < 0.25:
 			input_pkg.sword_uppercut = true
 			_sword_cooldown = 1.0
@@ -440,7 +440,7 @@ func _generate_action_evasive(info: Dictionary, dist: float) -> void:
 	# 忍术干扰
 	if _ninjutsu_cooldown <= 0.0 and randf() < 0.2:
 		_choose_ninjutsu_by_position()
-		_ninjutsu_cooldown = 1.5
+		_ninjutsu_cooldown = 3.0
 
 	# ── 绝境反击
 	if dist < 60.0 and not info.get("player_is_attacking", false):
@@ -474,7 +474,7 @@ func _generate_action_neutral(_info: Dictionary, dist: float) -> void:
 		# 15%: 根据位置释放忍术（火焰/火球/棱刃）
 		if _ninjutsu_cooldown <= 0.0:
 			_choose_ninjutsu_by_position()
-			_ninjutsu_cooldown = 2.0
+			_ninjutsu_cooldown = 3.0
 		_neutral_action_timer = randf_range(20.0, 40.0)
 	elif roll < 0.85:
 		# 20%: 飞行下劈（FlightToTop → SwordDownslash）

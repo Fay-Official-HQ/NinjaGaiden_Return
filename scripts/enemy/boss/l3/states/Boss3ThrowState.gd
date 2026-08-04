@@ -26,7 +26,7 @@ func update(_delta: float) -> void:
 func physics_update(_delta: float) -> void:
 	boss.velocity.x = 0.0
 
-## 随机选一个飞镖射向玩家
+## 随机选一个飞镖射向玩家（普通飞镖 75%，火焰镖 25%）
 func _throw_dart() -> void:
 	if not boss.player_ref:
 		return
@@ -34,7 +34,7 @@ func _throw_dart() -> void:
 	var dir = (boss.player_ref.global_position - boss.global_position).normalized()
 	var spawn_pos = boss.global_position + dir * 20.0 + Vector2(0, 0)
 
-	if randi() % 2 == 0:
+	if randf() < 0.75:
 		# 投掷普通飞镖
 		AudioManager.play_sound(boss.data.throw_dart_sound)
 		var dart = DART_SCENE.instantiate()
@@ -42,7 +42,7 @@ func _throw_dart() -> void:
 		get_tree().current_scene.add_child(dart)
 		dart.initialize(dir, boss.data.throw_dart_speed)
 	else:
-		# 投掷爆炸飞镖
+		# 投掷火焰镖
 		AudioManager.play_sound(boss.data.throw_fire_dart_sound)
 		var dart = FIRE_DART_SCENE.instantiate()
 		dart.initialize(dir, boss.data.throw_fire_dart_speed)
