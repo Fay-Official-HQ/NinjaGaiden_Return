@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drnhmw2a6mbcx"
-path="res://.godot/imported/enemy_l5.png-489776b4b39b5af93ff8453c71c10c04.ctex"
+uid="uid://b6km7cvxbvu6o"
+path="res://.godot/imported/Shub_Niggurath1.png-1bed56fdb20ae45709fd92f1ac44da43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/l4/enemy_l5.png"
-dest_files=["res://.godot/imported/enemy_l5.png-489776b4b39b5af93ff8453c71c10c04.ctex"]
+source_file="res://assets/sprites/enemy/boss/boss_l4/special/Shub_Niggurath1.png"
+dest_files=["res://.godot/imported/Shub_Niggurath1.png-1bed56fdb20ae45709fd92f1ac44da43.ctex"]
 
 [params]
 

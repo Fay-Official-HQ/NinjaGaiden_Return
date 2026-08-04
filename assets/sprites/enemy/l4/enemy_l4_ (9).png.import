@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4c45lw1lmj2j"
-path="res://.godot/imported/monv (1)1.png-b6d1450d34c39253fc6adf7ad446e359.ctex"
+uid="uid://cp7fg76d5hbff"
+path="res://.godot/imported/enemy_l4_ (9).png-39019d9f4065bba839c8eaca06ffdba5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/boss/boss_l4/special/monv (1)1.png"
-dest_files=["res://.godot/imported/monv (1)1.png-b6d1450d34c39253fc6adf7ad446e359.ctex"]
+source_file="res://assets/sprites/enemy/l4/enemy_l4_ (9).png"
+dest_files=["res://.godot/imported/enemy_l4_ (9).png-39019d9f4065bba839c8eaca06ffdba5.ctex"]
 
 [params]
 
