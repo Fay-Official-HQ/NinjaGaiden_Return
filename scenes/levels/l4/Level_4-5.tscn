@@ -7,8 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/environment/hanging_platform.tscn" id="5_mopta"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_vfvly"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_1b2nk"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_58ufx"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="8_po8nh"]
+[ext_resource type="PackedScene" uid="uid://bfc5fsn0dvi2r" path="res://scenes/enemy/l3/white_ninja_spawner.tscn" id="9_1q356"]
 [ext_resource type="Script" uid="uid://cduihly0ss1id" path="res://scripts/environment/BossTransitionZone.gd" id="9_jjodv"]
+[ext_resource type="PackedScene" uid="uid://bwf13juxhcqlk" path="res://scenes/enemy/l3/sky_shinobi_spawner.tscn" id="10_mopta"]
+[ext_resource type="PackedScene" uid="uid://0apmi4vqkb4m" path="res://scenes/enemy/l3/BlackEliteNinja.tscn" id="11_vfvly"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -167,7 +171,60 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_58ufx")]
+position = Vector2(-252, 47)
+consumable_type = 0
+
+[node name="Item2" parent="Items" unique_id=299637218 instance=ExtResource("8_58ufx")]
+position = Vector2(-676, 164)
+consumable_type = 2
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="WhiteNinjaSpawner" parent="enemys" unique_id=1022552023 instance=ExtResource("9_1q356")]
+position = Vector2(-129, 153)
+
+[node name="SpawnPosition" parent="enemys/WhiteNinjaSpawner" index="1" unique_id=552779338]
+position = Vector2(-44, -160)
+
+[node name="TargetPosition" parent="enemys/WhiteNinjaSpawner" index="2" unique_id=1234567890]
+position = Vector2(-122, -60)
+
+[node name="WhiteNinjaSpawner2" parent="enemys" unique_id=1674356927 instance=ExtResource("9_1q356")]
+position = Vector2(-390, 152)
+
+[node name="SpawnPosition" parent="enemys/WhiteNinjaSpawner2" index="1" unique_id=552779338]
+position = Vector2(-15, -196)
+
+[node name="TargetPosition" parent="enemys/WhiteNinjaSpawner2" index="2" unique_id=1234567890]
+position = Vector2(-142, -68)
+
+[node name="WhiteNinjaSpawner3" parent="enemys" unique_id=562465853 instance=ExtResource("9_1q356")]
+position = Vector2(-584, 79)
+
+[node name="SpawnPosition" parent="enemys/WhiteNinjaSpawner3" index="1" unique_id=552779338]
+position = Vector2(-105, -108)
+
+[node name="TargetPosition" parent="enemys/WhiteNinjaSpawner3" index="2" unique_id=1234567890]
+position = Vector2(-187, 13)
+
+[node name="SkyShinobiSpawner" parent="enemys" unique_id=1527596956 instance=ExtResource("10_mopta")]
+position = Vector2(-494, 80)
+
+[node name="SpawnPosition" parent="enemys/SkyShinobiSpawner" index="1"]
+position = Vector2(-48, 193)
+
+[node name="SkyShinobiSpawner2" parent="enemys" unique_id=1083034480 instance=ExtResource("10_mopta")]
+position = Vector2(-699, 79)
+
+[node name="SpawnPosition" parent="enemys/SkyShinobiSpawner2" index="1"]
+position = Vector2(-48, 193)
+
+[node name="BlackEliteNinja" parent="enemys" unique_id=1227478862 instance=ExtResource("11_vfvly")]
+position = Vector2(-406, 220)
+
+[node name="BlackEliteNinja2" parent="enemys" unique_id=433792235 instance=ExtResource("11_vfvly")]
+position = Vector2(-837, 221)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=417704354]
 
@@ -193,3 +250,8 @@ position = Vector2(-1000, 138)
 shape = SubResource("RectangleShape2D_7rxlm")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="enemys/WhiteNinjaSpawner"]
+[editable path="enemys/WhiteNinjaSpawner2"]
+[editable path="enemys/WhiteNinjaSpawner3"]
+[editable path="enemys/SkyShinobiSpawner"]
+[editable path="enemys/SkyShinobiSpawner2"]

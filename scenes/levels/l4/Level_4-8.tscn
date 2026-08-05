@@ -8,6 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://m1mcny5xwvus" path="res://scenes/environment/hanging_platform.tscn" id="5_xfkif"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="6_t18h1"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="7_vjcj3"]
+[ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="8_5v4ym"]
+[ext_resource type="PackedScene" uid="uid://bh5fru4d8ax0x" path="res://scenes/enemy/l4/ghost_fire_spawner.tscn" id="9_62baa"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_vjcj3"]
+[ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="10_jkxb1"]
+[ext_resource type="PackedScene" uid="uid://cnyhgpkwkdttx" path="res://scenes/enemy/l1/bat_spawner.tscn" id="11_t18h1"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -32,6 +37,12 @@ size = Vector2(284, 617.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkxb1"]
+size = Vector2(30, 126.125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t18h1"]
+size = Vector2(79, 126.0625)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfkif"]
 size = Vector2(32.035156, 79.386955)
@@ -155,7 +166,79 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="ItemSpecial" parent="Items" unique_id=575307007 instance=ExtResource("8_5v4ym")]
+position = Vector2(325, 157)
+
+[node name="Item" parent="Items" unique_id=886136156 instance=ExtResource("9_vjcj3")]
+position = Vector2(369, -160)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="GhostFireSpawner" parent="enemys" unique_id=1105180595 instance=ExtResource("9_62baa")]
+position = Vector2(425, 205)
+spawn_count = 2
+spawn_interval = 10.0
+
+[node name="CollisionShape2D" parent="enemys/GhostFireSpawner/TriggerArea" parent_id_path=PackedInt32Array(1105180595, 1223572896) index="0" unique_id=1605690024]
+shape = SubResource("RectangleShape2D_jkxb1")
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner" index="1" unique_id=1208541808]
+position = Vector2(-100, -84)
+
+[node name="GhostFireSpawner2" parent="enemys" unique_id=1487400131 instance=ExtResource("9_62baa")]
+position = Vector2(406, 52)
+spawn_interval = 10.0
+
+[node name="CollisionShape2D" parent="enemys/GhostFireSpawner2/TriggerArea" parent_id_path=PackedInt32Array(1487400131, 1223572896) index="0" unique_id=1605690024]
+position = Vector2(-24.5, -0.03125)
+shape = SubResource("RectangleShape2D_t18h1")
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner2" index="1" unique_id=1208541808]
+position = Vector2(-81, -24)
+
+[node name="GhostFireSpawner3" parent="enemys" unique_id=1190935308 instance=ExtResource("9_62baa")]
+position = Vector2(327, -131)
+spawn_interval = 10.0
+
+[node name="CollisionShape2D" parent="enemys/GhostFireSpawner3/TriggerArea" parent_id_path=PackedInt32Array(1190935308, 1223572896) index="0" unique_id=1605690024]
+shape = SubResource("RectangleShape2D_jkxb1")
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner3" index="1" unique_id=1208541808]
+position = Vector2(-170, -49)
+
+[node name="GhostFireSpawner4" parent="enemys" unique_id=595955688 instance=ExtResource("9_62baa")]
+position = Vector2(289, -131)
+spawn_interval = 10.0
+
+[node name="CollisionShape2D" parent="enemys/GhostFireSpawner4/TriggerArea" parent_id_path=PackedInt32Array(595955688, 1223572896) index="0" unique_id=1605690024]
+shape = SubResource("RectangleShape2D_jkxb1")
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner4" index="1" unique_id=1208541808]
+position = Vector2(80, -49)
+
+[node name="EagleSpawner" parent="enemys" unique_id=1712208962 instance=ExtResource("10_jkxb1")]
+position = Vector2(398, -83)
+
+[node name="SpawnPosition" parent="enemys/EagleSpawner" index="1" unique_id=313397505]
+position = Vector2(-396, -104)
+
+[node name="EagleSpawner2" parent="enemys" unique_id=1493660137 instance=ExtResource("10_jkxb1")]
+position = Vector2(260, -348)
+
+[node name="SpawnPosition" parent="enemys/EagleSpawner2" index="1" unique_id=313397505]
+position = Vector2(220, -101)
+
+[node name="EagleSpawner3" parent="enemys" unique_id=69853885 instance=ExtResource("10_jkxb1")]
+position = Vector2(346, -137)
+
+[node name="SpawnPosition" parent="enemys/EagleSpawner3" index="1" unique_id=313397505]
+position = Vector2(-346, -43)
+
+[node name="BatSpawner" parent="enemys" unique_id=761399404 instance=ExtResource("11_t18h1")]
+position = Vector2(274, -348)
+
+[node name="SpawnPosition" parent="enemys/BatSpawner" index="1" unique_id=1206789695]
+position = Vector2(199, -32)
 
 [node name="entry_top" type="Marker2D" parent="." unique_id=417704354]
 position = Vector2(455, -346)
@@ -182,3 +265,11 @@ position = Vector2(504.5, -396.5)
 shape = SubResource("RectangleShape2D_62baa")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="enemys/GhostFireSpawner"]
+[editable path="enemys/GhostFireSpawner2"]
+[editable path="enemys/GhostFireSpawner3"]
+[editable path="enemys/GhostFireSpawner4"]
+[editable path="enemys/EagleSpawner"]
+[editable path="enemys/EagleSpawner2"]
+[editable path="enemys/EagleSpawner3"]
+[editable path="enemys/BatSpawner"]

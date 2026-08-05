@@ -6,7 +6,13 @@
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="4_6c5bo"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="5_ww4gb"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="6_wj8q2"]
+[ext_resource type="PackedScene" uid="uid://ddm2nkwk3ei4d" path="res://scenes/enemy/l4/SnakeheadShooter.tscn" id="7_c5bra"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="7_jljr3"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="7_wj8q2"]
+[ext_resource type="PackedScene" uid="uid://bh5fru4d8ax0x" path="res://scenes/enemy/l4/ghost_fire_spawner.tscn" id="8_nslf2"]
+[ext_resource type="PackedScene" uid="uid://cnyhgpkwkdttx" path="res://scenes/enemy/l1/bat_spawner.tscn" id="9_6c5bo"]
+[ext_resource type="PackedScene" uid="uid://bc01dhxuu2rlh" path="res://scenes/enemy/l4/PatrolEnemy4.tscn" id="10_ww4gb"]
+[ext_resource type="PackedScene" uid="uid://bsvglakgwlvum" path="res://scenes/enemy/l4/hopper_monster_spawner.tscn" id="11_ww4gb"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -34,6 +40,12 @@ size = Vector2(284, 617.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0dner"]
+size = Vector2(368.5, 147.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wj8q2"]
+size = Vector2(387, 154.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5tpat"]
 size = Vector2(22, 231)
@@ -157,7 +169,53 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("7_wj8q2")]
+position = Vector2(278, 216)
+consumable_type = 2
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="SnakeheadShooter" parent="enemys" unique_id=1656441098 instance=ExtResource("7_c5bra")]
+position = Vector2(187, 198)
+
+[node name="CollisionShape2D" parent="enemys/SnakeheadShooter/DetectRange" parent_id_path=PackedInt32Array(1656441098, 89548439) index="0" unique_id=823214000]
+position = Vector2(0.75, -63.625)
+shape = SubResource("RectangleShape2D_0dner")
+
+[node name="GhostFireSpawner" parent="enemys" unique_id=1105180595 instance=ExtResource("8_nslf2")]
+position = Vector2(213, 338)
+spawn_count = 3
+spawn_interval = 10.0
+max_spawns = 1
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner" index="1" unique_id=1208541808]
+position = Vector2(65, -154)
+
+[node name="BatSpawner" parent="enemys" unique_id=761399404 instance=ExtResource("9_6c5bo")]
+position = Vector2(176, 212)
+
+[node name="SpawnPosition" parent="enemys/BatSpawner" index="1" unique_id=1206789695]
+position = Vector2(298, -28)
+
+[node name="PatrolEnemy4" parent="enemys" unique_id=1227478862 instance=ExtResource("10_ww4gb")]
+position = Vector2(355, 218)
+
+[node name="GhostFireSpawner2" parent="enemys" unique_id=1692609468 instance=ExtResource("8_nslf2")]
+position = Vector2(423, 121)
+spawn_interval = 5.0
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner2" index="1" unique_id=1208541808]
+position = Vector2(-69, -59)
+
+[node name="HopperMonsterSpawner" parent="enemys" unique_id=1847870735 instance=ExtResource("11_ww4gb")]
+position = Vector2(235, 89)
+
+[node name="CollisionShape2D" parent="enemys/HopperMonsterSpawner/TriggerArea" parent_id_path=PackedInt32Array(1847870735, 311826351) index="0" unique_id=1930460275]
+position = Vector2(-43.5, -34.125)
+shape = SubResource("RectangleShape2D_wj8q2")
+
+[node name="SpawnPosition" parent="enemys/HopperMonsterSpawner" index="1" unique_id=538062068]
+position = Vector2(-217, -59)
 
 [node name="entry_bottom" type="Marker2D" parent="." unique_id=417704354]
 position = Vector2(37, 223)
@@ -182,3 +240,9 @@ spawn_point = "entry_top"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneB" unique_id=1503045469]
 position = Vector2(-4, 210.30652)
 shape = SubResource("RectangleShape2D_qhlv4")
+
+[editable path="enemys/SnakeheadShooter"]
+[editable path="enemys/GhostFireSpawner"]
+[editable path="enemys/BatSpawner"]
+[editable path="enemys/GhostFireSpawner2"]
+[editable path="enemys/HopperMonsterSpawner"]

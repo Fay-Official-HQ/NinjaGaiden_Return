@@ -8,6 +8,11 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_q0fb0"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="7_0jf7e"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="8_80vy6"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_yykvq"]
+[ext_resource type="PackedScene" uid="uid://cnyhgpkwkdttx" path="res://scenes/enemy/l1/bat_spawner.tscn" id="9_atl6s"]
+[ext_resource type="PackedScene" uid="uid://brddgu8cas1j5" path="res://scenes/enemy/l3/sexy_kunoichi_spawner.tscn" id="10_q0fb0"]
+[ext_resource type="PackedScene" uid="uid://sdmscf4tl485" path="res://scenes/enemy/l3/Kunoichi.tscn" id="11_atl6s"]
+[ext_resource type="PackedScene" uid="uid://bh5fru4d8ax0x" path="res://scenes/enemy/l4/ghost_fire_spawner.tscn" id="12_q0fb0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -143,7 +148,33 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_yykvq")]
+position = Vector2(212, 98)
+consumable_type = 3
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="BatSpawner" parent="enemys" unique_id=761399404 instance=ExtResource("9_atl6s")]
+position = Vector2(167, 102)
+
+[node name="SpawnPosition" parent="enemys/BatSpawner" index="1" unique_id=1206789695]
+position = Vector2(308, 19)
+
+[node name="SexyKunoichiSpawner" parent="enemys" unique_id=85159603 instance=ExtResource("10_q0fb0")]
+position = Vector2(74, 135)
+
+[node name="SpawnPosition" parent="enemys/SexyKunoichiSpawner" index="1" unique_id=1097475069]
+position = Vector2(328, -149)
+
+[node name="Kunoichi" parent="enemys" unique_id=1227478862 instance=ExtResource("11_atl6s")]
+position = Vector2(410, 141)
+
+[node name="GhostFireSpawner" parent="enemys" unique_id=1105180595 instance=ExtResource("12_q0fb0")]
+position = Vector2(109, 155)
+spawn_interval = 5.0
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner" index="1" unique_id=1208541808]
+position = Vector2(103, 1)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=417704354]
 position = Vector2(31, 195)
@@ -170,3 +201,6 @@ position = Vector2(436, -21)
 shape = SubResource("RectangleShape2D_1f70x")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="enemys/BatSpawner"]
+[editable path="enemys/SexyKunoichiSpawner"]
+[editable path="enemys/GhostFireSpawner"]

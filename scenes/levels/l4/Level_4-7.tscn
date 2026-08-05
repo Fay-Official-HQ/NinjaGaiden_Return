@@ -6,7 +6,14 @@
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="4_xle71"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="5_tvvtb"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="6_17i23"]
+[ext_resource type="PackedScene" uid="uid://ddm2nkwk3ei4d" path="res://scenes/enemy/l4/SnakeheadShooter.tscn" id="7_b8n73"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="7_bfhgy"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="7_pl5y8"]
+[ext_resource type="PackedScene" uid="uid://bc01dhxuu2rlh" path="res://scenes/enemy/l4/PatrolEnemy4.tscn" id="8_xle71"]
+[ext_resource type="PackedScene" uid="uid://bh5fru4d8ax0x" path="res://scenes/enemy/l4/ghost_fire_spawner.tscn" id="9_tvvtb"]
+[ext_resource type="PackedScene" uid="uid://bsvglakgwlvum" path="res://scenes/enemy/l4/hopper_monster_spawner.tscn" id="10_tvvtb"]
+[ext_resource type="PackedScene" uid="uid://c5tdx1pwwyte" path="res://scenes/enemy/l1/eagle_spawner.tscn" id="12_pl5y8"]
+[ext_resource type="PackedScene" uid="uid://cnyhgpkwkdttx" path="res://scenes/enemy/l1/bat_spawner.tscn" id="13_o8vj4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -28,6 +35,12 @@ size = Vector2(284, 617.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqsmc"]
+size = Vector2(380.5, 159.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfhgy"]
+size = Vector2(310, 136.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lru74"]
 size = Vector2(58.070313, 50.77391)
@@ -136,7 +149,81 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("7_bfhgy")]
+position = Vector2(76, 37)
+
+[node name="Item2" parent="Items" unique_id=1425891053 instance=ExtResource("7_bfhgy")]
+position = Vector2(173, -366)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="SnakeheadShooter" parent="enemys" unique_id=1656441098 instance=ExtResource("7_b8n73")]
+position = Vector2(49, -102)
+
+[node name="CollisionShape2D" parent="enemys/SnakeheadShooter/DetectRange" parent_id_path=PackedInt32Array(1656441098, 89548439) index="0" unique_id=823214000]
+position = Vector2(6.75, -57.625)
+shape = SubResource("RectangleShape2D_jqsmc")
+
+[node name="SnakeheadShooter2" parent="enemys" unique_id=790975117 instance=ExtResource("7_b8n73")]
+position = Vector2(243, -397)
+
+[node name="CollisionShape2D" parent="enemys/SnakeheadShooter2/DetectRange" parent_id_path=PackedInt32Array(790975117, 89548439) index="0" unique_id=823214000]
+position = Vector2(6.75, -57.625)
+shape = SubResource("RectangleShape2D_jqsmc")
+
+[node name="PatrolEnemy4" parent="enemys" unique_id=1227478862 instance=ExtResource("8_xle71")]
+position = Vector2(61, 74)
+
+[node name="GhostFireSpawner" parent="enemys" unique_id=1105180595 instance=ExtResource("9_tvvtb")]
+position = Vector2(157, 26)
+max_spawns = 1
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner" index="1" unique_id=1208541808]
+position = Vector2(43, 95)
+
+[node name="GhostFireSpawner2" parent="enemys" unique_id=935970344 instance=ExtResource("9_tvvtb")]
+position = Vector2(159, -178)
+spawn_count = 3
+max_spawns = 1
+
+[node name="SpawnPosition" parent="enemys/GhostFireSpawner2" index="1" unique_id=1208541808]
+position = Vector2(68, 119)
+
+[node name="HopperMonsterSpawner" parent="enemys" unique_id=1847870735 instance=ExtResource("10_tvvtb")]
+position = Vector2(-28, -46)
+spawn_interval = 5.0
+
+[node name="CollisionShape2D" parent="enemys/HopperMonsterSpawner/TriggerArea" parent_id_path=PackedInt32Array(1847870735, 311826351) index="0" unique_id=1930460275]
+position = Vector2(-2, -43.125)
+shape = SubResource("RectangleShape2D_bfhgy")
+
+[node name="SpawnPosition" parent="enemys/HopperMonsterSpawner" index="1" unique_id=538062068]
+position = Vector2(74, -288)
+
+[node name="PatrolEnemy5" parent="enemys" unique_id=1879578721 instance=ExtResource("8_xle71")]
+position = Vector2(396, -503)
+
+[node name="PatrolEnemy6" parent="enemys" unique_id=571803341 instance=ExtResource("8_xle71")]
+position = Vector2(327, -728)
+
+[node name="EagleSpawner" parent="enemys" unique_id=1712208962 instance=ExtResource("12_pl5y8")]
+position = Vector2(332, -579)
+
+[node name="SpawnPosition" parent="enemys/EagleSpawner" index="1" unique_id=313397505]
+position = Vector2(-320, -83)
+
+[node name="EagleSpawner2" parent="enemys" unique_id=1265987207 instance=ExtResource("12_pl5y8")]
+position = Vector2(420, -741)
+
+[node name="SpawnPosition" parent="enemys/EagleSpawner2" index="1" unique_id=313397505]
+position = Vector2(-421, -185)
+
+[node name="BatSpawner" parent="enemys" unique_id=761399404 instance=ExtResource("13_o8vj4")]
+position = Vector2(259, -849)
+spawn_direction = 1
+
+[node name="SpawnPosition" parent="enemys/BatSpawner" index="1" unique_id=1206789695]
+position = Vector2(-251, -8)
 
 [node name="entry_top" type="Marker2D" parent="." unique_id=417704354]
 position = Vector2(21, -831)
@@ -161,3 +248,12 @@ spawn_point = "entry_bottom"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneT" unique_id=1684932862]
 position = Vector2(-24.482422, -853.3065)
 shape = SubResource("RectangleShape2D_31252")
+
+[editable path="enemys/SnakeheadShooter"]
+[editable path="enemys/SnakeheadShooter2"]
+[editable path="enemys/GhostFireSpawner"]
+[editable path="enemys/GhostFireSpawner2"]
+[editable path="enemys/HopperMonsterSpawner"]
+[editable path="enemys/EagleSpawner"]
+[editable path="enemys/EagleSpawner2"]
+[editable path="enemys/BatSpawner"]
