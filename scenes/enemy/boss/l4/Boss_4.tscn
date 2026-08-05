@@ -259,16 +259,16 @@ script = ExtResource("19_bspie")
 [node name="BossMark" type="Node2D" parent="." unique_id=1908210087]
 
 [node name="Marker2D" type="Marker2D" parent="BossMark" unique_id=1657280335]
-position = Vector2(130, 67)
+position = Vector2(130, 77)
 
 [node name="Marker2D2" type="Marker2D" parent="BossMark" unique_id=865531088]
-position = Vector2(200, 67)
+position = Vector2(200, 77)
 
 [node name="Marker2D3" type="Marker2D" parent="BossMark" unique_id=648757939]
-position = Vector2(264, 67)
+position = Vector2(264, 77)
 
 [node name="Marker2D4" type="Marker2D" parent="BossMark" unique_id=40318837]
-position = Vector2(327, 67)
+position = Vector2(327, 77)
 
 [node name="Marker2D5" type="Marker2D" parent="BossMark" unique_id=1166720459]
 position = Vector2(49, -18)

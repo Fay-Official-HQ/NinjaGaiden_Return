@@ -21,7 +21,7 @@ enum HopperState { IDLE, CHASE, JUMP_ATTACK, JUMP_CHASE }
 const CHASE_RANGE: float = 250.0   # 开始追击的玩家距离（纯距离检测，无需 DetectRange 节点）
 const CHASE_SPEED: float = 120.0   # 蹦跳追击水平速度
 const HOP_FORCE: float = -230.0    # 追击蹦跳起跳力度
-const HOP_INTERVAL: float = 0.3    # 追击蹦跳间隔（秒）
+const HOP_INTERVAL: float = 0.0    # 追击蹦跳间隔（秒）
 # —— 跳跃攻击（类似 chaser_green_ninja） ——
 const JUMP_DISTANCE: float = 80.0   # 触发跳跃攻击的距离上限（玩家在 80px 内则一直连跳）
 const JUMP_FORCE: float = -240.0    # 跳跃攻击起跳力度

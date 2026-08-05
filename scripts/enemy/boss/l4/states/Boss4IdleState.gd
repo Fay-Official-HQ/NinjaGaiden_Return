@@ -20,11 +20,7 @@ func enter(_msg: Dictionary = {}) -> void:
 
 
 func update(delta: float) -> void:
-	# 始终面朝玩家
-	if boss.player_ref:
-		var dir = 1.0 if boss.player_ref.global_position.x > boss.global_position.x else -1.0
-		boss.set_facing_direction(dir)
-
+	# 建筑 BOSS 不随玩家位置调转方向，方向在生成时固定
 	var data: BossData_4 = boss.data as BossData_4
 	var interval: float = data.attack_interval if data else 3.0
 	_timer += delta
