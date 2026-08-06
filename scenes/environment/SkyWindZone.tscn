@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://1paxaa8s0rat"]
+
+[ext_resource type="Script" uid="uid://dm3aw6kjj7jur" path="res://scripts/environment/sky_wind_zone.gd" id="1_tyd1x"]
+
+[node name="SkyWindZone" type="Node2D" unique_id=1483867348]
+script = ExtResource("1_tyd1x")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=100000001]
+
+[node name="WindParticles" type="Node2D" parent="CanvasLayer" unique_id=747196930]

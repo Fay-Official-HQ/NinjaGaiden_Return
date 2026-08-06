@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bu5wkt2iufiku"]
+
+[ext_resource type="Texture2D" uid="uid://1m35s5q05klr" path="res://assets/sprites/map/zhishengji1.png" id="1_e3xoh"]
+[ext_resource type="PackedScene" uid="uid://dg1iidmkauxis" path="res://scenes/environment/wire.tscn" id="1_qjjoy"]
+[ext_resource type="Texture2D" uid="uid://cfs7akk4qdubr" path="res://assets/sprites/map/zhishengji2.png" id="2_a48v7"]
+[ext_resource type="Script" uid="uid://clj6brysv707a" path="res://scripts/environment/helicopter.gd" id="3_helix"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u87dq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e3xoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_a48v7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u87dq"]
+size = Vector2(33, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5o0d"]
+size = Vector2(64, 5)
+
+[node name="Helicopter" type="CharacterBody2D" unique_id=953866549]
+script = ExtResource("3_helix")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1994037542]
+sprite_frames = SubResource("SpriteFrames_u87dq")
+autoplay = "default"
+frame_progress = 0.991649
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=507035868]
+position = Vector2(26.5, 12.5)
+shape = SubResource("RectangleShape2D_u87dq")
+
+[node name="HangingPlatform" parent="." unique_id=894400689 instance=ExtResource("1_qjjoy")]
+
+[node name="CollisionShape2D" parent="HangingPlatform" index="0" unique_id=464106358]
+position = Vector2(12, 33.5)
+shape = SubResource("RectangleShape2D_b5o0d")
+
+[node name="Mark" type="Node2D" parent="." unique_id=856929956]
+
+[node name="WayPostion" type="Node2D" parent="Mark" unique_id=92598932]
+
+[node name="way1" type="Marker2D" parent="Mark/WayPostion" unique_id=853255848]
+
+[node name="way2" type="Marker2D" parent="Mark/WayPostion" unique_id=534790531]
+
+[node name="way3" type="Marker2D" parent="Mark/WayPostion" unique_id=616074986]
+
+[node name="way4" type="Marker2D" parent="Mark/WayPostion" unique_id=1017852917]
+
+[node name="TargetPosition" type="Marker2D" parent="Mark" unique_id=981352566]
+
+[editable path="HangingPlatform"]
