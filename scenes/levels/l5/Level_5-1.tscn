@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="6_x6afm"]
 [ext_resource type="PackedScene" uid="uid://1paxaa8s0rat" path="res://scenes/environment/SkyWindZone.tscn" id="10_ln4oy"]
 [ext_resource type="PackedScene" uid="uid://bu5wkt2iufiku" path="res://scenes/environment/Helicopter.tscn" id="11_dsbl3"]
+[ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="13_4oc2w"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -66,6 +67,9 @@ size = Vector2(284, 617.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lvry"]
+size = Vector2(90.1875, 88.96875)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_x61gm")
@@ -225,7 +229,7 @@ position = Vector2(1000, 400)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("6_x6afm")]
-position = Vector2(27, 59)
+position = Vector2(27, 64)
 
 [node name="environment" type="Node" parent="." unique_id=98744003]
 
@@ -259,6 +263,27 @@ metadata/_edit_lock_ = true
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
+position = Vector2(27, 66)
+
+[node name="entry_right" type="Marker2D" parent="." unique_id=1589893077]
+position = Vector2(2967, 67)
+
+[node name="TransitionZoneL" type="Area2D" parent="." unique_id=1798297699]
+script = ExtResource("13_4oc2w")
+spawn_point = "entry_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1723016062]
+
+[node name="TransitionZoneR" type="Area2D" parent="." unique_id=1943620859]
+script = ExtResource("13_4oc2w")
+target_scene = "res://scenes/levels/l5/Level_5-2.tscn"
+spawn_point = "entry_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=1018722825]
+position = Vector2(3036, 41)
+shape = SubResource("RectangleShape2D_7lvry")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
 [editable path="environment/Helicopter"]
