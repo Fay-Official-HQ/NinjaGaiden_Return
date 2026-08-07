@@ -143,6 +143,17 @@ func stop_sfx_fade_out(player: AudioStreamPlayer, fade_out_duration: float = 1.5
 	tw.tween_callback(player.stop)
 
 
+## 按事件 ID 停止所有正在播放该音效的 SFX 播放器。
+## 用于区域音效（如直升机 zhishengji）：只停自己，不影响场景 BGM 和其他音效
+func stop_sfx(event_id: StringName) -> void:
+	var event := SoundRegistry.get_event(event_id)
+	if event == null:
+		return
+	for player in _sfx_players:
+		if player.stream == event.stream:
+			player.stop()
+
+
 # 内部：找一个空闲 SFX 播放器
 func _find_idle_sfx_player() -> AudioStreamPlayer:
 	for player in _sfx_players:

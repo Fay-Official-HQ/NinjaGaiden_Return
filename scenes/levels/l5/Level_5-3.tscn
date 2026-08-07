@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://1paxaa8s0rat" path="res://scenes/environment/SkyWindZone.tscn" id="10_rrfna"]
 [ext_resource type="TileSet" uid="uid://boy5fit5xes1v" path="res://resources/tilesets/tileset4.tres" id="11_8bfb4"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="12_ljha7"]
+[ext_resource type="PackedScene" uid="uid://bu5wkt2iufiku" path="res://scenes/environment/Helicopter.tscn" id="12_sf4to"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -28,8 +29,32 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 67
 sources/0 = SubResource("TileSetAtlasSource_5x2jh")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o1yx"]
-size = Vector2(599, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sf4to"]
+size = Vector2(624.5, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqyo3"]
+size = Vector2(133.25, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsio3"]
+size = Vector2(102.625, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7egj"]
+size = Vector2(503.3125, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yk8ik"]
+size = Vector2(135.65625, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j77lx"]
+size = Vector2(103.828125, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7x3bo"]
+size = Vector2(63.914063, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fibyf"]
+size = Vector2(31.978516, 7.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrfna"]
+size = Vector2(79.98926, 7.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tj86g"]
 size = Vector2(284, 617.75)
@@ -37,8 +62,8 @@ size = Vector2(284, 617.75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lvry"]
-size = Vector2(90.1875, 88.96875)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bfb4"]
+size = Vector2(25.09375, 307.48438)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_kk5hf")
@@ -100,7 +125,9 @@ position = Vector2(0, -47)
 tile_set = ExtResource("2_sf4to")
 
 [node name="collision" type="TileMapLayer" parent="Map/TileMapLayer" unique_id=930108176]
+visible = false
 light_mask = 0
+tile_map_data = PackedByteArray("AABYAh8AAAAAAAAAAABZAh8AAAAAAAAAAABaAh8AAAAAAAAAAABbAh8AAAAAAAAAAABcAh8AAAAAAAAAAABdAh8AAAAAAAAAAABeAh8AAAAAAAAAAABfAh8AAAAAAAAAAABgAh8AAAAAAAAAAABhAh8AAAAAAAAAAABiAh8AAAAAAAAAAABjAh8AAAAAAAAAAABkAh8AAAAAAAAAAABlAh8AAAAAAAAAAABmAh8AAAAAAAAAAABnAh8AAAAAAAAAAABoAh8AAAAAAAAAAABpAh8AAAAAAAAAAABqAh8AAAAAAAAAAABrAh8AAAAAAAAAAABsAh8AAAAAAAAAAABtAh8AAAAAAAAAAABuAh8AAAAAAAAAAABvAh8AAAAAAAAAAABwAh8AAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_cnmxh")
 
 [node name="terrain" type="Node" parent="Map/TileMapLayer" unique_id=1874394162]
@@ -110,11 +137,76 @@ script = ExtResource("6_yk8ik")
 damage = 3
 
 [node name="HangingPlatform" parent="Map/TileMapLayer/terrain" unique_id=894400689 instance=ExtResource("7_j77lx")]
-visible = false
 
 [node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" index="0" unique_id=232704396]
-position = Vector2(299.5, 92)
-shape = SubResource("RectangleShape2D_1o1yx")
+position = Vector2(310.75, 196)
+shape = SubResource("RectangleShape2D_sf4to")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=470224271]
+position = Vector2(2147.375, 134)
+shape = SubResource("RectangleShape2D_mqyo3")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=1401759103]
+position = Vector2(2340.6875, 148.5)
+shape = SubResource("RectangleShape2D_bsio3")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=169329391]
+position = Vector2(2692.3438, 195)
+shape = SubResource("RectangleShape2D_e7egj")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=370620611]
+position = Vector2(4028.1719, 133)
+shape = SubResource("RectangleShape2D_yk8ik")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=1205968688]
+position = Vector2(4220.086, 148)
+shape = SubResource("RectangleShape2D_j77lx")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=1107339996]
+position = Vector2(4328.043, 99)
+shape = SubResource("RectangleShape2D_7x3bo")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=1845950732]
+position = Vector2(4424.0215, 99.5)
+shape = SubResource("RectangleShape2D_fibyf")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=606089213]
+position = Vector2(4496.0107, 99.75)
+shape = SubResource("RectangleShape2D_fibyf")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=1488100756]
+position = Vector2(4568, 99)
+shape = SubResource("RectangleShape2D_fibyf")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=612437391]
+position = Vector2(4640, 100)
+shape = SubResource("RectangleShape2D_fibyf")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" unique_id=2035763943]
+position = Vector2(4712.0054, 220.125)
+shape = SubResource("RectangleShape2D_rrfna")
+one_way_collision = true
+debug_color = Color(0, 0.88235295, 0, 0.77254903)
 
 [node name="StopMoving" type="StaticBody2D" parent="Map/TileMapLayer" unique_id=1068461566 groups=["wall_blocker"]]
 collision_layer = 4
@@ -138,14 +230,51 @@ position = Vector2(2500, 400)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("9_fibyf")]
-visible = false
-position = Vector2(27, 56)
+position = Vector2(18, 163)
 
 [node name="environment" type="Node" parent="." unique_id=98744003]
 
 [node name="SkyWindZone" parent="environment" unique_id=1483867348 instance=ExtResource("10_rrfna")]
 wind_speed = 30.0
 wind_direction = 1
+
+[node name="Helicopter" parent="environment" unique_id=953866549 instance=ExtResource("12_sf4to")]
+position = Vector2(690, 154)
+flight_speed = 150.0
+
+[node name="way1" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="0" unique_id=853255848]
+position = Vector2(201, -7)
+
+[node name="way2" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="1" unique_id=534790531]
+position = Vector2(439, 35)
+
+[node name="way3" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="2" unique_id=616074986]
+position = Vector2(770, -35)
+
+[node name="way4" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="3" unique_id=1017852917]
+position = Vector2(1065, 25)
+
+[node name="TargetPosition" parent="environment/Helicopter/Mark" parent_id_path=PackedInt32Array(953866549, 856929956) index="1" unique_id=981352566]
+position = Vector2(1299, -44)
+
+[node name="Helicopter2" parent="environment" unique_id=1742117650 instance=ExtResource("12_sf4to")]
+position = Vector2(3014, 155)
+flight_speed = 150.0
+
+[node name="way1" parent="environment/Helicopter2/Mark/WayPostion" parent_id_path=PackedInt32Array(1742117650, 92598932) index="0" unique_id=853255848]
+position = Vector2(127, -63)
+
+[node name="way2" parent="environment/Helicopter2/Mark/WayPostion" parent_id_path=PackedInt32Array(1742117650, 92598932) index="1" unique_id=534790531]
+position = Vector2(277, -26)
+
+[node name="way3" parent="environment/Helicopter2/Mark/WayPostion" parent_id_path=PackedInt32Array(1742117650, 92598932) index="2" unique_id=616074986]
+position = Vector2(485, -70)
+
+[node name="way4" parent="environment/Helicopter2/Mark/WayPostion" parent_id_path=PackedInt32Array(1742117650, 92598932) index="3" unique_id=1017852917]
+position = Vector2(650, -15)
+
+[node name="TargetPosition" parent="environment/Helicopter2/Mark" parent_id_path=PackedInt32Array(1742117650, 856929956) index="1" unique_id=981352566]
+position = Vector2(882, -55)
 
 [node name="BlockView" type="TileMapLayer" parent="." unique_id=149562674]
 z_index = 120
@@ -157,10 +286,8 @@ metadata/_edit_lock_ = true
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
-position = Vector2(27, 66)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1589893077]
-position = Vector2(2967, 67)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=1798297699]
 script = ExtResource("12_ljha7")
@@ -170,11 +297,14 @@ spawn_point = "entry_right"
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1943620859]
 script = ExtResource("12_ljha7")
-target_scene = "res://scenes/levels/l5/Level_5-2.tscn"
-spawn_point = "entry_right"
+target_scene = "res://scenes/levels/l5/Level_5-4.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=1018722825]
-position = Vector2(3036, 41)
-shape = SubResource("RectangleShape2D_7lvry")
+position = Vector2(5004.453, 133.25781)
+shape = SubResource("RectangleShape2D_8bfb4")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="environment/Helicopter"]
+[editable path="environment/Helicopter/HangingPlatform"]
+[editable path="environment/Helicopter2"]
+[editable path="environment/Helicopter2/HangingPlatform"]

@@ -10,8 +10,12 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="8_7wk05"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="9_id5ii"]
 [ext_resource type="PackedScene" uid="uid://1paxaa8s0rat" path="res://scenes/environment/SkyWindZone.tscn" id="10_y6txi"]
+[ext_resource type="PackedScene" uid="uid://bu5wkt2iufiku" path="res://scenes/environment/Helicopter.tscn" id="11_fmnt6"]
 [ext_resource type="TileSet" uid="uid://boy5fit5xes1v" path="res://resources/tilesets/tileset4.tres" id="11_fsw12"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="12_0jo1v"]
+[ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="13_iqt61"]
+[ext_resource type="Script" uid="uid://cduihly0ss1id" path="res://scripts/environment/BossTransitionZone.gd" id="13_ol12h"]
+[ext_resource type="Script" uid="uid://x750a3o8m463" path="res://scenes/levels/l3/MapComponent/tishi.gd" id="14_0m2jc"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -28,8 +32,8 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 67
 sources/0 = SubResource("TileSetAtlasSource_5x2jh")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o1yx"]
-size = Vector2(599, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmnt6"]
+size = Vector2(624.5, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tj86g"]
 size = Vector2(284, 617.75)
@@ -37,13 +41,13 @@ size = Vector2(284, 617.75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lvry"]
-size = Vector2(90.1875, 88.96875)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ol12h"]
+size = Vector2(106.1875, 409.46875)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_u2j4m")
 metadata/_edit_horizontal_guides_ = [272.0]
-metadata/_edit_vertical_guides_ = [2000.0]
+metadata/_edit_vertical_guides_ = [5000.0]
 
 [node name="Map" type="Node2D" parent="." unique_id=970251159]
 metadata/_edit_lock_ = true
@@ -110,11 +114,10 @@ script = ExtResource("6_0m2jc")
 damage = 3
 
 [node name="HangingPlatform" parent="Map/TileMapLayer/terrain" unique_id=894400689 instance=ExtResource("7_ogsr5")]
-visible = false
 
 [node name="CollisionShape2D" parent="Map/TileMapLayer/terrain/HangingPlatform" index="0" unique_id=232704396]
-position = Vector2(299.5, 92)
-shape = SubResource("RectangleShape2D_1o1yx")
+position = Vector2(310.75, 196)
+shape = SubResource("RectangleShape2D_fmnt6")
 
 [node name="StopMoving" type="StaticBody2D" parent="Map/TileMapLayer" unique_id=1068461566 groups=["wall_blocker"]]
 collision_layer = 4
@@ -134,18 +137,53 @@ metadata/_custom_type_script = "uid://c04yqponxtme3"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/DeathZone" unique_id=1844145851]
-position = Vector2(2500, 400)
+position = Vector2(2500, 600)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("9_id5ii")]
-visible = false
-position = Vector2(27, 56)
+position = Vector2(16, 163)
 
 [node name="environment" type="Node" parent="." unique_id=98744003]
 
 [node name="SkyWindZone" parent="environment" unique_id=1483867348 instance=ExtResource("10_y6txi")]
 wind_speed = 30.0
 wind_direction = 1
+
+[node name="Helicopter" parent="environment" unique_id=953866549 instance=ExtResource("11_fmnt6")]
+position = Vector2(690, 130)
+
+[node name="way1" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="0" unique_id=853255848]
+position = Vector2(150, 51)
+
+[node name="way2" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="1" unique_id=534790531]
+position = Vector2(371, -44)
+
+[node name="way3" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="2" unique_id=616074986]
+position = Vector2(727, 24)
+
+[node name="way4" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="3" unique_id=1017852917]
+position = Vector2(1086, -45)
+
+[node name="way5" type="Marker2D" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="4" unique_id=1553185314]
+position = Vector2(1423, 39)
+
+[node name="way6" type="Marker2D" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="5" unique_id=829087287]
+position = Vector2(1686, 86)
+
+[node name="way7" type="Marker2D" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="6" unique_id=1708368743]
+position = Vector2(2097, -67)
+
+[node name="way8" type="Marker2D" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="7" unique_id=1865284313]
+position = Vector2(2628, -32)
+
+[node name="way9" type="Marker2D" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="8" unique_id=1738861458]
+position = Vector2(3338, -80)
+
+[node name="way10" type="Marker2D" parent="environment/Helicopter/Mark/WayPostion" parent_id_path=PackedInt32Array(953866549, 92598932) index="9" unique_id=1482959781]
+position = Vector2(4140, -42)
+
+[node name="TargetPosition" parent="environment/Helicopter/Mark" parent_id_path=PackedInt32Array(953866549, 856929956) index="1" unique_id=981352566]
+position = Vector2(4272, 179)
 
 [node name="BlockView" type="TileMapLayer" parent="." unique_id=149562674]
 z_index = 120
@@ -154,13 +192,25 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="tishi" type="Label" parent="Items" unique_id=56099271]
+texture_filter = 1
+offset_left = 4929.0
+offset_top = 230.0
+offset_right = 4976.322
+offset_bottom = 246.6177
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7411765)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("13_iqt61")
+theme_override_font_sizes/font_size = 10
+text = "此處降落"
+script = ExtResource("14_0m2jc")
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
-position = Vector2(27, 66)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1589893077]
-position = Vector2(2967, 67)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=1798297699]
 script = ExtResource("12_0jo1v")
@@ -168,13 +218,15 @@ spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1723016062]
 
-[node name="TransitionZoneR" type="Area2D" parent="." unique_id=1943620859]
-script = ExtResource("12_0jo1v")
-target_scene = "res://scenes/levels/l5/Level_5-2.tscn"
-spawn_point = "entry_right"
+[node name="BossTransitionZone" type="Area2D" parent="." unique_id=1523119303]
+script = ExtResource("13_ol12h")
+target_scene = "res://scenes/levels/l5/Level_5-4.tscn"
+metadata/_custom_type_script = "uid://cduihly0ss1id"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=1018722825]
-position = Vector2(3036, 41)
-shape = SubResource("RectangleShape2D_7lvry")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=1579363572]
+position = Vector2(4954, 478)
+shape = SubResource("RectangleShape2D_ol12h")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="environment/Helicopter"]
+[editable path="environment/Helicopter/HangingPlatform"]

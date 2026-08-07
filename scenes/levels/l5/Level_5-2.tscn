@@ -58,8 +58,8 @@ size = Vector2(284, 617.75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lvry"]
-size = Vector2(90.1875, 88.96875)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d47ct"]
+size = Vector2(20.09375, 211.48438)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_hc186")
@@ -226,10 +226,8 @@ metadata/_edit_lock_ = true
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
-position = Vector2(27, 66)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1589893077]
-position = Vector2(2967, 67)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=1798297699]
 script = ExtResource("13_hc186")
@@ -239,11 +237,10 @@ spawn_point = "entry_right"
 
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1943620859]
 script = ExtResource("13_hc186")
-target_scene = "res://scenes/levels/l5/Level_5-2.tscn"
-spawn_point = "entry_right"
+target_scene = "res://scenes/levels/l5/Level_5-3.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=1018722825]
-position = Vector2(3036, 41)
-shape = SubResource("RectangleShape2D_7lvry")
+position = Vector2(3000.9531, 102.25781)
+shape = SubResource("RectangleShape2D_d47ct")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]

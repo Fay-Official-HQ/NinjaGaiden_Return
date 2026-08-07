@@ -22,6 +22,10 @@ class_name Helicopter
 ## 悬挂跟随开关：玩家悬挂在平台下时是否随直升机移动（默认开）。
 ## 直升机浮动/飞行会上下左右移动，若不跟随，玩家会脱手掉落
 @export var hang_follow: bool = true
+## BGM 触发半径（像素）：玩家进入该范围内播放 zhishengji，走出范围停止播放
+@export_range(50.0, 1000.0, 10.0) var bgm_radius: float = 240.0
+## 直升机触发 BGM 的事件 ID（SoundRegistry 中登记）
+const BGM_EVENT_ID: StringName = &"zhishengji"
 
 enum HelicopterState { IDLE, FLYING, ARRIVED }
 
@@ -37,6 +41,8 @@ var _path_points: Array[Vector2] = []
 var _path_index: int = 0
 ## 上一物理帧的位置，用于计算本帧位移（悬挂跟随用）
 var _last_global_pos: Vector2 = Vector2.ZERO
+## BGM 是否正在播放（防止每帧重复调用 play_sound / stop_bgm）
+var _bgm_playing: bool = false
 
 @onready var _trigger_shape: CollisionShape2D = $CollisionShape2D
 
@@ -68,8 +74,37 @@ func _physics_process(delta: float) -> void:
 			_fly(delta)
 		HelicopterState.ARRIVED:
 			_hover(delta, _home_position)
+	# 距离检测：玩家在 bgm_radius 内播放 zhishengji，走出范围停止
+	_update_bgm()
 	# 移动完成后，把本帧位移同步给悬挂在平台下的玩家（保证浮动/飞行时不脱手）
 	_carry_hanging_player()
+
+
+# ==================== BGM 距离触发 ====================
+## 每帧检测玩家与直升机的距离：
+## ≤ bgm_radius 播放 zhishengji（SFX 叠加播放），> bgm_radius 停止该音效。
+## 用 _bgm_playing 标记避免每帧重复调用播放/停止。
+## 注意：zhishengji 已改为 SFX，必须用 stop_sfx 按事件停止，
+## 不能调用 stop_bgm()（那会误停场景自身的背景音乐）。
+func _update_bgm() -> void:
+	var player := get_tree().get_first_node_in_group("player")
+	if not player or not is_instance_valid(player):
+		return
+	var dist: float = global_position.distance_to(player.global_position)
+	if dist <= bgm_radius:
+		if not _bgm_playing:
+			_bgm_playing = true
+			AudioManager.play_sound(BGM_EVENT_ID)
+	elif _bgm_playing:
+		_bgm_playing = false
+		AudioManager.stop_sfx(BGM_EVENT_ID)
+
+
+## 场景卸载时停止该音效，避免切换关卡后 zhishengji 残留播放
+func _exit_tree() -> void:
+	if _bgm_playing:
+		_bgm_playing = false
+		AudioManager.stop_sfx(BGM_EVENT_ID)
 
 
 # ==================== 悬挂跟随 ====================

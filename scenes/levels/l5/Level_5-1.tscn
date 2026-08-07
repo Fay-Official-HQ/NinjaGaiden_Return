@@ -265,10 +265,8 @@ metadata/_edit_lock_ = true
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
-position = Vector2(27, 66)
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=1589893077]
-position = Vector2(2967, 67)
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=1798297699]
 script = ExtResource("13_4oc2w")
@@ -279,7 +277,6 @@ spawn_point = "entry_right"
 [node name="TransitionZoneR" type="Area2D" parent="." unique_id=1943620859]
 script = ExtResource("13_4oc2w")
 target_scene = "res://scenes/levels/l5/Level_5-2.tscn"
-spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=1018722825]
 position = Vector2(3036, 41)
