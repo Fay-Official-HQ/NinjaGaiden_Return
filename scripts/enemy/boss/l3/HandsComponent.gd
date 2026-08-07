@@ -151,6 +151,9 @@ func _try_basic_action() -> bool:
 		var msg = {"air_attack": not player_on_floor}
 		if _input_pkg.ninjutsu_fireball:
 			msg["fireball"] = true
+		# 如果 Brain 设置了跳跃空中投掷，跳跃最高点投掷飞镖（需额外按住跳跃的 air_throw 标记）
+		if _input_pkg.jump_air_throw:
+			msg["air_throw"] = true
 		_boss.state_machine.change_state_by_name("Boss3JumpState", msg)
 		# 水平速度由 HandsComponent.physics() 在跳跃期间持续控制
 		_has_pending_jump = false

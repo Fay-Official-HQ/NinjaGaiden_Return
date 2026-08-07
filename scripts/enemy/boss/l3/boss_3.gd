@@ -14,6 +14,7 @@ class_name Boss3
 @onready var state_machine: Boss3StateMachine = $BossStateMachine
 @onready var boss_ui: BossUI = $BossUI
 @onready var sword_hit_box: Area2D = $AttackRoot/SwordHitBox
+@onready var sword_hit_box2: Area2D = $AttackRoot/SwordHitBox2
 @onready var crouch_hit_box: Area2D = $AttackRoot/CrouchHitBox
 @onready var hurtbox_collision: CollisionShape2D = $HurtRoot/HurtBox/CollisionShape2D
 @onready var floor_detect_left: RayCast2D = $FloorDetectLeft

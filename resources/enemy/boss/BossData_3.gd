@@ -39,6 +39,11 @@ class_name BossData_3
 ## 上挑前突进距离（像素，耗尽后清空水平速度）
 @export var uppercut_dash_distance: float = 50.0
 
+# ==================== 剑术蓄力参数 ====================
+## 剑术前蓄力时长（秒），所有地面剑术（前冲/旋转/上挑）出剑前的 charge 蓄力姿势时间
+## 注：SwordDownslashState（空中下劈）由 FlightToTop 飞到空中后释放，已有飞行+悬浮前摇，不额外蓄力
+@export var sword_charge_duration: float = 0.3
+
 # ==================== 飞行参数 ====================
 ## 空中失衡直线飞行速度（像素/秒，FallAirState）
 @export var fall_air_fly_speed: float = 400.0

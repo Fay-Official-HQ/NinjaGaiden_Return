@@ -429,8 +429,12 @@ func _generate_action_evasive(info: Dictionary, dist: float) -> void:
 		return
 
 	# 墙角被困：不要跳墙，改为移动挣脱
+	# 跳跃起来后动作随机化：空中攻击 / 空中投掷飞镖（含火焰镖，按血量规则）
 	if not is_cornered and randf() < 0.7:
 		input_pkg.jump = true
+		# 起跳后的空中动作：30% 空中投掷飞镖（其余默认接空中攻击）
+		if randf() < 0.3:
+			input_pkg.jump_air_throw = true
 
 	# 格挡保命
 	if _block_cooldown <= 0.0 and randf() < 0.6:

@@ -12,6 +12,9 @@ var jump: bool = false
 var attack: bool = false
 var block: bool = false
 
+# ── 跳跃后空中投掷（跳跃到最高点时投掷飞镖，与 jump 配合使用） ──
+var jump_air_throw: bool = false
+
 # ── 忍术（各自独立按键，对应 4 种投射物） ──
 var ninjutsu_fire: bool = false      # 0-火焰弹(3发斜上)
 var ninjutsu_fireball: bool = false  # 1-火球术(3发斜下)
@@ -42,6 +45,7 @@ func clear() -> void:
 	jump = false
 	attack = false
 	block = false
+	jump_air_throw = false
 	ninjutsu_fire = false
 	ninjutsu_fireball = false
 	ninjutsu_boomerang = false

@@ -5,7 +5,7 @@
 extends Area2D
 class_name Boss3HitBox
 
-@export var damage: int = 2
+@export var damage: int = 1
 
 func _ready() -> void:
 	monitoring = false

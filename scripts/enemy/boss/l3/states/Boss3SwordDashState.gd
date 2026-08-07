@@ -1,8 +1,11 @@
 # res://scripts/enemy/boss/l3/states/Boss3SwordDashState.gd
-## 剑术：前冲（直接冲刺 → 恢复）
+## 剑术：前冲（蓄力 → 直接冲刺 → 恢复）
+## 蓄力时长由 BossData_3.sword_charge_duration 数据驱动
 extends Boss3State
 class_name Boss3SwordDashState
 
+var _charging: bool = false
+var _charge_timer: float = 0.0
 var _dash_timer: float = 0.0
 var _in_dash: bool = false
 var _recover_timer: float = 0.0
@@ -10,16 +13,21 @@ var _recover_timer: float = 0.0
 func enter(_msg: Dictionary = {}) -> void:
 	super()
 	_face_player()
-	boss.animated_sprite.play("sword_dash")
-	AudioManager.play_sound(&"jianqianchong")
-	boss.velocity.x = boss.facing_direction * boss.data.sword_dash_speed
-	var dash_time = boss.data.sword_dash_distance / max(boss.data.sword_dash_speed, 1.0)
-	_dash_timer = dash_time
-	_in_dash = true
+	# 蓄力阶段：播放 charge 姿势，到时后才真正出剑
+	_charging = true
+	_charge_timer = boss.data.sword_charge_duration
+	boss.animated_sprite.play("charge")
+	boss.velocity = Vector2.ZERO
+	_in_dash = false
 	_recover_timer = 0.0
-	boss.sword_hit_box.set_deferred("monitoring", true)
 
 func update(delta: float) -> void:
+	# 蓄力中：等待蓄力时长后开始冲刺
+	if _charging:
+		_charge_timer -= delta
+		if _charge_timer <= 0.0:
+			_start_dash()
+		return
 	if _in_dash:
 		# 撞墙提前结束冲刺
 		if boss.is_on_wall():
@@ -38,6 +46,16 @@ func update(delta: float) -> void:
 		_recover_timer -= delta
 		if _recover_timer <= 0.0:
 			state_machine.change_state_by_name("Boss3IdleState")
+
+func _start_dash() -> void:
+	_charging = false
+	boss.animated_sprite.play("sword_dash")
+	AudioManager.play_sound(&"jianqianchong")
+	boss.velocity.x = boss.facing_direction * boss.data.sword_dash_speed
+	var dash_time = boss.data.sword_dash_distance / max(boss.data.sword_dash_speed, 1.0)
+	_dash_timer = dash_time
+	_in_dash = true
+	boss.sword_hit_box.set_deferred("monitoring", true)
 
 func physics_update(_delta: float) -> void:
 	pass

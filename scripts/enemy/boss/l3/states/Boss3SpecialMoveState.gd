@@ -50,6 +50,11 @@ var _fade_tween: Tween
 ## 下劈前保存的碰撞掩码（穿透恢复用）
 var _saved_collision_mask: int = 0
 
+## 当前招式待开启的攻击框（动画帧>=1时开启，即第2帧）
+var _pending_hitbox: Area2D = null
+## 当前招式已开启的攻击框
+var _active_hitbox: Area2D = null
+
 
 func enter(_msg: Dictionary = {}) -> void:
 	super()
@@ -60,7 +65,10 @@ func enter(_msg: Dictionary = {}) -> void:
 	boss.hurt_box.set_deferred("monitorable", false)
 	# 关闭所有攻击框，防止 FADE_OUT 阶段玩家碰触受伤
 	boss.sword_hit_box.set_deferred("monitoring", false)
+	boss.sword_hit_box2.set_deferred("monitoring", false)
 	boss.crouch_hit_box.set_deferred("monitoring", false)
+	_pending_hitbox = null
+	_active_hitbox = null
 
 	_phase = Phase.FADE_OUT
 	_phase_timer = boss.data.special_fade_out_time
@@ -71,6 +79,9 @@ func enter(_msg: Dictionary = {}) -> void:
 func update(delta: float) -> void:
 	_phase_timer -= delta
 	_alpha_timer += delta
+
+	# 攻击框延迟开启：动画第2帧（frame>=1）时开启当前招式的攻击框
+	_try_enable_pending_hitbox()
 
 	match _phase:
 		Phase.FADE_OUT:        _update_fade_out(delta)
@@ -212,7 +223,8 @@ func _enter_sp1_dash() -> void:
 	boss.animated_sprite.play("sp1")
 	boss.animated_sprite.modulate.a = 1.0
 	boss.ignore_gravity = true
-	boss.sword_hit_box.set_deferred("monitoring", true)
+	# sp1 招式 → SwordHitBox（动画第2帧 frame>=1 时开启）
+	_set_pending_hitbox(boss.sword_hit_box)
 
 	if boss.player_ref:
 		var dir = sign(boss.player_ref.global_position.x - boss.global_position.x)
@@ -233,7 +245,8 @@ func _enter_sp1_hold() -> void:
 	_phase_timer = boss.data.sp1_hold_time
 	_alpha_timer = 0.0
 	boss.velocity = Vector2.ZERO
-	boss.sword_hit_box.set_deferred("monitoring", false)
+	# 斩击结束 → 关闭当前攻击框
+	_close_current_hitbox()
 	boss.ignore_gravity = true
 	# 锁定在 sp1 最后一帧（暂停动画）
 	boss.animated_sprite.pause()
@@ -287,7 +300,8 @@ func _enter_sp2_dive() -> void:
 	_phase = Phase.SP2_DIVE
 	boss.hurt_box.set_deferred("monitoring", true)
 	boss.hurt_box.set_deferred("monitorable", true)
-	boss.sword_hit_box.set_deferred("monitoring", true)
+	# sp2 招式 → SwordHitBox2（动画第2帧 frame>=1 时开启）
+	_set_pending_hitbox(boss.sword_hit_box2)
 	boss.ignore_gravity = true
 	# 锁定下劈方向（朝玩家位置）
 	if boss.player_ref:
@@ -313,7 +327,8 @@ func _enter_sp3_wait() -> void:
 	_phase = Phase.SP3_WAIT
 	_phase_timer = boss.data.sp3_land_wait
 	boss.velocity = Vector2.ZERO
-	boss.sword_hit_box.set_deferred("monitoring", false)
+	# sp2 斩击结束 → 关闭当前攻击框
+	_close_current_hitbox()
 	boss.ignore_gravity = false
 	_disable_wall_penetration()
 
@@ -329,7 +344,8 @@ func _enter_sp3_spin() -> void:
 	_phase = Phase.SP3_SPIN
 	_phase_timer = 2.0
 	boss.animated_sprite.play("sp3")
-	boss.sword_hit_box.set_deferred("monitoring", true)
+	# sp3 招式 → CrouchHitBox（动画第2帧 frame>=1 时开启）
+	_set_pending_hitbox(boss.crouch_hit_box)
 	boss.ignore_gravity = true
 	if boss.player_ref:
 		var dir = sign(boss.player_ref.global_position.x - boss.global_position.x)
@@ -358,7 +374,8 @@ func _enter_sp3_hold() -> void:
 	_phase_timer = boss.data.sp3_hold_time
 	_alpha_timer = 0.0
 	boss.velocity = Vector2.ZERO
-	boss.sword_hit_box.set_deferred("monitoring", false)
+	# 斩击结束 → 关闭当前攻击框
+	_close_current_hitbox()
 	boss.animated_sprite.pause()
 
 func _update_sp3_hold(_delta: float) -> void:
@@ -408,7 +425,8 @@ func _enter_sp4_slash() -> void:
 	_phase_timer = 2.0
 	boss.hurt_box.set_deferred("monitoring", true)
 	boss.hurt_box.set_deferred("monitorable", true)
-	boss.sword_hit_box.set_deferred("monitoring", true)
+	# sp4 招式 → SwordHitBox2（动画第2帧 frame>=1 时开启）
+	_set_pending_hitbox(boss.sword_hit_box2)
 	boss.ignore_gravity = true
 	boss.velocity.x = boss.facing_direction * boss.data.sp4_slash_speed
 	_dash_left = boss.data.sp4_slash_distance
@@ -434,7 +452,8 @@ func _enter_sp4_hold() -> void:
 	_phase_timer = boss.data.sp4_hold_time
 	_alpha_timer = 0.0
 	boss.velocity = Vector2.ZERO
-	boss.sword_hit_box.set_deferred("monitoring", false)
+	# 斩击结束 → 关闭当前攻击框
+	_close_current_hitbox()
 	boss.animated_sprite.pause()
 
 func _update_sp4_hold(_delta: float) -> void:
@@ -484,7 +503,8 @@ func _enter_sp5_spin() -> void:
 	_phase_timer = 2.0
 	boss.hurt_box.set_deferred("monitoring", true)
 	boss.hurt_box.set_deferred("monitorable", true)
-	boss.sword_hit_box.set_deferred("monitoring", true)
+	# sp5 招式 → SwordHitBox2（动画第2帧 frame>=1 时开启）
+	_set_pending_hitbox(boss.sword_hit_box2)
 	boss.ignore_gravity = true
 	boss.velocity.x = boss.facing_direction * boss.data.run_speed * 1.5
 	_dash_left = boss.data.sp5_spin_distance
@@ -508,6 +528,8 @@ func _update_sp5_spin(delta: float) -> void:
 func _enter_sp6_uppercut() -> void:
 	_phase = Phase.SP6_UPPERCUT
 	boss.animated_sprite.play("sp6")
+	# sp6 招式 → SwordHitBox2（动画第2帧 frame>=1 时开启）
+	_set_pending_hitbox(boss.sword_hit_box2)
 	boss.velocity.y = boss.data.jump_velocity * boss.data.uppercut_jump_multiplier
 	boss.velocity.x = boss.facing_direction * boss.data.run_speed * boss.data.uppercut_speed_multiplier
 	_dash_left = boss.data.sp6_uppercut_distance
@@ -524,7 +546,7 @@ func _update_sp6_uppercut(delta: float) -> void:
 			boss.velocity.x = 0.0
 	if boss.velocity.y > 0:
 		# 达到最高点→进入 SP7 悬浮
-		boss.sword_hit_box.set_deferred("monitoring", false)
+		_close_current_hitbox()
 		_enter_sp7_float()
 
 
@@ -556,7 +578,8 @@ func _enter_sp7_dive() -> void:
 	_phase = Phase.SP7_DIVE
 	boss.hurt_box.set_deferred("monitoring", true)
 	boss.hurt_box.set_deferred("monitorable", true)
-	boss.sword_hit_box.set_deferred("monitoring", true)
+	# sp7 招式 → CrouchHitBox（动画第2帧 frame>=1 时开启）
+	_set_pending_hitbox(boss.crouch_hit_box)
 	boss.ignore_gravity = true
 	# 朝玩家下劈
 	if boss.player_ref:
@@ -582,7 +605,8 @@ func _enter_sp7_land() -> void:
 	_phase = Phase.SP7_LAND
 	_phase_timer = boss.data.sp7_land_hold
 	boss.velocity = Vector2.ZERO
-	boss.sword_hit_box.set_deferred("monitoring", false)
+	# 斩击结束 → 关闭当前攻击框
+	_close_current_hitbox()
 	boss.ignore_gravity = false
 	_disable_wall_penetration()
 	# 锁定 sp7 最后一帧
@@ -605,8 +629,12 @@ func _finish_special_move() -> void:
 	_disable_wall_penetration()
 	boss.hurt_box.set_deferred("monitoring", true)
 	boss.hurt_box.set_deferred("monitorable", true)
+	# 恢复普通攻击框；SwordHitBox2 仅必杀技使用，保持默认关闭
 	boss.sword_hit_box.set_deferred("monitoring", true)
+	boss.sword_hit_box2.set_deferred("monitoring", false)
 	boss.crouch_hit_box.set_deferred("monitoring", true)
+	_pending_hitbox = null
+	_active_hitbox = null
 	state_machine.change_state_by_name("Boss3IdleState")
 
 
@@ -621,14 +649,43 @@ func exit() -> void:
 	_disable_wall_penetration()
 	boss.hurt_box.set_deferred("monitoring", true)
 	boss.hurt_box.set_deferred("monitorable", true)
-	# 恢复所有攻击框
+	# 恢复普通攻击框；SwordHitBox2 仅必杀技使用，保持默认关闭
 	boss.sword_hit_box.set_deferred("monitoring", true)
+	boss.sword_hit_box2.set_deferred("monitoring", false)
 	boss.crouch_hit_box.set_deferred("monitoring", true)
+	_pending_hitbox = null
+	_active_hitbox = null
 
 func _cleanup_tween() -> void:
 	if _fade_tween and _fade_tween.is_valid():
 		_fade_tween.kill()
 		_fade_tween = null
+
+
+# ═══════════════════════════════════════════════
+# 攻击框延迟开启（动画第2帧 frame>=1 时开启）
+# ═══════════════════════════════════════════════
+
+## 设置当前招式的待开启攻击框（立即关闭上一个攻击框）
+func _set_pending_hitbox(hitbox: Area2D) -> void:
+	_close_current_hitbox()
+	_pending_hitbox = hitbox
+
+## 每帧调用：动画第2帧（frame>=1）时开启待开启的攻击框
+func _try_enable_pending_hitbox() -> void:
+	if _pending_hitbox and boss.animated_sprite.frame >= 1:
+		_pending_hitbox.set_deferred("monitoring", true)
+		_active_hitbox = _pending_hitbox
+		_pending_hitbox = null
+
+## 关闭当前已开启的攻击框（含待开启的）
+func _close_current_hitbox() -> void:
+	if _pending_hitbox:
+		_pending_hitbox.set_deferred("monitoring", false)
+		_pending_hitbox = null
+	if _active_hitbox:
+		_active_hitbox.set_deferred("monitoring", false)
+		_active_hitbox = null
 
 
 # ═══════════════════════════════════════════════

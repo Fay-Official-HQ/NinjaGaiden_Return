@@ -87,6 +87,8 @@ size = Vector2(17, 34)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4gow"]
 size = Vector2(30.25, 12)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qr5hs"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02t1g"]
 size = Vector2(28.375, 18.5)
 
@@ -605,6 +607,16 @@ position = Vector2(15.875, -3)
 shape = SubResource("RectangleShape2D_p4gow")
 debug_color = Color(0.99215686, 0, 0.24705882, 0.92941177)
 
+[node name="SwordHitBox2" type="Area2D" parent="AttackRoot" unique_id=1239698021]
+collision_layer = 32
+script = ExtResource("73_boss_hit")
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/SwordHitBox2" unique_id=2077812914]
+position = Vector2(17, 4)
+shape = SubResource("CapsuleShape2D_qr5hs")
+debug_color = Color(0.65853727, 0.51322544, 0.110114865, 0.92941177)
+
 [node name="CrouchHitBox" type="Area2D" parent="AttackRoot" unique_id=1330417975]
 collision_layer = 32
 script = ExtResource("73_boss_hit")
@@ -637,7 +649,7 @@ frame_progress = 0.63516915
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=565619224]
 sprite_frames = SubResource("SpriteFrames_tuikd")
-animation = &"sp2"
+animation = &"air_ninjutsu"
 autoplay = "idle"
 
 [node name="ChargeMist" type="Node2D" parent="Visual" unique_id=1180245529]

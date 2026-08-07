@@ -19,6 +19,10 @@ func enter(_msg: Dictionary = {}) -> void:
 	if _msg.get("trigger_effects", false):
 		spawn_block_spark()
 
+	# 显式关闭攻击框，防止前一个状态用 set_deferred 关闭的延迟导致残留碰撞伤害
+	boss.sword_hit_box.set_deferred("monitoring", false)
+	boss.crouch_hit_box.set_deferred("monitoring", false)
+
 func update(delta: float) -> void:
 	_block_timer -= delta
 	if _block_timer <= 0.0:

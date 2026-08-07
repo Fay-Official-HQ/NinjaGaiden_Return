@@ -3,9 +3,9 @@ class_name SwordComponent
 
 const MAX_TP = 16
 #剑术冷却
-const COOLDOWN_TIME = 5.0
+const COOLDOWN_TIME = 2.5
 #必杀技冷却
-const FINISH_COOLDOWN_TIME = 10.0
+const FINISH_COOLDOWN_TIME = 7.0
 #剑术消耗
 const SWORD_TP_COST = 2
 const BUFFER_TIMEOUT = 0.3

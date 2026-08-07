@@ -21,7 +21,7 @@ radius = 5.0249376
 [sub_resource type="CircleShape2D" id="CircleShape2D_npwh0"]
 radius = 5.0990195
 
-[node name="FlyingNinjaDart" type="Area2D" unique_id=812332263 groups=["projectile"]]
+[node name="FlyingNinjaDart" type="Area2D" unique_id=812332263 groups=["blockable", "projectile"]]
 collision_layer = 2
 script = ExtResource("1")
 

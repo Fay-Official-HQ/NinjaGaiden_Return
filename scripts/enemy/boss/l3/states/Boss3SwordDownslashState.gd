@@ -1,5 +1,6 @@
 # res://scripts/enemy/boss/l3/states/Boss3SwordDownslashState.gd
 ## 剑术：下劈（朝玩家方向直线下劈，直到碰到地形（地板/墙壁）才结束）
+## 注意：此状态由 FlightToTop 飞到空中后释放，已有飞行+悬浮前摇，不做额外蓄力
 ## 注意：每帧 physics_update 强制重设速度，防止重力/帧序干扰
 extends Boss3State
 class_name Boss3SwordDownslashState
@@ -31,6 +32,9 @@ func enter(_msg: Dictionary = {}) -> void:
 
 	# 持续开启攻击框，直到碰到地形才关闭
 	boss.sword_hit_box.set_deferred("monitoring", true)
+
+func update(_delta: float) -> void:
+	pass
 
 func physics_update(_delta: float) -> void:
 	# 每帧强制锁定速度方向，防止重力/帧序覆盖

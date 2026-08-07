@@ -45,7 +45,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6g8a"]
 size = Vector2(20, 3)
 
-[node name="arrow" type="Area2D" unique_id=1462592865 groups=["blockable", "enemy", "projectile"]]
+[node name="arrow" type="Area2D" unique_id=1462592865 groups=["blockable", "projectile"]]
 collision_layer = 2
 script = ExtResource("1_35bhl")
 
@@ -56,7 +56,7 @@ sprite_frames = SubResource("SpriteFrames_0pk2b")
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_v6g8a")
 
-[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340 groups=["blockable"]]
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340 groups=["blockable", "projectile"]]
 collision_layer = 32
 script = ExtResource("7_ul2nt")
 

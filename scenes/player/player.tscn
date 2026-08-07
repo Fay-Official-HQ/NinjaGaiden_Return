@@ -116,8 +116,8 @@ size = Vector2(30, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymths"]
 size = Vector2(31, 47)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0anf"]
-size = Vector2(45, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vy876"]
+size = Vector2(53, 42)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0y4ya"]
 size = Vector2(246.75, 111)
@@ -684,8 +684,8 @@ monitorable = false
 script = ExtResource("exterminate_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRoot/ExterminateHitBox" unique_id=430205010]
-position = Vector2(22.5, 6)
-shape = SubResource("RectangleShape2D_p0anf")
+position = Vector2(26.5, 6)
+shape = SubResource("RectangleShape2D_vy876")
 debug_color = Color(0, 0, 0.07058824, 0.41960785)
 
 [node name="DragonFlashHitBox" type="Area2D" parent="AttackRoot" unique_id=2072884072]
@@ -750,8 +750,10 @@ position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
 sprite_frames = SubResource("SpriteFrames_npwbq")
-animation = &"Exec_Air"
+animation = &"Exec_Stand"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="BlockSparkPos" type="Marker2D" parent="Visual" unique_id=1902681224]
 position = Vector2(17, 2)
