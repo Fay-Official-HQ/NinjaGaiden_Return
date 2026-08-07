@@ -97,6 +97,7 @@ theme_override_fonts/font = ExtResource("6_6ip15")
 text = "激  戰"
 
 [node name="chapter_4" type="Node2D" parent="ChapterText" unique_id=578759709]
+visible = false
 position = Vector2(-1, 0)
 
 [node name="title" type="Label" parent="ChapterText/chapter_4" unique_id=1803130101]
@@ -117,6 +118,29 @@ offset_right = 54.0
 offset_bottom = 52.0
 theme_override_fonts/font = ExtResource("6_6ip15")
 text = "奇  襲"
+
+[node name="chapter_5" type="Node2D" parent="ChapterText" unique_id=642131898]
+visible = false
+position = Vector2(-1, 0)
+
+[node name="title" type="Label" parent="ChapterText/chapter_5" unique_id=511025243]
+texture_filter = 1
+offset_left = 116.0
+offset_top = 97.0
+offset_right = 178.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("6_6ip15")
+text = "第 五 章"
+
+[node name="subtitle" type="Label" parent="ChapterText/chapter_5/title" unique_id=75839360]
+texture_filter = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 29.0
+offset_right = 54.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("6_6ip15")
+text = "妖  姬"
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1659387622]
 stream = ExtResource("1_wchr6")

@@ -70,8 +70,15 @@ var _charge_visual_active: bool = false
 var _charge_sfx_player: AudioStreamPlayer = null
 var _charge_mist_timer: float = 0.0
 
+# ── 超忍模式（作弊）特效跟踪 ──
+## 超忍模式开启后，是否持续在角色身后生成血色雾气
+var _god_mist_active: bool = false
+var _god_mist_timer: float = 0.0
+
 var _shaqi_texture = preload("res://assets/sprites/Ryu/lizitexiao/shaqi.png")
 var _spark_texture = preload("res://assets/shaders/huohua.png")
+## 超忍模式开启瞬间的升腾特效贴图
+var _sunlong_texture = preload("res://assets/shaders/sunlong2.png")
 
 # HurtBox 原始参数（用于下蹲切换恢复）
 var _normal_hurtbox_size: Vector2
@@ -109,6 +116,11 @@ func _ready() -> void:
 
 	_setup_heal_particles()
 
+	# 超忍模式（作弊）开启/关闭时触发特效
+	CheatManager.god_mode_changed.connect(_on_god_mode_changed)
+	# 跨场景重建时：若超忍模式已开启，恢复持续血雾（开启瞬间特效不重复播放）
+	_god_mist_active = CheatManager.god_mode
+
 
 func _setup_heal_particles() -> void:
 	if not _heal_material:
@@ -133,6 +145,7 @@ func _process(delta: float) -> void:
 	input.update_input()
 	input.update_buffer(delta)
 	_update_charge(delta)
+	_update_god_mode_mist(delta)
 	_update_exterminate_chain(delta)
 	state_machine.update(delta)
 
@@ -397,6 +410,64 @@ func _spawn_shaqi() -> void:
 	tw.set_parallel(true)
 	tw.tween_property(s, "modulate:a", 0.0, duration - 0.1)
 	tw.tween_callback(s.queue_free).set_delay(duration)
+
+
+# ────────── 超忍模式（作弊）特效 ──────────
+## 超忍模式开启/关闭回调：开启时播放 baoqi 音效 + 升腾特效 + 青色抖动，并启动持续血雾
+func _on_god_mode_changed(enabled: bool) -> void:
+	if enabled:
+		_god_mist_active = true
+		AudioManager.play_sound(&"baoqi")
+		_spawn_sunlong_rise_effect()
+		_play_cyan_shake()
+	else:
+		_god_mist_active = false
+
+
+## 开启瞬间：sunlong2 贴图升腾特效（仿 ItemSpecial 巫女祝福升腾：向上漂移 + 淡出 + 放大）
+func _spawn_sunlong_rise_effect() -> void:
+	var s := Sprite2D.new()
+	s.texture = _sunlong_texture
+	s.global_position = global_position
+	s.modulate = Color(1, 1, 1, 0.7)
+	s.scale = Vector2(0.8 * facing_direction, 0.8)
+	s.z_index = 1
+	get_parent().add_child(s)
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(s, "position:y", -60.0, 0.6)
+	tween.tween_property(s, "modulate:a", 0.0, 0.6)
+	tween.tween_property(s, "scale", Vector2(1.1 * facing_direction, 1.1), 0.6)
+	tween.finished.connect(s.queue_free, CONNECT_ONE_SHOT)
+
+
+## 开启瞬间：青色偏色 + 左右抖动（仿灭杀最后一击显现），最终回到原位，不产生位移
+func _play_cyan_shake() -> void:
+	# 清除受伤闪烁状态，防止 invincible_timer 覆盖青色偏色
+	invincible_timer = 0.0
+	animated_sprite.modulate = Color.CYAN
+	animated_sprite.position.x = -20.0
+	var fade := create_tween()
+	fade.set_parallel(true)
+	fade.tween_property(animated_sprite, "modulate", Color.WHITE, 0.5)
+	fade.tween_property(animated_sprite, "position:x", 0.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	# 快速抖动（0.15 秒内左右晃 3 次）
+	var shake := create_tween()
+	shake.tween_property(animated_sprite, "position:x", 12.0, 0.04)
+	shake.tween_property(animated_sprite, "position:x", -10.0, 0.04).set_delay(0.04)
+	shake.tween_property(animated_sprite, "position:x", 6.0, 0.04).set_delay(0.08)
+	shake.tween_property(animated_sprite, "position:x", -4.0, 0.04).set_delay(0.12)
+
+
+## 超忍模式期间：角色身后不断生成血色雾气升腾（复用蓄力血雾逻辑，角色身体不变色）
+func _update_god_mode_mist(delta: float) -> void:
+	if not _god_mist_active:
+		return
+	_god_mist_timer += delta
+	if _god_mist_timer >= randf_range(0.02, 0.05):
+		_god_mist_timer = 0.0
+		_spawn_shaqi()
+		_spawn_shaqi()
 
 #根据蓄力层数调整身体颜色
 func _update_charge_color() -> void:

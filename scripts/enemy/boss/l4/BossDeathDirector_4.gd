@@ -220,5 +220,5 @@ func _end_level() -> void:
 	LevelManager.spawn_point = "default"
 
 	# 前往第五章过场动画
-	Cutscene.target_chapter = 4
+	Cutscene.target_chapter = 5
 	get_tree().change_scene_to_file("res://scenes/ui/Cutscene.tscn")
