@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/l5/mech_bee_spawner.gd" id="1_spawner"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(50, 376.25)
+
+[node name="MechBeeSpawner" type="Node2D"]
+script = ExtResource("1_spawner")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+shape = SubResource("RectangleShape2D_trigger")
+
+[node name="SpawnPosition" type="Marker2D" parent="."]
+position = Vector2(0, -54)
+
+[node name="FallTarget" type="Marker2D" parent="."]
+position = Vector2(0, -54)

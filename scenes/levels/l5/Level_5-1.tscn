@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://1paxaa8s0rat" path="res://scenes/environment/SkyWindZone.tscn" id="10_ln4oy"]
 [ext_resource type="PackedScene" uid="uid://bu5wkt2iufiku" path="res://scenes/environment/Helicopter.tscn" id="11_dsbl3"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="13_4oc2w"]
+[ext_resource type="PackedScene" uid="uid://sdh6s6fgya2x" path="res://scenes/enemy/l5/mech_bug.tscn" id="13_x61gm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -263,6 +264,9 @@ metadata/_edit_lock_ = true
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="MechBug" parent="enemys" unique_id=2001263754 instance=ExtResource("13_x61gm")]
+position = Vector2(274, 183)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
 

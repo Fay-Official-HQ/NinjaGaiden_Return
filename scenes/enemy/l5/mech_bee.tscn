@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://dlfqwrld4w0vj"]
+
+[ext_resource type="Script" uid="uid://bep0jll10sh44" path="res://scripts/enemy/l5/mech_bee.gd" id="1_h433x"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="3_o7nse"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="4_tmp04"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="5_8sfxc"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="6_br6it"]
+[ext_resource type="Texture2D" uid="uid://dsto43v1lklbo" path="res://assets/sprites/enemy/l5/emem_ly5_9.png" id="6_sttxx"]
+[ext_resource type="Texture2D" uid="uid://i8xv4e30akan" path="res://assets/sprites/enemy/l5/emem_ly5_10.png" id="7_2u8k0"]
+[ext_resource type="Texture2D" uid="uid://bniksv33et5ob" path="res://assets/sprites/enemy/l5/emem_ly5_11.png" id="8_o7nse"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_ob8wc"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_i7cb4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_o7nse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tmp04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8sfxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_br6it")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_sttxx")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_2u8k0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_o7nse")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sttxx"]
+size = Vector2(24.5, 20.5)
+
+[node name="MechBee" type="CharacterBody2D" unique_id=1227478862 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_h433x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
+position = Vector2(2, -8)
+sprite_frames = SubResource("SpriteFrames_4qnji")
+animation = &"fly"
+frame_progress = 0.8527252
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1135260774]
+position = Vector2(1.75, 5.75)
+shape = SubResource("RectangleShape2D_sttxx")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=447011981]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_ob8wc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1742849016]
+position = Vector2(1.75, 5.75)
+shape = SubResource("RectangleShape2D_sttxx")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1843786011]
+collision_layer = 32
+script = ExtResource("10_i7cb4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=926217819]
+position = Vector2(1.75, 5.75)
+shape = SubResource("RectangleShape2D_sttxx")

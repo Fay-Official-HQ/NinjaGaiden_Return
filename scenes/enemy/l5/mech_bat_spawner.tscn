@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy/l5/mech_bat_spawner.gd" id="1_spawner"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
+size = Vector2(20, 167)
+
+[node name="MechBatSpawner" type="Node2D"]
+script = ExtResource("1_spawner")
+
+[node name="TriggerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_trigger")
+
+[node name="SpawnPosition" type="Marker2D" parent="."]
+position = Vector2(172, -54)
