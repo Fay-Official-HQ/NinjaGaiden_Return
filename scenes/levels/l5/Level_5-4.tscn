@@ -206,13 +206,12 @@ script = ExtResource("14_0m2jc")
 
 [node name="TransitionZoneL" type="Area2D" parent="." unique_id=1798297699]
 script = ExtResource("12_0jo1v")
-spawn_point = "entry_right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneL" unique_id=1723016062]
 
 [node name="BossTransitionZone" type="Area2D" parent="." unique_id=1523119303]
 script = ExtResource("13_ol12h")
-target_scene = "res://scenes/ui/TestEnd.tscn"
+target_scene = "res://scenes/levels/l5/Level_5-5.tscn"
 metadata/_custom_type_script = "uid://cduihly0ss1id"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=1579363572]
