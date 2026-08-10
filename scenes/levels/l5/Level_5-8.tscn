@@ -5,6 +5,13 @@
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="3_qbwxn"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="4_ju0o3"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="5_sgkgm"]
+[ext_resource type="PackedScene" uid="uid://dajawglmwg184" path="res://scenes/environment/current.tscn" id="6_ju0o3"]
+[ext_resource type="Texture2D" uid="uid://bp0ku5j8f3qho" path="res://assets/sprites/map/dian/dian_zhong1.png" id="7_sgkgm"]
+[ext_resource type="Texture2D" uid="uid://c85gyolrv5xyq" path="res://assets/sprites/map/dian/dian_zhong2.png" id="8_mw5xg"]
+[ext_resource type="Texture2D" uid="uid://bi6fdknv36tsr" path="res://assets/sprites/map/dian/dian_zhong3.png" id="9_6fnpo"]
+[ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="10_mw5xg"]
+[ext_resource type="Script" uid="uid://x750a3o8m463" path="res://scenes/levels/l3/MapComponent/tishi.gd" id="11_6fnpo"]
+[ext_resource type="Script" uid="uid://cduihly0ss1id" path="res://scripts/environment/BossTransitionZone.gd" id="12_6fnpo"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -21,11 +28,40 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 67
 sources/0 = SubResource("TileSetAtlasSource_5x2jh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju0o3"]
+size = Vector2(80, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgkgm"]
+size = Vector2(81, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mw5xg"]
+size = Vector2(65.5, 13)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tj86g"]
 size = Vector2(284, 617.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iv342"]
 size = Vector2(506, 59)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o5kso"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_sgkgm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mw5xg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6fnpo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fnpo"]
+size = Vector2(202, 24)
 
 [node name="Node2D" type="Node2D" unique_id=311310683]
 script = ExtResource("1_iv342")
@@ -85,7 +121,19 @@ tile_set = SubResource("TileSet_cnmxh")
 
 [node name="jianci" type="Area2D" parent="Map/TileMapLayer/terrain" unique_id=197777424]
 script = ExtResource("3_qbwxn")
-damage = 3
+damage = 6
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/jianci" unique_id=1221955946]
+position = Vector2(65, 1392)
+shape = SubResource("RectangleShape2D_ju0o3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/jianci" unique_id=1866763689]
+position = Vector2(432.5, 1896)
+shape = SubResource("RectangleShape2D_sgkgm")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Map/TileMapLayer/terrain/jianci" unique_id=37301270]
+position = Vector2(230.25, 2568.5)
+shape = SubResource("RectangleShape2D_mw5xg")
 
 [node name="StopMoving" type="StaticBody2D" parent="Map/TileMapLayer" unique_id=1068461566 groups=["wall_blocker"]]
 collision_layer = 4
@@ -113,13 +161,109 @@ position = Vector2(465, 25)
 
 [node name="environment" type="Node" parent="." unique_id=98744003]
 
+[node name="Current" parent="environment" unique_id=552217362 instance=ExtResource("6_ju0o3")]
+position = Vector2(25, 1392)
+
+[node name="you" parent="environment/Current" index="2" unique_id=424685396]
+position = Vector2(80, 0)
+
+[node name="zhong2" type="AnimatedSprite2D" parent="environment/Current" unique_id=411776137]
+position = Vector2(32, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
+[node name="zhong3" type="AnimatedSprite2D" parent="environment/Current" unique_id=2023407027]
+position = Vector2(48, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
+[node name="zhong4" type="AnimatedSprite2D" parent="environment/Current" unique_id=628456468]
+position = Vector2(64, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
+[node name="Current2" parent="environment" unique_id=392402130 instance=ExtResource("6_ju0o3")]
+position = Vector2(392, 1896)
+
+[node name="you" parent="environment/Current2" index="2" unique_id=424685396]
+position = Vector2(80, 0)
+
+[node name="zhong2" type="AnimatedSprite2D" parent="environment/Current2" unique_id=2017008377]
+position = Vector2(32, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
+[node name="zhong3" type="AnimatedSprite2D" parent="environment/Current2" unique_id=1759197900]
+position = Vector2(48, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
+[node name="zhong4" type="AnimatedSprite2D" parent="environment/Current2" unique_id=18888770]
+position = Vector2(64, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
+[node name="Current3" parent="environment" unique_id=1825616958 instance=ExtResource("6_ju0o3")]
+position = Vector2(199, 2569)
+
+[node name="zuo" parent="environment/Current3" index="0" unique_id=778721947]
+position = Vector2(-1, 0)
+
+[node name="you" parent="environment/Current3" index="2" unique_id=424685396]
+position = Vector2(64, 0)
+
+[node name="zhong2" type="AnimatedSprite2D" parent="environment/Current3" unique_id=1018450434]
+position = Vector2(32, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
+[node name="zhong3" type="AnimatedSprite2D" parent="environment/Current3" unique_id=1534040608]
+position = Vector2(48, 0)
+sprite_frames = SubResource("SpriteFrames_o5kso")
+frame = 2
+frame_progress = 0.043155555
+
 [node name="BlockView" type="TileMapLayer" parent="." unique_id=149562674]
 z_index = 120
 tile_set = ExtResource("2_j8jrm")
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="tishi" type="Label" parent="Items" unique_id=612910949]
+texture_filter = 1
+offset_left = 85.329834
+offset_top = 2948.393
+offset_right = 132.65161
+offset_bottom = 2965.0107
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7411765)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("10_mw5xg")
+theme_override_font_sizes/font_size = 10
+text = "向下墜落"
+script = ExtResource("11_6fnpo")
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="entry_top" type="Marker2D" parent="." unique_id=723347267]
 position = Vector2(465, 27)
+
+[node name="BossTransitionZone" type="Area2D" parent="." unique_id=990925691]
+script = ExtResource("12_6fnpo")
+target_scene = "res://scenes/levels/l5/Level_5-9.tscn"
+metadata/_custom_type_script = "uid://cduihly0ss1id"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=1552493973]
+position = Vector2(109, 3012)
+shape = SubResource("RectangleShape2D_6fnpo")
+
+[editable path="environment/Current"]
+[editable path="environment/Current2"]
+[editable path="environment/Current3"]
