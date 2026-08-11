@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="4_22ig8"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="5_2iwfh"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="6_askar"]
+[ext_resource type="PackedScene" uid="uid://ief082voyoou" path="res://scenes/enemy/l5/tower_guard.tscn" id="6_o57rl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -128,6 +129,9 @@ tile_set = ExtResource("2_o57rl")
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="TowerGuard" parent="enemys" unique_id=1656441098 instance=ExtResource("6_o57rl")]
+position = Vector2(2540, 83)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=85740071]
 position = Vector2(19, 20)

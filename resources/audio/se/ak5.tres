@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://d4bje3gm0xkby"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_hyncw"]
+[ext_resource type="AudioStream" uid="uid://ct6hiixmh1awn" path="res://assets/audio/se/l5/ak5.ogg" id="2_runt2"]
+
+[resource]
+script = ExtResource("1_hyncw")
+event_id = &"ak5"
+stream = ExtResource("2_runt2")
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"
