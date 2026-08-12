@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://d58ap4pcsx1s"]
+
+[ext_resource type="Script" uid="uid://caviuikig0pw0" path="res://scripts/enemy/l5/grenadier.gd" id="1_wnq2w"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_g1s4u"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_gb3i6"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_0am0f"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_l17w0"]
+[ext_resource type="Texture2D" uid="uid://cny3r5xxgjeuq" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_14.png" id="6_pxh2o"]
+[ext_resource type="Texture2D" uid="uid://1gbagf3yv8lu" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_15.png" id="7_xwtuu"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="8_psqeg"]
+[ext_resource type="Texture2D" uid="uid://cjyf27hn1fd1" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_16.png" id="8_qr4uj"]
+[ext_resource type="Texture2D" uid="uid://b06ymygvbpull" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_17.png" id="9_031ud"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="9_c7uep"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crouch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g1s4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gb3i6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0am0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_l17w0")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_pxh2o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_xwtuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qr4uj")
+}, {
+"duration": 4.0,
+"texture": ExtResource("9_031ud")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 7.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(20, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b06r5"]
+size = Vector2(379.90625, 273.09375)
+
+[node name="Grenadier" type="CharacterBody2D" unique_id=1656441098 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_wnq2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
+sprite_frames = SubResource("SpriteFrames_crouch")
+animation = &"throw"
+frame = 2
+frame_progress = 1.0
+offset = Vector2(0, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
+position = Vector2(1, 13)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=451901895]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("8_psqeg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=850370569]
+position = Vector2(1, 13)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=862567462]
+collision_layer = 32
+script = ExtResource("9_c7uep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1774050365]
+position = Vector2(1, 13)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=89548439]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=1397095207]
+shape = SubResource("RectangleShape2D_b06r5")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1834477540]
+position = Vector2(13, 1)

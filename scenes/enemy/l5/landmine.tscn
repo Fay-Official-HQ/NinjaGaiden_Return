@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://caxd43hbngqcg"]
+
+[ext_resource type="Texture2D" uid="uid://c51enpceqcacx" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe8.png" id="1_el155"]
+[ext_resource type="Texture2D" uid="uid://c0er51axcpwlr" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe9.png" id="2_80xmb"]
+[ext_resource type="Texture2D" uid="uid://olqbj7uymjcx" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe10.png" id="3_e0g03"]
+[ext_resource type="Texture2D" uid="uid://dqvtuohremmuc" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_2.png" id="5_el155"]
+[ext_resource type="Texture2D" uid="uid://cjesgvx6s3txo" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_3.png" id="6_80xmb"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_7eubx"]
+[ext_resource type="Script" uid="uid://jkwgb5d0yxmj" path="res://scripts/enemy/l5/landmine.gd" id="11_landm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crouch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_el155")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_80xmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e0g03")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_el155")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_80xmb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0g03"]
+size = Vector2(12, 3.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_80xmb"]
+radius = 17.18284
+
+[node name="Landmine" type="CharacterBody2D" unique_id=1656441098 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 524
+script = ExtResource("11_landm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
+sprite_frames = SubResource("SpriteFrames_crouch")
+animation = &"death"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_e0g03")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=89548439]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=1255951955]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_e0g03")
+
+[node name="ExplosionHitBox" type="Area2D" parent="." unique_id=812143329]
+collision_layer = 32
+script = ExtResource("10_7eubx")
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitBox" unique_id=674729217]
+position = Vector2(0, -0.5)
+shape = SubResource("CircleShape2D_80xmb")

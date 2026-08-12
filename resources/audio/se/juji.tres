@@ -14,5 +14,5 @@ packet_sequence = SubResource("OggPacketSequence_rxfpc")
 script = ExtResource("1_dfva1")
 event_id = &"juji"
 stream = SubResource("AudioStreamOggVorbis_dfva1")
-volume_db = -4.0
+volume_db = -7.0
 metadata/_custom_type_script = "uid://cfwtaajtfa38p"

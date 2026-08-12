@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://oenqdtom260j"]
+
+[ext_resource type="Script" uid="uid://cvwvx3on4ys4t" path="res://scripts/enemy/l5/mortar_soldier.gd" id="1_wnq2w"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_g1s4u"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_gb3i6"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_0am0f"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_l17w0"]
+[ext_resource type="Texture2D" uid="uid://c1cgqb7dy2pc0" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_19.png" id="6_syqbv"]
+[ext_resource type="Texture2D" uid="uid://chigtimc5k1l6" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_20.png" id="7_0kn6f"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="8_psqeg"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="9_c7uep"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crouch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_g1s4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gb3i6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0am0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_l17w0")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_syqbv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("7_0kn6f")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 7.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_syqbv"]
+size = Vector2(37, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kn6f"]
+size = Vector2(407.5, 170)
+
+[node name="MortarSoldier" type="CharacterBody2D" unique_id=1656441098 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_wnq2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_crouch")
+animation = &"throw"
+offset = Vector2(0, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_syqbv")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=451901895]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("8_psqeg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=880117854]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_syqbv")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=862567462]
+collision_layer = 32
+script = ExtResource("9_c7uep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1212171634]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_syqbv")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=89548439]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=1397095207]
+shape = SubResource("RectangleShape2D_0kn6f")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=2128497475]
+position = Vector2(13, 9)

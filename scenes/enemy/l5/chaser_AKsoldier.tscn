@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://ckioau2hce5b3"]
+
+[ext_resource type="Script" uid="uid://nyfl8tgwlkwf" path="res://scripts/enemy/l5/chaser_a_ksoldier.gd" id="1_8ygbk"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_mnu8v"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_j8sm6"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_20agj"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_8f145"]
+[ext_resource type="Texture2D" uid="uid://blkkoilocuxi2" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_5.png" id="6_8ygbk"]
+[ext_resource type="Texture2D" uid="uid://bbmn4ifipkhua" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_4.png" id="7_avpcx"]
+[ext_resource type="Texture2D" uid="uid://bdx2es3h7yag2" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_6.png" id="8_51fvk"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_08ctc"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_qmuri"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_soldier"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mnu8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_j8sm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_20agj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8f145")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_51fvk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_avpcx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8ygbk")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_51fvk")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
+size = Vector2(17, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
+size = Vector2(424, 31)
+
+[node name="chaser_AKsoldier" type="CharacterBody2D" unique_id=634735606 groups=["enemy", "fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 140
+script = ExtResource("1_8ygbk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=468094849]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_soldier")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=965303556]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=987781398]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_08ctc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2119140954]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=482527051]
+collision_layer = 32
+script = ExtResource("10_qmuri")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=575196810]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_hit")
+
+[node name="DetectRange" type="Area2D" parent="." unique_id=858862171]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange" unique_id=545219636]
+shape = SubResource("RectangleShape2D_detect")
+
+[node name="FloorDetectLeft" type="RayCast2D" parent="." unique_id=1939299372]
+target_position = Vector2(-5, 20)
+collision_mask = 12
+
+[node name="FloorDetectRight" type="RayCast2D" parent="." unique_id=1789595564]
+target_position = Vector2(5, 20)
+collision_mask = 12

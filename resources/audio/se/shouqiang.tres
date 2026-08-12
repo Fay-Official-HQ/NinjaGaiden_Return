@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://b4713smkdbacv"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_qulqt"]
+[ext_resource type="AudioStream" uid="uid://hmwwxglhqbko" path="res://assets/audio/se/l5/shouqiang.ogg" id="2_epf3m"]
+
+[resource]
+script = ExtResource("1_qulqt")
+event_id = &"shouqiang"
+stream = ExtResource("2_epf3m")
+volume_db = -7.0
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

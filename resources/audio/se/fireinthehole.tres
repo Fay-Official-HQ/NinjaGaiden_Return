@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://bjtd1jkk7eyl1"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_groli"]
+[ext_resource type="AudioStream" uid="uid://dk2v53gweejcp" path="res://assets/audio/se/l5/fireinthehole.ogg" id="2_gti27"]
+
+[resource]
+script = ExtResource("1_groli")
+event_id = &"fireinthehole"
+stream = ExtResource("2_gti27")
+volume_db = -7.0
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"
