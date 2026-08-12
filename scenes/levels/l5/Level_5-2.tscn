@@ -10,8 +10,18 @@
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="8_x78df"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="9_d47ct"]
 [ext_resource type="PackedScene" uid="uid://1paxaa8s0rat" path="res://scenes/environment/SkyWindZone.tscn" id="10_ib5d1"]
+[ext_resource type="PackedScene" uid="uid://6p404iw2tco6" path="res://scenes/enemy/l2/chaser_monster_spawner.tscn" id="12_hc186"]
+[ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="12_ib5d1"]
 [ext_resource type="TileSet" uid="uid://boy5fit5xes1v" path="res://resources/tilesets/tileset4.tres" id="12_yc1p1"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="13_ash73"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="13_hc186"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/mech_eagle_spawner.tscn" id="13_l1ywn"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/mech_bat_spawner.tscn" id="14_3c573"]
+[ext_resource type="PackedScene" uid="uid://cwag8n3i784e1" path="res://scenes/enemy/l5/small_patrol_enemy_white.tscn" id="15_x78df"]
+[ext_resource type="PackedScene" uid="uid://cg1sfkn76cova" path="res://scenes/enemy/l5/defense_enemy.tscn" id="16_d47ct"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/mech_bee_spawner.tscn" id="17_x78df"]
+[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="18_d47ct"]
+[ext_resource type="PackedScene" uid="uid://sdh6s6fgya2x" path="res://scenes/enemy/l5/mech_bug.tscn" id="19_d47ct"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -223,7 +233,217 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="ItemSpecial" parent="Items" unique_id=575307007 instance=ExtResource("12_ib5d1")]
+position = Vector2(1611, 157)
+
+[node name="Item" parent="Items" unique_id=563822033 instance=ExtResource("13_ash73")]
+position = Vector2(804, 85)
+
+[node name="Item2" parent="Items" unique_id=2019420669 instance=ExtResource("13_ash73")]
+position = Vector2(1139, 85)
+
+[node name="Item3" parent="Items" unique_id=1275741987 instance=ExtResource("13_ash73")]
+position = Vector2(2279, 159)
+
+[node name="Item4" parent="Items" unique_id=680899701 instance=ExtResource("13_ash73")]
+position = Vector2(2896, 137)
+consumable_type = 2
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="ChaserMonsterSpawner" parent="enemys" unique_id=90267948 instance=ExtResource("12_hc186")]
+position = Vector2(712, 57)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner" index="1" unique_id=1893374063]
+position = Vector2(-169, -61)
+
+[node name="ChaserMonsterSpawner2" parent="enemys" unique_id=558497717 instance=ExtResource("12_hc186")]
+position = Vector2(584, 47)
+
+[node name="ChaserMonsterSpawner3" parent="enemys" unique_id=1132626235 instance=ExtResource("12_hc186")]
+position = Vector2(274, 51)
+
+[node name="ChaserMonsterSpawner4" parent="enemys" unique_id=133905349 instance=ExtResource("12_hc186")]
+position = Vector2(367, 57)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner4" index="1" unique_id=1893374063]
+position = Vector2(-269, -69)
+
+[node name="ChaserMonsterSpawner5" parent="enemys" unique_id=1362369443 instance=ExtResource("12_hc186")]
+position = Vector2(407, 55)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner5" index="1" unique_id=1893374063]
+position = Vector2(196, -84)
+
+[node name="ChaserMonsterSpawner6" parent="enemys" unique_id=1792320108 instance=ExtResource("12_hc186")]
+position = Vector2(1673, 197)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner6" index="1" unique_id=1893374063]
+position = Vector2(383, -70)
+
+[node name="ChaserMonsterSpawner7" parent="enemys" unique_id=971454568 instance=ExtResource("12_hc186")]
+position = Vector2(1831, 201)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner7" index="1" unique_id=1893374063]
+position = Vector2(-292, -93)
+
+[node name="MechEagleSpawner" parent="enemys" unique_id=610295597 instance=ExtResource("13_l1ywn")]
+position = Vector2(247, 54)
+
+[node name="SpawnPosition" parent="enemys/MechEagleSpawner" index="1"]
+position = Vector2(371, 171)
+
+[node name="MechEagleSpawner2" parent="enemys" unique_id=1454990227 instance=ExtResource("13_l1ywn")]
+position = Vector2(1858, 165)
+
+[node name="SpawnPosition" parent="enemys/MechEagleSpawner2" index="1"]
+position = Vector2(364, -99)
+
+[node name="MechBatSpawner" parent="enemys" unique_id=448528072 instance=ExtResource("14_3c573")]
+position = Vector2(263, 52)
+spawn_direction = 1
+
+[node name="SpawnPosition" parent="enemys/MechBatSpawner" index="1"]
+position = Vector2(-217, 0)
+
+[node name="MechBatSpawner4" parent="enemys" unique_id=826819971 instance=ExtResource("14_3c573")]
+position = Vector2(2050, 163)
+spawn_direction = 1
+
+[node name="SpawnPosition" parent="enemys/MechBatSpawner4" index="1"]
+position = Vector2(-217, 0)
+
+[node name="MechBatSpawner5" parent="enemys" unique_id=1823728791 instance=ExtResource("14_3c573")]
+position = Vector2(2169, 159)
+spawn_direction = 1
+
+[node name="SpawnPosition" parent="enemys/MechBatSpawner5" index="1"]
+position = Vector2(321, 16)
+
+[node name="SmallPatrolEnemyWhite" parent="enemys" unique_id=1227478862 instance=ExtResource("15_x78df")]
+position = Vector2(706, 121)
+
+[node name="SmallPatrolEnemyWhite2" parent="enemys" unique_id=1614905756 instance=ExtResource("15_x78df")]
+position = Vector2(1057, 119)
+
+[node name="DefenseEnemy" parent="enemys" unique_id=1668046059 instance=ExtResource("16_d47ct")]
+position = Vector2(888, 122)
+
+[node name="DefenseEnemy2" parent="enemys" unique_id=314484788 instance=ExtResource("16_d47ct")]
+position = Vector2(500, 69)
+
+[node name="MechBatSpawner2" parent="enemys" unique_id=1986028260 instance=ExtResource("14_3c573")]
+position = Vector2(962, 79)
+
+[node name="SpawnPosition" parent="enemys/MechBatSpawner2" index="1"]
+position = Vector2(238, 16)
+
+[node name="PatrolEnemy" parent="enemys" unique_id=964092126 instance=ExtResource("18_d47ct")]
+position = Vector2(1285, 121)
+
+[node name="MechBeeSpawner" parent="enemys" unique_id=1630902754 instance=ExtResource("17_x78df")]
+position = Vector2(1139, 105)
+spawn_count = 3
+
+[node name="SpawnPosition" parent="enemys/MechBeeSpawner" index="1"]
+position = Vector2(152, -157)
+
+[node name="FallTarget" parent="enemys/MechBeeSpawner" index="2"]
+position = Vector2(147, -48)
+
+[node name="MechBeeSpawner2" parent="enemys" unique_id=1171491203 instance=ExtResource("17_x78df")]
+position = Vector2(2381, 151)
+spawn_count = 2
+
+[node name="SpawnPosition" parent="enemys/MechBeeSpawner2" index="1"]
+position = Vector2(212, -142)
+
+[node name="FallTarget" parent="enemys/MechBeeSpawner2" index="2"]
+position = Vector2(213, 54)
+
+[node name="MechBeeSpawner3" parent="enemys" unique_id=679017581 instance=ExtResource("17_x78df")]
+position = Vector2(2598, 131)
+
+[node name="SpawnPosition" parent="enemys/MechBeeSpawner3" index="1"]
+position = Vector2(187, -172)
+
+[node name="FallTarget" parent="enemys/MechBeeSpawner3" index="2"]
+position = Vector2(187, -65)
+
+[node name="MechBug" parent="enemys" unique_id=2001263754 instance=ExtResource("19_d47ct")]
+position = Vector2(1806, 177)
+
+[node name="Marker2D1" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="0" unique_id=736141795]
+position = Vector2(92, 43)
+
+[node name="Marker2D2" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="1" unique_id=491322409]
+position = Vector2(222, -4)
+
+[node name="Marker2D3" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="2" unique_id=436267015]
+position = Vector2(102, -72)
+
+[node name="Marker2D4" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="3" unique_id=1355663687]
+position = Vector2(-105, -67)
+
+[node name="Marker2D5" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="4" unique_id=1359844507]
+position = Vector2(-193, -12)
+
+[node name="MechBug2" parent="enemys" unique_id=975778423 instance=ExtResource("19_d47ct")]
+position = Vector2(1633, 176)
+
+[node name="Marker2D1" parent="enemys/MechBug2/Mark" parent_id_path=PackedInt32Array(975778423, 1555861018) index="0" unique_id=736141795]
+position = Vector2(85, -4)
+
+[node name="Marker2D2" parent="enemys/MechBug2/Mark" parent_id_path=PackedInt32Array(975778423, 1555861018) index="1" unique_id=491322409]
+position = Vector2(173, -83)
+
+[node name="Marker2D3" parent="enemys/MechBug2/Mark" parent_id_path=PackedInt32Array(975778423, 1555861018) index="2" unique_id=436267015]
+position = Vector2(21, -133)
+
+[node name="Marker2D4" parent="enemys/MechBug2/Mark" parent_id_path=PackedInt32Array(975778423, 1555861018) index="3" unique_id=1355663687]
+position = Vector2(-124, -102)
+
+[node name="Marker2D5" parent="enemys/MechBug2/Mark" parent_id_path=PackedInt32Array(975778423, 1555861018) index="4" unique_id=1359844507]
+position = Vector2(-96, 41)
+
+[node name="MechBug3" parent="enemys" unique_id=1091671361 instance=ExtResource("19_d47ct")]
+position = Vector2(1988, 173)
+
+[node name="Marker2D1" parent="enemys/MechBug3/Mark" parent_id_path=PackedInt32Array(1091671361, 1555861018) index="0" unique_id=736141795]
+position = Vector2(92, 93)
+
+[node name="Marker2D2" parent="enemys/MechBug3/Mark" parent_id_path=PackedInt32Array(1091671361, 1555861018) index="1" unique_id=491322409]
+position = Vector2(151, -39)
+
+[node name="Marker2D3" parent="enemys/MechBug3/Mark" parent_id_path=PackedInt32Array(1091671361, 1555861018) index="2" unique_id=436267015]
+position = Vector2(21, -133)
+
+[node name="Marker2D4" parent="enemys/MechBug3/Mark" parent_id_path=PackedInt32Array(1091671361, 1555861018) index="3" unique_id=1355663687]
+position = Vector2(-152, -15)
+
+[node name="Marker2D5" parent="enemys/MechBug3/Mark" parent_id_path=PackedInt32Array(1091671361, 1555861018) index="4" unique_id=1359844507]
+position = Vector2(-17, 105)
+
+[node name="MechBatSpawner3" parent="enemys" unique_id=333008181 instance=ExtResource("14_3c573")]
+position = Vector2(1611, 197)
+
+[node name="SpawnPosition" parent="enemys/MechBatSpawner3" index="1"]
+position = Vector2(287, 1)
+
+[node name="SmallPatrolEnemyWhite3" parent="enemys" unique_id=186819888 instance=ExtResource("15_x78df")]
+position = Vector2(2277, 203)
+
+[node name="SmallPatrolEnemyWhite4" parent="enemys" unique_id=1912489914 instance=ExtResource("15_x78df")]
+position = Vector2(2677, 121)
+
+[node name="DefenseEnemy3" parent="enemys" unique_id=923695483 instance=ExtResource("16_d47ct")]
+position = Vector2(2482, 109)
+
+[node name="MechEagleSpawner3" parent="enemys" unique_id=821715169 instance=ExtResource("13_l1ywn")]
+position = Vector2(2518, 75)
+
+[node name="SpawnPosition" parent="enemys/MechEagleSpawner3" index="1"]
+position = Vector2(423, -60)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
 
@@ -244,3 +464,22 @@ position = Vector2(3000.9531, 102.25781)
 shape = SubResource("RectangleShape2D_d47ct")
 
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
+[editable path="enemys/ChaserMonsterSpawner"]
+[editable path="enemys/ChaserMonsterSpawner4"]
+[editable path="enemys/ChaserMonsterSpawner5"]
+[editable path="enemys/ChaserMonsterSpawner6"]
+[editable path="enemys/ChaserMonsterSpawner7"]
+[editable path="enemys/MechEagleSpawner"]
+[editable path="enemys/MechEagleSpawner2"]
+[editable path="enemys/MechBatSpawner"]
+[editable path="enemys/MechBatSpawner4"]
+[editable path="enemys/MechBatSpawner5"]
+[editable path="enemys/MechBatSpawner2"]
+[editable path="enemys/MechBeeSpawner"]
+[editable path="enemys/MechBeeSpawner2"]
+[editable path="enemys/MechBeeSpawner3"]
+[editable path="enemys/MechBug"]
+[editable path="enemys/MechBug2"]
+[editable path="enemys/MechBug3"]
+[editable path="enemys/MechBatSpawner3"]
+[editable path="enemys/MechEagleSpawner3"]
