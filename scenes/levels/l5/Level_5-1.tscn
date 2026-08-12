@@ -12,8 +12,16 @@
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="6_x6afm"]
 [ext_resource type="PackedScene" uid="uid://1paxaa8s0rat" path="res://scenes/environment/SkyWindZone.tscn" id="10_ln4oy"]
 [ext_resource type="PackedScene" uid="uid://bu5wkt2iufiku" path="res://scenes/environment/Helicopter.tscn" id="11_dsbl3"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="13_2xik3"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="13_4oc2w"]
-[ext_resource type="PackedScene" uid="uid://sdh6s6fgya2x" path="res://scenes/enemy/l5/mech_bug.tscn" id="13_x61gm"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/mech_eagle_spawner.tscn" id="13_x61gm"]
+[ext_resource type="PackedScene" uid="uid://cwag8n3i784e1" path="res://scenes/enemy/l5/small_patrol_enemy_white.tscn" id="14_7qbwt"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/mech_bee_spawner.tscn" id="15_d5tiv"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/mech_bat_spawner.tscn" id="16_ao52m"]
+[ext_resource type="PackedScene" uid="uid://bxorj7hex2om3" path="res://scenes/enemy/l1/patrol_enemy.tscn" id="17_7ncbo"]
+[ext_resource type="PackedScene" uid="uid://6p404iw2tco6" path="res://scenes/enemy/l2/chaser_monster_spawner.tscn" id="18_1hvfu"]
+[ext_resource type="PackedScene" uid="uid://cg1sfkn76cova" path="res://scenes/enemy/l5/defense_enemy.tscn" id="19_nfg43"]
+[ext_resource type="PackedScene" uid="uid://sdh6s6fgya2x" path="res://scenes/enemy/l5/mech_bug.tscn" id="20_yy1hl"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -263,10 +271,163 @@ metadata/_edit_lock_ = true
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("13_2xik3")]
+position = Vector2(273, 45)
+consumable_type = 3
+
+[node name="Item2" parent="Items" unique_id=379681513 instance=ExtResource("13_2xik3")]
+position = Vector2(496, 143)
+
+[node name="Item3" parent="Items" unique_id=534037737 instance=ExtResource("13_2xik3")]
+position = Vector2(807, 86)
+
+[node name="Item4" parent="Items" unique_id=697776478 instance=ExtResource("13_2xik3")]
+position = Vector2(2841, 39)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
-[node name="MechBug" parent="enemys" unique_id=2001263754 instance=ExtResource("13_x61gm")]
-position = Vector2(274, 183)
+[node name="MechEagleSpawner" parent="enemys" unique_id=1971384616 instance=ExtResource("13_x61gm")]
+position = Vector2(499, 117)
+
+[node name="SpawnPosition" parent="enemys/MechEagleSpawner" index="1"]
+position = Vector2(352, -74)
+
+[node name="SmallPatrolEnemyWhite" parent="enemys" unique_id=1227478862 instance=ExtResource("14_7qbwt")]
+position = Vector2(496, 181)
+
+[node name="SmallPatrolEnemyWhite2" parent="enemys" unique_id=1797534806 instance=ExtResource("14_7qbwt")]
+position = Vector2(1256, 111)
+
+[node name="MechBeeSpawner" parent="enemys" unique_id=352786390 instance=ExtResource("15_d5tiv")]
+position = Vector2(613, 140)
+spawn_count = 2
+
+[node name="SpawnPosition" parent="enemys/MechBeeSpawner" index="1"]
+position = Vector2(202, -135)
+
+[node name="FallTarget" parent="enemys/MechBeeSpawner" index="2"]
+position = Vector2(197, -75)
+
+[node name="MechBeeSpawner2" parent="enemys" unique_id=1620051805 instance=ExtResource("15_d5tiv")]
+position = Vector2(1266, 133)
+spawn_count = 2
+
+[node name="CollisionShape2D" parent="enemys/MechBeeSpawner2/TriggerArea" index="0"]
+position = Vector2(-123, -22)
+
+[node name="SpawnPosition" parent="enemys/MechBeeSpawner2" index="1"]
+position = Vector2(-8, -169)
+
+[node name="FallTarget" parent="enemys/MechBeeSpawner2" index="2"]
+position = Vector2(-10, -89)
+
+[node name="MechBatSpawner" parent="enemys" unique_id=1865369458 instance=ExtResource("16_ao52m")]
+position = Vector2(576, 118)
+
+[node name="SpawnPosition" parent="enemys/MechBatSpawner" index="1"]
+position = Vector2(359, -21)
+
+[node name="PatrolEnemy" parent="enemys" unique_id=1718389576 instance=ExtResource("17_7ncbo")]
+position = Vector2(708, 126)
+
+[node name="PatrolEnemy2" parent="enemys" unique_id=653078305 instance=ExtResource("17_7ncbo")]
+position = Vector2(893, 122)
+
+[node name="PatrolEnemy3" parent="enemys" unique_id=1587416560 instance=ExtResource("17_7ncbo")]
+position = Vector2(2649, 43)
+
+[node name="ChaserMonsterSpawner" parent="enemys" unique_id=90267948 instance=ExtResource("18_1hvfu")]
+position = Vector2(1023, 133)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner" index="1" unique_id=1893374063]
+position = Vector2(378, -10)
+
+[node name="ChaserMonsterSpawner2" parent="enemys" unique_id=1376147929 instance=ExtResource("18_1hvfu")]
+position = Vector2(1142, 134)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner2" index="1" unique_id=1893374063]
+position = Vector2(378, -10)
+
+[node name="ChaserMonsterSpawner3" parent="enemys" unique_id=1141655946 instance=ExtResource("18_1hvfu")]
+position = Vector2(2264, 64)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner3" index="1" unique_id=1893374063]
+position = Vector2(293, -84)
+
+[node name="ChaserMonsterSpawner4" parent="enemys" unique_id=1227688796 instance=ExtResource("18_1hvfu")]
+position = Vector2(2405, 67)
+
+[node name="SpawnPosition" parent="enemys/ChaserMonsterSpawner4" index="1" unique_id=1893374063]
+position = Vector2(270, -79)
+
+[node name="DefenseEnemy" parent="enemys" unique_id=1027476172 instance=ExtResource("19_nfg43")]
+position = Vector2(1246, 188)
+
+[node name="DefenseEnemy2" parent="enemys" unique_id=855729742 instance=ExtResource("19_nfg43")]
+position = Vector2(2402, 110)
+
+[node name="MechEagleSpawner2" parent="enemys" unique_id=372374548 instance=ExtResource("13_x61gm")]
+position = Vector2(1322, 150)
+
+[node name="SpawnPosition" parent="enemys/MechEagleSpawner2" index="1"]
+position = Vector2(382, 119)
+
+[node name="MechEagleSpawner3" parent="enemys" unique_id=1422985747 instance=ExtResource("13_x61gm")]
+position = Vector2(1349, 152)
+
+[node name="SpawnPosition" parent="enemys/MechEagleSpawner3" index="1"]
+position = Vector2(-304, -138)
+
+[node name="MechBeeSpawner3" parent="enemys" unique_id=79397343 instance=ExtResource("15_d5tiv")]
+position = Vector2(1840, 140)
+
+[node name="CollisionShape2D" parent="enemys/MechBeeSpawner3/TriggerArea" index="0"]
+position = Vector2(121, -15)
+
+[node name="SpawnPosition" parent="enemys/MechBeeSpawner3" index="1"]
+position = Vector2(299, -147)
+
+[node name="FallTarget" parent="enemys/MechBeeSpawner3" index="2"]
+position = Vector2(298, 57)
+
+[node name="MechBug" parent="enemys" unique_id=2001263754 instance=ExtResource("20_yy1hl")]
+position = Vector2(2032, 136)
+
+[node name="Marker2D1" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="0" unique_id=736141795]
+position = Vector2(81, 44)
+
+[node name="Marker2D2" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="1" unique_id=491322409]
+position = Vector2(155, -14)
+
+[node name="Marker2D3" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="2" unique_id=436267015]
+position = Vector2(60, -79)
+
+[node name="Marker2D4" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="3" unique_id=1355663687]
+position = Vector2(-79, -75)
+
+[node name="Marker2D5" parent="enemys/MechBug/Mark" parent_id_path=PackedInt32Array(2001263754, 1555861018) index="4" unique_id=1359844507]
+position = Vector2(-202, 45)
+
+[node name="MechEagleSpawner4" parent="enemys" unique_id=1006812397 instance=ExtResource("13_x61gm")]
+position = Vector2(2546, 69)
+
+[node name="SpawnPosition" parent="enemys/MechEagleSpawner4" index="1"]
+position = Vector2(393, -58)
+
+[node name="MechBeeSpawner4" parent="enemys" unique_id=1373396244 instance=ExtResource("15_d5tiv")]
+position = Vector2(2686, 92)
+
+[node name="SpawnPosition" parent="enemys/MechBeeSpawner4" index="1"]
+position = Vector2(57, -134)
+
+[node name="FallTarget" parent="enemys/MechBeeSpawner4" index="2"]
+position = Vector2(58, -63)
+
+[node name="MechBatSpawner2" parent="enemys" unique_id=1034246547 instance=ExtResource("16_ao52m")]
+position = Vector2(2023, 108)
+
+[node name="SpawnPosition" parent="enemys/MechBatSpawner2" index="1"]
+position = Vector2(299, -7)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=348258669]
 
@@ -289,3 +450,18 @@ shape = SubResource("RectangleShape2D_7lvry")
 [editable path="Map/TileMapLayer/terrain/HangingPlatform"]
 [editable path="environment/Helicopter"]
 [editable path="environment/Helicopter/HangingPlatform"]
+[editable path="enemys/MechEagleSpawner"]
+[editable path="enemys/MechBeeSpawner"]
+[editable path="enemys/MechBeeSpawner2"]
+[editable path="enemys/MechBatSpawner"]
+[editable path="enemys/ChaserMonsterSpawner"]
+[editable path="enemys/ChaserMonsterSpawner2"]
+[editable path="enemys/ChaserMonsterSpawner3"]
+[editable path="enemys/ChaserMonsterSpawner4"]
+[editable path="enemys/MechEagleSpawner2"]
+[editable path="enemys/MechEagleSpawner3"]
+[editable path="enemys/MechBeeSpawner3"]
+[editable path="enemys/MechBug"]
+[editable path="enemys/MechEagleSpawner4"]
+[editable path="enemys/MechBeeSpawner4"]
+[editable path="enemys/MechBatSpawner2"]
