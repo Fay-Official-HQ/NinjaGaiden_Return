@@ -13,7 +13,7 @@ class_name MachineGunner
 
 # ── 可调数据（Inspector 可调） ──
 ## 探测距离（像素），玩家进入该距离后开始射击
-@export var detect_distance: float = 250.0
+@export var detect_distance: float = 200.0
 ## 【连射间隔】每一轮点射内，每一发子弹之间的间隔（秒）。
 ##   例：burst_count=3 时，第 1 发在 t=0，第 2 发在 t=burst_interval，
 ##       第 3 发在 t=2×burst_interval。
