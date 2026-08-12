@@ -1,0 +1,115 @@
+# 所有数据硬编码在代码中，不需要绑定 data 资源
+extends BaseEnemy
+class_name RedCapSoldier
+
+const CHASE_SPEED: float = 150.0
+const JUMP_FORCE: float = -250.0
+const JUMP_DISTANCE: float = 100.0
+const JUMP_STUN: float = 0.3
+const SCREEN_MARGIN: float = 50.0
+const DEATH_SOUND: StringName = &"disiwang"
+
+enum State { CHASE, JUMP_ATTACK }
+
+var _state: int = State.CHASE
+var _jump_stun: float = 0.0
+var _jump_count: int = 0
+
+
+func _ready() -> void:
+	super()
+	current_hp = 1
+	_face_player()
+	anim.play("walk")
+
+
+func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+
+	if not is_on_floor():
+		velocity.y += 980.0 * delta
+
+	_jump_stun -= delta
+
+	match _state:
+		State.CHASE:
+			_face_player()
+			_chase_update()
+		State.JUMP_ATTACK:
+			_jump_attack_update()
+
+	move_and_slide()
+
+	if _state == State.JUMP_ATTACK and not is_on_floor() and is_on_wall() and velocity.y >= 0 and _jump_count < 6:
+		_jump_count += 1
+		velocity.y = JUMP_FORCE
+		velocity.x = CHASE_SPEED * 1.5 * (1.0 if facing_right else -1.0)
+
+
+func _chase_update() -> void:
+	velocity.x = CHASE_SPEED * (1.0 if facing_right else -1.0)
+	anim.play("walk")
+
+	var player = get_tree().get_first_node_in_group("player")
+	if not player:
+		return
+	if not is_on_floor():
+		return
+	if _jump_stun > 0.0:
+		return
+
+	var dist_x = abs(player.global_position.x - global_position.x)
+	if dist_x <= JUMP_DISTANCE:
+		_jump_count = 1
+		_do_jump_attack()
+		return
+
+	if is_on_wall():
+		_jump_count = 1
+		_do_jump_attack()
+
+
+func _jump_attack_update() -> void:
+	anim.play("jump")
+	velocity.x = CHASE_SPEED * 1.5 * (1.0 if facing_right else -1.0)
+	if is_on_floor():
+		_jump_count = 0
+		_face_player()
+		# 落地后如果玩家仍在 100px 内 → 立即再跳，无延迟
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			var dist_x = abs(player.global_position.x - global_position.x)
+			if dist_x <= JUMP_DISTANCE:
+				_jump_count = 1
+				_do_jump_attack()
+				return
+		_state = State.CHASE
+		_jump_stun = JUMP_STUN
+		anim.play("walk")
+
+
+func _do_jump_attack() -> void:
+	_state = State.JUMP_ATTACK
+	velocity.y = JUMP_FORCE
+	velocity.x = CHASE_SPEED * 1.5 * (1.0 if facing_right else -1.0)
+	anim.play("jump")
+
+
+func _die() -> void:
+	is_dead = true
+	AudioManager.play_sound(DEATH_SOUND)
+	hitbox.set_deferred("monitoring", false)
+	hitbox.set_deferred("monitorable", false)
+	hurtbox.set_deferred("monitoring", false)
+	hurtbox.set_deferred("monitorable", false)
+	set_physics_process(false)
+	anim.play("death")
+	anim.animation_finished.connect(_on_death_anim_finished, CONNECT_ONE_SHOT)
+
+
+func _face_player() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	if not player:
+		return
+	_set_facing(player.global_position.x > global_position.x)

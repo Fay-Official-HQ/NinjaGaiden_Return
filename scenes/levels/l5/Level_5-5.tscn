@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="6_54wd5"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="7_somqt"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="8_a2vjk"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/red_cap_spawner.tscn" id="8_eqjru"]
 [ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="12_4o472"]
 [ext_resource type="Script" uid="uid://x750a3o8m463" path="res://scenes/levels/l3/MapComponent/tishi.gd" id="13_5obq6"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="14_5extl"]
@@ -144,6 +145,16 @@ script = ExtResource("13_5obq6")
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
+[node name="RedCapSpawner" parent="enemys" unique_id=1647634202 instance=ExtResource("8_eqjru")]
+position = Vector2(183, 139)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner" index="1"]
+position = Vector2(136, -139)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner" index="2"]
+position = Vector2(242, 29)
+
 [node name="entry_left" type="Marker2D" parent="." unique_id=85740071]
 
 [node name="entry_right" type="Marker2D" parent="." unique_id=723347267]
@@ -163,3 +174,5 @@ spawn_point = "entry_left"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=384079134]
 position = Vector2(2715, 282)
 shape = SubResource("RectangleShape2D_oqy7s")
+
+[editable path="enemys/RedCapSpawner"]

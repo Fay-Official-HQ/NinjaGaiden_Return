@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bnnf7lr3un1kp"]
+
+[ext_resource type="Script" uid="uid://tmmj4caasav6" path="res://scripts/enemy/l5/red_cap_soldier.gd" id="1_lpv7m"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_o2nni"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_5gkl6"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_xkdpo"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_ucuoc"]
+[ext_resource type="Texture2D" uid="uid://dul3ynmutlbcy" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_27.png" id="6_lpv7m"]
+[ext_resource type="Texture2D" uid="uid://cphjs6bap3v6c" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_25.png" id="7_srs3h"]
+[ext_resource type="Texture2D" uid="uid://cwc7xg1hnbu28" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_26.png" id="8_psb5j"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="9_6ww3q"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="10_7on8k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_chaser"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o2nni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5gkl6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xkdpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ucuoc")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_lpv7m")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_srs3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_psb5j")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lpv7m"]
+size = Vector2(20, 32)
+
+[node name="RedCapSoldier" type="CharacterBody2D" unique_id=1833051193 groups=["enemy", "fall_vulnerable"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_lpv7m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2027237292]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_chaser")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1365246591]
+shape = SubResource("RectangleShape2D_lpv7m")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=287410304]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("9_6ww3q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=574884098]
+shape = SubResource("RectangleShape2D_lpv7m")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1919418762]
+collision_layer = 32
+script = ExtResource("10_7on8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=965029361]
+shape = SubResource("RectangleShape2D_lpv7m")
+
+[node name="FloorDetectFront" type="RayCast2D" parent="." unique_id=1271895115]
+target_position = Vector2(20, 28)
+collision_mask = 12
+
+[node name="WallDetectFront" type="RayCast2D" parent="." unique_id=1768131665]
+target_position = Vector2(22, 0)
+collision_mask = 12

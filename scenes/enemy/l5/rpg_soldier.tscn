@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://d23ijm62esgv4"]
+
+[ext_resource type="Script" uid="uid://cvcng6ycdjcjv" path="res://scripts/enemy/l5/rpg_soldier.gd" id="1_yilsg"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_860hj"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_xh0c5"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_tbhj1"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_w0rjk"]
+[ext_resource type="Texture2D" uid="uid://oiwvef1y0hpo" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_21.png" id="6_yilsg"]
+[ext_resource type="Texture2D" uid="uid://d1hj0wlscm2q4" path="res://assets/sprites/enemy/l5/l5_2/ememy_l5_22.png" id="7_860hj"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="8_jy1dq"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="9_dba4c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crouch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_860hj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xh0c5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tbhj1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w0rjk")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_yilsg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("7_860hj")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3xo6"]
+size = Vector2(20, 32)
+
+[node name="RPGSoldier" type="CharacterBody2D" unique_id=1656441098 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_yilsg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
+sprite_frames = SubResource("SpriteFrames_crouch")
+animation = &"throw"
+offset = Vector2(0, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
+position = Vector2(1, 13)
+shape = SubResource("RectangleShape2D_v3xo6")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=451901895]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("8_jy1dq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=391854723]
+position = Vector2(1, 13)
+shape = SubResource("RectangleShape2D_v3xo6")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=862567462]
+collision_layer = 32
+script = ExtResource("9_dba4c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=534330901]
+position = Vector2(1, 13)
+shape = SubResource("RectangleShape2D_v3xo6")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1801071199]
+position = Vector2(12, 5)
