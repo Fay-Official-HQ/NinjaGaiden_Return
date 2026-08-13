@@ -4,11 +4,22 @@
 [ext_resource type="TileSet" uid="uid://bbbvs3mbn1ybq" path="res://resources/tilesets/tileset5_2.tres" id="4_3hg8h"]
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="6_54wd5"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="7_somqt"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_6cdsc"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="8_a2vjk"]
 [ext_resource type="PackedScene" path="res://scenes/enemy/l5/red_cap_spawner.tscn" id="8_eqjru"]
+[ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="9_54wd5"]
+[ext_resource type="PackedScene" uid="uid://clbkdsi7get2v" path="res://scenes/enemy/l5/ak_soldier_spawner.tscn" id="9_mkxkm"]
+[ext_resource type="PackedScene" uid="uid://obq20lexppk5" path="res://scenes/enemy/l5/awm_sniper.tscn" id="10_wqdxy"]
+[ext_resource type="PackedScene" uid="uid://d58ap4pcsx1s" path="res://scenes/enemy/l5/grenadier.tscn" id="11_v5f60"]
 [ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="12_4o472"]
+[ext_resource type="PackedScene" uid="uid://comlftn81x4e0" path="res://scenes/enemy/l5/female_patrol.tscn" id="12_gjprk"]
 [ext_resource type="Script" uid="uid://x750a3o8m463" path="res://scenes/levels/l3/MapComponent/tishi.gd" id="13_5obq6"]
+[ext_resource type="PackedScene" uid="uid://duk74mnoqwvpa" path="res://scenes/enemy/l5/female_pistol.tscn" id="13_koh8v"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="14_5extl"]
+[ext_resource type="PackedScene" uid="uid://ptdqv5eb4s8y" path="res://scenes/enemy/l5/machine_gunner.tscn" id="15_v5f60"]
+[ext_resource type="PackedScene" uid="uid://ief082voyoou" path="res://scenes/enemy/l5/tower_guard.tscn" id="16_gjprk"]
+[ext_resource type="PackedScene" uid="uid://d23ijm62esgv4" path="res://scenes/enemy/l5/rpg_soldier.tscn" id="16_koh8v"]
+[ext_resource type="PackedScene" uid="uid://caxd43hbngqcg" path="res://scenes/enemy/l5/landmine.tscn" id="17_xvcyo"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -30,6 +41,12 @@ size = Vector2(284, 617.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqsrt"]
 size = Vector2(5398.5, 141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjprk"]
+size = Vector2(302, 154)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_koh8v"]
+size = Vector2(351.5, 153)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqy7s"]
 
@@ -143,17 +160,207 @@ theme_override_font_sizes/font_size = 10
 text = "向下攀爬"
 script = ExtResource("13_5obq6")
 
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_6cdsc")]
+position = Vector2(233, 166)
+
+[node name="Item2" parent="Items" unique_id=723173775 instance=ExtResource("8_6cdsc")]
+position = Vector2(958, 156)
+
+[node name="Item3" parent="Items" unique_id=990656157 instance=ExtResource("8_6cdsc")]
+position = Vector2(1740, 179)
+
+[node name="Item4" parent="Items" unique_id=1901711294 instance=ExtResource("8_6cdsc")]
+position = Vector2(2821, 59)
+consumable_type = 0
+
+[node name="ItemSpecial" parent="Items" unique_id=1194567971 instance=ExtResource("9_54wd5")]
+position = Vector2(1359, 28)
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
 
 [node name="RedCapSpawner" parent="enemys" unique_id=1647634202 instance=ExtResource("8_eqjru")]
-position = Vector2(183, 139)
+position = Vector2(1057, 7)
 soldier_type = 1
 
 [node name="SpawnPosition" parent="enemys/RedCapSpawner" index="1"]
-position = Vector2(136, -139)
+position = Vector2(147, -18)
 
 [node name="TargetPosition" parent="enemys/RedCapSpawner" index="2"]
-position = Vector2(242, 29)
+position = Vector2(230, 83)
+
+[node name="RedCapSpawner2" parent="enemys" unique_id=249568001 instance=ExtResource("8_eqjru")]
+position = Vector2(1180, 9)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner2" index="1"]
+position = Vector2(147, -18)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner2" index="2"]
+position = Vector2(230, 83)
+
+[node name="RedCapSpawner3" parent="enemys" unique_id=1259379177 instance=ExtResource("8_eqjru")]
+position = Vector2(1308, 8)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner3" index="1"]
+position = Vector2(147, -18)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner3" index="2"]
+position = Vector2(230, 83)
+
+[node name="RedCapSpawner4" parent="enemys" unique_id=1221855463 instance=ExtResource("8_eqjru")]
+position = Vector2(1308, 8)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner4" index="1"]
+position = Vector2(147, -18)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner4" index="2"]
+position = Vector2(230, 83)
+
+[node name="RedCapSpawner5" parent="enemys" unique_id=1634948007 instance=ExtResource("8_eqjru")]
+position = Vector2(1286, 7)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner5" index="1"]
+position = Vector2(320, -53)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner5" index="2"]
+position = Vector2(285, 82)
+
+[node name="RedCapSpawner9" parent="enemys" unique_id=1421624083 instance=ExtResource("8_eqjru")]
+position = Vector2(2480, 137)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner9" index="1"]
+position = Vector2(140, -141)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner9" index="2"]
+position = Vector2(69, 49)
+
+[node name="RedCapSpawner10" parent="enemys" unique_id=617453175 instance=ExtResource("8_eqjru")]
+position = Vector2(2574, 135)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner10" index="1"]
+position = Vector2(140, -141)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner10" index="2"]
+position = Vector2(28, 58)
+
+[node name="RedCapSpawner11" parent="enemys" unique_id=1789500194 instance=ExtResource("8_eqjru")]
+position = Vector2(2621, 130)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner11" index="1"]
+position = Vector2(196, -136)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner11" index="2"]
+position = Vector2(150, -61)
+
+[node name="RedCapSpawner6" parent="enemys" unique_id=782651052 instance=ExtResource("8_eqjru")]
+position = Vector2(1409, 8)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner6" index="1"]
+position = Vector2(-278, -30)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner6" index="2"]
+position = Vector2(-203, 81)
+
+[node name="AkSoldierSpawner" parent="enemys" unique_id=1580042316 instance=ExtResource("9_mkxkm")]
+position = Vector2(1099, 8)
+burst_count = 2
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner" index="1"]
+position = Vector2(517, 57)
+
+[node name="AkSoldierSpawner2" parent="enemys" unique_id=453107526 instance=ExtResource("9_mkxkm")]
+position = Vector2(1263, 4)
+soldier_type = 0
+burst_count = 1
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner2" index="1"]
+position = Vector2(364, 56)
+
+[node name="AkSoldierSpawner3" parent="enemys" unique_id=304699521 instance=ExtResource("9_mkxkm")]
+position = Vector2(1443, 5)
+soldier_type = 0
+burst_count = 1
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner3" index="1"]
+position = Vector2(-309, 46)
+
+[node name="AWMSniper" parent="enemys" unique_id=1656441098 instance=ExtResource("10_wqdxy")]
+position = Vector2(548, 187)
+
+[node name="Grenadier" parent="enemys" unique_id=77150397 instance=ExtResource("11_v5f60")]
+position = Vector2(607, 139)
+
+[node name="Grenadier2" parent="enemys" unique_id=1215963013 instance=ExtResource("11_v5f60")]
+position = Vector2(958, 186)
+
+[node name="FemalePatrol" parent="enemys" unique_id=1227478862 instance=ExtResource("12_gjprk")]
+position = Vector2(418, 199)
+
+[node name="FemalePistol" parent="enemys" unique_id=1888296966 instance=ExtResource("13_koh8v")]
+position = Vector2(814, 106)
+
+[node name="MachineGunner" parent="enemys" unique_id=517773344 instance=ExtResource("15_v5f60")]
+position = Vector2(1633, 66)
+
+[node name="TowerGuard" parent="enemys" unique_id=1785014 instance=ExtResource("16_gjprk")]
+position = Vector2(1835, 43)
+
+[node name="CollisionShape2D" parent="enemys/TowerGuard/DetectRange" parent_id_path=PackedInt32Array(1785014, 89548439) index="0" unique_id=823214000]
+position = Vector2(11, 34)
+shape = SubResource("RectangleShape2D_gjprk")
+
+[node name="TowerGuard2" parent="enemys" unique_id=1117701311 instance=ExtResource("16_gjprk")]
+position = Vector2(2075, 43)
+
+[node name="CollisionShape2D" parent="enemys/TowerGuard2/DetectRange" parent_id_path=PackedInt32Array(1117701311, 89548439) index="0" unique_id=823214000]
+position = Vector2(-7.75, 32.5)
+shape = SubResource("RectangleShape2D_koh8v")
+
+[node name="RPGSoldier" parent="enemys" unique_id=1707571415 instance=ExtResource("16_koh8v")]
+position = Vector2(2411, 170)
+
+[node name="RedCapSpawner7" parent="enemys" unique_id=1114903743 instance=ExtResource("8_eqjru")]
+position = Vector2(2214, 139)
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner7" index="1"]
+position = Vector2(333, 1)
+
+[node name="RedCapSpawner8" parent="enemys" unique_id=742414017 instance=ExtResource("8_eqjru")]
+position = Vector2(2241, 139)
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner8" index="1"]
+position = Vector2(341, 24)
+
+[node name="AkSoldierSpawner4" parent="enemys" unique_id=1672023141 instance=ExtResource("9_mkxkm")]
+position = Vector2(2257, 140)
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner4" index="1"]
+position = Vector2(368, -28)
+
+[node name="Grenadier3" parent="enemys" unique_id=244107279 instance=ExtResource("11_v5f60")]
+position = Vector2(2715, 81)
+
+[node name="Landmine" parent="enemys" unique_id=558718412 instance=ExtResource("17_xvcyo")]
+position = Vector2(2855, 198)
+
+[node name="Landmine2" parent="enemys" unique_id=637950158 instance=ExtResource("17_xvcyo")]
+position = Vector2(2284, 197)
+
+[node name="Landmine3" parent="enemys" unique_id=1243083042 instance=ExtResource("17_xvcyo")]
+position = Vector2(2342, 197)
+
+[node name="Landmine4" parent="enemys" unique_id=2025477641 instance=ExtResource("17_xvcyo")]
+position = Vector2(2477, 197)
+
+[node name="Landmine5" parent="enemys" unique_id=730336899 instance=ExtResource("17_xvcyo")]
+position = Vector2(2545, 197)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=85740071]
 
@@ -176,3 +383,19 @@ position = Vector2(2715, 282)
 shape = SubResource("RectangleShape2D_oqy7s")
 
 [editable path="enemys/RedCapSpawner"]
+[editable path="enemys/RedCapSpawner2"]
+[editable path="enemys/RedCapSpawner3"]
+[editable path="enemys/RedCapSpawner4"]
+[editable path="enemys/RedCapSpawner5"]
+[editable path="enemys/RedCapSpawner9"]
+[editable path="enemys/RedCapSpawner10"]
+[editable path="enemys/RedCapSpawner11"]
+[editable path="enemys/RedCapSpawner6"]
+[editable path="enemys/AkSoldierSpawner"]
+[editable path="enemys/AkSoldierSpawner2"]
+[editable path="enemys/AkSoldierSpawner3"]
+[editable path="enemys/TowerGuard"]
+[editable path="enemys/TowerGuard2"]
+[editable path="enemys/RedCapSpawner7"]
+[editable path="enemys/RedCapSpawner8"]
+[editable path="enemys/AkSoldierSpawner4"]

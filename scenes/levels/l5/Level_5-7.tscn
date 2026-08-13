@@ -5,7 +5,21 @@
 [ext_resource type="Script" uid="uid://wkuq5b1a3i5c" path="res://scripts/components/jianci.gd" id="3_0au0b"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="4_jnuik"]
 [ext_resource type="PackedScene" uid="uid://b1nav0c8m3ed7" path="res://scenes/player/player.tscn" id="5_iob0f"]
+[ext_resource type="PackedScene" uid="uid://duk74mnoqwvpa" path="res://scenes/enemy/l5/female_pistol.tscn" id="6_jnuik"]
+[ext_resource type="FontFile" uid="uid://bfnkkqdjw8bgk" path="res://assets/fonts/fusion-pixel-10px-proportional-zh_hant.otf" id="6_m20p2"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="6_rte4s"]
+[ext_resource type="PackedScene" uid="uid://d58ap4pcsx1s" path="res://scenes/enemy/l5/grenadier.tscn" id="7_iob0f"]
+[ext_resource type="Script" uid="uid://x750a3o8m463" path="res://scenes/levels/l3/MapComponent/tishi.gd" id="7_uq1pd"]
+[ext_resource type="PackedScene" uid="uid://clbkdsi7get2v" path="res://scenes/enemy/l5/ak_soldier_spawner.tscn" id="8_rte4s"]
+[ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="8_uq1pd"]
+[ext_resource type="PackedScene" uid="uid://oenqdtom260j" path="res://scenes/enemy/l5/mortar_soldier.tscn" id="9_dql6c"]
+[ext_resource type="PackedScene" uid="uid://comlftn81x4e0" path="res://scenes/enemy/l5/female_patrol.tscn" id="10_8gtke"]
+[ext_resource type="PackedScene" uid="uid://caxd43hbngqcg" path="res://scenes/enemy/l5/landmine.tscn" id="11_u76qh"]
+[ext_resource type="PackedScene" uid="uid://d23ijm62esgv4" path="res://scenes/enemy/l5/rpg_soldier.tscn" id="12_egiou"]
+[ext_resource type="PackedScene" uid="uid://ief082voyoou" path="res://scenes/enemy/l5/tower_guard.tscn" id="13_8gtke"]
+[ext_resource type="PackedScene" uid="uid://ptdqv5eb4s8y" path="res://scenes/enemy/l5/machine_gunner.tscn" id="14_u76qh"]
+[ext_resource type="PackedScene" path="res://scenes/enemy/l5/red_cap_spawner.tscn" id="15_egiou"]
+[ext_resource type="PackedScene" uid="uid://obq20lexppk5" path="res://scenes/enemy/l5/awm_sniper.tscn" id="16_ilvqs"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
 load_path = "res://.godot/imported/touming.png-e249bacf6581ef61ec745dd02116f6b5.ctex"
@@ -115,7 +129,7 @@ position = Vector2(2500, 400)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("5_iob0f")]
-position = Vector2(76, 246)
+position = Vector2(76, 247)
 
 [node name="environment" type="Node" parent="." unique_id=98744003]
 
@@ -126,7 +140,252 @@ tile_set = ExtResource("2_3xfv0")
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
+[node name="tishi" type="Label" parent="Items" unique_id=2079980588]
+texture_filter = 1
+offset_left = 4931.0
+offset_top = 230.0
+offset_right = 4978.322
+offset_bottom = 246.61768
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7411765)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("6_m20p2")
+theme_override_font_sizes/font_size = 10
+text = "向下攀爬"
+script = ExtResource("7_uq1pd")
+
+[node name="Item" parent="Items" unique_id=575307007 instance=ExtResource("8_uq1pd")]
+position = Vector2(145, 66)
+
+[node name="Item2" parent="Items" unique_id=744403419 instance=ExtResource("8_uq1pd")]
+position = Vector2(440, 128)
+
+[node name="Item3" parent="Items" unique_id=743268566 instance=ExtResource("8_uq1pd")]
+position = Vector2(959, 139)
+
+[node name="Item4" parent="Items" unique_id=673879751 instance=ExtResource("8_uq1pd")]
+position = Vector2(1862, 96)
+
+[node name="Item5" parent="Items" unique_id=1957260760 instance=ExtResource("8_uq1pd")]
+position = Vector2(3012, 168)
+consumable_type = 3
+
+[node name="Item6" parent="Items" unique_id=87618872 instance=ExtResource("8_uq1pd")]
+position = Vector2(3889, 145)
+
+[node name="Item7" parent="Items" unique_id=1520812579 instance=ExtResource("8_uq1pd")]
+position = Vector2(4457, 186)
+consumable_type = 0
+
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="FemalePistol" parent="enemys" unique_id=1656441098 instance=ExtResource("6_jnuik")]
+position = Vector2(309, 82)
+
+[node name="Grenadier" parent="enemys" unique_id=842365491 instance=ExtResource("7_iob0f")]
+position = Vector2(564, 197)
+
+[node name="Grenadier2" parent="enemys" unique_id=327461896 instance=ExtResource("7_iob0f")]
+position = Vector2(851, 163)
+
+[node name="AkSoldierSpawner" parent="enemys" unique_id=1046862810 instance=ExtResource("8_rte4s")]
+position = Vector2(607, 148)
+burst_count = 2
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner" index="1"]
+position = Vector2(266, 1)
+
+[node name="AkSoldierSpawner2" parent="enemys" unique_id=276672067 instance=ExtResource("8_rte4s")]
+position = Vector2(607, 148)
+burst_count = 2
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner2" index="1"]
+position = Vector2(266, 1)
+
+[node name="MortarSoldier" parent="enemys" unique_id=935006510 instance=ExtResource("9_dql6c")]
+position = Vector2(1060, 163)
+
+[node name="FemalePatrol" parent="enemys" unique_id=1227478862 instance=ExtResource("10_8gtke")]
+position = Vector2(1256, 221)
+
+[node name="FemalePistol2" parent="enemys" unique_id=132399653 instance=ExtResource("6_jnuik")]
+position = Vector2(1415, 82)
+
+[node name="Landmine" parent="enemys" unique_id=939189479 instance=ExtResource("11_u76qh")]
+position = Vector2(1382, 110)
+
+[node name="Landmine3" parent="enemys" unique_id=1623754812 instance=ExtResource("11_u76qh")]
+position = Vector2(2009, 238)
+
+[node name="Landmine4" parent="enemys" unique_id=829452183 instance=ExtResource("11_u76qh")]
+position = Vector2(2157, 238)
+
+[node name="Landmine5" parent="enemys" unique_id=985671829 instance=ExtResource("11_u76qh")]
+position = Vector2(2197, 238)
+
+[node name="Landmine6" parent="enemys" unique_id=1315752502 instance=ExtResource("11_u76qh")]
+position = Vector2(2303, 238)
+
+[node name="Landmine7" parent="enemys" unique_id=1926255071 instance=ExtResource("11_u76qh")]
+position = Vector2(2385, 238)
+
+[node name="Landmine8" parent="enemys" unique_id=901151884 instance=ExtResource("11_u76qh")]
+position = Vector2(2344, 238)
+
+[node name="Landmine2" parent="enemys" unique_id=1095794099 instance=ExtResource("11_u76qh")]
+position = Vector2(1032, 189)
+
+[node name="Grenadier3" parent="enemys" unique_id=669934040 instance=ExtResource("7_iob0f")]
+position = Vector2(1641, 114)
+
+[node name="RPGSoldier" parent="enemys" unique_id=1857071376 instance=ExtResource("12_egiou")]
+position = Vector2(1560, 210)
+
+[node name="FemalePatrol2" parent="enemys" unique_id=1054258972 instance=ExtResource("10_8gtke")]
+position = Vector2(1753, 223)
+
+[node name="TowerGuard" parent="enemys" unique_id=1813153440 instance=ExtResource("13_8gtke")]
+position = Vector2(2172, 131)
+
+[node name="Grenadier4" parent="enemys" unique_id=1155287080 instance=ExtResource("7_iob0f")]
+position = Vector2(2467, 161)
+
+[node name="AkSoldierSpawner3" parent="enemys" unique_id=874480196 instance=ExtResource("8_rte4s")]
+position = Vector2(2882, 143)
+soldier_type = 0
+burst_count = 2
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner3" index="1"]
+position = Vector2(305, 34)
+
+[node name="AkSoldierSpawner4" parent="enemys" unique_id=1585517888 instance=ExtResource("8_rte4s")]
+position = Vector2(3039, 140)
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner4" index="1"]
+position = Vector2(305, 34)
+
+[node name="AkSoldierSpawner5" parent="enemys" unique_id=1179026185 instance=ExtResource("8_rte4s")]
+position = Vector2(3170, 142)
+burst_count = 1
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner5" index="1"]
+position = Vector2(-327, 22)
+
+[node name="AkSoldierSpawner6" parent="enemys" unique_id=971280253 instance=ExtResource("8_rte4s")]
+position = Vector2(3339, 145)
+burst_count = 2
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner6" index="1"]
+position = Vector2(-327, 22)
+
+[node name="AkSoldierSpawner7" parent="enemys" unique_id=581329168 instance=ExtResource("8_rte4s")]
+position = Vector2(3355, 147)
+soldier_type = 0
+
+[node name="SpawnPosition" parent="enemys/AkSoldierSpawner7" index="1"]
+position = Vector2(329, 23)
+
+[node name="MachineGunner" parent="enemys" unique_id=375232410 instance=ExtResource("14_u76qh")]
+position = Vector2(3651, 195)
+
+[node name="RedCapSpawner" parent="enemys" unique_id=1156503432 instance=ExtResource("15_egiou")]
+position = Vector2(2882, 142)
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner" index="1"]
+position = Vector2(364, 66)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner" index="2"]
+position = Vector2(165, -22)
+
+[node name="RedCapSpawner2" parent="enemys" unique_id=1231070652 instance=ExtResource("15_egiou")]
+position = Vector2(2963, 139)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner2" index="1"]
+position = Vector2(69, -137)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner2" index="2"]
+position = Vector2(69, -66)
+
+[node name="RedCapSpawner3" parent="enemys" unique_id=1735030828 instance=ExtResource("15_egiou")]
+position = Vector2(3002, 138)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner3" index="1"]
+position = Vector2(137, -147)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner3" index="2"]
+position = Vector2(137, -43)
+
+[node name="RedCapSpawner4" parent="enemys" unique_id=1498700963 instance=ExtResource("15_egiou")]
+position = Vector2(3124, 135)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner4" index="1"]
+position = Vector2(152, -132)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner4" index="2"]
+position = Vector2(152, 34)
+
+[node name="RedCapSpawner5" parent="enemys" unique_id=2114098459 instance=ExtResource("15_egiou")]
+position = Vector2(3143, 140)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner5" index="1"]
+position = Vector2(-68, -138)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner5" index="2"]
+position = Vector2(253, 76)
+
+[node name="RedCapSpawner6" parent="enemys" unique_id=1251972516 instance=ExtResource("15_egiou")]
+position = Vector2(3279, 137)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner6" index="1"]
+position = Vector2(-68, -138)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner6" index="2"]
+position = Vector2(247, 84)
+
+[node name="RedCapSpawner7" parent="enemys" unique_id=2141820578 instance=ExtResource("15_egiou")]
+position = Vector2(3312, 135)
+soldier_type = 1
+
+[node name="SpawnPosition" parent="enemys/RedCapSpawner7" index="1"]
+position = Vector2(90, -153)
+
+[node name="TargetPosition" parent="enemys/RedCapSpawner7" index="2"]
+position = Vector2(90, 44)
+
+[node name="Landmine9" parent="enemys" unique_id=67198166 instance=ExtResource("11_u76qh")]
+position = Vector2(2919, 222)
+
+[node name="Landmine12" parent="enemys" unique_id=402069715 instance=ExtResource("11_u76qh")]
+position = Vector2(4552, 158)
+
+[node name="Landmine10" parent="enemys" unique_id=2086690477 instance=ExtResource("11_u76qh")]
+position = Vector2(3190, 222)
+
+[node name="Landmine11" parent="enemys" unique_id=1894417889 instance=ExtResource("11_u76qh")]
+position = Vector2(3598, 222)
+
+[node name="Grenadier5" parent="enemys" unique_id=265779555 instance=ExtResource("7_iob0f")]
+position = Vector2(3999, 195)
+
+[node name="MortarSoldier2" parent="enemys" unique_id=1462392631 instance=ExtResource("9_dql6c")]
+position = Vector2(4775, 163)
+
+[node name="FemalePistol3" parent="enemys" unique_id=1207714216 instance=ExtResource("6_jnuik")]
+position = Vector2(4456, 131)
+
+[node name="FemalePistol4" parent="enemys" unique_id=1664664615 instance=ExtResource("6_jnuik")]
+position = Vector2(4638, 131)
+
+[node name="AWMSniper" parent="enemys" unique_id=1966985122 instance=ExtResource("16_ilvqs")]
+position = Vector2(4552, 195)
+
+[node name="FemalePatrol3" parent="enemys" unique_id=99601126 instance=ExtResource("10_8gtke")]
+position = Vector2(4251, 128)
 
 [node name="entry_left" type="Marker2D" parent="." unique_id=85740071]
 position = Vector2(76, 246)
@@ -151,3 +410,18 @@ spawn_point = "entry_top"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionZoneR" unique_id=384079134]
 position = Vector2(4991, 282)
 shape = SubResource("RectangleShape2D_oqy7s")
+
+[editable path="enemys/AkSoldierSpawner"]
+[editable path="enemys/AkSoldierSpawner2"]
+[editable path="enemys/AkSoldierSpawner3"]
+[editable path="enemys/AkSoldierSpawner4"]
+[editable path="enemys/AkSoldierSpawner5"]
+[editable path="enemys/AkSoldierSpawner6"]
+[editable path="enemys/AkSoldierSpawner7"]
+[editable path="enemys/RedCapSpawner"]
+[editable path="enemys/RedCapSpawner2"]
+[editable path="enemys/RedCapSpawner3"]
+[editable path="enemys/RedCapSpawner4"]
+[editable path="enemys/RedCapSpawner5"]
+[editable path="enemys/RedCapSpawner6"]
+[editable path="enemys/RedCapSpawner7"]

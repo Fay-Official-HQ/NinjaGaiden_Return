@@ -218,6 +218,14 @@ func create_shadow() -> void:
 	tw.tween_callback(s.queue_free)            # 最后从场景树移除
 
 func trigger_screen_flash() -> void:
+	# BOSS 死亡演出（红黑剪影定格）期间跳过闪白：
+	# 死亡演出会同步 Engine.time_scale = 0 定格，若此时创建全屏白屏，
+	# 白屏的淡出 Tween 会被冻结，一直盖在红黑剪影上，破坏 BOSS 死亡效果。
+	# 覆盖 1~4 关所有导演（l1/l2 走基类标志，l3/l4 有独立标志）。
+	if BossDeathDirector.is_death_playing \
+			or BossDeathDirector_3.is_death_playing \
+			or BossDeathDirector_4.is_death_playing:
+		return
 	# 创建一个全屏白色 CanvasLayer（覆盖在所有内容之上）
 	var canvas = CanvasLayer.new()
 	canvas.layer = 100  # 极高层级确保在最上面

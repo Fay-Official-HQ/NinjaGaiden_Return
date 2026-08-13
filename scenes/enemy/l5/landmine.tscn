@@ -49,9 +49,7 @@ script = ExtResource("11_landm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1755906226]
 sprite_frames = SubResource("SpriteFrames_crouch")
-animation = &"death"
-frame = 2
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=591223812]
 position = Vector2(0, 0.25)
