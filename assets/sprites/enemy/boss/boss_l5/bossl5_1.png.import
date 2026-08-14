@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv0tcebs0i2f1"
-path="res://.godot/imported/Sprite-0001.png-16fec053ec75519a1cc5cc9f9cbbf89e.ctex"
+uid="uid://d24vn645obndc"
+path="res://.godot/imported/bossl5_1.png-6e44d10b882f3b84e3ecb4fbd5969d49.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy/boss/boss_l5/Sprite-0001.png"
-dest_files=["res://.godot/imported/Sprite-0001.png-16fec053ec75519a1cc5cc9f9cbbf89e.ctex"]
+source_file="res://assets/sprites/enemy/boss/boss_l5/bossl5_1.png"
+dest_files=["res://.godot/imported/bossl5_1.png-6e44d10b882f3b84e3ecb4fbd5969d49.ctex"]
 
 [params]
 
