@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://cl2vmdjlltx4k"]
+
+[ext_resource type="Script" uid="uid://bhkviagh7dcbc" path="res://scripts/enemy/boss/l5/boss_glass.gd" id="1_4ol3x"]
+[ext_resource type="Texture2D" uid="uid://1tdfftlwnnux" path="res://assets/sprites/enemy/boss/boss_l5/jiniangbolo_2.png" id="2_6r3kb"]
+[ext_resource type="Texture2D" uid="uid://cr3e666a1hphu" path="res://assets/sprites/enemy/boss/boss_l5/jiniangbolo_1.png" id="2_gg304"]
+[ext_resource type="Texture2D" uid="uid://b1pqh6neo16n8" path="res://assets/sprites/enemy/boss/boss_l5/jiniangbolo_3.png" id="3_updt1"]
+[ext_resource type="Texture2D" uid="uid://cv2jrgwucqjen" path="res://assets/sprites/enemy/boss/boss_l5/jiniangbolo_4.png" id="4_fewc3"]
+[ext_resource type="Texture2D" uid="uid://ceacryvwieff" path="res://assets/sprites/enemy/boss/boss_l5/jiniangbolo_5.png" id="5_07nl7"]
+[ext_resource type="Texture2D" uid="uid://ddh30jpxd7rtw" path="res://assets/sprites/enemy/boss/boss_l5/jiniangbolo_6.png" id="6_2p0qn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qnji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gg304")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6r3kb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_updt1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fewc3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_07nl7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2p0qn")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gg304")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2p0qn")
+}],
+"loop": true,
+"name": &"isdead",
+"speed": 5.0
+}]
+
+[node name="BossGlass" type="Node2D" unique_id=841972997 groups=["enemy", "fall_vulnerable"]]
+script = ExtResource("1_4ol3x")
+metadata/_edit_horizontal_guides_ = [-135.0, 135.0]
+metadata/_edit_vertical_guides_ = [240.0, -240.0]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175577331]
+sprite_frames = SubResource("SpriteFrames_4qnji")
+flip_h = true
