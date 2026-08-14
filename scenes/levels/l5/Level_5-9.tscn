@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cl2vmdjlltx4k" path="res://scenes/enemy/boss/l5/BossGlass.tscn" id="6_ad2g2"]
 [ext_resource type="PackedScene" uid="uid://dltnde0yqiwim" path="res://scenes/environment/CameraZone.tscn" id="8_gjgeu"]
 [ext_resource type="Script" uid="uid://ckwvxaqlg05oj" path="res://scripts/environment/BossGateTrigger.gd" id="9_25rnl"]
+[ext_resource type="Texture2D" uid="uid://cv0tcebs0i2f1" path="res://assets/sprites/enemy/boss/boss_l5/Sprite-0001.png" id="9_r7aqt"]
 [ext_resource type="Script" uid="uid://djaj0jfd7yhak" path="res://scripts/enemy/boss/l5/boss_born_area.gd" id="10_n5kq8"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50olt"]
@@ -128,6 +129,11 @@ tile_set = ExtResource("2_b6ceu")
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
 [node name="enemys" type="Node" parent="." unique_id=1730653662]
+
+[node name="Sprite2D" type="Sprite2D" parent="enemys" unique_id=1872853289]
+position = Vector2(905, 85)
+texture = ExtResource("9_r7aqt")
+flip_h = true
 
 [node name="CameraZone" parent="." unique_id=851938473 instance=ExtResource("8_gjgeu")]
 position = Vector2(361.70743, 23.675964)
