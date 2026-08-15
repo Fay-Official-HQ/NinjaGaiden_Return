@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://brjngpejmqy6b"]
+
+[ext_resource type="Script" uid="uid://dmorm4pf5hc4q" path="res://scripts/enemy/boss/l5/boss_5_laser.gd" id="1_ket57"]
+[ext_resource type="Texture2D" uid="uid://bxnvtqve672y5" path="res://assets/sprites/enemy/test/disiwang01.png" id="2_2qni0"]
+[ext_resource type="Texture2D" uid="uid://dvnui568l3pr1" path="res://assets/sprites/enemy/test/disiwang02.png" id="3_8kthu"]
+[ext_resource type="Texture2D" uid="uid://crw1y52lgogo5" path="res://assets/sprites/enemy/test/disiwang03.png" id="4_4skas"]
+[ext_resource type="Texture2D" uid="uid://pjcga8gdq1kp" path="res://assets/sprites/enemy/test/disiwang04.png" id="5_wseq1"]
+[ext_resource type="Texture2D" uid="uid://dvbbxkqh8gf3g" path="res://assets/sprites/enemy/boss/boss_l4/special/boss4nengliangdan2.png" id="6_qkesv"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="7_cd08r"]
+[ext_resource type="Texture2D" uid="uid://cun7cr8l2sop6" path="res://assets/sprites/enemy/boss/boss_l4/special/boss4nengliangdan3.png" id="7_y035o"]
+[ext_resource type="Texture2D" uid="uid://uibdci71cqqa" path="res://assets/sprites/enemy/boss/boss_l4/special/boss4nengliangdan4.png" id="8_6yrad"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="8_do27m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0pk2b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2qni0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8kthu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4skas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wseq1")
+}],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_qkesv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y035o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6yrad")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qkesv"]
+
+[node name="boss5_laser" type="Area2D" unique_id=1462592865 groups=["blockable", "projectile"]]
+z_index = 10
+z_as_relative = false
+collision_layer = 2
+script = ExtResource("1_ket57")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1907469118]
+sprite_frames = SubResource("SpriteFrames_0pk2b")
+animation = &"flying"
+frame_progress = 0.46255103
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1624574917]
+shape = SubResource("CircleShape2D_qkesv")
+
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=657064340 groups=["blockable", "projectile"]]
+collision_layer = 32
+script = ExtResource("7_cd08r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1879408888]
+shape = SubResource("CircleShape2D_qkesv")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=26408527]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("8_do27m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=818694833]
+shape = SubResource("CircleShape2D_qkesv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1769547363]

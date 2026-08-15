@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundEventResource" format=3 uid="uid://dipm3dmie6i0i"]
+
+[ext_resource type="Script" uid="uid://cfwtaajtfa38p" path="res://resources/audio/SoundEventResource.gd" id="1_amwcq"]
+[ext_resource type="AudioStream" uid="uid://ba80p6cypfyx1" path="res://assets/audio/se/fangkongjinbao.ogg" id="2_tnyil"]
+
+[resource]
+script = ExtResource("1_amwcq")
+event_id = &"fangkong"
+stream = ExtResource("2_tnyil")
+volume_db = -5.0
+metadata/_custom_type_script = "uid://cfwtaajtfa38p"

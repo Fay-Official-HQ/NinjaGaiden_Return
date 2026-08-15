@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c806v0jb8eid8"]
+
+[ext_resource type="Script" uid="uid://bivrikqw5xue6" path="res://scripts/enemy/boss/l5/bomb_missile.gd" id="1_bomb"]
+[ext_resource type="Texture2D" uid="uid://mgujplpes6qx" path="res://assets/sprites/enemy/boss/boss_l5/hongzha.png" id="2_hongzha"]
+[ext_resource type="Texture2D" uid="uid://c51enpceqcacx" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe8.png" id="2_l1e8c"]
+[ext_resource type="Texture2D" uid="uid://c0er51axcpwlr" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe9.png" id="3_xvngh"]
+[ext_resource type="Texture2D" uid="uid://olqbj7uymjcx" path="res://assets/sprites/enemy/l3/enemy_l3_renzhe10.png" id="4_77jrt"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="6_w0mpb"]
+[ext_resource type="Script" uid="uid://cmn07aeey7mv4" path="res://scripts/components/HurtBox.gd" id="7_cr0mc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bomb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l1e8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xvngh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_77jrt")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hongzha")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hongzha")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bomb"]
+size = Vector2(20, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bomb"]
+radius = 20.006248
+
+[node name="bomb_missile" type="Area2D" unique_id=1470000001]
+z_index = 10
+z_as_relative = false
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_bomb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1470000002]
+sprite_frames = SubResource("SpriteFrames_bomb")
+animation = &"flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1470000003]
+shape = SubResource("RectangleShape2D_bomb")
+
+[node name="ExplosionHitBox" type="Area2D" parent="." unique_id=1470000004]
+collision_layer = 32
+script = ExtResource("6_w0mpb")
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitBox" unique_id=1470000005]
+position = Vector2(-1, -1.5)
+shape = SubResource("CircleShape2D_bomb")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1470000006]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("7_cr0mc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1470000007]
+shape = SubResource("RectangleShape2D_bomb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1470000008]

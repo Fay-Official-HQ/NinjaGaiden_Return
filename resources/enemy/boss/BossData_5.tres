@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BossData_5" format=3 uid="uid://cvab5dat5uxx7"]
+
+[ext_resource type="Script" uid="uid://dy2nn2d5bhr04" path="res://resources/enemy/boss/BossData_5.gd" id="1_5"]
+
+[resource]
+script = ExtResource("1_5")
+boss_name = "空中要塞指挥官"

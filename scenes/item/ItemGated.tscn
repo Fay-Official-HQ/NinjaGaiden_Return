@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dsfvji7ogw4vk"]
+
+[ext_resource type="Script" uid="uid://ct7ywm7pd0q7e" path="res://scripts/item/ItemGated.gd" id="1_gated"]
+[ext_resource type="Texture2D" uid="uid://dlphb7xqjjtb4" path="res://assets/sprites/Ryu/wuye/wuyezhufu1.png" id="2_c8y2k"]
+[ext_resource type="Texture2D" uid="uid://cqedb66prphwh" path="res://assets/sprites/item/item_hidden.png" id="3_m1pp2"]
+[ext_resource type="Texture2D" uid="uid://b3p6m3jwxp7se" path="res://assets/sprites/Ryu/wuye/wuyezhufu2.png" id="3_qp3n5"]
+[ext_resource type="Texture2D" uid="uid://bxmp50bjqtn0m" path="res://assets/sprites/Ryu/wuye/wuyezhufu3.png" id="4_ml4w8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ndiym"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sh8g6"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("2_c8y2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qp3n5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ml4w8")
+}],
+"loop": false,
+"name": &"wuye",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ri8g"]
+radius = 8.0
+
+[node name="ItemGated" type="Area2D" unique_id=381907500]
+collision_layer = 64
+collision_mask = 16
+script = ExtResource("1_gated")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=295679958]
+shape = SubResource("CircleShape2D_ndiym")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=286351744]
+texture = ExtResource("3_m1pp2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1417002592]
+sprite_frames = SubResource("SpriteFrames_sh8g6")
+animation = &"wuye"
+frame = 2
+frame_progress = 1.0
+
+[node name="PickupArea" type="Area2D" parent="." unique_id=1623281253]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1129884908]
+shape = SubResource("CircleShape2D_2ri8g")
+debug_color = Color(0.31466863, 0.61645865, 0.32269007, 0.41960785)
+
+[node name="GroundDetector" type="RayCast2D" parent="." unique_id=25881457]
+target_position = Vector2(0, 20)
+collision_mask = 12

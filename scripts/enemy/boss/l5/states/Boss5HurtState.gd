@@ -1,0 +1,76 @@
+extends BossState
+class_name Boss5HurtState
+
+var _hurt_timer: float = 0.0
+var _flash_tween: Tween
+var _disabled_hitboxes: Array[Area2D] = []
+
+
+func enter(_msg: Dictionary = {}) -> void:
+	boss.animated_sprite.play("hurt")
+	boss.velocity = Vector2.ZERO
+	_hurt_timer = boss.data.hurt_duration
+	_apply_knockback()
+	_disable_all_hitboxes()
+	_start_flash()
+
+
+func update(delta: float) -> void:
+	_hurt_timer -= delta
+	if _hurt_timer <= 0.0:
+		boss.velocity.x = 0.0
+		_restore_all_hitboxes()
+		_cleanup_flash()
+		state_machine.change_state_by_name("BossFlyState")
+
+
+func physics_update(_delta: float) -> void:
+	pass
+
+
+func exit() -> void:
+	_restore_all_hitboxes()
+	_cleanup_flash()
+
+
+## 模仿第三关 Boss 的击退方式：向后弹开，由 move_and_slide 处理移动
+func _apply_knockback() -> void:
+	var knock_dir = -1.0 if boss.facing_direction > 0 else 1.0
+	var knock_speed = boss.data.knockback_distance / max(_hurt_timer, 0.01)
+	boss.velocity.x = knock_dir * knock_speed
+
+
+func _start_flash() -> void:
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	# 峰值亮度由 BossData_5.hurt_flash_strength 控制（我需要调试）
+	var data5 := boss.data as BossData_5
+	var peak: float = data5.hurt_flash_strength if data5 else 5.0
+	boss.animated_sprite.modulate = Color(peak, peak, peak, 1.0)
+	_flash_tween = create_tween()
+	_flash_tween.tween_property(boss.animated_sprite, "modulate", Color.WHITE, boss.data.hurt_duration)
+
+
+func _cleanup_flash() -> void:
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	boss.animated_sprite.modulate = Color.WHITE
+
+
+## 禁用敌人攻击判定，防止受伤期间持续伤害玩家（与第三关一致）
+func _disable_all_hitboxes() -> void:
+	_disabled_hitboxes.clear()
+	var attack_root = boss.get_node_or_null("AttackRoot") as Node2D
+	if not attack_root:
+		return
+	for child in attack_root.get_children():
+		if child is Area2D and child.monitoring:
+			_disabled_hitboxes.append(child)
+			child.set_deferred("monitoring", false)
+
+
+func _restore_all_hitboxes() -> void:
+	for hitbox in _disabled_hitboxes:
+		if is_instance_valid(hitbox):
+			hitbox.set_deferred("monitoring", true)
+	_disabled_hitboxes.clear()

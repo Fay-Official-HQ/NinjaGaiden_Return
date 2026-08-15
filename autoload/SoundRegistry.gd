@@ -78,7 +78,9 @@ var _audio_files: Array[String] = [
 	"res://resources/audio/se/ak5.tres",
 	"res://resources/audio/se/shouqiang.tres",
 	"res://resources/audio/se/jiqiang.tres",
-	"res://resources/audio/se/fireinthehole.tres"
+	"res://resources/audio/se/fireinthehole.tres",
+	"res://resources/audio/se/fangkong.tres",
+	"res://resources/audio/se/yongchang.tres"
 ]
 
 var _pending_paths: Array[String] = []

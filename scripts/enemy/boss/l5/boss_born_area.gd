@@ -1,8 +1,8 @@
 extends Area2D
 class_name BossBornArea
 
-## 破碎后要生成的临时 BOSS（测试用 tower_guard，后续可换正式 Boss 场景）
-const TOWER_GUARD_SCENE: PackedScene = preload("res://scenes/enemy/l5/tower_guard.tscn")
+## 破碎后要生成的 BOSS（第5章最终 Boss）
+const BOSS_5_SCENE: PackedScene = preload("res://scenes/enemy/boss/l5/Boss_5.tscn")
 
 ## 玻璃罩节点（相对本节点的路径，本脚本与 BossGlass2 同属 environment 子节点）
 @export var glass_path: NodePath = ^"../BossGlass2"
@@ -34,25 +34,25 @@ func _on_body_entered(body: Node2D) -> void:
 	AudioManager.play_sound(&"jianci")
 	glass.break_glass()
 
-	# 死亡动画播放完最后一帧的同时，在出生点生成 tower_guard
+	# 死亡动画播放完最后一帧的同时，在出生点生成 Boss5
 	var anim: AnimatedSprite2D = glass.get_node("AnimatedSprite2D")
 	if anim:
 		await anim.animation_finished
-	_spawn_guard()
+	_spawn_boss()
 
 
-## 在 BornMark 位置生成 tower_guard，挂到关卡根节点的 enemys 下
-func _spawn_guard() -> void:
-	var guard: Node2D = TOWER_GUARD_SCENE.instantiate()
-	var mark: Marker2D = get_tree().current_scene.get_node(born_mark_path)
+## 在 BornMark 位置生成 Boss5，挂到关卡根节点的 enemys 下
+func _spawn_boss() -> void:
+	var boss: Node2D = BOSS_5_SCENE.instantiate()
+	var mark: Marker2D = get_tree().current_scene.get_node_or_null(born_mark_path)
 	if mark:
-		guard.global_position = mark.global_position
+		boss._spawn_point = mark.global_position
 	else:
-		guard.global_position = global_position
+		boss._spawn_point = global_position
 	var enemy_parent: Node = get_tree().current_scene.get_node_or_null("enemys")
 	if enemy_parent:
-		enemy_parent.add_child(guard)
+		enemy_parent.add_child(boss)
 	else:
-		get_tree().current_scene.add_child(guard)
+		get_tree().current_scene.add_child(boss)
 	# 生成 boss 后播放战斗 BGM
 	AudioManager.play_sound(&"zhandoul5")

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dahaxr2504868"]
+
+[ext_resource type="Script" uid="uid://u305yfa27uus" path="res://scripts/enemy/boss/l5/fire_phoenix.gd" id="1_phoe"]
+[ext_resource type="Texture2D" uid="uid://dulm11fdugif5" path="res://assets/sprites/enemy/boss/boss_l5/huofenghuang.png" id="2_phoe"]
+[ext_resource type="Script" uid="uid://cflbsmpgemw31" path="res://scripts/components/EnemyHitBox.gd" id="3_phoe"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_phoe"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_phoe")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ei80"]
+size = Vector2(119, 41)
+
+[node name="fire_phoenix" type="Area2D" unique_id=1500000001]
+z_index = 10
+z_as_relative = false
+collision_layer = 2
+script = ExtResource("1_phoe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1500000002]
+sprite_frames = SubResource("SpriteFrames_phoe")
+animation = &"flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1500000003]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_8ei80")
+
+[node name="EnemyHitBox" type="Area2D" parent="." unique_id=1500000004]
+collision_layer = 32
+script = ExtResource("3_phoe")
+damage = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox" unique_id=1607783657]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_8ei80")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1500000008]
