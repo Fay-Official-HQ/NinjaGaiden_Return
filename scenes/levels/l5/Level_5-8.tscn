@@ -414,7 +414,7 @@ position = Vector2(465, 27)
 
 [node name="BossTransitionZone" type="Area2D" parent="." unique_id=990925691]
 script = ExtResource("12_6fnpo")
-target_scene = "res://scenes/ui/TestEnd.tscn"
+target_scene = "res://scenes/levels/l5/Level_5-9.tscndddd"
 metadata/_custom_type_script = "uid://cduihly0ss1id"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossTransitionZone" unique_id=1552493973]
