@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://2604s6c2136w" path="res://assets/sprites/map/yuncai.png" id="4_mgnyg"]
 [ext_resource type="TileSet" uid="uid://bnek8qlnb7yu5" path="res://resources/tilesets/tileset2_1.tres" id="5_kvvug"]
 [ext_resource type="Script" uid="uid://c04yqponxtme3" path="res://scripts/environment/DeathZone.gd" id="6_n352j"]
-[ext_resource type="PackedScene" uid="uid://b8kkx6rvgqrnb" path="res://scenes/player/player2.tscn" id="7_s5bbx"]
+[ext_resource type="PackedScene" uid="uid://dykm40v6ybjer" path="res://scenes/player/CF.tscn" id="7_s5bbx"]
 [ext_resource type="PackedScene" uid="uid://bljf6qa3xmajw" path="res://scenes/item/ItemSpecial.tscn" id="8_eb6c4"]
 [ext_resource type="PackedScene" uid="uid://dyqtdxk8jogrj" path="res://scenes/item/Item.tscn" id="9_4d7sk"]
 [ext_resource type="Script" uid="uid://bgx8fcvkt60f6" path="res://scripts/environment/TransitionZone.gd" id="11_82y4s"]
@@ -104,6 +104,7 @@ position = Vector2(2001, 437)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("7_s5bbx")]
+position = Vector2(94, 209)
 
 [node name="Items" type="Node" parent="." unique_id=111644370]
 
