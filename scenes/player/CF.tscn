@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dykm40v6ybjer"]
 
-[ext_resource type="Script" uid="uid://chdk8g20101lh" path="res://scripts/player/Player.gd" id="1_sqcun"]
-[ext_resource type="Resource" uid="uid://c062bsajfkqey" path="res://resources/player/PlayerData.tres" id="2_y53ex"]
+[ext_resource type="Script" uid="uid://chdk8g20101lh" path="res://scripts/player/Player.gd" id="1_ubbbu"]
+[ext_resource type="Resource" uid="uid://c062bsajfkqey" path="res://resources/player/PlayerData.tres" id="2_c3xxp"]
 [ext_resource type="Script" uid="uid://dgwlv73m7q21n" path="res://scripts/components/InputComponent.gd" id="3_cpjmk"]
 [ext_resource type="Script" uid="uid://ddfcyhwrvybrn" path="res://scripts/components/MovementComponent.gd" id="4_kotlm"]
 [ext_resource type="Script" uid="uid://uwmfea4ebq1o" path="res://scripts/components/AnimationComponent.gd" id="5_yrvsw"]
@@ -57,9 +57,13 @@
 [ext_resource type="Texture2D" uid="uid://2w5rs40e76ak" path="res://assets/sprites/ChangFei/ChangFei31.png" id="55_ubbbu"]
 [ext_resource type="Texture2D" uid="uid://dvwj8bj7witt5" path="res://assets/sprites/ChangFei/ChangFei32.png" id="56_pd2no"]
 [ext_resource type="Texture2D" uid="uid://cfmpiloujuloh" path="res://assets/sprites/ChangFei/ChangFei33.png" id="57_14bfb"]
+[ext_resource type="Texture2D" uid="uid://ce10cjv8rjbhb" path="res://assets/sprites/ChangFei/ChangFei40.png" id="58_pd2no"]
 [ext_resource type="Texture2D" uid="uid://c0v3u0m7uqfga" path="res://assets/sprites/ChangFei/ChangFei25.png" id="58_ubbbu"]
+[ext_resource type="Texture2D" uid="uid://dpdfsdy3jfhc1" path="res://assets/sprites/ChangFei/ChangFei41.png" id="59_14bfb"]
+[ext_resource type="Texture2D" uid="uid://o4dchlifhwwx" path="res://assets/sprites/ChangFei/ChangFei1.png" id="59_kotlm"]
 [ext_resource type="Texture2D" uid="uid://dm5h0xj8syyn2" path="res://assets/sprites/ChangFei/ChangFei13.png" id="59_yrvsw"]
 [ext_resource type="Texture2D" uid="uid://cevjh4kq6b8wi" path="res://assets/sprites/ChangFei/ChangFei14.png" id="60_ubbbu"]
+[ext_resource type="Texture2D" uid="uid://beyio58t8gkf7" path="res://assets/sprites/ChangFei/ChangFei42.png" id="60_v5sid"]
 [ext_resource type="Texture2D" uid="uid://bc3nhe4ckrp22" path="res://assets/sprites/ChangFei/ChangFei4.png" id="61_pd2no"]
 [ext_resource type="Texture2D" uid="uid://d156mk7tvtof0" path="res://assets/sprites/ChangFei/ChangFei15.png" id="62_14bfb"]
 [ext_resource type="Texture2D" uid="uid://by4agiabwe3e4" path="res://assets/sprites/ChangFei/ChangFei18.png" id="63_kotlm"]
@@ -74,30 +78,31 @@
 [ext_resource type="Texture2D" uid="uid://bn1f4f201kybr" path="res://assets/sprites/ChangFei/ChangFei21.png" id="72_pd2no"]
 [ext_resource type="Texture2D" uid="uid://bi77rrforef4b" path="res://assets/sprites/ChangFei/ChangFei9.png" id="73_14bfb"]
 [ext_resource type="Texture2D" uid="uid://daf6l0fpx0lfr" path="res://assets/sprites/ChangFei/ChangFei10.png" id="74_v5sid"]
-[ext_resource type="Texture2D" uid="uid://cimwmh6sx4aqw" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_003.png" id="75_1claa"]
 [ext_resource type="Texture2D" uid="uid://b08wna84jqmkv" path="res://assets/sprites/ChangFei/ChangFei11.png" id="75_exrkn"]
 [ext_resource type="Texture2D" uid="uid://bsv3j7vvcinsf" path="res://assets/sprites/ChangFei/ChangFei12.png" id="76_bb15w"]
-[ext_resource type="Texture2D" uid="uid://b30ldriejrbrd" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_004.png" id="76_n8q35"]
-[ext_resource type="Texture2D" uid="uid://dy711ftrq1ajb" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_005.png" id="77_46igw"]
-[ext_resource type="Texture2D" uid="uid://biwcmi44b7nr2" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_006.png" id="78_7cq43"]
-[ext_resource type="Texture2D" uid="uid://c35ulovryvjex" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_007.png" id="79_1ipa2"]
-[ext_resource type="Texture2D" uid="uid://br41mnre27113" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_008.png" id="80_n6wn6"]
-[ext_resource type="Texture2D" uid="uid://drmn71juut602" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_009.png" id="81_w1j0q"]
-[ext_resource type="Texture2D" uid="uid://c6u23hpkbpw28" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_010.png" id="82_gqhdy"]
-[ext_resource type="Texture2D" uid="uid://83p1ek6iykrg" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_011.png" id="83_a7t24"]
+[ext_resource type="Texture2D" uid="uid://dmggd0wohgom8" path="res://assets/sprites/ChangFei/ChangFei44.png" id="82_pd2no"]
+[ext_resource type="Texture2D" uid="uid://goa7km8mt44r" path="res://assets/sprites/ChangFei/ChangFei45.png" id="83_14bfb"]
 [ext_resource type="Texture2D" uid="uid://bnqjvjtuelwli" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_004.png" id="84_l0xxp"]
+[ext_resource type="Texture2D" uid="uid://3owalle25jgu" path="res://assets/sprites/ChangFei/ChangFei46.png" id="84_v5sid"]
+[ext_resource type="Texture2D" uid="uid://jbtjrhp8d36x" path="res://assets/sprites/ChangFei/ChangFei47.png" id="85_exrkn"]
 [ext_resource type="Texture2D" uid="uid://bsoqigbt7rvk" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_005.png" id="85_m1in6"]
 [ext_resource type="Texture2D" uid="uid://bcyr7uigo0m8k" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_006.png" id="86_1c6nu"]
-[ext_resource type="Texture2D" uid="uid://bbc27w5k70gpr" path="res://assets/sprites/Ryu/tpjingling/beizhan/beizhan.png" id="87_75sfn"]
+[ext_resource type="Texture2D" uid="uid://com4hlnv8xx62" path="res://assets/sprites/ChangFei/ChangFei48.png" id="86_bb15w"]
+[ext_resource type="Texture2D" uid="uid://dl5c3fd0yfq7g" path="res://assets/sprites/ChangFei/ChangFei49.png" id="87_8jwmv"]
 [ext_resource type="Texture2D" uid="uid://cx2f4oew386xy" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_004.png" id="88_jb44d"]
+[ext_resource type="Texture2D" uid="uid://df1j8e38bq73f" path="res://assets/sprites/ChangFei/ChangFei50.png" id="88_oico6"]
+[ext_resource type="Texture2D" uid="uid://cjt4risfl7j78" path="res://assets/sprites/ChangFei/ChangFei51.png" id="89_7056y"]
 [ext_resource type="Texture2D" uid="uid://bbrwjd5h3urac" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_005.png" id="89_aw7yb"]
 [ext_resource type="Texture2D" uid="uid://ciog60uaubvf6" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_006.png" id="90_ful53"]
 [ext_resource type="Texture2D" uid="uid://boebc2inlywh3" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_007.png" id="91_cjrrq"]
 [ext_resource type="Texture2D" uid="uid://crg41j4f8sytp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_004.png" id="92_483l5"]
 [ext_resource type="Texture2D" uid="uid://b3v5buj37o85s" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_005.png" id="93_b3okf"]
+[ext_resource type="Texture2D" uid="uid://dftiyox63ofv1" path="res://assets/sprites/ChangFei/ChangFei43.png" id="93_ppub3"]
 [ext_resource type="Texture2D" uid="uid://h1u6t056tqr0" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_006.png" id="94_k6wcp"]
 [ext_resource type="Texture2D" uid="uid://dxja886d8v1kp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_007.png" id="95_jj3bn"]
+[ext_resource type="Script" uid="uid://dbti7ijb3x5th" path="res://scripts/player/states/RelaxState.gd" id="96_rlxst"]
 [ext_resource type="Texture2D" uid="uid://dcxta317tmluy" path="res://assets/sprites/ChangFei/ChangFei34.png" id="98_kotlm"]
+[ext_resource type="Texture2D" uid="uid://ccfcyakxjuijl" path="res://assets/sprites/ChangFei/ChangFei39.png" id="99_cpjmk"]
 [ext_resource type="Texture2D" uid="uid://du7qqkfxlhgj2" path="res://assets/sprites/ChangFei/ChangFei38.png" id="99_yrvsw"]
 [ext_resource type="Texture2D" uid="uid://dh42jhmm6phn6" path="res://assets/sprites/ChangFei/ChangFei35.png" id="100_y53ex"]
 [ext_resource type="Texture2D" uid="uid://dcs6gk0ka0wci" path="res://assets/sprites/ChangFei/ChangFei37.png" id="101_cpjmk"]
@@ -243,13 +248,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("58_ubbbu")
-}],
-"loop": true,
-"name": &"death",
-"speed": 5.0
+"texture": ExtResource("58_pd2no")
 }, {
-"frames": [],
+"duration": 1.0,
+"texture": ExtResource("59_14bfb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_v5sid")
+}],
+"loop": false,
+"name": &"death",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_kotlm")
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
@@ -381,35 +395,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("75_1claa")
+"texture": ExtResource("82_pd2no")
 }, {
 "duration": 1.0,
-"texture": ExtResource("76_n8q35")
+"texture": ExtResource("83_14bfb")
 }, {
 "duration": 1.0,
-"texture": ExtResource("77_46igw")
+"texture": ExtResource("84_v5sid")
 }, {
 "duration": 1.0,
-"texture": ExtResource("78_7cq43")
+"texture": ExtResource("85_exrkn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("79_1ipa2")
+"texture": ExtResource("86_bb15w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("80_n6wn6")
+"texture": ExtResource("87_8jwmv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("81_w1j0q")
+"texture": ExtResource("88_oico6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("82_gqhdy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("83_a7t24")
+"texture": ExtResource("89_7056y")
 }],
 "loop": false,
 "name": &"sword_dash",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -436,7 +447,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("87_75sfn")
+"texture": ExtResource("93_ppub3")
 }],
 "loop": true,
 "name": &"sword_ready",
@@ -493,10 +504,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("98_kotlm")
+"texture": ExtResource("99_yrvsw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("99_yrvsw")
+"texture": ExtResource("99_cpjmk")
 }],
 "loop": true,
 "name": &"wall_climb",
@@ -543,8 +554,8 @@ gravity = Vector3(0, 98, 0)
 [node name="Player" type="CharacterBody2D" unique_id=1811321606 groups=["player"]]
 z_index = 100
 collision_mask = 652
-script = ExtResource("1_sqcun")
-data = ExtResource("2_y53ex")
+script = ExtResource("1_ubbbu")
+data = ExtResource("2_c3xxp")
 
 [node name="Components" type="Node" parent="." unique_id=1554109802]
 
@@ -572,6 +583,9 @@ initial_state = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=1099474039]
 script = ExtResource("10_exrkn")
+
+[node name="RelaxState" type="Node" parent="StateMachine" unique_id=1120229851]
+script = ExtResource("96_rlxst")
 
 [node name="RunState" type="Node" parent="StateMachine" unique_id=506380533]
 script = ExtResource("11_bb15w")
@@ -747,12 +761,12 @@ debug_color = Color(0.77392095, 0.43947607, 0.13655847, 0.41960785)
 position = Vector2(0, 5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual" unique_id=1073694674]
-position = Vector2(0, 6)
+position = Vector2(-2, 6)
 sprite_frames = SubResource("SpriteFrames_kotlm")
-animation = &"run"
+animation = &"sword_dash"
 autoplay = "idle"
-frame = 1
-frame_progress = 0.4688751
+frame = 7
+frame_progress = 1.0
 
 [node name="BlockSparkPos" type="Marker2D" parent="Visual" unique_id=1902681224]
 position = Vector2(17, 2)

@@ -254,7 +254,7 @@ func die() -> void:
 	AudioManager.pause_bgm()
 
 	# 播放死亡动画
-	animated_sprite.play("hurt")
+	animated_sprite.play("death")
 
 	# 播放死亡音效
 	AudioManager.play_sound(&"siwang")

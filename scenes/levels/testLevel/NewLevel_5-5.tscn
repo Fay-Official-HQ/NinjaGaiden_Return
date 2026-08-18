@@ -135,6 +135,7 @@ position = Vector2(2500, 400)
 shape = SubResource("RectangleShape2D_vqsrt")
 
 [node name="Player" parent="." unique_id=1811321606 instance=ExtResource("5_3ey7l")]
+position = Vector2(82, 77)
 
 [node name="environment" type="Node" parent="." unique_id=98744003]
 

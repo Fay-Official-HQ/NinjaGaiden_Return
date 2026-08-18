@@ -3,7 +3,13 @@ extends State
 
 class_name IdleState
 
+## 静止超过该秒数（无任何输入）则进入放松状态（仅当场景存在 RelaxState 节点时启用）
+const RELAX_IDLE_TIME: float = 5.0
+
+var _no_input_time: float = 0.0
+
 func enter(_msg: Dictionary = {}) -> void:
+	_no_input_time = 0.0
 	player.animation.play("idle")
 
 func physics_update(_delta: float) -> void:
@@ -60,5 +66,11 @@ func physics_update(_delta: float) -> void:
 
 	player.movement.stop()
 	player.move_and_slide()
+
+	# 放松状态检测：静止 5 秒无任何输入 → 进入 RelaxState（仅当场景中存在该节点）
+	_no_input_time += _delta
+	var relax_state: State = state_machine.get_node_or_null("RelaxState") as State
+	if relax_state and _no_input_time >= RELAX_IDLE_TIME:
+		state_machine.change_state(relax_state)
 
 
