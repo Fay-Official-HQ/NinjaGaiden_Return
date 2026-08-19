@@ -10,4 +10,7 @@
 
 [resource]
 script = ExtResource("1_script")
-shadow_textures = [ExtResource("2_shadow"), ExtResource("3_shadow"), ExtResource("4_shadow"), ExtResource("5_shadow"), ExtResource("6_shadow")]
+sound_overrides = {
+"cuoa": "gongji",
+"gongji": "cuoa"
+}
