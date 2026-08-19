@@ -10,8 +10,8 @@
 [ext_resource type="Script" uid="uid://0c42lm51fa85" path="res://scripts/components/NinjutsuComponent.gd" id="6_7nf13"]
 [ext_resource type="Script" uid="uid://bicqkfw1indlk" path="res://scripts/player/states/StateMachine.gd" id="7_5stf6"]
 [ext_resource type="Script" uid="uid://e4qsxfifoewa" path="res://scripts/player/states/IdleState.gd" id="7_npwbq"]
-[ext_resource type="Script" uid="uid://dbti7ijb3x5th" path="res://scripts/player/states/RelaxState.gd" id="7_relax"]
 [ext_resource type="Script" uid="uid://dvqdc7rn0e8nu" path="res://scripts/components/SwordComponent.gd" id="7_pq1ih"]
+[ext_resource type="Script" uid="uid://dbti7ijb3x5th" path="res://scripts/player/states/RelaxState.gd" id="7_relax"]
 [ext_resource type="Script" uid="uid://c0onc1k065k5y" path="res://scripts/player/states/RunState.gd" id="8_7oing"]
 [ext_resource type="Script" uid="uid://dkn0ephrawqnl" path="res://scripts/components/PlayerAudioComponent.gd" id="8_vlhku"]
 [ext_resource type="Script" uid="uid://daep5nnwqrcff" path="res://scripts/player/states/JumpState.gd" id="9_5stf6"]
@@ -582,7 +582,7 @@ initial_state = NodePath("IdleState")
 [node name="IdleState" type="Node" parent="StateMachine" unique_id=1099474039]
 script = ExtResource("7_npwbq")
 
-[node name="RelaxState" type="Node" parent="StateMachine"]
+[node name="RelaxState" type="Node" parent="StateMachine" unique_id=883299223]
 script = ExtResource("7_relax")
 
 [node name="RunState" type="Node" parent="StateMachine" unique_id=506380533]

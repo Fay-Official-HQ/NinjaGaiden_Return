@@ -8,14 +8,7 @@ var _chains_remaining: int = 0
 var _chain_timer: float = 0.0
 var _is_active: bool = false
 
-var shadow_textures = [
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_1.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_2.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_3.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_4.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_5.png")
-]
-
+# 残影贴图从角色素材配置读取（player.get_shadow_textures()），每个角色可不同
 var _active_shadows: Array[Sprite2D] = []
 
 var _chain_origin: Vector2
@@ -86,7 +79,7 @@ func _do_attack(target: Node2D) -> void:
 
 	player.set_facing_direction(1.0 if target.global_position.x > player.global_position.x else -1.0)
 
-	AudioManager.play_sound(&"cuoa")
+	player.play_sound(&"cuoa")
 	_spawn_shadow_wave(target.global_position)
 
 	var hurtbox = _get_hurtbox(target)
@@ -95,7 +88,8 @@ func _do_attack(target: Node2D) -> void:
 
 
 func _spawn_shadow_wave(pos: Vector2) -> void:
-	var tex = shadow_textures[randi() % shadow_textures.size()]
+	var textures: Array = player.get_shadow_textures()
+	var tex = textures[randi() % textures.size()]
 	var s = Sprite2D.new()
 	s.texture = tex
 	s.modulate.a = randf_range(0.4, 0.7)

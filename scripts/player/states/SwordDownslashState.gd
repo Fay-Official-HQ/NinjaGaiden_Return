@@ -22,8 +22,8 @@ func enter(_msg: Dictionary = {}) -> void:
 		_fallback_to_neutral()
 		return
 	player.sword.start_cooldown("downslash")
-	AudioManager.play_sound(&"hanjiao")
-	AudioManager.play_sound(&"jianxiapi")
+	player.play_sound(&"hanjiao")
+	player.play_sound(&"jianxiapi")
 	print("【下劈】释放成功！剩余TP:", player.sword.current_tp, " 冷却5秒")
 
 	player.is_invincible = true

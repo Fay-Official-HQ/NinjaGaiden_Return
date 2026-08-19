@@ -4,6 +4,9 @@ extends CharacterBody2D
 class_name Player
 
 @export var data: PlayerData
+# 角色专属素材配置（必杀技/处决特效贴图、音效覆盖表）
+# 未设置时自动使用 CharacterAssets 默认值（Ryu 素材），旧角色无需改动
+@export var assets: CharacterAssets
 
 # 组件解耦引用
 @onready var input: InputComponent = $Components/InputComponent
@@ -168,7 +171,7 @@ func _process(delta: float) -> void:
 				_special_heal_accum -= SPECIAL_HEAL_INTERVAL
 				_special_heal_count += 1
 				current_hp = min(current_hp + SPECIAL_HEAL_AMOUNT, data.max_hp)
-				AudioManager.play_sound(&"liaoyu")
+				play_sound(&"liaoyu")
 				heal_particles.restart()
 		if not is_invincible:
 			#此处设置无敌期间透明度
@@ -236,12 +239,43 @@ func _check_overlapping_enemy_after_invincibility() -> void:
 			_on_hurt_box_took_damage(area.damage)
 			return
 
+# ────────── 角色素材配置访问（各角色可差异化）──────────
+## 懒加载角色素材配置：未在场景中设置 assets 时，回退到 Ryu 默认素材，保证旧角色零改动
+func get_assets() -> CharacterAssets:
+	if assets == null:
+		assets = CharacterAssets.new()
+	return assets
+
+## 必杀技/处决共用的 5 张残影贴图
+func get_shadow_textures() -> Array:
+	return get_assets().shadow_textures
+
+## 必杀技最后一击的大刀幻影贴图
+func get_final_phantom_texture() -> Texture2D:
+	return get_assets().final_phantom_texture
+
+## 角色音效统一出口：支持按角色覆盖音效 ID，未覆盖时原样播放（兼容旧逻辑）
+func play_sound(sound_id: StringName) -> void:
+	var overrides: Dictionary = get_assets().sound_overrides
+	var key := String(sound_id)
+	if overrides.has(key):
+		sound_id = StringName(overrides[key])
+	AudioManager.play_sound(sound_id)
+
+## 蓄力等淡入音效统一出口（同样支持按角色覆盖），返回播放器引用
+func play_sfx_fade_in(sound_id: StringName, fade_in_duration: float = 0.0) -> AudioStreamPlayer:
+	var overrides: Dictionary = get_assets().sound_overrides
+	var key := String(sound_id)
+	if overrides.has(key):
+		sound_id = StringName(overrides[key])
+	return AudioManager.play_sfx_fade_in(sound_id, fade_in_duration)
+
+
 func die() -> void:
 	if _is_dead:
 		return
 	print("玩家死亡！")
 	_is_dead = true
-
 	# 冻结所有运动
 	velocity = Vector2.ZERO
 	set_physics_process(false)
@@ -257,7 +291,7 @@ func die() -> void:
 	animated_sprite.play("death")
 
 	# 播放死亡音效
-	AudioManager.play_sound(&"siwang")
+	play_sound(&"siwang")
 
 	# 清除场景持久化，确保重开时恢复满状态
 	PlayerStateManager.clear()
@@ -342,7 +376,7 @@ func _update_charge(delta: float) -> void:
 		exterminate_stacks = 1
 		_charge_energy_timer = 0.0
 		_charge_visual_active = true
-		_charge_sfx_player = AudioManager.play_sfx_fade_in(&"xuli", 0.0)
+		_charge_sfx_player = play_sfx_fade_in(&"xuli", 0.0)
 		sword.current_tp -= 1
 		sword.tp_changed.emit(sword.current_tp)
 		_update_charge_color()
@@ -417,7 +451,7 @@ func _spawn_shaqi() -> void:
 func _on_god_mode_changed(enabled: bool) -> void:
 	if enabled:
 		_god_mist_active = true
-		AudioManager.play_sound(&"baoqi")
+		play_sound(&"baoqi")
 		_spawn_sunlong_rise_effect()
 		_play_cyan_shake()
 	else:
@@ -527,7 +561,7 @@ func _on_block_detector_entered(area: Area2D) -> void:
 	var attack_dir = sign(area.global_position.x - global_position.x)
 	if attack_dir != 0 and attack_dir != facing_direction:
 		return
-	AudioManager.play_sound(&"fangyu")
+	play_sound(&"fangyu")
 	_spawn_block_spark()
 	# 仅销毁投射物（不销毁近战攻击的父节点）
 	if area.get_parent() != null and area.get_parent().is_in_group("projectile"):

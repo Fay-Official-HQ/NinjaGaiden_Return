@@ -26,7 +26,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	is_casting = false
 	player.velocity = Vector2.ZERO
 	player.animation.play("wall_idle")
-	AudioManager.play_sound(&"tiaoyue")
+	player.play_sound(&"tiaoyue")
 
 	_climbable_wall = _msg.get("climbable_wall", null)
 

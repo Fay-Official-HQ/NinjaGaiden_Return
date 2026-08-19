@@ -23,14 +23,8 @@ const PLAYER_ALPHA = 0.0      # 技能期间玩家透明度（0.0 = 完全透明
 
 @export var final_phantom_lifetime: float = 1.35  # 终结幻影存在时间（秒），可在编辑器中调试
 
-# 5种残影贴图，每波随机选取
-var shadow_textures = [
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_1.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_2.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_3.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_4.png"),
-	preload("res://assets/sprites/Ryu/shadows/shadow_pose_5.png")
-]
+# 5种残影贴图改为从角色素材配置读取（player.get_shadow_textures()）
+# 每个角色可配置不同的残影贴图，代码不变
 
 # getter 属性：延迟获取子节点引用，避免 _ready 顺序问题
 var sprite: AnimatedSprite2D:
@@ -92,7 +86,7 @@ func enter(_msg: Dictionary = {}) -> void:
 	_tween_fade = create_tween()
 	_tween_fade.tween_property(sprite, "modulate:a", PLAYER_ALPHA, FADE_IN_TIME)
 
-	AudioManager.play_sound(&"yinshen")
+	player.play_sound(&"yinshen")
 
 	# 获取场景中的 DragonFlashHitBox，开启它的碰撞监控（发射伤害雷达）
 	var box_node = player.get_node("AttackRoot/DragonFlashHitBox")
@@ -174,7 +168,7 @@ func spawn_wave() -> void:
 	# 每2波算1次斩击（偶数波触发音效+伤害）
 	if _wave_count % 2 == 0:
 		_hit_count += 1
-		AudioManager.play_sound(&"gongji")
+		player.play_sound(&"gongji")
 		_deal_dragon_damage(1)
 
 	# 每波都生成随机幻影（视觉效果）
@@ -188,15 +182,16 @@ func spawn_wave() -> void:
 # 最后一击：保留玩家身上的淡出幻影，但不生成随机残影
 func _do_final_strike() -> void:
 	_hit_count += 1
-	AudioManager.play_sound(&"hanjiao")
-	AudioManager.play_sound(&"bishaji")
+	player.play_sound(&"hanjiao")
+	player.play_sound(&"bishaji")
 	_spawn_final_phantom()
 	_deal_dragon_damage(4, true)
 	trigger_screen_flash()
 
 func create_shadow() -> void:
-	# 从5种残影贴图中随机选一个
-	var tex = shadow_textures[randi() % shadow_textures.size()]
+	# 从该角色配置的5种残影贴图中随机选一个
+	var textures: Array = player.get_shadow_textures()
+	var tex = textures[randi() % textures.size()]
 
 	var s = Sprite2D.new()
 	s.texture = tex
@@ -247,7 +242,7 @@ func trigger_screen_flash() -> void:
 
 func _spawn_final_phantom() -> void:
 	var phantom = Sprite2D.new()
-	phantom.texture = preload("res://assets/sprites/Ryu/fcjingling/dadao/dadao_004.png")
+	phantom.texture = player.get_final_phantom_texture()
 	phantom.global_position = player.global_position
 	phantom.scale.x = player.facing_direction
 	phantom.modulate.a = 0.6
