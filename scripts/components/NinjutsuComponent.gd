@@ -83,6 +83,17 @@ func cast_ninjutsu(facing_override: float = 0.0) -> void:
 func _get_player() -> Player:
 	return get_parent().owner as Player
 
+
+## 播放忍术音效（支持角色专属音效覆盖 CharacterAssets.sound_overrides，如 CF 替换忍术音效）
+func _play_sound(sound_id: StringName) -> void:
+	var player = _get_player()
+	if player:
+		var overrides: Dictionary = player.get_assets().sound_overrides
+		var key := String(sound_id)
+		if overrides.has(key):
+			sound_id = StringName(overrides[key])
+	AudioManager.play_sound(sound_id)
+
 func _get_dir(facing_override: float) -> float:
 	# facing_override != 0 表示墙上释放，由 WallState 指定方向
 	if facing_override != 0:
@@ -91,7 +102,7 @@ func _get_dir(facing_override: float) -> float:
 	return 1.0 if player.facing_direction > 0 else -1.0
 
 func _cast_fire(facing_override: float = 0.0) -> void:
-	AudioManager.play_sound(&"renshuhuoyan")
+	_play_sound(&"renshuhuoyan")
 	print("释放忍术：火焰")
 	var player = _get_player()
 	if not player:
@@ -109,7 +120,7 @@ func _cast_fire(facing_override: float = 0.0) -> void:
 
 func _cast_fireball(facing_override: float = 0.0) -> void:
 	print("释放忍术：火球")
-	AudioManager.play_sound(&"renshuhuoqiu")
+	_play_sound(&"renshuhuoqiu")
 	var player = _get_player()
 	var dir = _get_dir(facing_override)
 	var base_pos = player.global_position + Vector2(dir * 20, 8)
@@ -123,7 +134,7 @@ func _cast_fireball(facing_override: float = 0.0) -> void:
 		get_tree().current_scene.add_child(proj)
 
 func _cast_edgeblade(_facing_override: float = 0.0) -> void:
-	AudioManager.play_sound(&"renshulengren")
+	_play_sound(&"renshulengren")
 	print("释放忍术：棱刃")
 	var player = _get_player()
 	if not player:
@@ -143,7 +154,7 @@ func _cast_edgeblade(_facing_override: float = 0.0) -> void:
 
 func _cast_boomerang(facing_override: float = 0.0) -> void:
 	print("释放忍术：回旋镖")
-	AudioManager.play_sound(&"renshubiao")
+	_play_sound(&"renshubiao")
 	var player = _get_player()
 	if not player:
 		return

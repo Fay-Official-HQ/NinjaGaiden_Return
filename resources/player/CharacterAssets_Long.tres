@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterAssets" format=3 uid="uid://d100544y66nq2"]
 
 [ext_resource type="Texture2D" uid="uid://bhr8uc86bbyqs" path="res://assets/sprites/Ryu/fcjingling/dadao/dadao_004.png" id="1_k2m1h"]
-[ext_resource type="Script" uid="uid://bf6h1egmtrfi1" path="res://resources/player/CharacterAssets.gd" id="2_7bdy6"]
+[ext_resource type="Script" path="res://resources/player/CharacterAssets.gd" id="2_7bdy6"]
 [ext_resource type="Texture2D" uid="uid://bcb22mqlep7ej" path="res://assets/sprites/Ryu/shadows/shadow_pose_1.png" id="3_k2m1h"]
 [ext_resource type="Texture2D" uid="uid://j5hila3mbb6p" path="res://assets/sprites/Ryu/shadows/shadow_pose_2.png" id="4_k2m1h"]
 [ext_resource type="Texture2D" uid="uid://dp0honv8d2o31" path="res://assets/sprites/Ryu/shadows/shadow_pose_3.png" id="5_7bdy6"]

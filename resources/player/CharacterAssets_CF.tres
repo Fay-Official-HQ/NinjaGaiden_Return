@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterAssets" format=3 uid="uid://cogggldxsep24"]
 
 [ext_resource type="Texture2D" uid="uid://ciahyagowc4du" path="res://assets/sprites/ChangFei/ChangFei64.png" id="1_87764"]
-[ext_resource type="Script" uid="uid://bf6h1egmtrfi1" path="res://resources/player/CharacterAssets.gd" id="1_script"]
+[ext_resource type="Script" path="res://resources/player/CharacterAssets.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://b8q5uri4him11" path="res://assets/sprites/ChangFei/shadows/ChangFei66.png" id="2_shadow"]
 [ext_resource type="Texture2D" uid="uid://dr4k2muqgje8f" path="res://assets/sprites/ChangFei/shadows/ChangFei67.png" id="3_shadow"]
 [ext_resource type="Texture2D" uid="uid://cy7qhu8oyxqlf" path="res://assets/sprites/ChangFei/shadows/ChangFei68.png" id="4_shadow"]
@@ -12,5 +12,9 @@
 script = ExtResource("1_script")
 sound_overrides = {
 "cuoa": "gongji",
-"gongji": "cuoa"
+"hanjiao": "gongji",
+"renshubiao": "jianxuanzhuan",
+"renshuhuoqiu": "shibingfashe",
+"renshuhuoyan": "jianqianchong",
+"renshulengren": "fangyu"
 }

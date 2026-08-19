@@ -7,6 +7,8 @@ extends Node
 
 # 自动绑定主角的动画节点（如果你的叫别名字，请改成对应的名字）
 @onready var sprite: AnimatedSprite2D =$"../../Visual/AnimatedSprite2D"
+# 主角节点（用于读取 CharacterAssets.sound_overrides 做角色音效覆盖）
+@onready var player: Player = $"../.."
 
 ## 核心名册：在这里配置【哪个动画】的【第几帧（从0开始数）】播放【什么声音】
 ## 以后增加新动画音效，让 AI 帮你往这个字典里添字即可！
@@ -48,6 +50,12 @@ func _on_sprite_frame_changed() -> void:
 		# 检查当前这一帧有没有登记音效
 		if anim_table.has(current_frame):
 			var sound_id = anim_table[current_frame]
+			# 角色专属音效覆盖（CharacterAssets.sound_overrides，如 CF 把 hanjiao 换成 gongji）
+			if player:
+				var overrides: Dictionary = player.get_assets().sound_overrides
+				var key := String(sound_id)
+				if overrides.has(key):
+					sound_id = StringName(overrides[key])
 			# 查到了！立刻放音
 			AudioManager.play_sound(sound_id)
 			print("【组件触发】动画: ", current_anim, " 第 ", current_frame + 1, " 帧，播放音效: ", sound_id)
@@ -55,5 +63,11 @@ func _on_sprite_frame_changed() -> void:
 ## 接口2：提供给状态机（FSM）的【即时播放接口】
 ## 比如跳跃、受伤、忍术出手时，状态机直接调用这个方法
 func play_immediate(sound_id: StringName) -> void:
+	# 同样支持角色专属音效覆盖
+	if player:
+		var overrides: Dictionary = player.get_assets().sound_overrides
+		var key := String(sound_id)
+		if overrides.has(key):
+			sound_id = StringName(overrides[key])
 	AudioManager.play_sound(sound_id)
 	print("【组件触发】状态机即时呼叫播放音效: ", sound_id)

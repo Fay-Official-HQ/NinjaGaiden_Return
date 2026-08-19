@@ -1,0 +1,472 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://84hrb3wtc1wf"]
+
+[ext_resource type="Texture2D" uid="uid://mfc5epdvphh7" path="res://assets/sprites/Ryu/fcjingling/konggongji/konggongji_002.png" id="1_vgtdd"]
+[ext_resource type="Texture2D" uid="uid://bb1yh8mxhfcn8" path="res://assets/sprites/Ryu/fcjingling/dadao/miesha.png" id="2_is2ol"]
+[ext_resource type="Texture2D" uid="uid://bwkfpq06gqy26" path="res://assets/sprites/Ryu/fcjingling/konggongji/konggongji_004.png" id="3_84i2e"]
+[ext_resource type="Texture2D" uid="uid://i3emub21lh3m" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_003.png" id="4_3dkry"]
+[ext_resource type="Texture2D" uid="uid://db5oapl2tix42" path="res://assets/sprites/Ryu/fcjingling/dadao/dundadao.png" id="5_c2ise"]
+[ext_resource type="Texture2D" uid="uid://o8ermo06xa04" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_005.png" id="6_785ji"]
+[ext_resource type="Texture2D" uid="uid://dnprhdmkcfsx5" path="res://assets/sprites/Ryu/fcjingling/gongji/gongji_002.png" id="7_h4iu3"]
+[ext_resource type="Texture2D" uid="uid://3qljdnugd1eq" path="res://assets/sprites/Ryu/fcjingling/dadao/zhandadao.png" id="8_aoiyc"]
+[ext_resource type="Texture2D" uid="uid://beig2cuynrf31" path="res://assets/sprites/Ryu/fcjingling/gongji/gongji_004.png" id="9_we8jf"]
+[ext_resource type="Texture2D" uid="uid://cxetkrxvv0occ" path="res://assets/sprites/Ryu/fcjingling/konggongji/konggongji_003.png" id="10_mlvjj"]
+[ext_resource type="Texture2D" uid="uid://bwy5edcsegnv5" path="res://assets/sprites/Ryu/fcjingling/kongrenshu/kongrenshu_003.png" id="11_6geg5"]
+[ext_resource type="Texture2D" uid="uid://y22glbi6npis" path="res://assets/sprites/Ryu/fcjingling/kongrenshu/kongrenshu_004.png" id="12_7ee1a"]
+[ext_resource type="Texture2D" uid="uid://byuwjqf1645xx" path="res://assets/sprites/Ryu/fcjingling/gongji/gongji_003.png" id="13_ffvmg"]
+[ext_resource type="Texture2D" uid="uid://fk3whd58ldas" path="res://assets/sprites/Ryu/fcjingling/xiadun/xiadun_002.png" id="14_1libm"]
+[ext_resource type="Texture2D" uid="uid://br7qlm4e54vfj" path="res://assets/sprites/Ryu/fcjingling/xiadun/xiadun_003.png" id="15_e8s0k"]
+[ext_resource type="Texture2D" uid="uid://ceg4v7fy6tgb" path="res://assets/sprites/Ryu/fcjingling/xiadungongji/xiadungongji_004.png" id="16_7tij1"]
+[ext_resource type="Texture2D" uid="uid://bcj2o2v82ijfa" path="res://assets/sprites/Ryu/fcjingling/shoushang/shoushang.png" id="17_beatm"]
+[ext_resource type="Texture2D" uid="uid://xyp8qlv4k6r7" path="res://assets/sprites/Ryu/fcjingling/zhanli/zhanli_000.png" id="18_kfnj6"]
+[ext_resource type="Texture2D" uid="uid://cdh7g16kk6ug2" path="res://assets/sprites/Ryu/fcjingling/zhanli/zhanli_001.png" id="19_7kurb"]
+[ext_resource type="Texture2D" uid="uid://v1q0b16j43jh" path="res://assets/sprites/Ryu/fcjingling/xuankong/xuankong_001.png" id="20_ff8v4"]
+[ext_resource type="Texture2D" uid="uid://dkuhyplmtk1a0" path="res://assets/sprites/Ryu/fcjingling/xuankong/xuankong_002.png.png" id="21_t6qnn"]
+[ext_resource type="Texture2D" uid="uid://d2nj07tef4p44" path="res://assets/sprites/Ryu/fcjingling/shiheng/shiheng_002.png" id="22_laowx"]
+[ext_resource type="Texture2D" uid="uid://biemve1cpov1f" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_003.png" id="23_k50s5"]
+[ext_resource type="Texture2D" uid="uid://byr771p1frsq6" path="res://assets/sprites/Ryu/fcjingling/renshu/renshu_004.png" id="24_iynve"]
+[ext_resource type="Texture2D" uid="uid://c8xnchcrryhri" path="res://assets/sprites/Ryu/fcjingling/xuandiao/xuandiao_004.png" id="25_pemon"]
+[ext_resource type="Texture2D" uid="uid://umkmklhlxik1" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_005.png" id="26_132ub"]
+[ext_resource type="Texture2D" uid="uid://cuvp201nxr5bv" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_006.png" id="27_xdklk"]
+[ext_resource type="Texture2D" uid="uid://cg35nawxuvama" path="res://assets/sprites/Ryu/fcjingling/xuanyidong/xuandiao_007.png" id="28_yutpk"]
+[ext_resource type="Texture2D" uid="uid://0qne33xiivrf" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_008.png" id="29_muv1w"]
+[ext_resource type="Texture2D" uid="uid://bfq3r0lu7dms7" path="res://assets/sprites/Ryu/fcjingling/xuanrenshu/xuandiao_009.png" id="30_ks2kj"]
+[ext_resource type="Texture2D" uid="uid://vhqfcrntrnqu" path="res://assets/sprites/Ryu/fcjingling/fangun/fangun_002.png" id="31_cxe8q"]
+[ext_resource type="Texture2D" uid="uid://cpv8rh51vo5gy" path="res://assets/sprites/Ryu/fcjingling/fangun/fangun_003.png" id="32_l28v1"]
+[ext_resource type="Texture2D" uid="uid://cjpyily7lxk3" path="res://assets/sprites/Ryu/fcjingling/fangun/fangun_004.png" id="33_25yfs"]
+[ext_resource type="Texture2D" uid="uid://bkp6rkait02so" path="res://assets/sprites/Ryu/fcjingling/fangun/fangun_005.png" id="34_0wk06"]
+[ext_resource type="Texture2D" uid="uid://bydsxjyu1e4uc" path="res://assets/sprites/Ryu/fcjingling/paodong/paodong_002.png" id="35_l4s5k"]
+[ext_resource type="Texture2D" uid="uid://33ffa1fowfra" path="res://assets/sprites/Ryu/fcjingling/paodong/paodong_003.png" id="36_n5rnb"]
+[ext_resource type="Texture2D" uid="uid://d1kfuauyd748v" path="res://assets/sprites/Ryu/fcjingling/paodong/paodong_004.png" id="37_r36b7"]
+[ext_resource type="Texture2D" uid="uid://cimwmh6sx4aqw" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_003.png" id="38_y7rgg"]
+[ext_resource type="Texture2D" uid="uid://b30ldriejrbrd" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_004.png" id="39_ncbsi"]
+[ext_resource type="Texture2D" uid="uid://dy711ftrq1ajb" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_005.png" id="40_d6rx8"]
+[ext_resource type="Texture2D" uid="uid://biwcmi44b7nr2" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_006.png" id="41_6yy8k"]
+[ext_resource type="Texture2D" uid="uid://c35ulovryvjex" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_007.png" id="42_qyd1q"]
+[ext_resource type="Texture2D" uid="uid://br41mnre27113" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_008.png" id="43_bvbel"]
+[ext_resource type="Texture2D" uid="uid://drmn71juut602" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_009.png" id="44_tm6qw"]
+[ext_resource type="Texture2D" uid="uid://c6u23hpkbpw28" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_010.png" id="45_3w45u"]
+[ext_resource type="Texture2D" uid="uid://83p1ek6iykrg" path="res://assets/sprites/Ryu/tpjingling/qianchong/qianchong_011.png" id="46_uxov4"]
+[ext_resource type="Texture2D" uid="uid://bnqjvjtuelwli" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_004.png" id="47_jbjhd"]
+[ext_resource type="Texture2D" uid="uid://bsoqigbt7rvk" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_005.png" id="48_gd5na"]
+[ext_resource type="Texture2D" uid="uid://bcyr7uigo0m8k" path="res://assets/sprites/Ryu/tpjingling/xiapi/xiapi_006.png" id="49_qxrr6"]
+[ext_resource type="Texture2D" uid="uid://bbc27w5k70gpr" path="res://assets/sprites/Ryu/tpjingling/beizhan/beizhan.png" id="50_seuk8"]
+[ext_resource type="Texture2D" uid="uid://cx2f4oew386xy" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_004.png" id="51_phtny"]
+[ext_resource type="Texture2D" uid="uid://bbrwjd5h3urac" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_005.png" id="52_pulad"]
+[ext_resource type="Texture2D" uid="uid://ciog60uaubvf6" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_006.png" id="53_ukliu"]
+[ext_resource type="Texture2D" uid="uid://boebc2inlywh3" path="res://assets/sprites/Ryu/tpjingling/xuanzhuan/xuanzhuan_007.png" id="54_tyarp"]
+[ext_resource type="Texture2D" uid="uid://crg41j4f8sytp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_004.png" id="55_1fnqi"]
+[ext_resource type="Texture2D" uid="uid://b3v5buj37o85s" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_005.png" id="56_f821a"]
+[ext_resource type="Texture2D" uid="uid://h1u6t056tqr0" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_006.png" id="57_yt0se"]
+[ext_resource type="Texture2D" uid="uid://dxja886d8v1kp" path="res://assets/sprites/Ryu/tpjingling/shangtiao/shangtiao_007.png" id="58_x0cwg"]
+[ext_resource type="Texture2D" uid="uid://dqur54a73cjy2" path="res://assets/sprites/Ryu/fcjingling/paqiang/qiangmian_003.png" id="59_bhe7d"]
+[ext_resource type="Texture2D" uid="uid://nf7u5mix72c" path="res://assets/sprites/Ryu/fcjingling/paqiang/qiangmian_004.png" id="60_mvwe2"]
+[ext_resource type="Texture2D" uid="uid://bdmieei86moql" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu/qiangmian_005.png" id="61_xjxh6"]
+[ext_resource type="Texture2D" uid="uid://boddtmlcylvxk" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu/qiangmian_006.png" id="62_i78t8"]
+[ext_resource type="Texture2D" uid="uid://qg1ms4d8x4m" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu2/qiangmian_007.png" id="63_k11vn"]
+[ext_resource type="Texture2D" uid="uid://bkeswjbq3neej" path="res://assets/sprites/Ryu/fcjingling/qiangrenshu2/qiangmian_008.png" id="64_ua75b"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("1_vgtdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_is2ol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_84i2e")
+}],
+"loop": false,
+"name": &"Exec_Air",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3dkry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c2ise")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_785ji")
+}],
+"loop": false,
+"name": &"Exec_Crouch",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_h4iu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_aoiyc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_we8jf")
+}],
+"loop": false,
+"name": &"Exec_Stand",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("1_vgtdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mlvjj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_84i2e")
+}],
+"loop": false,
+"name": &"air_attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_6geg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7ee1a")
+}],
+"loop": false,
+"name": &"air_ninjutsu",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_h4iu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ffvmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_we8jf")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_1libm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_e8s0k")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3dkry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_7tij1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_785ji")
+}],
+"loop": false,
+"name": &"crouch_attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_beatm")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_kfnj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_7kurb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_ff8v4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_t6qnn")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_laowx")
+}],
+"loop": true,
+"name": &"fall_imbalance",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_k50s5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_iynve")
+}],
+"loop": false,
+"name": &"ground_ninjutsu",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_pemon")
+}],
+"loop": true,
+"name": &"hang_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_132ub")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_xdklk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_yutpk")
+}],
+"loop": true,
+"name": &"hang_move",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_muv1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_ks2kj")
+}],
+"loop": false,
+"name": &"hang_ninjutsu",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_beatm")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_kfnj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_7kurb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_cxe8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_l28v1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_25yfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_0wk06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_cxe8q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_l28v1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_25yfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ff8v4")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_l4s5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_n5rnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_r36b7")
+}],
+"loop": true,
+"name": &"run",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_y7rgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_ncbsi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_d6rx8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_6yy8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_qyd1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_bvbel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_tm6qw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_3w45u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_uxov4")
+}],
+"loop": false,
+"name": &"sword_dash",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_jbjhd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_gd5na")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_gd5na")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_qxrr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_qxrr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_qxrr6")
+}],
+"loop": false,
+"name": &"sword_downslash",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_seuk8")
+}],
+"loop": true,
+"name": &"sword_ready",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("51_phtny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_pulad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_ukliu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_tyarp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_phtny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_pulad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_ukliu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_tyarp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_phtny")
+}],
+"loop": false,
+"name": &"sword_spin",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_1fnqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_f821a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_yt0se")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_x0cwg")
+}],
+"loop": false,
+"name": &"sword_uppercut",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_bhe7d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_mvwe2")
+}],
+"loop": true,
+"name": &"wall_climb",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_bhe7d")
+}],
+"loop": true,
+"name": &"wall_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("61_xjxh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_i78t8")
+}],
+"loop": false,
+"name": &"wall_ninjutsu",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("63_k11vn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_ua75b")
+}],
+"loop": false,
+"name": &"wall_ninjutsu_backward",
+"speed": 7.0
+}]
