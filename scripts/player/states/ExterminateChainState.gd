@@ -17,6 +17,10 @@ var _chain_origin: Vector2
 func enter(msg: Dictionary = {}) -> void:
 	player._cancel_charge()
 
+	# 清除受伤闪烁计时器：防止 _process 中 invincible_timer 每帧覆盖
+	# modulate.a（0.5/1.0 交替），导致灭杀隐身（modulate.a=0）失效
+	player.invincible_timer = 0.0
+
 	_chains_remaining = msg.get("chains", 0)
 	_is_active = true
 	_chain_timer = CHAIN_WINDOW
@@ -64,6 +68,8 @@ func exit() -> void:
 	_is_active = false
 	_cleanup_shadows()
 	player.is_invincible = false
+	# 恢复角色可见（防止灭杀被强制切走时残留透明）
+	player.animated_sprite.modulate = Color.WHITE
 
 
 func _do_attack(target: Node2D) -> void:
